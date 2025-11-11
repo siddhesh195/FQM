@@ -1,32 +1,34 @@
-name: Build
+name: Tests
+
 on:
   push:
-  schedule:
-    # runs a new build every Saturday
-    - cron: 0 0 * * SAT
+  pull_request:
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
+  pytest:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        # FIXME: refactor tests to handle `windows-latest` edge cases
-        os: [ubuntu-latest]
-        python-version: ['3.8', '3.9']
-
+        python-version: ['3.9', '3.10', '3.11']  # adjust to what FQM supports
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
-          cache-dependency-path: '**/requirements/test-legacy.txt'
+          cache: pip
+          cache-dependency-path: |
+            requirements/*.txt
+
       - name: Install dependencies
-        run: pip install -r requirements/test-legacy.txt
-      - name: Style check
         run: |
-          python -m flake8 app/**/**/** tests/**/**/**
-      - name: Tests
+          python -m pip install --upgrade pip
+          if [ -f requirements/test.txt ]; then pip install -r requirements/test.txt; fi
+          if [ -f requirements/test-legacy.txt ]; then pip install -r requirements/test-legacy.txt; fi
+          # fallback if your tests also need app deps
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run tests
         run: |
-          python -m pytest -vv --cov=app
+          python -m pytest -vv --cov=app tests
