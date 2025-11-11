@@ -2,17 +2,14 @@ name: Tests
 
 on:
   push:
-    branches: ['**']
   pull_request:
-    branches: ['**']
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.11']  # adjust to what FQM supports
-
+        python-version: ['3.9', '3.10', '3.11']
     steps:
       - uses: actions/checkout@v4
 
@@ -21,21 +18,17 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
+          # Adjust to your actual file(s):
+          cache-dependency-path: |
+            requirements/test-legacy.txt
+            requirements/test.txt
 
-      - name: Install dependencies
+      - name: Install test deps
+        # pick the right requirements file that actually exists in your repo
         run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements/test.txt ]; then
-            pip install -r requirements/test.txt
-          elif [ -f requirements/test-legacy.txt ]; then
-            pip install -r requirements/test-legacy.txt
-          elif [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-          pip install pytest pytest-cov flake8
-
-      - name: Lint
-        run: flake8 app tests
+          if [ -f requirements/test-legacy.txt ]; then pip install -r requirements/test-legacy.txt; \
+          elif [ -f requirements/test.txt ]; then pip install -r requirements/test.txt; \
+          else echo "No test requirements file found" && exit 1; fi
 
       - name: Run tests
         run: pytest -vv --cov=app --cov-report=term-missing
