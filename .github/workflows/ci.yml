@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.11"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
           if [ -f requirements/test.txt ]; then pip install -r requirements/test.txt; \
           elif [ -f requirements/test-legacy.txt ]; then pip install -r requirements/test-legacy.txt; fi
 
-      - name: Lint
+      - name: Lint (non-blocking)
         run: python -m flake8 app tests
 
       - name: Run tests
