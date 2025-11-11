@@ -2,14 +2,16 @@ name: Tests
 
 on:
   push:
+    branches: ["**"]
   pull_request:
 
 jobs:
-  tests:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ['3.9', '3.10', '3.11']
+
     steps:
       - uses: actions/checkout@v4
 
@@ -18,17 +20,19 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-          # Adjust to your actual file(s):
           cache-dependency-path: |
-            requirements/test-legacy.txt
             requirements/test.txt
+            requirements/test-legacy.txt
+            requirements.txt
 
-      - name: Install test deps
-        # pick the right requirements file that actually exists in your repo
+      - name: Install test dependencies
         run: |
-          if [ -f requirements/test-legacy.txt ]; then pip install -r requirements/test-legacy.txt; \
-          elif [ -f requirements/test.txt ]; then pip install -r requirements/test.txt; \
-          else echo "No test requirements file found" && exit 1; fi
+          if [ -f requirements/test.txt ]; then pip install -r requirements/test.txt; \
+          elif [ -f requirements/test-legacy.txt ]; then pip install -r requirements/test-legacy.txt; \
+          elif [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Lint
+        run: python -m flake8 app tests
 
       - name: Run tests
-        run: pytest -vv --cov=app --cov-report=term-missing
+        run: pytest -vv --maxfail=1 --cov=app --cov-report=term-missing
