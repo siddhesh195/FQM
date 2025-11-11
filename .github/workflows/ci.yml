@@ -1,5 +1,4 @@
 name: CI
-
 # Trigger on every push (any branch), every pull request, and allow manual dispatch.
 on:
   push:
