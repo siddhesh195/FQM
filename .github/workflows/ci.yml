@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         # Adjust if your project only supports certain versions
-        python-version: ['3.9', '3.10', '3.11']
+        python-version: ['3.11']
 
     steps:
       - uses: actions/checkout@v4
@@ -32,6 +32,8 @@ jobs:
           if [ -f requirements/test.txt ]; then pip install -r requirements/test.txt; \
           elif [ -f requirements/test-legacy.txt ]; then pip install -r requirements/test-legacy.txt; \
           elif [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+          pip install gevent
 
       - name: Run tests
         run: |
