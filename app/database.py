@@ -361,6 +361,27 @@ class Serial(db.Model, TicketsMixin, Mixin):
 
         return last_ticket.order_by(cls.pdt.desc())\
                           .first()
+    
+    @classmethod
+    def get_all_pulled_tickets(cls, office_id=None):
+        ''' get all pulled tickets.
+
+        Parameters
+        ----------
+            office_id: int
+                office's id to filter tickets by.
+
+        Returns
+        -------
+            List of all pulled tickets.
+        '''
+        pulled_tickets = cls.query.filter_by(p=True)\
+                                   .filter(cls.number != 100)
+        if office_id:
+            pulled_tickets = pulled_tickets.filter_by(office_id=office_id)
+
+        return pulled_tickets.order_by(cls.pdt.desc())\
+                              .all()
 
     @classmethod
     def get_waiting_list_tickets(cls, office_id=None, limit=9):

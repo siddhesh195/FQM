@@ -45,10 +45,16 @@
 	$.getJSON("{{ url_for('static', filename='tts.json') }}")
 		.then(function(j) {
 			announcement_texts = j
-			var en = announcement_texts['en-us']
-
-			if (en) announcement_texts['en-us'].message = en.message
-				.replace('{}', "{{ alias.office }}")
+			if (announcement_texts) {
+			
+            Object.keys(announcement_texts).forEach(function(lang) {
+                if (announcement_texts[lang] && announcement_texts[lang].message) {
+				
+                    announcement_texts[lang].message = announcement_texts[lang].message
+                        .replace(/{}/g, "{{ alias.office }}");
+                }
+            });
+            }
 		})
 
 	var stream = JsonStream({
@@ -62,7 +68,81 @@
 		effect: "{{ ts.effect }}",
 		ensure_value: 'w9',
 		todo: function (data, toPlay) {
+			var emptyText = "{{ translate('Empty', 'en', [defLang]) }}";
+
+            // --- Pulled tickets handler (runs for every update)
+            (function updatePulledSection() {
+                try {
+                    if (!data.pulled || !Array.isArray(data.pulled)) {
+                    // nothing to do
+                    return;
+                    }
+
+                    // small delay so JsonStream's own DOM writes finish first
+                    setTimeout(function () {
+                        try {
+                            var pulled = data.pulled.slice(0, 9); // limit to 9 slots
+                            var emptyText = "{{ translate('Empty', 'en', [defLang]) }}";
+
+                            // Try two naming schemes: 'p1..p9' (legacy) and 'pulled1..pulled9' (separate)
+                            for (var i = 0; i < 9; i++) {
+                                var item = pulled[i] || null;
+
+                                // prefer separate pulledX names (safer), but fallback to pX
+                                var slotNames = ['pulled' + (i + 1), 'p' + (i + 1)];
+                                var $el = null;
+                                for (var si = 0; si < slotNames.length; si++) {
+                                    $el = $('[stream="' + slotNames[si] + '"]');
+                                    if ($el.length) break;
+                                }
+
+                                if (!$el || !$el.length) {
+                                    // slot not present in this template; skip
+                                    continue;
+                                }
+
+                                if (!item) {
+                                    $el.text(emptyText);
+                                    $el.removeAttr('title');
+                                   continue;
+                                }
+
+                                // Render text (server gave item.text). If you want name/number fallback here, you can.
+                                var text = item.text || emptyText;
+                                $el.text(text);
+
+                                // Hover meta (pulled_by + timestamp + office/task)
+                                var metaParts = [];
+                                if (item.pulled_by) metaParts.push(item.pulled_by);
+                                if (item.pdt) {
+                                    // safe date parse
+                                    try { metaParts.push(new Date(item.pdt).toLocaleString()); }
+                                    catch (e) { metaParts.push(item.pdt); }
+                                }
+                                if (item.office) metaParts.push(item.office);
+                                if (item.task) metaParts.push(item.task);
+
+                                if (metaParts.length) $el.attr('title', metaParts.join(' — '));
+                                else $el.removeAttr('title');
+                            } // end of for loop
+
+                        // debug: optionally log updates (uncomment to debug)
+                        // console.log('Pulled slots updated', pulled);
+
+                        } catch (innerErr) {
+                            console.error('pulled update inner error', innerErr);
+                        }
+                    }, 40); // 40ms delay — small but helps avoid race with JsonStream DOM writes
+
+                } catch (err) {
+                    console.error('pulled update error', err);
+                }
+            })();
+            // --- end pulled tickets handler
 			if (announcement_texts) {
+		        if(data.cot=='Empty' || data.con=='Empty') {
+					return;
+				}
 				if (playAnnouncements) {
 					$.when.apply($, languages.map(function(language, index) {
 						var promise = $.Deferred()
@@ -88,6 +168,8 @@
 				} else if (playAudioNotification) play([audioNotification])
 			}
 		}
+
+		
 	})
 
 	var watcher = setInterval(function () {
@@ -315,7 +397,38 @@
 		</h1>
     </div>
 </div>
+<!-- ✅ Pulled tickets section -->
+<div id="pulled-container" class="row text-center mt-5">
+    <div class="col-xs-12">
+        <h1 class="title">Recently Pulled Tickets</h1>
+    </div>
+    <div class="col-xs-3">
+        <h1 class='tickets'>
+            <p class='watchit inline' stream='pulled1'>{{ translate('Empty', 'en', [defLang]) }}</p>
+        </h1>
+    </div>
+    <div class="col-xs-3">
+        <h1 class='tickets'>
+            <p class='watchit inline' stream='pulled2'>{{ translate('Empty', 'en', [defLang]) }}</p>
+        </h1>
+    </div>
+    <div class="col-xs-3">
+        <h1 class='tickets'>
+            <p class='watchit inline' stream='pulled3'>{{ translate('Empty', 'en', [defLang]) }}</p>
+        </h1>
+    </div>
+    <div class="col-xs-3">
+        <h1 class='tickets'>
+            <p class='watchit inline' stream='pulled4'>{{ translate('Empty', 'en', [defLang]) }}</p>
+        </h1>
+    </div>
+</div>
+
 <div class="row text-center mt-3">
+	<div class="col-xs-12">
+        <h1 class="title">Waiting Tickets Row 1</h1>
+    </div>
+
     <div class="col-xs-3">
 		<h1 class='tickets'>
 			<p class='watchit inline' stream='w1'>{{ translate('Empty', 'en', [defLang]) }}</p>
@@ -339,6 +452,9 @@
 </div>
 <div class="row text-center mt-1">
     <br>
+	<div class="col-xs-12">
+        <h1 class="title">Waiting Tickets Row 2</h1>
+    </div>
     <div class="col-xs-3">
 		<h1 class='tickets'>
 			<p class='watchit inline' stream='w5'>{{ translate('Empty', 'en', [defLang]) }}</p>

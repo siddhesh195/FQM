@@ -4,7 +4,9 @@
         "en": "",
         "es": "",
         "fr": "",
-        "it": ""
+        "it": "",
+        "mr": "",
+        "ta": ""
     },
     "\nCurrent ticket : ": {
         "en": "Current ticket :",
@@ -72,6 +74,13 @@
         "fr": "1 fois",
         "it": "1 volta"
     },
+    "1. A sid 2": {
+        "en": "1. A sid 2",
+        "gu": "1. A sid 2",
+        "hi": "1. \u090f\u0915 \u092a\u0915\u094d\u0937 2",
+        "mr": "1. A sid 2",
+        "ta": "1. \u0b92\u0bb0\u0bc1 \u0b9a\u0bbf\u0b9f\u0bcd 2"
+    },
     "10 times": {
         "ar": "10 \u0645\u0631\u0627\u062a",
         "en": "10 times",
@@ -86,12 +95,22 @@
         "fr": "2 fois",
         "it": "2 volte"
     },
+    "2. A sid 1": {
+        "en": "2. A sid 1",
+        "gu": "2. A sid 1",
+        "hi": "2. \u090f\u0915 \u092a\u0915\u094d\u0937 1",
+        "mr": "2. A sid 1",
+        "ta": "2. \u0b92\u0bb0\u0bc1 \u0b9a\u0bbf\u0b9f\u0bcd 1"
+    },
     "3 times": {
         "ar": ".\u062b\u0644\u0627\u062b \u0645\u0631\u0627\u062a",
         "en": "3 times",
         "es": "3 veces",
         "fr": "3 fois",
         "it": "3 volte"
+    },
+    "3083801": {
+        "en": "3083801"
     },
     "4 times": {
         "ar": "4 \u0645\u0631\u0627\u062a",
@@ -107,12 +126,18 @@
         "fr": "5 fois",
         "it": "5 volte"
     },
+    "5217614": {
+        "en": "5217614"
+    },
     "6 times": {
         "ar": "6 \u0645\u0631\u0627\u062a",
         "en": "6 times",
         "es": "6 veces",
         "fr": "6 fois",
         "it": "6 volte"
+    },
+    "6302990": {
+        "en": "6302990"
     },
     "7 times": {
         "ar": "7 \u0645\u0631\u0627\u062a",
@@ -135,6 +160,12 @@
         "fr": "9 fois",
         "it": "9 volte"
     },
+    "9633561": {
+        "en": "9633561"
+    },
+    "9999": {
+        "en": "9999"
+    },
     "A sound tune that will be played whenever the customer select a task of his choice": {
         "ar": "\u0646\u063a\u0645\u0629 \u0635\u0648\u062a \u064a\u062a\u0645 \u062a\u0634\u063a\u064a\u0644\u0647\u0627 \u0639\u0646\u062f\u0645\u0627 \u064a\u062e\u062a\u0627\u0631 \u0627\u0644\u0639\u0645\u064a\u0644 \u0645\u0647\u0645\u0629 \u0645\u0646 \u0627\u062e\u062a\u064a\u0627\u0631\u0647",
         "en": "A sound tune that will be played whenever the customer select a task of his choice",
@@ -149,19 +180,32 @@
         "fr": "Un m\u00e9lodie sonore sera jou\u00e9 chaque fois que le ticket client a \u00e9t\u00e9 appel\u00e9. Ainsi qu'une annonce texte-discours qui sera jou\u00e9e dans la langue s\u00e9lectionn\u00e9e",
         "it": "Una melodia che verr\u00e0 riprodotta ogni volta che viene estratto il ticket del cliente. Cos\u00ec come un annuncio di sintesi vocale che verr\u00e0 riprodotto nella lingua selezionata"
     },
+    "A5217614": {
+        "en": "A5217614"
+    },
     "API": {
         "ar": "API",
+        "de": "API",
         "en": "API",
         "es": "API",
         "fr": "API",
-        "it": "API"
+        "gu": "API",
+        "hi": "\u090f\u092a\u0940\u0906\u0908",
+        "it": "API",
+        "mr": "API",
+        "ta": "API"
     },
     "API documentation": {
         "ar": "\u0648\u062b\u0627\u0626\u0642 API",
+        "de": "API-Dokumentation",
         "en": "API documentation",
         "es": "documentaci\u00f3n de la API",
         "fr": "documentation de l'API",
-        "it": "documentazione API"
+        "gu": "API \u0aa6\u0ab8\u0acd\u0aa4\u0abe\u0ab5\u0ac7\u0a9c\u0ac0\u0a95\u0ab0\u0aa3",
+        "hi": "\u090f\u092a\u0940\u0906\u0908 \u0926\u0938\u094d\u0924\u093e\u0935\u0947\u091c\u093c\u0940\u0915\u0930\u0923",
+        "it": "documentazione API",
+        "mr": "API \u0926\u0938\u094d\u0924\u0910\u0935\u091c\u0940\u0915\u0930\u0923",
+        "ta": "API \u0b86\u0bb5\u0ba3\u0b99\u0bcd\u0b95\u0bb3\u0bcd"
     },
     "About FQM": {
         "ar": "\u0639\u0646 \u0627\u0644\u0646\u0638\u0627\u0645",
@@ -172,10 +216,12 @@
     },
     "Actions": {
         "ar": "\u0623\u0641\u0639\u0627\u0644",
+        "de": "Aktionen",
         "en": "Actions",
         "es": "Comportamiento",
         "fr": "Actions",
-        "it": "Azioni"
+        "it": "Azioni",
+        "mr": "\u0915\u094d\u0930\u093f\u092f\u093e"
     },
     "Activated": {
         "ar": "\u0645\u0641\u0639\u0644",
@@ -189,7 +235,8 @@
         "en": "Add",
         "es": "A\u00f1adir",
         "fr": "Ajouter",
-        "it": "Inserisci"
+        "it": "Inserisci",
+        "mr": "\u0972\u0921"
     },
     "Add a slide": {
         "ar": "\u0623\u0636\u0641 \u0634\u0631\u064a\u062d\u0629",
@@ -214,17 +261,27 @@
     },
     "Add new office": {
         "ar": "\u0625\u0636\u0627\u0641\u0629 \u0645\u0643\u062a\u0628 \u062c\u062f\u064a\u062f",
+        "de": "Neues B\u00fcro hinzuf\u00fcgen",
         "en": "Add new office",
         "es": "A\u00f1adir nueva oficina",
         "fr": "Ajouter un nouveau bureau",
-        "it": "Aggiungi nuovo ufficio"
+        "gu": "\u0aa8\u0ab5\u0ac0 \u0a93\u0aab\u0abf\u0ab8 \u0a89\u0aae\u0ac7\u0ab0\u0acb",
+        "hi": "\u0928\u092f\u093e \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u091c\u094b\u0921\u093c\u0947\u0902",
+        "it": "Aggiungi nuovo ufficio",
+        "mr": "\u0928\u0935\u0940\u0928 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u091c\u094b\u0921\u093e",
+        "ta": "\u0baa\u0bc1\u0ba4\u0bbf\u0baf \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0ba4\u0bcd\u0ba4\u0bc8\u0b9a\u0bcd \u0b9a\u0bc7\u0bb0\u0bcd\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd"
     },
     "Add new task": {
         "ar": "\u0625\u0636\u0627\u0641\u0629 \u0645\u0647\u0645\u0629 \u062c\u062f\u064a\u062f\u0629",
+        "de": "Neue Aufgabe hinzuf\u00fcgen",
         "en": "Add new task",
         "es": "Agregar nueva tarea",
         "fr": "Ajouter une nouvelle t\u00e2che",
-        "it": "Aggiungi nuova attivit\u00e0"
+        "gu": "\u0aa8\u0ab5\u0ac1\u0a82 \u0a95\u0abe\u0ab0\u0acd\u0aaf \u0a89\u0aae\u0ac7\u0ab0\u0acb",
+        "hi": "\u0928\u092f\u093e \u0915\u093e\u0930\u094d\u092f \u091c\u094b\u0921\u093c\u0947\u0902",
+        "it": "Aggiungi nuova attivit\u00e0",
+        "mr": "\u0928\u0935\u0940\u0928 \u0915\u093e\u0930\u094d\u092f \u091c\u094b\u0921\u093e",
+        "ta": "\u0baa\u0bc1\u0ba4\u0bbf\u0baf \u0baa\u0ba3\u0bbf\u0baf\u0bc8\u0b9a\u0bcd \u0b9a\u0bc7\u0bb0\u0bcd\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd"
     },
     "Add new user": {
         "ar": "\u0625\u0636\u0627\u0641\u0629 \u0645\u0633\u062a\u062e\u062f\u0645 \u062c\u062f\u064a\u062f",
@@ -235,10 +292,15 @@
     },
     "Add office": {
         "ar": "\u0623\u0636\u0641 \u0645\u0643\u062a\u0628",
+        "de": "B\u00fcro hinzuf\u00fcgen",
         "en": "Add office",
         "es": "Agregar oficina",
         "fr": "Ajouter un bureau",
-        "it": "Aggiungi ufficio"
+        "gu": "\u0a93\u0aab\u0abf\u0ab8 \u0a89\u0aae\u0ac7\u0ab0\u0acb",
+        "hi": "\u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u091c\u094b\u0921\u093c\u0947\u0902",
+        "it": "Aggiungi ufficio",
+        "mr": "\u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u091c\u094b\u0921\u093e",
+        "ta": "\u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0ba4\u0bcd\u0ba4\u0bc8\u0b9a\u0bcd \u0b9a\u0bc7\u0bb0\u0bcd\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd"
     },
     "Add task": {
         "ar": "\u0625\u0636\u0627\u0641\u0629 \u0645\u0647\u0645\u0629",
@@ -256,10 +318,15 @@
     },
     "Add user": {
         "ar": "\u0625\u0636\u0627\u0641\u0629 \u0645\u0633\u062a\u062e\u062f\u0645",
+        "de": "Benutzer hinzuf\u00fcgen",
         "en": "Add user",
         "es": "Agregar usuario",
         "fr": "Ajouter un utilisateur",
-        "it": "Aggiungi utente"
+        "gu": "\u0ab5\u0aaa\u0ab0\u0abe\u0ab6\u0a95\u0ab0\u0acd\u0aa4\u0abe \u0a89\u0aae\u0ac7\u0ab0\u0acb",
+        "hi": "\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e \u091c\u094b\u0921\u093c\u0947\u0902",
+        "it": "Aggiungi utente",
+        "mr": "\u0935\u093e\u092a\u0930\u0915\u0930\u094d\u0924\u093e \u091c\u094b\u0921\u093e",
+        "ta": "\u0baa\u0baf\u0ba9\u0bb0\u0bc8\u0b9a\u0bcd \u0b9a\u0bc7\u0bb0\u0bcd\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd"
     },
     "Additional preferences and settings to control certain features within the display screen": {
         "ar": "\u062a\u0641\u0636\u064a\u0644\u0627\u062a \u0648\u0625\u0639\u062f\u0627\u062f\u0627\u062a \u0625\u0636\u0627\u0641\u064a\u0629 \u0644\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u064a\u0632\u0627\u062a \u0645\u0639\u064a\u0646\u0629 \u0641\u064a \u0634\u0627\u0634\u0629 \u0627\u0644\u0639\u0631\u0636",
@@ -268,12 +335,35 @@
         "fr": "Pr\u00e9f\u00e9rences et param\u00e8tres suppl\u00e9mentaires pour contr\u00f4ler certaines fonctions de l'\u00e9cran d'affichage",
         "it": "preferenze e le impostazioni aggiuntive per controllare alcune funzioni all'interno dello schermo di visualizzazione"
     },
+    "Admin": {
+        "en": "Admin",
+        "es": "Administraci\u00f3n",
+        "fr": "Administrateur",
+        "gu": "\u0a8f\u0aa1\u0aae\u0abf\u0aa8",
+        "hi": "\u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0915",
+        "mr": "\u0972\u0921\u092e\u093f\u0928",
+        "ta": "\u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf"
+    },
     "Administration": {
         "ar": "\u0627\u0644\u0627\u062f\u0627\u0631\u0629",
+        "de": "Verwaltung",
         "en": "Administration",
         "es": "Administraci\u00f3n",
         "fr": "Administration",
-        "it": "Amministrazione"
+        "gu": "\u0ab5\u0ab9\u0ac0\u0ab5\u0a9f",
+        "hi": "\u092a\u094d\u0930\u0936\u093e\u0938\u0928",
+        "it": "Amministrazione",
+        "mr": "\u092a\u094d\u0930\u0936\u093e\u0938\u0928",
+        "ta": "\u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bae\u0bcd"
+    },
+    "Administrator": {
+        "en": "Administrator",
+        "es": "Administrador",
+        "fr": "Administrateur",
+        "gu": "\u0ab8\u0a82\u0a9a\u0abe\u0ab2\u0a95",
+        "hi": "\u092a\u094d\u0930\u0936\u093e\u0938\u0915",
+        "mr": "\u092a\u094d\u0930\u0936\u093e\u0938\u0915",
+        "ta": "\u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf"
     },
     "Administrators": {
         "ar": "\u0627\u0644\u0645\u0633\u0624\u0648\u0644\u064a\u0646",
@@ -319,45 +409,72 @@
     },
     "All credit reserved to the author of FQM. This work is a free, open-source project licensed under Mozilla Public License version 2.0 .": {
         "ar": "\u062c\u0645\u064a\u0639 \u0627\u0644\u0627\u0626\u062a\u0645\u0627\u0646 \u0645\u062d\u0641\u0648\u0638\u0629 \u0644\u0645\u0624\u0644\u0641 FQM. \u0647\u0630\u0627 \u0627\u0644\u0639\u0645\u0644 \u0647\u0648 \u0645\u0634\u0631\u0648\u0639 \u0645\u062c\u0627\u0646\u064a \u0645\u0641\u062a\u0648\u062d \u0627\u0644\u0645\u0635\u062f\u0631 \u0645\u0631\u062e\u0635 \u0628\u0645\u0648\u062c\u0628 \u0627\u0644\u0625\u0635\u062f\u0627\u0631 2.0 \u0645\u0646 Mozilla Public License.",
+        "de": "Alle Quellenangabe ist dem Autor von FQM vorbehalten. Dieses Werk ist ein kostenloses Open-Source-Projekt, das unter der Mozilla Public License Version 2.0 lizenziert ist.",
         "en": "All credit reserved to the author of FQM. This work is a free, open-source project licensed under Mozilla Public License version 2.0 .",
         "es": "Todo el cr\u00e9dito reservado al autor de FQM. Este trabajo es un proyecto gratuito de c\u00f3digo abierto con licencia de Mozilla Public License versi\u00f3n 2.0.",
         "fr": "Tout le cr\u00e9dit r\u00e9serv\u00e9 \u00e0 l'auteur de FQM. Ce travail est un projet libre et open-source sous licence publique Mozilla version 2.0.",
-        "it": "Tutto il credito \u00e8 riservato all'autore di FQM. Questo lavoro \u00e8 un progetto open source gratuito concesso in licenza con Mozilla Public License versione 2.0."
+        "gu": "\u0aa4\u0aae\u0abe\u0aae \u0a95\u0acd\u0ab0\u0ac7\u0aa1\u0abf\u0a9f FQM \u0aa8\u0abe \u0ab2\u0ac7\u0a96\u0a95 \u0aae\u0abe\u0a9f\u0ac7 \u0a86\u0ab0\u0a95\u0acd\u0ab7\u0abf\u0aa4 \u0a9b\u0ac7. \u0a86 \u0a95\u0abe\u0ab0\u0acd\u0aaf \u0aae\u0acb\u0a9d\u0abf\u0ab2\u0abe \u0aaa\u0aac\u0acd\u0ab2\u0abf\u0a95 \u0ab2\u0abe\u0aaf\u0ab8\u0aa8\u0acd\u0ab8 \u0ab8\u0a82\u0ab8\u0acd\u0a95\u0ab0\u0aa3 2.0 \u0ab9\u0ac7\u0aa0\u0ab3 \u0ab2\u0abe\u0a87\u0ab8\u0aa8\u0acd\u0ab8 \u0aaa\u0acd\u0ab0\u0abe\u0aaa\u0acd\u0aa4 \u0aae\u0aab\u0aa4, \u0a93\u0aaa\u0aa8-\u0ab8\u0acb\u0ab0\u0acd\u0ab8 \u0aaa\u0acd\u0ab0\u0acb\u0a9c\u0ac7\u0a95\u0acd\u0a9f \u0a9b\u0ac7.",
+        "hi": "\u0938\u093e\u0930\u093e \u0936\u094d\u0930\u0947\u092f \u090f\u092b\u0915\u094d\u092f\u0942\u090f\u092e \u0915\u0947 \u0932\u0947\u0916\u0915 \u0915\u094b \u0906\u0930\u0915\u094d\u0937\u093f\u0924 \u0939\u0948\u0964 \u092f\u0939 \u0915\u093e\u0930\u094d\u092f \u092e\u094b\u091c\u093c\u093f\u0932\u093e \u092a\u092c\u094d\u0932\u093f\u0915 \u0932\u093e\u0907\u0938\u0947\u0902\u0938 \u0938\u0902\u0938\u094d\u0915\u0930\u0923 2.0 \u0915\u0947 \u0924\u0939\u0924 \u0932\u093e\u0907\u0938\u0947\u0902\u0938 \u092a\u094d\u0930\u093e\u092a\u094d\u0924 \u090f\u0915 \u0928\u093f\u0903\u0936\u0941\u0932\u094d\u0915, \u0913\u092a\u0928-\u0938\u094b\u0930\u094d\u0938 \u092a\u094d\u0930\u094b\u091c\u0947\u0915\u094d\u091f \u0939\u0948\u0964",
+        "it": "Tutto il credito \u00e8 riservato all'autore di FQM. Questo lavoro \u00e8 un progetto open source gratuito concesso in licenza con Mozilla Public License versione 2.0.",
+        "mr": "\u0938\u0930\u094d\u0935 \u0936\u094d\u0930\u0947\u092f FQM \u091a\u094d\u092f\u093e \u0932\u0947\u0916\u0915\u093e\u0915\u0921\u0947 \u0930\u093e\u0916\u0940\u0935 \u0906\u0939\u0947. \u0939\u0947 \u0915\u093e\u0930\u094d\u092f Mozilla \u0938\u093e\u0930\u094d\u0935\u091c\u0928\u093f\u0915 \u092a\u0930\u0935\u093e\u0928\u093e \u0906\u0935\u0943\u0924\u094d\u0924\u0940 2.0 \u0905\u0902\u0924\u0930\u094d\u0917\u0924 \u092a\u0930\u0935\u093e\u0928\u093e\u0915\u0943\u0924 \u092e\u0941\u0915\u094d\u0924, \u092e\u0941\u0915\u094d\u0924-\u0938\u094d\u0930\u094b\u0924 \u092a\u094d\u0930\u0915\u0932\u094d\u092a \u0906\u0939\u0947.",
+        "ta": "\u0b85\u0ba9\u0bc8\u0ba4\u0bcd\u0ba4\u0bc1 \u0b95\u0b9f\u0ba9\u0bcd\u0b95\u0bb3\u0bc1\u0bae\u0bcd FQM \u0b87\u0ba9\u0bcd \u0b86\u0b9a\u0bbf\u0bb0\u0bbf\u0baf\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0b92\u0ba4\u0bc1\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f\u0bc1\u0bb3\u0bcd\u0bb3\u0ba4\u0bc1. \u0b87\u0ba8\u0bcd\u0ba4 \u0bb5\u0bc7\u0bb2\u0bc8 Mozilla \u0baa\u0bca\u0ba4\u0bc1 \u0b89\u0bb0\u0bbf\u0bae\u0bae\u0bcd \u0baa\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc1 2.0 \u0b87\u0ba9\u0bcd \u0b95\u0bc0\u0bb4\u0bcd \u0b89\u0bb0\u0bbf\u0bae\u0bae\u0bcd \u0baa\u0bc6\u0bb1\u0bcd\u0bb1 \u0b92\u0bb0\u0bc1 \u0b87\u0bb2\u0bb5\u0b9a \u0ba4\u0bbf\u0bb1\u0ba8\u0bcd\u0ba4 \u0bae\u0bc2\u0bb2 \u0ba4\u0bbf\u0b9f\u0bcd\u0b9f\u0bae\u0bbe\u0b95\u0bc1\u0bae\u0bcd."
     },
     "All tickets": {
         "ar": "\u062c\u0645\u064a\u0639 \u0627\u0644\u062a\u0630\u0627\u0643\u0631",
+        "de": "Alle Tickets",
         "en": "All tickets",
         "es": "Todos los boletos",
         "fr": "Tous les tickets",
-        "it": "Tutti i biglietti"
+        "gu": "\u0aac\u0aa7\u0ac0 \u0a9f\u0abf\u0a95\u0abf\u0a9f\u0acb",
+        "hi": "\u0938\u092d\u0940 \u091f\u093f\u0915\u091f",
+        "it": "Tutti i biglietti",
+        "mr": "\u0938\u0930\u094d\u0935 \u0924\u093f\u0915\u093f\u091f\u0947",
+        "ta": "\u0b85\u0ba9\u0bc8\u0ba4\u0bcd\u0ba4\u0bc1 \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc1\u0b95\u0bb3\u0bcd"
     },
     "All users": {
         "ar": "\u062c\u0645\u064a\u0639 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u064a\u0646",
+        "de": "Alle Benutzer",
         "en": "All users",
         "es": "Todos los usuarios",
         "fr": "Tous les utilisateurs",
-        "it": "Tutti gli utenti"
+        "gu": "\u0aac\u0aa7\u0abe \u0ab5\u0aaa\u0ab0\u0abe\u0ab6\u0a95\u0ab0\u0acd\u0aa4\u0abe\u0a93",
+        "hi": "\u0938\u092d\u0940 \u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e",
+        "it": "Tutti gli utenti",
+        "mr": "\u0938\u0930\u094d\u0935 \u0935\u093e\u092a\u0930\u0915\u0930\u094d\u0924\u0947",
+        "ta": "\u0b85\u0ba9\u0bc8\u0ba4\u0bcd\u0ba4\u0bc1 \u0baa\u0baf\u0ba9\u0bb0\u0bcd\u0b95\u0bb3\u0bcd"
     },
     "Allowing the admin and his assigned operators to manage the flow of tickets, by adding, modifying offices and task which are the virtual representation of the actual offices, tasks on-which tickets will be stored and pulled from to ease the process of dealing with queue management.": {
         "ar": "\u0627\u0644\u0633\u0645\u0627\u062d \u0644\u0644\u0645\u0633\u0626\u0648\u0644\u064a\u0646 \u0648\u0627\u0644\u0645\u0634\u063a\u0644\u064a\u0646 \u0627\u0644\u0645\u0639\u064a\u0646\u064a\u0646 \u0644\u0647 \u0628\u0625\u062f\u0627\u0631\u0629 \u062a\u062f\u0641\u0642 \u0627\u0644\u062a\u0630\u0627\u0643\u0631 \u060c \u0639\u0646 \u0637\u0631\u064a\u0642 \u0625\u0636\u0627\u0641\u0629 \u0648\u062a\u0639\u062f\u064a\u0644 \u0627\u0644\u0645\u0643\u0627\u062a\u0628 \u0648\u0627\u0644\u0645\u0647\u0627\u0645 \u0627\u0644\u062a\u064a \u062a\u0645\u062b\u0644 \u0627\u0644\u062a\u0645\u062b\u064a\u0644 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a \u0644\u0644\u0645\u0643\u0627\u062a\u0628 \u0627\u0644\u0641\u0639\u0644\u064a\u0629 \u060c \u0648\u0633\u064a\u062a\u0645 \u062a\u062e\u0632\u064a\u0646 \u0627\u0644\u0645\u0647\u0627\u0645 \u0627\u0644\u062a\u064a \u064a\u062a\u0645 \u062a\u062e\u0632\u064a\u0646 \u0627\u0644\u062a\u0630\u0627\u0643\u0631 \u0639\u0644\u064a\u0647\u0627 \u0648\u0633\u062d\u0628\u0647\u0627 \u0644\u062a\u0633\u0647\u064a\u0644 \u0639\u0645\u0644\u064a\u0629 \u0627\u0644\u062a\u0639\u0627\u0645\u0644 \u0645\u0639 \u0627\u0644\u0637\u0627\u0628\u0648\u0631 \u0625\u062f\u0627\u0631\u0629.",
         "en": "Allowing the admin and his assigned operators to manage the flow of tickets, by adding, modifying offices and task which are the virtual representation of the actual offices, tasks on-which tickets will be stored and pulled from to ease the process of dealing with queue management.",
         "es": "Permitir que el administrador y sus operadores asignados administren el flujo de tickets, agregando, modificando oficinas y tareas, que son la representaci\u00f3n virtual de las oficinas reales, tareas en las cuales se almacenar\u00e1n y extraer\u00e1n tickets para facilitar el proceso de hacer frente a la cola administraci\u00f3n.",
         "fr": "Permettre aux administrateurs et \u00e0 ses op\u00e9rateurs assign\u00e9s de g\u00e9rer le flux des tickets en : ajoutant et/ou en modifiant les bureaux et les t\u00e2ches. Ces t\u00e2ches sont la repr\u00e9sentation virtuelle des bureaux r\u00e9els. Les tickets seront stock\u00e9s dans ces m\u00eames t\u00e2ches et pourront \u00eatre retir\u00e9s pour faciliter la gestion de la file d'attente.",
-        "it": "Consentire all'amministratore e ai suoi operatori assegnati di gestire il flusso di biglietti, aggiungendo, modificando uffici e attivit\u00e0 che rappresentano la rappresentazione virtuale degli uffici effettivi, attivit\u00e0 su cui i ticket verranno archiviati e prelevati per facilitare il processo di gestione della coda gestione."
+        "gu": "\u0a8f\u0aa1\u0aae\u0abf\u0aa8 \u0a85\u0aa8\u0ac7 \u0aa4\u0ac7\u0aa8\u0abe \u0ab8\u0acb\u0a82\u0aaa\u0abe\u0aaf\u0ac7\u0ab2 \u0a93\u0aaa\u0ab0\u0ac7\u0a9f\u0ab0\u0acb\u0aa8\u0ac7 \u0a9f\u0abf\u0a95\u0abf\u0a9f\u0acb\u0aa8\u0abe \u0aaa\u0acd\u0ab0\u0ab5\u0abe\u0ab9\u0aa8\u0ac1\u0a82 \u0ab8\u0a82\u0a9a\u0abe\u0ab2\u0aa8 \u0a95\u0ab0\u0ab5\u0abe\u0aa8\u0ac0 \u0aae\u0a82\u0a9c\u0ac2\u0ab0\u0ac0 \u0a86\u0aaa\u0ac0\u0aa8\u0ac7, \u0a93\u0aab\u0abf\u0ab8\u0acb \u0a85\u0aa8\u0ac7 \u0a95\u0abe\u0ab0\u0acd\u0aaf\u0aa8\u0ac7 \u0a89\u0aae\u0ac7\u0ab0\u0ac0\u0aa8\u0ac7, \u0ab8\u0a82\u0ab6\u0acb\u0aa7\u0abf\u0aa4 \u0a95\u0ab0\u0ac0\u0aa8\u0ac7 \u0a9c\u0ac7 \u0ab5\u0abe\u0ab8\u0acd\u0aa4\u0ab5\u0abf\u0a95 \u0a93\u0aab\u0abf\u0ab8\u0acb\u0aa8\u0ac1\u0a82 \u0ab5\u0ab0\u0acd\u0a9a\u0acd\u0aaf\u0ac1\u0a85\u0ab2 \u0aaa\u0acd\u0ab0\u0aa4\u0abf\u0aa8\u0abf\u0aa7\u0abf\u0aa4\u0acd\u0ab5 \u0a9b\u0ac7, \u0a95\u0aa4\u0abe\u0ab0 \u0ab5\u0acd\u0aaf\u0ab5\u0ab8\u0acd\u0aa5\u0abe\u0aaa\u0aa8 \u0ab8\u0abe\u0aa5\u0ac7 \u0ab5\u0acd\u0aaf\u0ab5\u0ab9\u0abe\u0ab0 \u0a95\u0ab0\u0ab5\u0abe\u0aa8\u0ac0 \u0aaa\u0acd\u0ab0\u0a95\u0acd\u0ab0\u0abf\u0aaf\u0abe\u0aa8\u0ac7 \u0ab8\u0ab0\u0ab3 \u0aac\u0aa8\u0abe\u0ab5\u0ab5\u0abe \u0aae\u0abe\u0a9f\u0ac7 \u0a9f\u0abf\u0a95\u0abf\u0a9f\u0acb \u0a95\u0aaf\u0abe \u0aaa\u0ab0 \u0ab8\u0a82\u0a97\u0acd\u0ab0\u0ab9\u0abf\u0aa4 \u0a85\u0aa8\u0ac7 \u0a96\u0ac7\u0a82\u0a9a\u0ab5\u0abe\u0aae\u0abe\u0a82 \u0a86\u0ab5\u0ab6\u0ac7.",
+        "hi": "\u0915\u0924\u093e\u0930 \u092a\u094d\u0930\u092c\u0902\u0927\u0928 \u0938\u0947 \u0928\u093f\u092a\u091f\u0928\u0947 \u0915\u0940 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u094b \u0906\u0938\u093e\u0928 \u092c\u0928\u093e\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0915 \u0914\u0930 \u0909\u0938\u0915\u0947 \u0928\u093f\u0930\u094d\u0926\u093f\u0937\u094d\u091f \u0911\u092a\u0930\u0947\u091f\u0930\u094b\u0902 \u0915\u094b \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u094b\u0902 \u0914\u0930 \u0915\u093e\u0930\u094d\u092f\u094b\u0902 \u0915\u094b \u091c\u094b\u0921\u093c\u0915\u0930, \u0938\u0902\u0936\u094b\u0927\u093f\u0924 \u0915\u0930\u0915\u0947 \u091f\u093f\u0915\u091f\u094b\u0902 \u0915\u0947 \u092a\u094d\u0930\u0935\u093e\u0939 \u0915\u094b \u092a\u094d\u0930\u092c\u0902\u0927\u093f\u0924 \u0915\u0930\u0928\u0947 \u0915\u0940 \u0905\u0928\u0941\u092e\u0924\u093f \u0926\u0947\u0928\u093e, \u091c\u094b \u0935\u093e\u0938\u094d\u0924\u0935\u093f\u0915 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u094b\u0902 \u0915\u093e \u0906\u092d\u093e\u0938\u0940 \u092a\u094d\u0930\u0924\u093f\u0928\u093f\u0927\u093f\u0924\u094d\u0935 \u0939\u0948\u0902, \u091c\u093f\u0928 \u0915\u093e\u0930\u094d\u092f\u094b\u0902 \u092a\u0930 \u091f\u093f\u0915\u091f \u0938\u0902\u0917\u094d\u0930\u0939\u0940\u0924 \u0914\u0930 \u0916\u0940\u0902\u091a\u0947 \u091c\u093e\u090f\u0902\u0917\u0947\u0964",
+        "it": "Consentire all'amministratore e ai suoi operatori assegnati di gestire il flusso di biglietti, aggiungendo, modificando uffici e attivit\u00e0 che rappresentano la rappresentazione virtuale degli uffici effettivi, attivit\u00e0 su cui i ticket verranno archiviati e prelevati per facilitare il processo di gestione della coda gestione.",
+        "mr": "\u092a\u094d\u0930\u0936\u093e\u0938\u0915 \u0906\u0923\u093f \u0924\u094d\u092f\u093e\u091a\u094d\u092f\u093e \u0928\u093f\u092f\u0941\u0915\u094d\u0924 \u0911\u092a\u0930\u0947\u091f\u0930\u0928\u093e \u0924\u093f\u0915\u093f\u091f\u093e\u0902\u091a\u093e \u092a\u094d\u0930\u0935\u093e\u0939 \u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u093f\u0924 \u0915\u0930\u0923\u094d\u092f\u093e\u091a\u0940 \u092a\u0930\u0935\u093e\u0928\u0917\u0940 \u0926\u0947\u0923\u0947, \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u0947 \u0906\u0923\u093f \u0915\u093e\u0930\u094d\u092f\u0947 \u091c\u094b\u0921\u0942\u0928, \u200b\u200b\u0938\u0941\u0927\u093e\u0930\u093f\u0924 \u0915\u0930\u0942\u0928 \u091c\u0947 \u0935\u093e\u0938\u094d\u0924\u0935\u093f\u0915 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u093e\u0902\u091a\u0947 \u0906\u092d\u093e\u0938\u0940 \u092a\u094d\u0930\u0924\u093f\u0928\u093f\u0927\u093f\u0924\u094d\u0935 \u0906\u0939\u0947, \u0930\u093e\u0902\u0917 \u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0928\u093e\u0936\u0940 \u0935\u094d\u092f\u0935\u0939\u093e\u0930 \u0915\u0930\u0923\u094d\u092f\u093e\u091a\u0940 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0938\u0941\u0932\u092d \u0915\u0930\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0924\u093f\u0915\u093f\u091f\u0947 \u0938\u0902\u091a\u092f\u093f\u0924 \u0915\u0947\u0932\u0940 \u091c\u093e\u0924\u0940\u0932 \u0906\u0923\u093f \u0916\u0947\u091a\u0932\u0940 \u091c\u093e\u0924\u0940\u0932 \u0905\u0936\u0940 \u0915\u093e\u0930\u094d\u092f\u0947.",
+        "ta": "\u0bb5\u0bb0\u0bbf\u0b9a\u0bc8 \u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0ba4\u0bcd\u0ba4\u0bc8 \u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bc1\u0bae\u0bcd \u0b9a\u0bc6\u0baf\u0bb2\u0bcd\u0bae\u0bc1\u0bb1\u0bc8\u0baf\u0bc8 \u0b8e\u0bb3\u0bbf\u0ba4\u0bbe\u0b95\u0bcd\u0b95, \u0b89\u0ba3\u0bcd\u0bae\u0bc8\u0baf\u0bbe\u0ba9 \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0ba9\u0bcd \u0bae\u0bc6\u0baf\u0bcd\u0ba8\u0bbf\u0b95\u0bb0\u0bcd \u0baa\u0bbf\u0bb0\u0ba4\u0bbf\u0ba8\u0bbf\u0ba4\u0bbf\u0ba4\u0bcd\u0ba4\u0bc1\u0bb5\u0bae\u0bbe\u0ba9 \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0b99\u0bcd\u0b95\u0bb3\u0bcd \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0baa\u0ba3\u0bbf\u0b95\u0bb3\u0bc8\u0b9a\u0bcd \u0b9a\u0bc7\u0bb0\u0bcd\u0baa\u0bcd\u0baa\u0ba4\u0ba9\u0bcd \u0bae\u0bc2\u0bb2\u0bae\u0bcd, \u0bae\u0bbe\u0bb1\u0bcd\u0bb1\u0bbf\u0baf\u0bae\u0bc8\u0baa\u0bcd\u0baa\u0ba4\u0ba9\u0bcd \u0bae\u0bc2\u0bb2\u0bae\u0bcd, \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc1\u0b95\u0bb3\u0bbf\u0ba9\u0bcd \u0b93\u0b9f\u0bcd\u0b9f\u0ba4\u0bcd\u0ba4\u0bc8 \u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0b95\u0bbf\u0b95\u0bcd\u0b95 \u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b85\u0bb5\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0b92\u0ba4\u0bc1\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b86\u0baa\u0bb0\u0bc7\u0b9f\u0bcd\u0b9f\u0bb0\u0bcd\u0b95\u0bb3\u0bc8 \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0ba4\u0bcd\u0ba4\u0bb2\u0bcd."
     },
     "Allowing the admin and his permitted operators to add an office, that will later on contain multiple task and tickets, that will be always referenced to the created office via its chosen unique number and prefix, which will be used as a visual key code to reference tickets to their offices.": {
         "ar": "\u0627\u0644\u0633\u0645\u0627\u062d \u0644\u0644\u0645\u0633\u0624\u0648\u0644 \u0648\u0645\u0634\u063a\u0644\u064a\u0647 \u0627\u0644\u0645\u0633\u0645\u0648\u062d \u0644\u0647\u0645 \u0628\u0625\u0636\u0627\u0641\u0629 \u0645\u0643\u062a\u0628 \u060c \u0648\u0627\u0644\u0630\u064a \u0633\u064a\u062d\u062a\u0648\u064a \u0644\u0627\u062d\u0642\u064b\u0627 \u0639\u0644\u0649 \u0645\u0647\u0627\u0645 \u0648\u062a\u0630\u0627\u0643\u0631 \u0645\u062a\u0639\u062f\u062f\u0629 \u060c \u0648\u0627\u0644\u062a\u064a \u0633\u064a\u062a\u0645 \u0627\u0644\u0631\u062c\u0648\u0639 \u0625\u0644\u064a\u0647\u0627 \u062f\u0627\u0626\u0645\u064b\u0627 \u0625\u0644\u0649 \u0627\u0644\u0645\u0643\u062a\u0628 \u0627\u0644\u0630\u064a \u062a\u0645 \u0625\u0646\u0634\u0627\u0624\u0647 \u0639\u0646 \u0637\u0631\u064a\u0642 \u0627\u0644\u0631\u0642\u0645 \u0648\u0627\u0644\u0641\u0631\u064a\u062f \u0627\u0644\u0644\u0630\u064a\u0646 \u062a\u0645 \u0627\u062e\u062a\u064a\u0627\u0631\u0647\u0645\u0627 \u060c \u0648\u0627\u0644\u0630\u064a \u0633\u064a\u062a\u0645 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647 \u0643\u0631\u0645\u0632 \u0645\u0641\u062a\u0627\u062d \u0645\u0631\u0626\u064a \u0644\u0644\u0625\u0634\u0627\u0631\u0629 \u0625\u0644\u064a\u0647 \u062a\u0630\u0627\u0643\u0631 \u0644\u0645\u0643\u0627\u062a\u0628\u0647\u0645.",
         "en": "Allowing the admin and his permitted operators to add an office, that will later on contain multiple task and tickets, that will be always referenced to the created office via its chosen unique number and prefix, which will be used as a visual key code to reference tickets to their offices.",
         "es": "Permitir que el administrador y sus operadores permitidos agreguen una oficina, que luego contendr\u00e1 m\u00faltiples tareas y tickets, que siempre ser\u00e1n referenciados a la oficina creada a trav\u00e9s de su n\u00famero exclusivo y prefijo, que se usar\u00e1 como un c\u00f3digo de tecla visual para referencia entradas a sus oficinas.",
         "fr": "Permettre \u00e0 l'administrateur et \u00e0 ses op\u00e9rateurs autoris\u00e9s d'ajouter un bureau. Celui-ci peut par la suite contenir plusieurs t\u00e2ches et tickets, qui seront toujours r\u00e9f\u00e9renc\u00e9s au bureau cr\u00e9\u00e9 via son num\u00e9ro unique choisi et son pr\u00e9fixe. Ils serviront de code visuel pour r\u00e9f\u00e9renc\u00e9 ces tickets aux bureaux qui leurs sont propres.",
-        "it": "Consentendo all'amministratore e ai suoi operatori autorizzati di aggiungere un ufficio, che in seguito includer\u00e0 pi\u00f9 attivit\u00e0 e ticket, verr\u00e0 sempre fatto riferimento all'ufficio creato tramite il numero e il prefisso univoci scelti, che verranno utilizzati come codice di riferimento visivo per riferimento biglietti per i loro uffici."
+        "gu": "\u0a8f\u0aa1\u0aae\u0abf\u0aa8 \u0a85\u0aa8\u0ac7 \u0aa4\u0ac7\u0aa8\u0abe \u0a85\u0aa8\u0ac1\u0aae\u0aa4\u0abf \u0aaa\u0abe\u0aae\u0ac7\u0ab2\u0abe \u0a93\u0aaa\u0ab0\u0ac7\u0a9f\u0ab0\u0acb\u0aa8\u0ac7 \u0a8f\u0a95 \u0a93\u0aab\u0abf\u0ab8 \u0a89\u0aae\u0ac7\u0ab0\u0ab5\u0abe\u0aa8\u0ac0 \u0aae\u0a82\u0a9c\u0ac2\u0ab0\u0ac0 \u0a86\u0aaa\u0ab5\u0ac0, \u0a9c\u0ac7\u0aae\u0abe\u0a82 \u0aaa\u0abe\u0a9b\u0ab3\u0aa5\u0ac0 \u0aac\u0ab9\u0ac1\u0ab5\u0abf\u0aa7 \u0a95\u0abe\u0ab0\u0acd\u0aaf \u0a85\u0aa8\u0ac7 \u0a9f\u0abf\u0a95\u0abf\u0a9f\u0acb \u0ab9\u0ab6\u0ac7, \u0a9c\u0ac7 \u0ab9\u0a82\u0aae\u0ac7\u0ab6\u0abe \u0aa4\u0ac7\u0aa8\u0abe \u0aaa\u0ab8\u0a82\u0aa6 \u0a95\u0ab0\u0ac7\u0ab2\u0abe \u0a85\u0aa8\u0aa8\u0acd\u0aaf \u0aa8\u0a82\u0aac\u0ab0 \u0a85\u0aa8\u0ac7 \u0a89\u0aaa\u0ab8\u0ab0\u0acd\u0a97 \u0aa6\u0acd\u0ab5\u0abe\u0ab0\u0abe \u0aac\u0aa8\u0abe\u0ab5\u0ac7\u0ab2 \u0a93\u0aab\u0abf\u0ab8\u0aa8\u0ac7 \u0ab8\u0a82\u0aa6\u0ab0\u0acd\u0aad\u0abf\u0aa4 \u0a95\u0ab0\u0ab5\u0abe\u0aae\u0abe\u0a82 \u0a86\u0ab5\u0ab6\u0ac7, \u0a9c\u0ac7\u0aa8\u0acb \u0a89\u0aaa\u0aaf\u0acb\u0a97 \u0aa4\u0ac7\u0aae\u0aa8\u0ac0 \u0a93\u0aab\u0abf\u0ab8\u0aae\u0abe\u0a82 \u0a9f\u0abf\u0a95\u0abf\u0a9f\u0aa8\u0acb \u0ab8\u0a82\u0aa6\u0ab0\u0acd\u0aad \u0a86\u0aaa\u0ab5\u0abe \u0aae\u0abe\u0a9f\u0ac7 \u0ab5\u0abf\u0a9d\u0acd\u0aaf\u0ac1\u0a85\u0ab2 \u0a95\u0ac0 \u0a95\u0acb\u0aa1 \u0aa4\u0ab0\u0ac0\u0a95\u0ac7 \u0a95\u0ab0\u0ab5\u0abe\u0aae\u0abe\u0a82 \u0a86\u0ab5\u0ab6\u0ac7.",
+        "hi": "\u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0915 \u0914\u0930 \u0909\u0938\u0915\u0947 \u0905\u0928\u0941\u092e\u0924 \u0911\u092a\u0930\u0947\u091f\u0930\u094b\u0902 \u0915\u094b \u090f\u0915 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u091c\u094b\u0921\u093c\u0928\u0947 \u0915\u0940 \u0905\u0928\u0941\u092e\u0924\u093f \u0926\u0947\u0928\u093e, \u091c\u093f\u0938\u092e\u0947\u0902 \u092c\u093e\u0926 \u092e\u0947\u0902 \u0915\u0908 \u0915\u093e\u0930\u094d\u092f \u0914\u0930 \u091f\u093f\u0915\u091f \u0936\u093e\u092e\u093f\u0932 \u0939\u094b\u0902\u0917\u0947, \u091c\u093f\u0938\u0947 \u0939\u092e\u0947\u0936\u093e \u0905\u092a\u0928\u0947 \u091a\u0941\u0928\u0947 \u0939\u0941\u090f \u0905\u0926\u094d\u0935\u093f\u0924\u0940\u092f \u0928\u0902\u092c\u0930 \u0914\u0930 \u0909\u092a\u0938\u0930\u094d\u0917 \u0915\u0947 \u092e\u093e\u0927\u094d\u092f\u092e \u0938\u0947 \u092c\u0928\u093e\u090f \u0917\u090f \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u092e\u0947\u0902 \u0938\u0902\u0926\u0930\u094d\u092d\u093f\u0924 \u0915\u093f\u092f\u093e \u091c\u093e\u090f\u0917\u093e, \u091c\u093f\u0938\u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0909\u0928\u0915\u0947 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u094b\u0902 \u092e\u0947\u0902 \u091f\u093f\u0915\u091f\u094b\u0902 \u0915\u094b \u0938\u0902\u0926\u0930\u094d\u092d\u093f\u0924 \u0915\u0930\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u090f\u0915 \u0926\u0943\u0936\u094d\u092f \u0915\u0941\u0902\u091c\u0940 \u0915\u094b\u0921 \u0915\u0947 \u0930\u0942\u092a \u092e\u0947\u0902 \u0915\u093f\u092f\u093e \u091c\u093e\u090f\u0917\u093e\u0964",
+        "it": "Consentendo all'amministratore e ai suoi operatori autorizzati di aggiungere un ufficio, che in seguito includer\u00e0 pi\u00f9 attivit\u00e0 e ticket, verr\u00e0 sempre fatto riferimento all'ufficio creato tramite il numero e il prefisso univoci scelti, che verranno utilizzati come codice di riferimento visivo per riferimento biglietti per i loro uffici.",
+        "mr": "\u092a\u094d\u0930\u0936\u093e\u0938\u0915 \u0906\u0923\u093f \u0924\u094d\u092f\u093e\u091a\u094d\u092f\u093e \u092a\u0930\u0935\u093e\u0928\u0917\u0940 \u0905\u0938\u0932\u0947\u0932\u094d\u092f\u093e \u0911\u092a\u0930\u0947\u091f\u0930\u0928\u093e \u090f\u0915 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u091c\u094b\u0921\u0923\u094d\u092f\u093e\u091a\u0940 \u092a\u0930\u0935\u093e\u0928\u0917\u0940 \u0926\u0947\u0923\u0947, \u091c\u094d\u092f\u093e\u092e\u0927\u094d\u092f\u0947 \u0928\u0902\u0924\u0930 \u0905\u0928\u0947\u0915 \u0915\u093e\u0930\u094d\u092f \u0906\u0923\u093f \u0924\u093f\u0915\u093f\u091f\u0947 \u0905\u0938\u0924\u0940\u0932, \u091c\u0947 \u0928\u0947\u0939\u092e\u0940 \u0924\u092f\u093e\u0930 \u0915\u0947\u0932\u0947\u0932\u094d\u092f\u093e \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u093e\u0938 \u0924\u094d\u092f\u093e\u091a\u094d\u092f\u093e \u0928\u093f\u0935\u0921\u0932\u0947\u0932\u094d\u092f\u093e \u0905\u0926\u094d\u0935\u093f\u0924\u0940\u092f \u0915\u094d\u0930\u092e\u093e\u0902\u0915\u093e\u0926\u094d\u0935\u093e\u0930\u0947 \u0906\u0923\u093f \u0909\u092a\u0938\u0930\u094d\u0917\u093e\u0926\u094d\u0935\u093e\u0930\u0947 \u0938\u0902\u0926\u0930\u094d\u092d\u093f\u0924 \u0915\u0947\u0932\u0947 \u091c\u093e\u0924\u0940\u0932, \u091c\u0947 \u0924\u094d\u092f\u093e\u0902\u091a\u094d\u092f\u093e \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u093e\u0924 \u0924\u093f\u0915\u093f\u091f\u093e\u0902\u091a\u093e \u0938\u0902\u0926\u0930\u094d\u092d \u0926\u0947\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0935\u094d\u0939\u093f\u091c\u094d\u092f\u0941\u0905\u0932 \u0915\u0940 \u0915\u094b\u0921 \u092e\u094d\u0939\u0923\u0942\u0928 \u0935\u093e\u092a\u0930\u0932\u093e \u091c\u093e\u0908\u0932.",
+        "ta": "\u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b85\u0bb5\u0bb0\u0ba4\u0bc1 \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b86\u0baa\u0bb0\u0bc7\u0b9f\u0bcd\u0b9f\u0bb0\u0bcd\u0b95\u0bb3\u0bcd \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0ba4\u0bcd\u0ba4\u0bc8\u0b9a\u0bcd \u0b9a\u0bc7\u0bb0\u0bcd\u0b95\u0bcd\u0b95 \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0ba4\u0bc1, \u0b85\u0ba4\u0bc1 \u0baa\u0bbf\u0ba9\u0bcd\u0ba9\u0bb0\u0bcd \u0baa\u0bb2 \u0baa\u0ba3\u0bbf\u0b95\u0bb3\u0bcd \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc1\u0b95\u0bb3\u0bc8\u0b95\u0bcd \u0b95\u0bca\u0ba3\u0bcd\u0b9f\u0bbf\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd, \u0b85\u0ba4\u0bc1 \u0b8e\u0baa\u0bcd\u0baa\u0bcb\u0ba4\u0bc1\u0bae\u0bcd \u0b89\u0bb0\u0bc1\u0bb5\u0bbe\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0ba4\u0bcd\u0ba4\u0bbf\u0bb1\u0bcd\u0b95\u0bc1 \u0b85\u0ba4\u0ba9\u0bcd \u0ba4\u0bc7\u0bb0\u0bcd\u0ba8\u0bcd\u0ba4\u0bc6\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0ba4\u0ba9\u0bbf\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b8e\u0ba3\u0bcd \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0bae\u0bc1\u0ba9\u0bcd\u0ba9\u0bca\u0b9f\u0bcd\u0b9f\u0bc1 \u0bb5\u0bb4\u0bbf\u0baf\u0bbe\u0b95\u0b95\u0bcd \u0b95\u0bc1\u0bb1\u0bbf\u0baa\u0bcd\u0baa\u0bbf\u0b9f\u0baa\u0bcd\u0baa\u0b9f\u0bc1\u0bae\u0bcd, \u0b87\u0ba4\u0bc1 \u0b85\u0bb5\u0bb0\u0bcd\u0b95\u0bb3\u0bbf\u0ba9\u0bcd \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0b99\u0bcd\u0b95\u0bb3\u0bc1\u0b95\u0bcd\u0b95\u0bbe\u0ba9 \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc1\u0b95\u0bb3\u0bc8\u0b95\u0bcd \u0b95\u0bc1\u0bb1\u0bbf\u0baa\u0bcd\u0baa\u0bbf\u0b9f\u0bc1\u0bb5\u0ba4\u0bb1\u0bcd\u0b95\u0bbe\u0ba9 \u0b95\u0bbe\u0b9f\u0bcd\u0b9a\u0bbf \u0bb5\u0bbf\u0b9a\u0bc8\u0b95\u0bcd \u0b95\u0bc1\u0bb1\u0bbf\u0baf\u0bc0\u0b9f\u0bbe\u0b95\u0baa\u0bcd \u0baa\u0baf\u0ba9\u0bcd\u0baa\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0baa\u0bcd\u0baa\u0b9f\u0bc1\u0bae\u0bcd."
     },
     "Allowing the admin and his permitted operators to replay the chosen audio announcements on the display screen.": {
         "ar": "\u0627\u0644\u0633\u0645\u0627\u062d \u0644\u0644\u0645\u0634\u0631\u0641 \u0648\u0645\u0634\u063a\u0644\u064a\u0647 \u0627\u0644\u0645\u0633\u0645\u0648\u062d \u0644\u0647\u0645 \u0628\u0625\u0639\u0627\u062f\u0629 \u0639\u0631\u0636 \u0627\u0644\u0625\u0639\u0644\u0627\u0646\u0627\u062a \u0627\u0644\u0635\u0648\u062a\u064a\u0629 \u0627\u0644\u0645\u062e\u062a\u0627\u0631\u0629 \u0639\u0644\u0649 \u0634\u0627\u0634\u0629 \u0627\u0644\u0639\u0631\u0636.",
         "en": "Allowing the admin and his permitted operators to replay the chosen audio announcements on the display screen.",
         "es": "Permitir que el administrador y sus operadores autorizados reproduzcan los anuncios de audio elegidos en la pantalla de visualizaci\u00f3n.",
         "fr": "Permettre \u00e0 l'administrateur et \u00e0 ses op\u00e9rateurs autoris\u00e9s de rejouer les annonces audio choisies sur l'\u00e9cran d'affichage.",
-        "it": "Consentendo all'amministratore e ai suoi operatori autorizzati di riprodurre gli annunci audio scelti sullo schermo del display."
+        "gu": "\u0a8f\u0aa1\u0aae\u0abf\u0aa8 \u0a85\u0aa8\u0ac7 \u0aa4\u0ac7\u0aa8\u0abe \u0a85\u0aa8\u0ac1\u0aae\u0aa4\u0abf \u0aaa\u0acd\u0ab0\u0abe\u0aaa\u0acd\u0aa4 \u0a93\u0aaa\u0ab0\u0ac7\u0a9f\u0ab0\u0acb\u0aa8\u0ac7 \u0aa1\u0abf\u0ab8\u0acd\u0aaa\u0acd\u0ab2\u0ac7 \u0ab8\u0acd\u0a95\u0acd\u0ab0\u0ac0\u0aa8 \u0aaa\u0ab0 \u0aaa\u0ab8\u0a82\u0aa6 \u0a95\u0ab0\u0ac7\u0ab2 \u0a91\u0aa1\u0abf\u0aaf\u0acb \u0a98\u0acb\u0ab7\u0aa3\u0abe\u0a93\u0aa8\u0ac7 \u0aab\u0ab0\u0ac0\u0aa5\u0ac0 \u0a9a\u0ab2\u0abe\u0ab5\u0ab5\u0abe\u0aa8\u0ac0 \u0aae\u0a82\u0a9c\u0ac2\u0ab0\u0ac0 \u0a86\u0aaa\u0ab5\u0ac0.",
+        "hi": "\u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0915 \u0914\u0930 \u0909\u0938\u0915\u0947 \u0905\u0928\u0941\u092e\u0924 \u0911\u092a\u0930\u0947\u091f\u0930\u094b\u0902 \u0915\u094b \u0921\u093f\u0938\u094d\u092a\u094d\u0932\u0947 \u0938\u094d\u0915\u094d\u0930\u0940\u0928 \u092a\u0930 \u091a\u092f\u0928\u093f\u0924 \u0911\u0921\u093f\u092f\u094b \u0918\u094b\u0937\u0923\u093e\u0913\u0902 \u0915\u094b \u092b\u093f\u0930 \u0938\u0947 \u091a\u0932\u093e\u0928\u0947 \u0915\u0940 \u0905\u0928\u0941\u092e\u0924\u093f \u0926\u0947\u0928\u093e\u0964",
+        "it": "Consentendo all'amministratore e ai suoi operatori autorizzati di riprodurre gli annunci audio scelti sullo schermo del display.",
+        "mr": "\u092a\u094d\u0930\u0936\u093e\u0938\u0915 \u0906\u0923\u093f \u0924\u094d\u092f\u093e\u091a\u094d\u092f\u093e \u092a\u0930\u0935\u093e\u0928\u0917\u0940 \u0905\u0938\u0932\u0947\u0932\u094d\u092f\u093e \u0911\u092a\u0930\u0947\u091f\u0930\u0928\u093e \u0928\u093f\u0935\u0921\u0932\u0947\u0932\u094d\u092f\u093e \u0911\u0921\u093f\u0913 \u0918\u094b\u0937\u0923\u093e \u0921\u093f\u0938\u094d\u092a\u094d\u0932\u0947 \u0938\u094d\u0915\u094d\u0930\u0940\u0928\u0935\u0930 \u092a\u0941\u0928\u094d\u0939\u093e \u092a\u094d\u0932\u0947 \u0915\u0930\u0923\u094d\u092f\u093e\u0938 \u0905\u0928\u0941\u092e\u0924\u0940 \u0926\u0947\u0923\u0947.",
+        "ta": "\u0ba4\u0bc7\u0bb0\u0bcd\u0bb5\u0bc1 \u0b9a\u0bc6\u0baf\u0bcd\u0baf\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b86\u0b9f\u0bbf\u0baf\u0bcb \u0b85\u0bb1\u0bbf\u0bb5\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bc8 \u0b9f\u0bbf\u0bb8\u0bcd\u0baa\u0bcd\u0bb3\u0bc7 \u0bb8\u0bcd\u0b95\u0bbf\u0bb0\u0bc0\u0ba9\u0bbf\u0bb2\u0bcd \u0bae\u0bc0\u0ba3\u0bcd\u0b9f\u0bc1\u0bae\u0bcd \u0b87\u0baf\u0b95\u0bcd\u0b95 \u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b85\u0bb5\u0bb0\u0ba4\u0bc1 \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b86\u0baa\u0bb0\u0bc7\u0b9f\u0bcd\u0b9f\u0bb0\u0bcd\u0b95\u0bb3\u0bc8 \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0bbf\u0bb1\u0ba4\u0bc1."
     },
     "Allowing the user to customize every bit of the interface, which the customer be confronted and interacts with. Every element style has the option to be customized with its font, color, size and background color. Via the simple navigation bar on the side each main component is displayed with its own customizable element listed under it.": {
         "ar": "\u0627\u0644\u0633\u0645\u0627\u062d \u0644\u0644\u0645\u0633\u062a\u062e\u062f\u0645 \u0628\u062a\u062e\u0635\u064a\u0635 \u0643\u0644 \u062c\u0632\u0621 \u0645\u0646 \u0627\u0644\u0648\u0627\u062c\u0647\u0629 \u060c \u0627\u0644\u062a\u064a \u064a\u0648\u0627\u062c\u0647\u0647\u0627 \u0627\u0644\u0639\u0645\u064a\u0644 \u0648\u064a\u062a\u0641\u0627\u0639\u0644 \u0645\u0639\u0647\u0627. \u064a\u062d\u062a\u0648\u064a \u0643\u0644 \u0639\u0646\u0635\u0631 \u0645\u0646 \u0639\u0646\u0627\u0635\u0631 \u0627\u0644\u0639\u0646\u0635\u0631 \u0639\u0644\u0649 \u062e\u064a\u0627\u0631 \u062a\u062e\u0635\u064a\u0635\u0647 \u0645\u0639 \u0627\u0644\u062e\u0637 \u0648\u0627\u0644\u0644\u0648\u0646 \u0648\u0627\u0644\u062d\u062c\u0645 \u0648\u0644\u0648\u0646 \u0627\u0644\u062e\u0644\u0641\u064a\u0629. \u0639\u0628\u0631 \u0634\u0631\u064a\u0637 \u0627\u0644\u062a\u0646\u0642\u0644 \u0627\u0644\u0628\u0633\u064a\u0637 \u0639\u0644\u0649 \u0627\u0644\u062c\u0627\u0646\u0628 \u060c \u064a\u062a\u0645 \u0639\u0631\u0636 \u0643\u0644 \u0645\u0643\u0648\u0646 \u0631\u0626\u064a\u0633\u064a \u0645\u0639 \u0639\u0646\u0635\u0631 \u0642\u0627\u0628\u0644 \u0644\u0644\u062a\u062e\u0635\u064a\u0635 \u0645\u062f\u0631\u062c \u062a\u062d\u062a\u0647.",
@@ -371,14 +488,23 @@
         "en": "Allows the admin, permitted by admin operators to search with given parameters of ticket number, ticket prefix and or ticket date to reach to the specific ticket meant to be searched in a dynamic and fixable manner, that was well intended in design.",
         "es": "Permite al administrador, permitido por los operadores administrativos, buscar con par\u00e1metros determinados de n\u00famero de ticket, prefijo de ticket y / o fecha del ticket para llegar al ticket espec\u00edfico destinado a ser buscado de una manera din\u00e1mica y reparable, que fue bien intencionado en el dise\u00f1o.",
         "fr": "Permet \u00e0 l'administrateur et aux op\u00e9rateurs autoris\u00e9 par l'admin de rechercher avec des param\u00e8tres donn\u00e9s (les num\u00e9ros de tickets, le pr\u00e9fixe du ticket et/ou la date du ticket) un ticket sp\u00e9cifique.",
-        "it": "Consente all'amministratore, autorizzato dagli amministratori, di cercare con determinati parametri il numero del biglietto, il prefisso del biglietto e la data del biglietto per raggiungere lo specifico biglietto destinato alla ricerca in modo dinamico e risolvibile, che era ben inteso nel design."
+        "gu": "\u0a8f\u0aa1\u0aae\u0abf\u0aa8\u0aa8\u0ac7 \u0aaa\u0ab0\u0ab5\u0abe\u0aa8\u0a97\u0ac0 \u0a86\u0aaa\u0ac7 \u0a9b\u0ac7, \u0a8f\u0aa1\u0aae\u0abf\u0aa8 \u0a93\u0aaa\u0ab0\u0ac7\u0a9f\u0ab0\u0acb \u0aa6\u0acd\u0ab5\u0abe\u0ab0\u0abe \u0a9f\u0abf\u0a95\u0abf\u0a9f \u0aa8\u0a82\u0aac\u0ab0, \u0a9f\u0abf\u0a95\u0abf\u0a9f \u0a89\u0aaa\u0ab8\u0ab0\u0acd\u0a97 \u0a85\u0aa8\u0ac7 \u0a85\u0aa5\u0ab5\u0abe \u0a9f\u0abf\u0a95\u0abf\u0a9f\u0aa8\u0ac0 \u0aa4\u0abe\u0ab0\u0ac0\u0a96\u0aa8\u0abe \u0a86\u0aaa\u0ac7\u0ab2 \u0aaa\u0ab0\u0abf\u0aae\u0abe\u0aa3\u0acb \u0ab8\u0abe\u0aa5\u0ac7 \u0ab6\u0acb\u0aa7\u0ab5\u0abe\u0aa8\u0ac0 \u0aaa\u0ab0\u0ab5\u0abe\u0aa8\u0a97\u0ac0 \u0a86\u0aaa\u0ac7 \u0a9b\u0ac7 \u0a85\u0aa8\u0ac7 \u0a9a\u0acb\u0a95\u0acd\u0a95\u0ab8 \u0a9f\u0abf\u0a95\u0abf\u0a9f \u0ab8\u0ac1\u0aa7\u0ac0 \u0aaa\u0ab9\u0acb\u0a82\u0a9a\u0ab5\u0abe \u0aae\u0abe\u0a9f\u0ac7 \u0a9c\u0ac7 \u0a97\u0aa4\u0abf\u0ab6\u0ac0\u0ab2 \u0a85\u0aa8\u0ac7 \u0aa0\u0ac0\u0a95 \u0a95\u0ab0\u0ac0 \u0ab6\u0a95\u0abe\u0aaf \u0aa4\u0ac7\u0ab5\u0ac0 \u0ab0\u0ac0\u0aa4\u0ac7 \u0ab6\u0acb\u0aa7\u0ab5\u0abe\u0aae\u0abe\u0a82 \u0a86\u0ab5\u0ac7 \u0a9b\u0ac7, \u0a9c\u0ac7\u0aa8\u0acb \u0ab9\u0ac7\u0aa4\u0ac1 \u0aa1\u0abf\u0a9d\u0abe\u0a87\u0aa8\u0aae\u0abe\u0a82 \u0ab8\u0abe\u0ab0\u0acb \u0ab9\u0aa4\u0acb.",
+        "hi": "\u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0915 \u0911\u092a\u0930\u0947\u091f\u0930\u094b\u0902 \u0926\u094d\u0935\u093e\u0930\u093e \u091f\u093f\u0915\u091f \u0938\u0902\u0916\u094d\u092f\u093e, \u091f\u093f\u0915\u091f \u0909\u092a\u0938\u0930\u094d\u0917 \u0914\u0930 \u092f\u093e \u091f\u093f\u0915\u091f \u0915\u0940 \u0924\u093e\u0930\u0940\u0916 \u0915\u0947 \u0926\u093f\u090f \u0917\u090f \u092e\u093e\u092a\u0926\u0902\u0921\u094b\u0902 \u0915\u0947 \u0938\u093e\u0925 \u0916\u094b\u091c \u0915\u0930\u0928\u0947 \u0915\u0940 \u0905\u0928\u0941\u092e\u0924\u093f \u0926\u0947\u0928\u0947 \u0935\u093e\u0932\u0947 \u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0915 \u0915\u094b \u0917\u0924\u093f\u0936\u0940\u0932 \u0914\u0930 \u092b\u093f\u0915\u094d\u0938 \u0915\u0930\u0928\u0947 \u092f\u094b\u0917\u094d\u092f \u0924\u0930\u0940\u0915\u0947 \u0938\u0947 \u0916\u094b\u091c\u0947 \u091c\u093e\u0928\u0947 \u0935\u093e\u0932\u0947 \u0935\u093f\u0936\u093f\u0937\u094d\u091f \u091f\u093f\u0915\u091f \u0924\u0915 \u092a\u0939\u0941\u0902\u091a\u0928\u0947 \u0915\u0940 \u0905\u0928\u0941\u092e\u0924\u093f \u0926\u0947\u0924\u093e \u0939\u0948, \u091c\u094b \u0921\u093f\u091c\u093e\u0907\u0928 \u092e\u0947\u0902 \u0905\u091a\u094d\u091b\u0940 \u0924\u0930\u0939 \u0938\u0947 \u0907\u0930\u093e\u0926\u093e \u0925\u093e\u0964",
+        "it": "Consente all'amministratore, autorizzato dagli amministratori, di cercare con determinati parametri il numero del biglietto, il prefisso del biglietto e la data del biglietto per raggiungere lo specifico biglietto destinato alla ricerca in modo dinamico e risolvibile, che era ben inteso nel design.",
+        "mr": "\u092a\u094d\u0930\u0936\u093e\u0938\u0915\u093e\u0932\u093e, \u0924\u093f\u0915\u093f\u091f \u0915\u094d\u0930\u092e\u093e\u0902\u0915, \u0924\u093f\u0915\u093f\u091f \u0909\u092a\u0938\u0930\u094d\u0917 \u0906\u0923\u093f \u0915\u093f\u0902\u0935\u093e \u0924\u093f\u0915\u0940\u091f \u0924\u093e\u0930\u0916\u0947\u091a\u094d\u092f\u093e \u0926\u093f\u0932\u0947\u0932\u094d\u092f\u093e \u092a\u0945\u0930\u093e\u092e\u0940\u091f\u0930\u094d\u0938\u0938\u0939 \u0936\u094b\u0927\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u092a\u094d\u0930\u0936\u093e\u0938\u0915\u093e\u0938 \u0905\u0928\u0941\u092e\u0924\u0940 \u0926\u0947\u0924\u0947, \u091c\u094d\u092f\u093e\u091a\u093e \u0905\u0930\u094d\u0925 \u0921\u093e\u092f\u0928\u0945\u092e\u093f\u0915 \u0906\u0923\u093f \u0928\u093f\u0936\u094d\u091a\u093f\u0924 \u0915\u0930\u0923\u094d\u092f\u093e\u092f\u094b\u0917\u094d\u092f \u092a\u0926\u094d\u0927\u0924\u0940\u0928\u0947 \u0936\u094b\u0927\u0932\u093e \u091c\u093e\u0923\u093e\u0930 \u0906\u0939\u0947, \u091c\u0947 \u0921\u093f\u091d\u093e\u0907\u0928\u092e\u0927\u094d\u092f\u0947 \u091a\u093e\u0902\u0917\u0932\u0947 \u0939\u094b\u0924\u0947.",
+        "ta": "\u0bb5\u0b9f\u0bbf\u0bb5\u0bae\u0bc8\u0baa\u0bcd\u0baa\u0bbf\u0bb2\u0bcd \u0ba8\u0ba9\u0bcd\u0b95\u0bc1 \u0bb5\u0b9f\u0bbf\u0bb5\u0bae\u0bc8\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f, \u0b9f\u0bc8\u0ba9\u0bae\u0bbf\u0b95\u0bcd \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b9a\u0bb0\u0bbf\u0b9a\u0bc6\u0baf\u0bcd\u0baf\u0b95\u0bcd\u0b95\u0bc2\u0b9f\u0bbf\u0baf \u0bae\u0bc1\u0bb1\u0bc8\u0baf\u0bbf\u0bb2\u0bcd \u0ba4\u0bc7\u0b9f\u0baa\u0bcd\u0baa\u0b9f \u0bb5\u0bc7\u0ba3\u0bcd\u0b9f\u0bbf\u0baf \u0b95\u0bc1\u0bb1\u0bbf\u0baa\u0bcd\u0baa\u0bbf\u0b9f\u0bcd\u0b9f \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc8 \u0b85\u0b9f\u0bc8\u0baf, \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd \u0b8e\u0ba3\u0bcd, \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd \u0bae\u0bc1\u0ba9\u0bcd\u0ba9\u0bca\u0b9f\u0bcd\u0b9f\u0bc1 \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd \u0ba4\u0bc7\u0ba4\u0bbf \u0b86\u0b95\u0bbf\u0baf\u0bb5\u0bb1\u0bcd\u0bb1\u0bbf\u0ba9\u0bcd \u0b85\u0bb3\u0bb5\u0bc1\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bb3\u0bcd \u0bae\u0bc2\u0bb2\u0bae\u0bcd \u0ba4\u0bc7\u0b9f \u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf \u0b86\u0baa\u0bb0\u0bc7\u0b9f\u0bcd\u0b9f\u0bb0\u0bcd\u0b95\u0bb3\u0bbe\u0bb2\u0bcd \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf\u0baf\u0bc8 \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0bbf\u0bb1\u0ba4\u0bc1."
     },
     "Alternative printer driver": {
         "ar": "\u0628\u0631\u0646\u0627\u0645\u062c \u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u0637\u0627\u0628\u0639\u0629 \u0627\u0644\u0628\u062f\u064a\u0644",
+        "de": "Alternativer Druckertreiber",
         "en": "Alternative printer driver",
         "es": "controlador de impresora Alternativa",
         "fr": "Pilote d'imprimante alternatif",
-        "it": "driver di stampa alternativo"
+        "gu": "\u0ab5\u0ac8\u0a95\u0ab2\u0acd\u0aaa\u0abf\u0a95 \u0aaa\u0acd\u0ab0\u0abf\u0aa8\u0acd\u0a9f\u0ab0 \u0aa1\u0acd\u0ab0\u0abe\u0a88\u0ab5\u0ab0",
+        "hi": "\u0935\u0948\u0915\u0932\u094d\u092a\u093f\u0915 \u092a\u094d\u0930\u093f\u0902\u091f\u0930 \u0921\u094d\u0930\u093e\u0907\u0935\u0930",
+        "it": "driver di stampa alternativo",
+        "mr": "\u092a\u0930\u094d\u092f\u093e\u092f\u0940 \u092a\u094d\u0930\u093f\u0902\u091f\u0930 \u0921\u094d\u0930\u093e\u0907\u0935\u094d\u0939\u0930",
+        "ta": "\u0bae\u0bbe\u0bb1\u0bcd\u0bb1\u0bc1 \u0b85\u0b9a\u0bcd\u0b9a\u0bc1\u0baa\u0bcd\u0baa\u0bca\u0bb1\u0bbf \u0b87\u0baf\u0b95\u0bcd\u0b95\u0bbf"
     },
     "Always show ticket number: ": {
         "ar": "\u062a\u0638\u0647\u0631 \u062f\u0627\u0626\u0645\u0627 \u0631\u0642\u0645 \u0627\u0644\u062a\u0630\u0643\u0631\u0629:",
@@ -386,6 +512,15 @@
         "es": "Siempre mostrar el n\u00famero del billete:",
         "fr": "Toujours afficher le num\u00e9ro de ticket:",
         "it": "Mostra sempre il numero del biglietto:"
+    },
+    "Aplab Limited": {
+        "en": "Aplab Limited",
+        "es": "Aplab Limited",
+        "fr": "Aplab Limit\u00e9e",
+        "gu": "\u0a8f\u0aaa\u0ab2\u0aac \u0ab2\u0abf\u0aae\u0abf\u0a9f\u0ac7\u0aa1",
+        "hi": "\u0905\u092a\u0932\u0948\u092c \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+        "mr": "\u0972\u092a\u0932\u0945\u092c \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+        "ta": "\u0b85\u0baa\u0bcd\u0bb2\u0bbe\u0baa\u0bcd \u0bb2\u0bbf\u0bae\u0bbf\u0b9f\u0bc6\u0b9f\u0bcd"
     },
     "Apply": {
         "ar": "\u062a\u0637\u0628\u064a\u0642",
@@ -399,7 +534,11 @@
         "en": "Arabic",
         "es": "Ar\u00e1bica",
         "fr": "Arabe",
-        "it": "Arabo"
+        "gu": "\u0a85\u0ab0\u0aac\u0ac0",
+        "hi": "\u0905\u0930\u092c\u0940",
+        "it": "Arabo",
+        "mr": "\u0905\u0930\u092c\u0940",
+        "ta": "\u0b85\u0bb0\u0baa\u0bc1"
     },
     "Are you really sure, you want to exit ?": {
         "ar": "\u062a\u0631\u064a\u062f \u0628\u0627\u0644\u0641\u0639\u0644 , \u0627\u0644\u062e\u0631\u0648\u062c \u0648 \u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u061f",
@@ -431,17 +570,24 @@
     },
     "Authentication tokens": {
         "ar": "\u0627\u0644\u0631\u0645\u0648\u0632 \u0645\u0635\u0627\u062f\u0642\u0629",
+        "de": "Authentifizierungstoken",
         "en": "Authentication tokens",
         "es": "tokens de autenticaci\u00f3n",
         "fr": "Jetons d'authentification",
-        "it": "token di autenticazione"
+        "gu": "\u0aaa\u0acd\u0ab0\u0aae\u0abe\u0aa3\u0ac0\u0a95\u0ab0\u0aa3 \u0a9f\u0acb\u0a95\u0aa8\u0acd\u0ab8",
+        "hi": "\u092a\u094d\u0930\u092e\u093e\u0923\u0940\u0915\u0930\u0923 \u091f\u094b\u0915\u0928",
+        "it": "token di autenticazione",
+        "mr": "\u092a\u094d\u0930\u092e\u093e\u0923\u0940\u0915\u0930\u0923 \u091f\u094b\u0915\u0928",
+        "ta": "\u0b85\u0b99\u0bcd\u0b95\u0bc0\u0b95\u0bbe\u0bb0 \u0b9f\u0bcb\u0b95\u0bcd\u0b95\u0ba9\u0bcd\u0b95\u0bb3\u0bcd"
     },
     "Auto reload": {
         "ar": "\u0625\u0639\u0627\u062f\u0629 \u062a\u062d\u0645\u064a\u0644 \u062a\u0644\u0642\u0627\u0626\u064a",
+        "de": "Automatisches Nachladen",
         "en": "Auto reload",
         "es": "Recarga autom\u00e1tica",
         "fr": "Rafraichissement automatique",
-        "it": "Ricarica automatica"
+        "it": "Ricarica automatica",
+        "mr": "\u0911\u091f\u094b \u0930\u0940\u0932\u094b\u0921"
     },
     "Auto replaying the video : ": {
         "ar": "\u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u062a\u0644\u0642\u0627\u0626\u064a \u0644\u0644\u0641\u064a\u062f\u064a\u0648:",
@@ -449,6 +595,12 @@
         "es": "Reproducci\u00f3n autom\u00e1tica del video:",
         "fr": "Lecture en boucle de la vid\u00e9o:",
         "it": "Riproduzione automatica del video:"
+    },
+    "B3083801": {
+        "en": "B3083801"
+    },
+    "Back": {
+        "en": "Back"
     },
     "Background": {
         "ar": "\u062e\u0644\u0641\u064a\u0629",
@@ -564,10 +716,12 @@
     },
     "Close": {
         "ar": "\u0642\u0631\u064a\u0628",
+        "de": "Schlie\u00dfen",
         "en": "Close",
         "es": "Cerca",
         "fr": "Fermer",
-        "it": "Vicino"
+        "it": "Vicino",
+        "mr": "\u092c\u0902\u0926 \u0915\u0930\u093e"
     },
     "Colored background": {
         "ar": "\u062e\u0644\u0641\u064a\u0629 \u0645\u0644\u0648\u0646\u0629",
@@ -599,10 +753,12 @@
     },
     "Created": {
         "ar": "\u062e\u0644\u0642\u062a",
+        "de": "Erstellt",
         "en": "Created",
         "es": "Creado",
         "fr": "Cr\u00e9\u00e9",
-        "it": "Creato"
+        "it": "Creato",
+        "mr": "\u0924\u092f\u093e\u0930 \u0915\u0947\u0932\u0947"
     },
     "Critical Error": {
         "ar": "\u062e\u0637\u0623 \u0641\u064a \u0627\u0644\u062a\u0634\u063a\u064a\u0644",
@@ -647,10 +803,15 @@
     },
     "Customization": {
         "ar": "\u0627\u0644\u062a\u062e\u0635\u064a\u0635",
+        "de": "Anpassung",
         "en": "Customization",
         "es": "Personalizaci\u00f3n",
         "fr": "Personnalisation",
-        "it": "Personalizzazione"
+        "gu": "\u0a95\u0ab8\u0acd\u0a9f\u0aae\u0abe\u0a87\u0a9d\u0ac7\u0ab6\u0aa8",
+        "hi": "\u0905\u0928\u0941\u0915\u0942\u0932\u0928",
+        "it": "Personalizzazione",
+        "mr": "\u0938\u093e\u0928\u0941\u0915\u0942\u0932\u0928",
+        "ta": "\u0ba4\u0ba9\u0bbf\u0baa\u0bcd\u0baa\u0baf\u0ba9\u0bbe\u0b95\u0bcd\u0b95\u0bae\u0bcd"
     },
     "Customize": {
         "ar": "\u064a\u0639\u062f\u0644 \u0623\u0648 \u064a\u0643\u064a\u0641",
@@ -660,10 +821,15 @@
     },
     "Database": {
         "ar": "\u0642\u0627\u0639\u062f\u0629 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a",
+        "de": "Datenbank",
         "en": "Database",
         "es": "Base de datos",
         "fr": "Base de donn\u00e9es",
-        "it": "Banca dati"
+        "gu": "\u0aa1\u0ac7\u0a9f\u0abe\u0aac\u0ac7\u0a9d",
+        "hi": "\u0921\u0947\u091f\u093e\u092c\u0947\u0938",
+        "it": "Banca dati",
+        "mr": "\u0921\u0947\u091f\u093e\u092c\u0947\u0938",
+        "ta": "\u0ba4\u0bb0\u0bb5\u0bc1\u0ba4\u0bcd\u0ba4\u0bb3\u0bae\u0bcd"
     },
     "Deactivated": {
         "ar": "\u0645\u0639\u0637\u0644",
@@ -674,10 +840,12 @@
     },
     "Delete": {
         "ar": "\u062d\u0630\u0641",
+        "de": "L\u00f6schen",
         "en": "Delete",
         "es": "Borrar",
         "fr": "Effacer",
-        "it": "Elimina"
+        "it": "Elimina",
+        "mr": "\u0939\u091f\u0935\u093e"
     },
     "Delete all": {
         "ar": "\u062d\u0630\u0641 \u0627\u0644\u0643\u0644",
@@ -695,10 +863,15 @@
     },
     "Disable": {
         "ar": "\u062a\u0639\u0637\u064a\u0644",
+        "de": "Deaktivieren",
         "en": "Disable",
         "es": "Inhabilitar",
         "fr": "D\u00e9sactiver",
-        "it": "disattivare"
+        "gu": "\u0a85\u0a95\u0acd\u0ab7\u0aae \u0a95\u0ab0\u0acb",
+        "hi": "\u0905\u0915\u094d\u0937\u092e \u0915\u0930\u0928\u093e",
+        "it": "disattivare",
+        "mr": "\u0905\u0915\u094d\u0937\u092e \u0915\u0930\u093e",
+        "ta": "\u0bae\u0bc1\u0b9f\u0b95\u0bcd\u0b95\u0bc1"
     },
     "Disable audio notification": {
         "ar": "\u062a\u0639\u0637\u064a\u0644 \u0627\u0644\u0625\u062e\u0637\u0627\u0631 \u0627\u0644\u0635\u0648\u062a\u064a",
@@ -750,10 +923,15 @@
     },
     "Display screen": {
         "ar": "\u0634\u0627\u0634\u0629 \u0639\u0631\u0636",
+        "de": "Bildschirm anzeigen",
         "en": "Display screen",
         "es": "Pantalla de visualizaci\u00f3n",
         "fr": "\u00c9cran d'affichage",
-        "it": "Schermo"
+        "gu": "\u0aa1\u0abf\u0ab8\u0acd\u0aaa\u0acd\u0ab2\u0ac7 \u0ab8\u0acd\u0a95\u0acd\u0ab0\u0ac0\u0aa8",
+        "hi": "\u092a\u094d\u0930\u0926\u0930\u094d\u0936\u0928 \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "it": "Schermo",
+        "mr": "\u0921\u093f\u0938\u094d\u092a\u094d\u0932\u0947 \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "ta": "\u0b95\u0bbe\u0b9f\u0bcd\u0b9a\u0bbf \u0ba4\u0bbf\u0bb0\u0bc8"
     },
     "Display slideshow": {
         "ar": "\u0639\u0631\u0636 \u0627\u0644\u0634\u0631\u0627\u0626\u062d",
@@ -774,7 +952,11 @@
         "en": "Displays all existing tickets from all offices in a descending order from the newest to the oldest, and given the admin and permitted operators the options of resetting to zero or deleting all offices properly. As well as few indicators and counters that displays the number of offices, total, processed and waiting tickets accordingly.",
         "es": "Muestra todos los tickets existentes de todas las oficinas en orden descendente desde el m\u00e1s nuevo al m\u00e1s antiguo, y le da al administrador y a los operadores permitidos las opciones de restablecer a cero o eliminar todas las oficinas de manera adecuada. Adem\u00e1s de algunos indicadores y contadores que muestran la cantidad de oficinas, totales, procesadas y listas de espera en consecuencia.",
         "fr": "Affiche tous les tickets existants de tous les bureaux dans un ordre d\u00e9croissant (du plus r\u00e9cent au plus ancien) et donne \u00e0 l'administrateur et aux op\u00e9rateurs autoris\u00e9s la possibilit\u00e9 de remettre \u00e0 z\u00e9ro ou de supprimer tous les bureaux proprement. Il y a \u00e9galement quelques indicateurs et compteurs qui affichent le nombre de bureaux au total ainsi que les tickets trait\u00e9s et en attente.",
-        "it": "Visualizza tutti i biglietti esistenti da tutti gli uffici in ordine decrescente dal pi\u00f9 recente al pi\u00f9 vecchio, e fornisce all'amministratore e agli operatori autorizzati le opzioni di ripristino a zero o l'eliminazione corretta di tutti gli uffici. Oltre a pochi indicatori e contatori che visualizzano il numero di uffici, biglietti totali, elaborati e in attesa di conseguenza."
+        "gu": "\u0aa4\u0aae\u0abe\u0aae \u0a93\u0aab\u0abf\u0ab8\u0acb\u0aae\u0abe\u0a82\u0aa5\u0ac0 \u0aa4\u0aae\u0abe\u0aae \u0ab5\u0ab0\u0acd\u0aa4\u0aae\u0abe\u0aa8 \u0a9f\u0abf\u0a95\u0abf\u0a9f\u0acb\u0aa8\u0ac7 \u0ab8\u0acc\u0aa5\u0ac0 \u0aa8\u0ab5\u0abe\u0aa5\u0ac0 \u0ab2\u0a88\u0aa8\u0ac7 \u0ab8\u0acc\u0aa5\u0ac0 \u0a9c\u0ac2\u0aa8\u0abe\u0aae\u0abe\u0a82 \u0a89\u0aa4\u0ab0\u0aa4\u0abe \u0a95\u0acd\u0ab0\u0aae\u0aae\u0abe\u0a82 \u0aaa\u0acd\u0ab0\u0aa6\u0ab0\u0acd\u0ab6\u0abf\u0aa4 \u0a95\u0ab0\u0ac7 \u0a9b\u0ac7, \u0a85\u0aa8\u0ac7 \u0a8f\u0aa1\u0aae\u0abf\u0aa8 \u0a85\u0aa8\u0ac7 \u0aaa\u0ab0\u0ab5\u0abe\u0aa8\u0a97\u0ac0 \u0a86\u0aaa\u0ac7\u0ab2\u0abe \u0a93\u0aaa\u0ab0\u0ac7\u0a9f\u0ab0\u0acb\u0aa8\u0ac7 \u0ab6\u0ac2\u0aa8\u0acd\u0aaf \u0aaa\u0ab0 \u0ab0\u0ac0\u0ab8\u0ac7\u0a9f \u0a95\u0ab0\u0ab5\u0abe \u0a85\u0aa5\u0ab5\u0abe \u0aac\u0aa7\u0ac0 \u0a93\u0aab\u0abf\u0ab8\u0acb\u0aa8\u0ac7 \u0aaf\u0acb\u0a97\u0acd\u0aaf \u0ab0\u0ac0\u0aa4\u0ac7 \u0a95\u0abe\u0aa2\u0ac0 \u0aa8\u0abe\u0a96\u0ab5\u0abe\u0aa8\u0abe \u0ab5\u0abf\u0a95\u0ab2\u0acd\u0aaa\u0acb \u0a86\u0aaa\u0ac7 \u0a9b\u0ac7. \u0aa4\u0ac7\u0aae\u0a9c \u0aa5\u0acb\u0aa1\u0abe \u0ab8\u0ac2\u0a9a\u0a95\u0abe\u0a82\u0a95\u0acb \u0a85\u0aa8\u0ac7 \u0a95\u0abe\u0a89\u0aa8\u0acd\u0a9f\u0ab0\u0acd\u0ab8 \u0a95\u0ac7 \u0a9c\u0ac7 \u0a93\u0aab\u0abf\u0ab8\u0aa8\u0ac0 \u0ab8\u0a82\u0a96\u0acd\u0aaf\u0abe, \u0a95\u0ac1\u0ab2, \u0aaa\u0acd\u0ab0\u0acb\u0ab8\u0ac7\u0ab8\u0acd\u0aa1 \u0a85\u0aa8\u0ac7 \u0aa4\u0ac7 \u0aae\u0ac1\u0a9c\u0aac \u0ab5\u0ac7\u0a87\u0a9f\u0abf\u0a82\u0a97 \u0a9f\u0abf\u0a95\u0abf\u0a9f \u0aa6\u0ab0\u0acd\u0ab6\u0abe\u0ab5\u0ac7 \u0a9b\u0ac7.",
+        "hi": "\u0938\u092d\u0940 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u094b\u0902 \u0938\u0947 \u0938\u092d\u0940 \u092e\u094c\u091c\u0942\u0926\u093e \u091f\u093f\u0915\u091f\u094b\u0902 \u0915\u094b \u0928\u0935\u0940\u0928\u0924\u092e \u0938\u0947 \u0938\u092c\u0938\u0947 \u092a\u0941\u0930\u093e\u0928\u0947 \u0924\u0915 \u0905\u0935\u0930\u094b\u0939\u0940 \u0915\u094d\u0930\u092e \u092e\u0947\u0902 \u092a\u094d\u0930\u0926\u0930\u094d\u0936\u093f\u0924 \u0915\u0930\u0924\u093e \u0939\u0948, \u0914\u0930 \u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0915 \u0914\u0930 \u0905\u0928\u0941\u092e\u0924 \u0911\u092a\u0930\u0947\u091f\u0930\u094b\u0902 \u0915\u094b \u0936\u0942\u0928\u094d\u092f \u092a\u0930 \u0930\u0940\u0938\u0947\u091f \u0915\u0930\u0928\u0947 \u092f\u093e \u0938\u092d\u0940 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u094b\u0902 \u0915\u094b \u0920\u0940\u0915 \u0938\u0947 \u0939\u091f\u093e\u0928\u0947 \u0915\u093e \u0935\u093f\u0915\u0932\u094d\u092a \u0926\u0947\u0924\u093e \u0939\u0948\u0964 \u0938\u093e\u0925 \u0939\u0940 \u0915\u0941\u091b \u0938\u0902\u0915\u0947\u0924\u0915 \u0914\u0930 \u0915\u093e\u0909\u0902\u091f\u0930 \u091c\u094b \u0924\u0926\u0928\u0941\u0938\u093e\u0930 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u094b\u0902 \u0915\u0940 \u0938\u0902\u0916\u094d\u092f\u093e, \u0915\u0941\u0932, \u0938\u0902\u0938\u093e\u0927\u093f\u0924 \u0914\u0930 \u092a\u094d\u0930\u0924\u0940\u0915\u094d\u0937\u093e \u091f\u093f\u0915\u091f\u094b\u0902 \u0915\u094b \u092a\u094d\u0930\u0926\u0930\u094d\u0936\u093f\u0924 \u0915\u0930\u0924\u0947 \u0939\u0948\u0902\u0964",
+        "it": "Visualizza tutti i biglietti esistenti da tutti gli uffici in ordine decrescente dal pi\u00f9 recente al pi\u00f9 vecchio, e fornisce all'amministratore e agli operatori autorizzati le opzioni di ripristino a zero o l'eliminazione corretta di tutti gli uffici. Oltre a pochi indicatori e contatori che visualizzano il numero di uffici, biglietti totali, elaborati e in attesa di conseguenza.",
+        "mr": "\u0938\u0930\u094d\u0935 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u093e\u0924\u0940\u0932 \u0938\u0930\u094d\u0935 \u0935\u093f\u0926\u094d\u092f\u092e\u093e\u0928 \u0924\u093f\u0915\u093f\u091f\u0947 \u0938\u0930\u094d\u0935\u093e\u0924 \u0928\u0935\u0940\u0928 \u0924\u0947 \u0938\u0930\u094d\u0935\u093e\u0924 \u091c\u0941\u0928\u0940 \u0905\u0936\u093e \u0909\u0924\u0930\u0924\u094d\u092f\u093e \u0915\u094d\u0930\u092e\u093e\u0928\u0947 \u092a\u094d\u0930\u0926\u0930\u094d\u0936\u093f\u0924 \u0915\u0930\u0924\u0947 \u0906\u0923\u093f \u092a\u094d\u0930\u0936\u093e\u0938\u0915 \u0906\u0923\u093f \u092a\u0930\u0935\u093e\u0928\u0917\u0940 \u0926\u093f\u0932\u0947\u0932\u094d\u092f\u093e \u0911\u092a\u0930\u0947\u091f\u0930\u0928\u093e \u0936\u0942\u0928\u094d\u092f\u093e\u0935\u0930 \u0930\u0940\u0938\u0947\u091f \u0915\u0930\u0923\u094d\u092f\u093e\u091a\u0947 \u0915\u093f\u0902\u0935\u093e \u0938\u0930\u094d\u0935 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u0947 \u092f\u094b\u0917\u094d\u092f\u0930\u093f\u0924\u094d\u092f\u093e \u0939\u091f\u0935\u0923\u094d\u092f\u093e\u091a\u0947 \u092a\u0930\u094d\u092f\u093e\u092f \u0926\u093f\u0932\u0947 \u091c\u093e\u0924\u093e\u0924. \u0924\u0938\u0947\u091a \u0915\u093e\u0939\u0940 \u0938\u0902\u0915\u0947\u0924\u0915 \u0906\u0923\u093f \u0915\u093e\u0909\u0902\u091f\u0930 \u091c\u0947 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u093e\u0902\u091a\u0940 \u0938\u0902\u0916\u094d\u092f\u093e, \u090f\u0915\u0942\u0923, \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u0947\u0932\u0947\u0932\u0947 \u0906\u0923\u093f \u0924\u094d\u092f\u093e\u0928\u0941\u0938\u093e\u0930 \u092a\u094d\u0930\u0924\u0940\u0915\u094d\u0937\u093e \u0924\u093f\u0915\u093f\u091f\u0947 \u0926\u093e\u0916\u0935\u0924\u093e\u0924.",
+        "ta": "\u0b85\u0ba9\u0bc8\u0ba4\u0bcd\u0ba4\u0bc1 \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0bb2\u0bbf\u0bb0\u0bc1\u0ba8\u0bcd\u0ba4\u0bc1\u0bae\u0bcd \u0b8f\u0bb1\u0bcd\u0b95\u0ba9\u0bb5\u0bc7 \u0b89\u0bb3\u0bcd\u0bb3 \u0b85\u0ba9\u0bc8\u0ba4\u0bcd\u0ba4\u0bc1 \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc1\u0b95\u0bb3\u0bc8\u0baf\u0bc1\u0bae\u0bcd \u0baa\u0bc1\u0ba4\u0bbf\u0baf\u0ba4\u0bc1 \u0bae\u0bc1\u0ba4\u0bb2\u0bcd \u0baa\u0bb4\u0bc8\u0baf\u0ba4\u0bc1 \u0bb5\u0bb0\u0bc8 \u0b87\u0bb1\u0b99\u0bcd\u0b95\u0bc1 \u0bb5\u0bb0\u0bbf\u0b9a\u0bc8\u0baf\u0bbf\u0bb2\u0bcd \u0b95\u0bbe\u0ba3\u0bcd\u0baa\u0bbf\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd, \u0bae\u0bc7\u0bb2\u0bc1\u0bae\u0bcd \u0ba8\u0bbf\u0bb0\u0bcd\u0bb5\u0bbe\u0b95\u0bbf \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b85\u0ba9\u0bc1\u0bae\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b86\u0baa\u0bb0\u0bc7\u0b9f\u0bcd\u0b9f\u0bb0\u0bcd\u0b95\u0bb3\u0bc1\u0b95\u0bcd\u0b95\u0bc1 \u0baa\u0bc2\u0b9c\u0bcd\u0b9c\u0bbf\u0baf\u0ba4\u0bcd\u0ba4\u0bbf\u0bb1\u0bcd\u0b95\u0bc1 \u0bae\u0bc0\u0b9f\u0bcd\u0b9f\u0bae\u0bc8\u0b95\u0bcd\u0b95 \u0b85\u0bb2\u0bcd\u0bb2\u0ba4\u0bc1 \u0b85\u0ba9\u0bc8\u0ba4\u0bcd\u0ba4\u0bc1 \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0b99\u0bcd\u0b95\u0bb3\u0bc8\u0baf\u0bc1\u0bae\u0bcd \u0b9a\u0bb0\u0bbf\u0baf\u0bbe\u0b95 \u0ba8\u0bc0\u0b95\u0bcd\u0b95\u0bc1\u0bb5\u0ba4\u0bb1\u0bcd\u0b95\u0bbe\u0ba9 \u0bb5\u0bbf\u0bb0\u0bc1\u0baa\u0bcd\u0baa\u0b99\u0bcd\u0b95\u0bb3\u0bc8 \u0bb5\u0bb4\u0b99\u0bcd\u0b95\u0bc1\u0b95\u0bbf\u0bb1\u0ba4\u0bc1. \u0b85\u0ba4\u0bcd\u0ba4\u0bc1\u0b9f\u0ba9\u0bcd \u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0ba9\u0bcd \u0b8e\u0ba3\u0bcd\u0ba3\u0bbf\u0b95\u0bcd\u0b95\u0bc8, \u0bae\u0bca\u0ba4\u0bcd\u0ba4\u0bae\u0bcd, \u0baa\u0ba4\u0baa\u0bcd\u0baa\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b95\u0bbe\u0ba4\u0bcd\u0ba4\u0bbf\u0bb0\u0bc1\u0baa\u0bcd\u0baa\u0bc1 \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc1\u0b95\u0bb3\u0bbf\u0ba9\u0bcd \u0b8e\u0ba3\u0bcd\u0ba3\u0bbf\u0b95\u0bcd\u0b95\u0bc8\u0baf\u0bc8\u0b95\u0bcd \u0b95\u0bbe\u0ba3\u0bcd\u0baa\u0bbf\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0b9a\u0bbf\u0bb2 \u0b95\u0bc1\u0bb1\u0bbf\u0b95\u0bbe\u0b9f\u0bcd\u0b9f\u0bbf\u0b95\u0bb3\u0bcd \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b95\u0bb5\u0bc1\u0ba3\u0bcd\u0b9f\u0bb0\u0bcd\u0b95\u0bb3\u0bcd."
     },
     "Do not assign video": {
         "ar": "\u0647\u0644 \u0627\u0644\u0641\u064a\u062f\u064a\u0648 \u0639\u062f\u0645 \u062a\u0639\u064a\u064a\u0646",
@@ -785,10 +967,12 @@
     },
     "Duration": {
         "ar": "\u0627\u0644\u0645\u062f\u0629 \u0627\u0644\u0632\u0645\u0646\u064a\u0629",
+        "de": "Dauer",
         "en": "Duration",
         "es": "Duraci\u00f3n",
         "fr": "Dur\u00e9e",
-        "it": "Durata"
+        "it": "Durata",
+        "mr": "\u0915\u093e\u0932\u093e\u0935\u0927\u0940"
     },
     "Each: to repeat each announcement and notification": {
         "ar": "\u0643\u0644: \u0644\u062a\u0643\u0631\u0627\u0631 \u0643\u0644 \u0625\u0639\u0644\u0627\u0646 \u0648\u0627\u0644\u0625\u062e\u0637\u0627\u0631",
@@ -809,14 +993,23 @@
         "en": "Empty",
         "es": "Vac\u00edo",
         "fr": "Vide",
-        "it": "Vuoto"
+        "gu": "\u0a96\u0abe\u0ab2\u0ac0",
+        "hi": "\u0916\u093e\u0932\u0940",
+        "it": "Vuoto",
+        "mr": "\u0930\u093f\u0915\u093e\u092e\u0947",
+        "ta": "\u0b95\u0bbe\u0bb2\u0bbf"
     },
     "Enable": {
         "ar": "\u0645\u0643\u0646",
+        "de": "Aktivieren",
         "en": "Enable",
         "es": "Habilitar",
         "fr": "Activer",
-        "it": "Abilitare"
+        "gu": "\u0ab8\u0a95\u0acd\u0ab7\u0aae \u0a95\u0ab0\u0acb",
+        "hi": "\u0938\u0915\u094d\u0937\u092e",
+        "it": "Abilitare",
+        "mr": "\u0938\u0915\u094d\u0937\u092e \u0915\u0930\u093e",
+        "ta": "\u0b87\u0baf\u0b95\u0bcd\u0b95\u0bc1"
     },
     "Enable caching text-to-speech announcements :": {
         "ar": "\u062a\u0645\u0643\u064a\u0646 \u0627\u0644\u062a\u062e\u0632\u064a\u0646 \u0627\u0644\u0645\u0624\u0642\u062a \u0627\u0644\u0625\u0639\u0644\u0627\u0646\u0627\u062a \u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0646\u0635 \u0625\u0644\u0649 \u0643\u0644\u0627\u0645:",
@@ -851,14 +1044,20 @@
         "en": "English",
         "es": "Ingl\u00e9s",
         "fr": "Anglais",
-        "it": "inglese"
+        "gu": "\u0a85\u0a82\u0a97\u0acd\u0ab0\u0ac7\u0a9c\u0ac0",
+        "hi": "\u0905\u0902\u0917\u094d\u0930\u0947\u091c\u093c\u0940",
+        "it": "inglese",
+        "mr": "\u0907\u0902\u0917\u094d\u0930\u091c\u0940",
+        "ta": "\u0b86\u0b99\u0bcd\u0b95\u0bbf\u0bb2\u0bae\u0bcd"
     },
     "Enter a duration in seconds to auto-reload the page in :": {
         "ar": "\u0623\u062f\u062e\u0644 \u0645\u062f\u0629 \u0628\u0627\u0644\u062b\u0648\u0627\u0646\u064a \u0644\u0625\u0639\u0627\u062f\u0629 \u062a\u062d\u0645\u064a\u0644 \u0627\u0644\u0635\u0641\u062d\u0629 \u062a\u0644\u0642\u0627\u0626\u064a\u064b\u0627 \u0641\u064a:",
+        "de": "Geben Sie eine Dauer in Sekunden ein, um die Seite automatisch neu zu laden:",
         "en": "Enter a duration in seconds to auto-reload the page in :",
         "es": "Ingrese una duraci\u00f3n en segundos para volver a cargar autom\u00e1ticamente la p\u00e1gina en:",
         "fr": "Saisir une dur\u00e9e en secondes pour rafraichir automatiquement la page dans:",
-        "it": "Inserisci una durata in secondi per ricaricare automaticamente la pagina in:"
+        "it": "Inserisci una durata in secondi per ricaricare automaticamente la pagina in:",
+        "mr": "\u092a\u0943\u0937\u094d\u0920 \u0938\u094d\u0935\u092f\u0902-\u0930\u0940\u0932\u094b\u0921 \u0915\u0930\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0938\u0947\u0915\u0902\u0926\u093e\u0902\u092e\u0927\u094d\u092f\u0947 \u0915\u093e\u0932\u093e\u0935\u0927\u0940 \u090f\u0902\u091f\u0930 \u0915\u0930\u093e:"
     },
     "Enter a notification message :": {
         "ar": "\u0623\u062f\u062e\u0644 \u0631\u0633\u0627\u0644\u0629 \u0625\u0639\u0644\u0627\u0645:",
@@ -905,10 +1104,12 @@
     },
     "Enter a unique office name : ": {
         "ar": "\u0625\u062f\u062e\u0627\u0644 \u0627\u0633\u0645 \u0627\u0644\u0645\u0643\u062a\u0628 \u0641\u0631\u064a\u062f\u0629 \u0645\u0646 \u0646\u0648\u0639\u0647\u0627:",
+        "de": "Geben Sie einen eindeutigen B\u00fcronamen ein:",
         "en": "Enter a unique office name :",
         "es": "Introduzca un nombre de la oficina \u00fanico:",
         "fr": "Saisir un nom de bureau unique:",
-        "it": "Inserire un nome ufficio unico:"
+        "it": "Inserire un nome ufficio unico:",
+        "mr": "\u090f\u0915 \u0905\u0926\u094d\u0935\u093f\u0924\u0940\u092f \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u0928\u093e\u0935 \u092a\u094d\u0930\u0935\u093f\u0937\u094d\u091f \u0915\u0930\u093e:"
     },
     "Enter a unique user name : ": {
         "ar": "\u0623\u062f\u062e\u0644 \u0627\u0633\u0645 \u0645\u0633\u062a\u062e\u062f\u0645 \u0641\u0631\u064a\u062f:",
@@ -978,10 +1179,15 @@
     },
     "Enter password : ": {
         "ar": "\u0623\u062f\u062e\u0644 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631:",
+        "de": "Passwort eingeben:",
         "en": "Enter password :",
         "es": "Introducir la contrase\u00f1a :",
         "fr": "Saisir le mot de passe :",
-        "it": "Inserire la password :"
+        "gu": "\u0aaa\u0abe\u0ab8\u0ab5\u0ab0\u0acd\u0aa1 \u0aa6\u0abe\u0a96\u0ab2 \u0a95\u0ab0\u0acb:",
+        "hi": "\u092a\u093e\u0938 \u0935\u0930\u094d\u0921 \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902 :",
+        "it": "Inserire la password :",
+        "mr": "\u092a\u093e\u0938\u0935\u0930\u094d\u0921 \u092a\u094d\u0930\u0935\u093f\u0937\u094d\u091f \u0915\u0930\u093e:",
+        "ta": "\u0b95\u0b9f\u0bb5\u0bc1\u0b9a\u0bcd\u0b9a\u0bca\u0bb2\u0bcd\u0bb2\u0bc8 \u0b89\u0bb3\u0bcd\u0bb3\u0bbf\u0b9f\u0bb5\u0bc1\u0bae\u0bcd:"
     },
     "Enter token description : ": {
         "ar": "\u0623\u062f\u062e\u0644 \u0648\u0635\u0641 \u0631\u0645\u0632\u064a:",
@@ -1002,14 +1208,20 @@
         "en": "Enter unique title for the task :",
         "es": "Ingrese un t\u00edtulo \u00fanico para la tarea:",
         "fr": "Saisir un titre unique pour la t\u00e2che:",
-        "it": "Immettere un titolo univoco per l'attivit\u00e0:"
+        "it": "Immettere un titolo univoco per l'attivit\u00e0:",
+        "mr": "\u0915\u093e\u0930\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0905\u0926\u094d\u0935\u093f\u0924\u0940\u092f \u0936\u0940\u0930\u094d\u0937\u0915 \u092a\u094d\u0930\u0935\u093f\u0937\u094d\u091f \u0915\u0930\u093e:"
     },
     "Enter user name : ": {
         "ar": "\u0627\u062f\u062e\u0644 \u0627\u0633\u0645 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645 :",
+        "de": "Benutzernamen eingeben:",
         "en": "Enter user name :",
         "es": "Introduzca su nombre de usuario :",
         "fr": "Saisissez votre nom d'utilisateur :",
-        "it": "Inserire username :"
+        "gu": "\u0ab5\u0aaa\u0ab0\u0abe\u0ab6\u0a95\u0ab0\u0acd\u0aa4\u0abe \u0aa8\u0abe\u0aae \u0aa6\u0abe\u0a96\u0ab2 \u0a95\u0ab0\u0acb:",
+        "hi": "\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e \u0928\u093e\u092e \u0926\u0930\u094d\u091c \u0915\u0930\u0947\u0902:",
+        "it": "Inserire username :",
+        "mr": "\u0935\u093e\u092a\u0930\u0915\u0930\u094d\u0924\u093e \u0928\u093e\u0935 \u092a\u094d\u0930\u0935\u093f\u0937\u094d\u091f \u0915\u0930\u093e:",
+        "ta": "\u0baa\u0baf\u0ba9\u0bb0\u0bcd \u0baa\u0bc6\u0baf\u0bb0\u0bc8 \u0b89\u0bb3\u0bcd\u0bb3\u0bbf\u0b9f\u0bb5\u0bc1\u0bae\u0bcd:"
     },
     "Error: No offices exist to delete": {
         "ar": "\u062e\u0637\u0623: \u0644\u0627 \u062a\u0648\u062c\u062f \u0645\u0643\u0627\u062a\u0628 \u0644\u062d\u0630\u0641\u0647\u0627",
@@ -1033,10 +1245,15 @@
     },
     "Error: failed to repeat announcement.": {
         "ar": "\u062e\u0637\u0623: \u0641\u0634\u0644 \u0641\u064a \u062a\u0643\u0631\u0627\u0631 \u0627\u0644\u0625\u0639\u0644\u0627\u0646.",
+        "de": "Fehler: Die Ank\u00fcndigung konnte nicht wiederholt werden.",
         "en": "Error: failed to repeat announcement.",
         "es": "Error: no se pudo repetir el anuncio.",
         "fr": "Erreur: \u00e9chec de la r\u00e9p\u00e9tition de l'annonce.",
-        "it": "Errore: impossibile ripetere l'annuncio."
+        "gu": "\u0aad\u0ac2\u0ab2: \u0a9c\u0abe\u0ab9\u0ac7\u0ab0\u0abe\u0aa4\u0aa8\u0ac1\u0a82 \u0aaa\u0ac1\u0aa8\u0ab0\u0abe\u0ab5\u0ab0\u0acd\u0aa4\u0aa8 \u0a95\u0ab0\u0ab5\u0abe\u0aae\u0abe\u0a82 \u0aa8\u0abf\u0ab7\u0acd\u0aab\u0ab3.",
+        "hi": "\u0924\u094d\u0930\u0941\u091f\u093f: \u0918\u094b\u0937\u0923\u093e \u0926\u094b\u0939\u0930\u093e\u0928\u0947 \u092e\u0947\u0902 \u0935\u093f\u092b\u0932.",
+        "it": "Errore: impossibile ripetere l'annuncio.",
+        "mr": "\u0924\u094d\u0930\u0941\u091f\u0940: \u0918\u094b\u0937\u0923\u093e \u092a\u0941\u0928\u094d\u0939\u093e \u0915\u0930\u0923\u094d\u092f\u093e\u0924 \u0905\u092f\u0936\u0938\u094d\u0935\u0940.",
+        "ta": "\u0baa\u0bbf\u0bb4\u0bc8: \u0b85\u0bb1\u0bbf\u0bb5\u0bbf\u0baa\u0bcd\u0baa\u0bc8 \u0bae\u0bc0\u0ba3\u0bcd\u0b9f\u0bc1\u0bae\u0bcd \u0b9a\u0bc6\u0baf\u0bcd\u0bb5\u0ba4\u0bbf\u0bb2\u0bcd \u0ba4\u0bcb\u0bb2\u0bcd\u0bb5\u0bbf."
     },
     "Error: fault in search parameters": {
         "ar": "\u062e\u0637\u0623: \u062e\u0637\u0623 \u0641\u064a \u0645\u0639\u0644\u0645\u0627\u062a \u0627\u0644\u0628\u062d\u062b",
@@ -1156,10 +1373,15 @@
     },
     "Error: something wrong , or the page is non-existing": {
         "ar": "\u062e\u0637\u0623: \u062e\u0637\u0623 \u0645\u0627 \u060c \u0623\u0648 \u0623\u0646 \u0627\u0644\u0635\u0641\u062d\u0629 \u063a\u064a\u0631 \u0645\u0648\u062c\u0648\u062f\u0629",
+        "de": "Fehler: Etwas stimmt nicht oder die Seite existiert nicht",
         "en": "Error: something wrong , or the page is non-existing",
         "es": "Error: algo est\u00e1 mal, o la p\u00e1gina no existe",
         "fr": "Erreur: quelque chose ne va pas, ou la page est inexistante",
-        "it": "Errore: qualcosa non va, o la pagina non esiste"
+        "gu": "\u0aad\u0ac2\u0ab2: \u0a95\u0a82\u0a88\u0a95 \u0a96\u0acb\u0a9f\u0ac1\u0a82 , \u0a85\u0aa5\u0ab5\u0abe \u0aaa\u0ac3\u0ab7\u0acd\u0aa0 \u0a85\u0ab8\u0acd\u0aa4\u0abf\u0aa4\u0acd\u0ab5\u0aae\u0abe\u0a82 \u0aa8\u0aa5\u0ac0",
+        "hi": "\u0924\u094d\u0930\u0941\u091f\u093f: \u0915\u0941\u091b \u0917\u093c\u0932\u0924 \u0939\u0948, \u092f\u093e \u092a\u0943\u0937\u094d\u0920 \u0905\u0938\u094d\u0924\u093f\u0924\u094d\u0935\u0939\u0940\u0928 \u0939\u0948",
+        "it": "Errore: qualcosa non va, o la pagina non esiste",
+        "mr": "\u0924\u094d\u0930\u0941\u091f\u0940: \u0915\u093e\u0939\u0940\u0924\u0930\u0940 \u091a\u0942\u0915 , \u0915\u093f\u0902\u0935\u093e \u092a\u0943\u0937\u094d\u0920 \u0905\u0938\u094d\u0924\u093f\u0924\u094d\u0935\u093e\u0924 \u0928\u093e\u0939\u0940",
+        "ta": "\u0baa\u0bbf\u0bb4\u0bc8: \u0b8f\u0ba4\u0bcb \u0ba4\u0bb5\u0bb1\u0bc1 , \u0b85\u0bb2\u0bcd\u0bb2\u0ba4\u0bc1 \u0baa\u0b95\u0bcd\u0b95\u0bae\u0bcd \u0b87\u0bb2\u0bcd\u0bb2\u0bc8"
     },
     "Error: the office is already resetted": {
         "ar": "\u062e\u0637\u0623: \u062a\u0645 \u0625\u0639\u0627\u062f\u0629 \u062a\u0639\u064a\u064a\u0646 \u0627\u0644\u0645\u0643\u062a\u0628 \u0628\u0627\u0644\u0641\u0639\u0644",
@@ -1298,10 +1520,15 @@
     },
     "Exit": {
         "ar": "\u0649\u062e\u0631\u062c",
+        "de": "Ausfahrt",
         "en": "Exit",
         "es": "Salida",
         "fr": "Sortie",
-        "it": "Uscita"
+        "gu": "\u0aac\u0ab9\u0abe\u0ab0 \u0aa8\u0ac0\u0a95\u0ab3\u0acb",
+        "hi": "\u092c\u093e\u0939\u0930 \u0928\u093f\u0915\u0932\u0928\u093e",
+        "it": "Uscita",
+        "mr": "\u092c\u093e\u0939\u0947\u0930 \u092a\u0921\u093e",
+        "ta": "\u0bb5\u0bc6\u0bb3\u0bbf\u0baf\u0bc7\u0bb1\u0bc1"
     },
     "Exiting while running": {
         "ar": "\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062e\u0631\u0648\u062c",
@@ -1319,10 +1546,15 @@
     },
     "Export ": {
         "ar": "\u062a\u0635\u062f\u064a\u0631",
+        "de": "Export",
         "en": "Export ",
         "es": "Exportar",
         "fr": "Exporter",
-        "it": "Esportare"
+        "gu": "\u0aa8\u0abf\u0a95\u0abe\u0ab8 \u0a95\u0ab0\u0acb",
+        "hi": "\u0928\u093f\u0930\u094d\u092f\u093e\u0924",
+        "it": "Esportare",
+        "mr": "\u0928\u093f\u0930\u094d\u092f\u093e\u0924 \u0915\u0930\u093e",
+        "ta": "\u0b8f\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0ba4\u0bbf"
     },
     "Extract table": {
         "ar": "\u062c\u062f\u0648\u0644 \u0627\u0633\u062a\u062e\u0631\u0627\u062c",
@@ -1361,17 +1593,27 @@
     },
     "Flag Settings": {
         "ar": "\u0625\u0639\u062f\u0627\u062f\u0627\u062a \u0627\u0644\u0639\u0644\u0645",
+        "de": "Flag-Einstellungen",
         "en": "Flag Settings",
         "es": "Ajustes de la bandera",
         "fr": "R\u00e9glages drapeau",
-        "it": "Impostazioni Flag"
+        "gu": "\u0aab\u0acd\u0ab2\u0ac7\u0a97 \u0ab8\u0ac7\u0a9f\u0abf\u0a82\u0a97\u0acd\u0ab8",
+        "hi": "\u092b\u093c\u094d\u0932\u0948\u0917 \u0938\u0947\u091f\u093f\u0902\u0917",
+        "it": "Impostazioni Flag",
+        "mr": "\u0927\u094d\u0935\u091c \u0938\u0947\u091f\u093f\u0902\u0917\u094d\u091c",
+        "ta": "\u0b95\u0bca\u0b9f\u0bbf \u0b85\u0bae\u0bc8\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd"
     },
     "Forget it": {
         "ar": "\u0627\u0646\u0633\u0649 \u0630\u0644\u0643",
+        "de": "Vergiss es",
         "en": "Forget it",
         "es": "Olv\u00eddalo",
         "fr": "Abandonne",
-        "it": "Dimenticalo"
+        "gu": "\u0aad\u0ac2\u0ab2\u0ac0 \u0a9c\u0abe\u0ab5",
+        "hi": "\u0930\u0939\u0928\u0947 \u092d\u0940 \u0926\u094b",
+        "it": "Dimenticalo",
+        "mr": "\u0935\u093f\u0938\u0930\u0942\u0928 \u091c\u093e",
+        "ta": "\u0bae\u0bb1\u0ba8\u0bcd\u0ba4\u0bc1\u0bb5\u0bbf\u0b9f\u0bc1"
     },
     "Four seconds": {
         "ar": "\u0623\u0631\u0628\u0639 \u062b\u0648\u0627\u0646",
@@ -1399,14 +1641,23 @@
         "en": "French",
         "es": "franc\u00e9s",
         "fr": "fran\u00e7ais",
-        "it": "francese"
+        "gu": "\u0aab\u0acd\u0ab0\u0ac7\u0aa8\u0acd\u0a9a",
+        "hi": "\u092b\u093c\u094d\u0930\u0947\u0902\u091a",
+        "it": "francese",
+        "mr": "\u092b\u094d\u0930\u0947\u0902\u091a",
+        "ta": "\u0baa\u0bbf\u0bb0\u0bc6\u0b9e\u0bcd\u0b9a\u0bc1"
     },
     "General Screens": {
         "ar": "\u0634\u0627\u0634\u0627\u062a \u0627\u0644\u0639\u0627\u0645\u0629",
+        "de": "Allgemeine Bildschirme",
         "en": "General Screens",
         "es": "Pantallas generales",
         "fr": "\u00c9crans g\u00e9n\u00e9raux",
-        "it": "Schermi generali"
+        "gu": "\u0ab8\u0abe\u0aae\u0abe\u0aa8\u0acd\u0aaf \u0ab8\u0acd\u0a95\u0acd\u0ab0\u0ac0\u0aa8\u0acb",
+        "hi": "\u0938\u093e\u092e\u093e\u0928\u094d\u092f \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "it": "Schermi generali",
+        "mr": "\u0938\u093e\u092e\u093e\u0928\u094d\u092f \u092a\u0921\u0926\u0947",
+        "ta": "\u0baa\u0bca\u0ba4\u0bc1 \u0ba4\u0bbf\u0bb0\u0bc8\u0b95\u0bb3\u0bcd"
     },
     "Generate a ticket": {
         "ar": "\u062a\u0648\u0644\u064a\u062f \u062a\u0630\u0643\u0631\u0629",
@@ -1428,6 +1679,15 @@
         "es": "Verde",
         "fr": "vert",
         "it": "verde"
+    },
+    "Gujarati": {
+        "en": "Gujarati",
+        "es": "gujarati",
+        "fr": "gujarati",
+        "gu": "\u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0",
+        "hi": "\u0917\u0941\u091c\u0930\u093e\u0924\u0940",
+        "mr": "\u0917\u0941\u091c\u0930\u093e\u0924\u0940",
+        "ta": "\u0b95\u0bc1\u0b9c\u0bb0\u0bbe\u0ba4\u0bcd\u0ba4\u0bbf"
     },
     "Half a second": {
         "ar": "\u0646\u0635\u0641 \u062b\u0627\u0646\u064a\u0629",
@@ -1452,7 +1712,8 @@
         "en": "Hide this task :",
         "es": "Ocultar esta tarea:",
         "fr": "Masquer cette t\u00e2che:",
-        "it": "Nascondere questo compito:"
+        "it": "Nascondere questo compito:",
+        "mr": "\u0939\u0947 \u0915\u093e\u0930\u094d\u092f \u0932\u092a\u0935\u093e:"
     },
     "Hide ticket index number:": {
         "ar": "\u0625\u062e\u0641\u0627\u0621 \u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0642\u064a\u0627\u0633\u064a \u062a\u0630\u0643\u0631\u0629:",
@@ -1461,12 +1722,22 @@
         "fr": "Cacher le num\u00e9ro d'index des tickets:",
         "it": "Nascondi numero indice del biglietto:"
     },
+    "Hindi": {
+        "en": "Hindi",
+        "es": "hindi",
+        "fr": "hindi",
+        "gu": "\u0ab9\u0abf\u0aa8\u0acd\u0aa6\u0ac0",
+        "hi": "\u0939\u093f\u0902\u0926\u0940",
+        "mr": "\u0939\u093f\u0902\u0926\u0940",
+        "ta": "\u0bb9\u0bbf\u0ba8\u0bcd\u0ba4\u0bbf"
+    },
     "ID . Name": {
         "ar": "\u0647\u0648\u064a\u0629 \u0634\u062e\u0635\u064a\u0629 . \u0627\u0633\u0645",
         "en": "ID . Name",
         "es": "CARN\u00c9 DE IDENTIDAD . Nombre",
         "fr": "ID. Pr\u00e9nom",
-        "it": "ID. Nome"
+        "it": "ID. Nome",
+        "mr": "\u0906\u092f\u0921\u0940 \u0928\u093e\u0935"
     },
     "ID . Title": {
         "ar": "\u0647\u0648\u064a\u0629 \u0634\u062e\u0635\u064a\u0629 . \u0639\u0646\u0648\u0627\u0646",
@@ -1491,10 +1762,12 @@
     },
     "In-Waiting": {
         "ar": "\u0645\u0646\u062a\u0638\u0631",
+        "de": "Wartend",
         "en": "In-Waiting",
         "es": "En espera",
         "fr": "En attente",
-        "it": "In attesa"
+        "it": "In attesa",
+        "mr": "\u0907\u0928-\u0935\u0947\u091f\u093f\u0902\u0917"
     },
     "Info: authentication token is deleted.": {
         "ar": "\u0645\u0639\u0644\u0648\u0645\u0627\u062a: \u064a\u062a\u0645 \u062d\u0630\u0641 \u0631\u0645\u0632 \u0627\u0644\u0645\u0635\u0627\u062f\u0642\u0629.",
@@ -1529,10 +1802,12 @@
     },
     "Issued": {
         "ar": "\u0646\u0634\u0631",
+        "de": "Ausgegeben",
         "en": "Issued",
         "es": "Emitido",
         "fr": "Publi\u00e9",
-        "it": "Rilasciato"
+        "it": "Rilasciato",
+        "mr": "\u091c\u093e\u0930\u0940 \u0915\u0947\u0932\u0947"
     },
     "It is highly recommended to change the default password for security reasons": {
         "ar": "\u064a\u0648\u0635\u0649 \u0628\u0634\u062f\u0629 \u0628\u062a\u063a\u064a\u064a\u0631 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629 \u0644\u0623\u0633\u0628\u0627\u0628 \u062a\u062a\u0639\u0644\u0642 \u0628\u0627\u0644\u0623\u0645\u0627\u0646",
@@ -1565,38 +1840,62 @@
         "en": "Italian",
         "es": "italiano",
         "fr": "italien",
-        "it": "italiano"
+        "gu": "\u0a87\u0a9f\u0abe\u0ab2\u0abf\u0aaf\u0aa8",
+        "hi": "\u0907\u0924\u093e\u0932\u0935\u0940",
+        "it": "italiano",
+        "mr": "\u0907\u091f\u093e\u0932\u093f\u092f\u0928",
+        "ta": "\u0b87\u0ba4\u0bcd\u0ba4\u0bbe\u0bb2\u0bbf\u0baf\u0ba9\u0bcd"
+    },
+    "KYC Verification": {
+        "en": "KYC Verification",
+        "gu": "\u0a95\u0ac7\u0ab5\u0abe\u0aaf\u0ab8\u0ac0 \u0a9a\u0a95\u0abe\u0ab8\u0aa3\u0ac0",
+        "hi": "\u0915\u0947\u0935\u093e\u0908\u0938\u0940 \u0938\u0924\u094d\u092f\u093e\u092a\u0928",
+        "mr": "\u0915\u0947\u0935\u093e\u092f\u0938\u0940 \u092a\u0921\u0924\u093e\u0933\u0923\u0940",
+        "ta": "KYC \u0b9a\u0bb0\u0bbf\u0baa\u0bbe\u0bb0\u0bcd\u0baa\u0bcd\u0baa\u0bc1"
     },
     "Last seen": {
         "ar": "\u0627\u062e\u0631 \u0638\u0647\u0648\u0631",
         "en": "Last seen",
         "es": "Ultima vez visto",
         "fr": "Vue pour la derni\u00e8re fois",
-        "it": "Ultima visualizzazione"
+        "it": "Ultima visualizzazione",
+        "mr": "\u0936\u0947\u0935\u091f\u091a\u0947 \u092a\u093e\u0939\u093f\u0932\u0947"
     },
     "Last ticket": {
         "en": "Last ticket"
     },
     "Last ticket pulled": {
         "ar": "\u062a\u0630\u0643\u0631\u0629 \u0627\u0644\u0645\u0627\u0636\u064a \u0633\u062d\u0628\u062a",
+        "de": "Letztes Ticket gezogen",
         "en": "Last ticket pulled",
         "es": "\u00daltimo billete tirado",
         "fr": "Dernier ticket appeler",
-        "it": "Ultimo biglietto tirato"
+        "it": "Ultimo biglietto tirato",
+        "mr": "\u0936\u0947\u0935\u091f\u091a\u0947 \u0924\u093f\u0915\u0940\u091f \u0915\u093e\u0922\u0932\u0947"
     },
     "Later": {
         "ar": "\u0641\u064a \u0648\u0642\u062a \u0644\u0627\u062d\u0642",
+        "de": "Sp\u00e4ter",
         "en": "Later",
         "es": "Luego",
         "fr": "Plus tard",
-        "it": "Dopo"
+        "gu": "\u0aac\u0abe\u0aa6\u0aae\u0abe\u0a82",
+        "hi": "\u092c\u093e\u0926 \u092e\u0947\u0902",
+        "it": "Dopo",
+        "mr": "\u0928\u0902\u0924\u0930",
+        "ta": "\u0baa\u0bbf\u0ba9\u0bcd\u0ba9\u0bb0\u0bcd"
     },
     "License": {
         "ar": "\u0631\u062e\u0635\u0629",
+        "de": "Lizenz",
         "en": "License",
         "es": "Licencia",
         "fr": "Licence",
-        "it": "Licenza"
+        "gu": "\u0ab2\u0abe\u0a87\u0ab8\u0aa8\u0acd\u0ab8",
+        "hi": "\u0932\u093e\u0907\u0938\u0947\u0902\u0938",
+        "it": "Licenza",
+        "mr": "\u092a\u0930\u0935\u093e\u0928\u093e",
+        "ta": "\u0b89\u0bb0\u0bbf\u0bae\u0bae\u0bcd"
     },
     "Light blue": {
         "ar": "\u0623\u0632\u0631\u0642 \u0641\u0627\u062a\u062d",
@@ -1607,17 +1906,27 @@
     },
     "Login": {
         "ar": "\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644",
+        "de": "Login",
         "en": "Login",
         "es": "Iniciar sesi\u00f3n",
         "fr": "S'identifier",
-        "it": "Accesso"
+        "gu": "\u0ab2\u0ac9\u0a97\u0abf\u0aa8 \u0a95\u0ab0\u0acb",
+        "hi": "\u0932\u0949\u0917 \u0907\u0928 \u0915\u0930\u0947\u0902",
+        "it": "Accesso",
+        "mr": "\u0932\u0949\u0917\u093f\u0928 \u0915\u0930\u093e",
+        "ta": "\u0b89\u0bb3\u0bcd\u0ba8\u0bc1\u0bb4\u0bc8\u0b95"
     },
     "Logout": {
         "ar": "\u0627\u0644\u062e\u0631\u0648\u062c",
+        "de": "Abmelden",
         "en": "Logout",
         "es": "Cerrar sesi\u00f3n",
         "fr": "Se d\u00e9connecter",
-        "it": "Disconnettersi"
+        "gu": "\u0ab2\u0acb\u0a97\u0a86\u0a89\u0a9f",
+        "hi": "\u0932\u0949\u0917 \u0906\u0909\u091f",
+        "it": "Disconnettersi",
+        "mr": "\u0932\u0949\u0917\u0906\u0909\u091f \u0915\u0930\u093e",
+        "ta": "\u0bb5\u0bc6\u0bb3\u0bbf\u0baf\u0bc7\u0bb1\u0bc1"
     },
     "Main text box that, can be used to showcase the company brand or describe the template displayed to the customers": {
         "ar": "\u0645\u0631\u0628\u0639 \u0627\u0644\u0646\u0635 \u0627\u0644\u0631\u0626\u064a\u0633\u064a \u0627\u0644\u0630\u064a \u064a\u0645\u0643\u0646 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647 \u0644\u0639\u0631\u0636 \u0627\u0644\u0639\u0644\u0627\u0645\u0629 \u0627\u0644\u062a\u062c\u0627\u0631\u064a\u0629 \u0644\u0644\u0634\u0631\u0643\u0629 \u0623\u0648 \u0648\u0635\u0641 \u0627\u0644\u0642\u0627\u0644\u0628 \u0627\u0644\u0645\u0639\u0631\u0648\u0636 \u0644\u0644\u0639\u0645\u0644\u0627\u0621",
@@ -1635,10 +1944,15 @@
     },
     "Management": {
         "ar": "\u0625\u062f\u0627\u0631\u0629",
+        "de": "Management",
         "en": "Management",
         "es": "administraci\u00f3n",
         "fr": "G\u00e9rer",
-        "it": "Gestione"
+        "gu": "\u0aae\u0ac7\u0aa8\u0ac7\u0a9c\u0aae\u0ac7\u0aa8\u0acd\u0a9f",
+        "hi": "\u092a\u094d\u0930\u092c\u0902\u0927",
+        "it": "Gestione",
+        "mr": "\u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0928",
+        "ta": "\u0bae\u0bc7\u0bb2\u0bbe\u0ba3\u0bcd\u0bae\u0bc8"
     },
     "Management template": {
         "ar": "\u0642\u0627\u0644\u0628 \u0627\u0644\u0625\u062f\u0627\u0631\u0629",
@@ -1646,6 +1960,15 @@
         "es": "Plantilla de gesti\u00f3n",
         "fr": "Mod\u00e8le de gestion",
         "it": "Modello di gestione"
+    },
+    "Marathi": {
+        "en": "Marathi",
+        "es": "marathi",
+        "fr": "Marathi",
+        "gu": "\u0aae\u0ab0\u0abe\u0aa0\u0ac0",
+        "hi": "\u092e\u0930\u093e\u0920\u0940",
+        "mr": "\u092e\u0930\u093e\u0920\u0940",
+        "ta": "\u0bae\u0bb0\u0bbe\u0ba4\u0bcd\u0ba4\u0bbf"
     },
     "Medium": {
         "ar": "\u0645\u062a\u0648\u0633\u0637",
@@ -1696,19 +2019,27 @@
         "fr": "Pr\u00e9nom",
         "it": "Nome"
     },
+    "New Account Opening": {
+        "en": "New Account Opening",
+        "mr": "\u0928\u0935\u0940\u0928 \u0916\u093e\u0924\u0947 \u0909\u0918\u0921\u0923\u0947"
+    },
     "Newest Processed Tickets": {
         "ar": "\u0623\u062d\u062f\u062b \u062a\u0630\u0627\u0643\u0631 \u0645\u0639\u0627\u0644\u062c\u062a\u0647\u0627",
+        "de": "Neueste bearbeitete Tickets",
         "en": "Newest Processed Tickets",
         "es": "Billetes procesados \u200b\u200bm\u00e1s nuevos",
         "fr": "Nouveaux tickets transform\u00e9s",
-        "it": "I pi\u00f9 nuovi biglietti elaborati"
+        "it": "I pi\u00f9 nuovi biglietti elaborati",
+        "mr": "\u0928\u0935\u0940\u0928\u0924\u092e \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u0947\u0932\u0947\u0932\u0940 \u0924\u093f\u0915\u093f\u091f\u0947"
     },
     "Newest Tickets": {
         "ar": "\u0623\u062d\u062f\u062b \u062a\u0630\u0627\u0643\u0631",
+        "de": "Neueste Tickets",
         "en": "Newest Tickets",
         "es": "Boletos m\u00e1s nuevos",
         "fr": "Nouveaux tickets",
-        "it": "Biglietti pi\u00f9 recenti"
+        "it": "Biglietti pi\u00f9 recenti",
+        "mr": "\u0928\u0935\u0940\u0928\u0924\u092e \u0924\u093f\u0915\u093f\u091f\u0947"
     },
     "Next": {
         "ar": "\u0627\u0644\u062a\u0627\u0644\u0649",
@@ -1719,10 +2050,12 @@
     },
     "No": {
         "ar": "\u0644\u0627",
+        "de": "NEIN",
         "en": "No",
         "es": "No",
         "fr": "Non",
-        "it": "No"
+        "it": "No",
+        "mr": "\u0928\u093e\u0939\u0940"
     },
     "No authentication tokens exist yet to display": {
         "ar": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0627\u0644\u0631\u0645\u0648\u0632 \u0627\u0644\u0645\u0635\u0627\u062f\u0642\u0629 \u0628\u0639\u062f \u0639\u0644\u0649 \u0639\u0631\u0636",
@@ -1743,7 +2076,8 @@
         "en": "No operators assigned yet",
         "es": "No hay operadores asignados todav\u00eda",
         "fr": "Aucun op\u00e9rateur attribu\u00e9 pour le moment",
-        "it": "Nessun operatore ancora assegnato"
+        "it": "Nessun operatore ancora assegnato",
+        "mr": "\u0905\u0926\u094d\u092f\u093e\u092a \u0915\u094b\u0923\u0924\u0947\u0939\u0940 \u0911\u092a\u0930\u0947\u091f\u0930 \u0928\u093f\u092f\u0941\u0915\u094d\u0924 \u0915\u0947\u0932\u0947\u0932\u0947 \u0928\u093e\u0939\u0940\u0924"
     },
     "No printers were found": {
         "ar": "\u0644\u0645 \u064a\u062a\u0645 \u0627\u0644\u0639\u062b\u0648\u0631 \u0639\u0644\u0649 \u0637\u0627\u0628\u0639\u0627\u062a",
@@ -1767,17 +2101,20 @@
     },
     "No tickets been issued yet to display": {
         "ar": "\u0644\u0645 \u064a\u062a\u0645 \u0625\u0635\u062f\u0627\u0631 \u0623\u064a \u062a\u0630\u0627\u0643\u0631 \u0628\u0639\u062f",
+        "de": "Es wurden noch keine Tickets zur Anzeige ausgestellt",
         "en": "No tickets been issued yet to display",
         "es": "A\u00fan no se han emitido boletos para mostrar",
         "fr": "Aucun ticket n'a encore \u00e9t\u00e9 publi\u00e9 pour \u00eatre afficher",
-        "it": "Non sono ancora stati emessi biglietti da mostrare"
+        "it": "Non sono ancora stati emessi biglietti da mostrare",
+        "mr": "\u092a\u094d\u0930\u0926\u0930\u094d\u0936\u093f\u0924 \u0915\u0930\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0905\u0926\u094d\u092f\u093e\u092a \u0915\u094b\u0923\u0924\u0947\u0939\u0940 \u0924\u093f\u0915\u0940\u091f \u0926\u093f\u0932\u0947 \u0917\u0947\u0932\u0947 \u0928\u093e\u0939\u0940"
     },
     "No tickets exist to be displayed": {
         "ar": "\u0644\u0627 \u062a\u0648\u062c\u062f \u062a\u0630\u0627\u0643\u0631 \u0644\u064a\u062a\u0645 \u0639\u0631\u0636\u0647\u0627",
         "en": "No tickets exist to be displayed",
         "es": "No hay boletos para mostrar",
         "fr": "Il n'y a pas de tickets \u00e0 afficher",
-        "it": "Non esistono biglietti da mostrare"
+        "it": "Non esistono biglietti da mostrare",
+        "mr": "\u092a\u094d\u0930\u0926\u0930\u094d\u0936\u093f\u0924 \u0915\u0930\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0915\u094b\u0923\u0924\u0940\u0939\u0940 \u0924\u093f\u0915\u093f\u091f\u0947 \u0905\u0938\u094d\u0924\u093f\u0924\u094d\u0935\u093e\u0924 \u0928\u093e\u0939\u0940\u0924"
     },
     "No tickets were found": {
         "ar": "\u0644\u0645 \u064a\u062a\u0645 \u0627\u0644\u0639\u062b\u0648\u0631 \u0639\u0644\u0649 \u062a\u0630\u0627\u0643\u0631",
@@ -1905,7 +2242,8 @@
         "en": "Notice: Ticket has been pulled ..",
         "es": "Aviso: el boleto ha sido retirado ..",
         "fr": "Remarque: Le ticket a \u00e9t\u00e9 appel\u00e9 ..",
-        "it": "Avviso: il biglietto \u00e8 stato ritirato .."
+        "it": "Avviso: il biglietto \u00e8 stato ritirato ..",
+        "mr": "\u0938\u0942\u091a\u0928\u093e: \u0924\u093f\u0915\u0940\u091f \u0915\u093e\u0922\u0932\u0947 \u0906\u0939\u0947 .."
     },
     "Notice: To enable slide show you must disable video": {
         "ar": "\u0645\u0644\u0627\u062d\u0638\u0629: \u0644\u062a\u0645\u0643\u064a\u0646 \u0639\u0631\u0636 \u0627\u0644\u0634\u0631\u0627\u0626\u062d \u060c \u064a\u062c\u0628 \u0639\u0644\u064a\u0643 \u062a\u0639\u0637\u064a\u0644 \u0627\u0644\u0641\u064a\u062f\u064a\u0648",
@@ -1978,14 +2316,16 @@
         "en": "Notice: logged-in and all good",
         "es": "Aviso: conectado y todo bien",
         "fr": "Remarque: connection r\u00e9ussie",
-        "it": "Avviso: loggato e tutto bene"
+        "it": "Avviso: loggato e tutto bene",
+        "mr": "\u0938\u0942\u091a\u0928\u093e: \u0932\u0949\u0917-\u0907\u0928 \u0906\u0923\u093f \u0938\u0930\u094d\u0935 \u091a\u093e\u0902\u0917\u0932\u0947"
     },
     "Notice: logout is done.": {
         "ar": "\u0625\u0634\u0639\u0627\u0631: \u064a\u062a\u0645 \u0627\u0644\u062e\u0631\u0648\u062c.",
         "en": "Notice: logout is done.",
         "es": "Aviso: el cierre de sesi\u00f3n est\u00e1 hecho.",
         "fr": "Remarque: Vous avez \u00e9t\u00e9 d\u00e9connect\u00e9 avec succ\u00e8s.",
-        "it": "Avviso: il logout \u00e8 terminato."
+        "it": "Avviso: il logout \u00e8 terminato.",
+        "mr": "\u0938\u0942\u091a\u0928\u093e: \u0932\u0949\u0917\u0906\u0909\u091f \u092a\u0942\u0930\u094d\u0923 \u091d\u093e\u0932\u0947."
     },
     "Notice: make sure that printer is properly connected": {
         "ar": "\u0625\u0634\u0639\u0627\u0631: \u062a\u0623\u0643\u062f \u0645\u0646 \u062a\u0648\u0635\u064a\u0644 \u0627\u0644\u0637\u0627\u0628\u0639\u0629 \u0628\u0634\u0643\u0644 \u0635\u062d\u064a\u062d",
@@ -2047,10 +2387,15 @@
     },
     "Notice: repeating announcement successfully.": {
         "ar": "\u0625\u0634\u0639\u0627\u0631: \u062a\u0643\u0631\u0627\u0631 \u0627\u0644\u0625\u0639\u0644\u0627\u0646 \u0628\u0646\u062c\u0627\u062d.",
+        "de": "Hinweis: Ank\u00fcndigung erfolgreich wiederholt.",
         "en": "Notice: repeating announcement successfully.",
         "es": "Aviso: repetir el anuncio con \u00e9xito.",
         "fr": "Remarque: Annonce r\u00e9p\u00e9ter avec succ\u00e8s.",
-        "it": "Avviso: annuncio ripetuto con successo."
+        "gu": "\u0ab8\u0ac2\u0a9a\u0aa8\u0abe: \u0ab8\u0aab\u0ab3\u0aa4\u0abe\u0aaa\u0ac2\u0ab0\u0acd\u0ab5\u0a95 \u0a9c\u0abe\u0ab9\u0ac7\u0ab0\u0abe\u0aa4\u0aa8\u0ac1\u0a82 \u0aaa\u0ac1\u0aa8\u0ab0\u0abe\u0ab5\u0ab0\u0acd\u0aa4\u0aa8.",
+        "hi": "\u0938\u0942\u091a\u0928\u093e: \u0918\u094b\u0937\u0923\u093e \u0938\u092b\u0932\u0924\u093e\u092a\u0942\u0930\u094d\u0935\u0915 \u0926\u094b\u0939\u0930\u093e\u0908 \u091c\u093e \u0930\u0939\u0940 \u0939\u0948\u0964",
+        "it": "Avviso: annuncio ripetuto con successo.",
+        "mr": "\u0938\u0942\u091a\u0928\u093e: \u092a\u0941\u0928\u0930\u093e\u0935\u0943\u0924\u094d\u0924\u0940 \u0918\u094b\u0937\u0923\u093e \u092f\u0936\u0938\u094d\u0935\u0940\u0930\u093f\u0924\u094d\u092f\u093e.",
+        "ta": "\u0b85\u0bb1\u0bbf\u0bb5\u0bbf\u0baa\u0bcd\u0baa\u0bc1: \u0bae\u0bc0\u0ba3\u0bcd\u0b9f\u0bc1\u0bae\u0bcd \u0b85\u0bb1\u0bbf\u0bb5\u0bbf\u0baa\u0bcd\u0baa\u0bc1 \u0bb5\u0bc6\u0bb1\u0bcd\u0bb1\u0bbf\u0b95\u0bb0\u0bae\u0bbe\u0b95."
     },
     "Notice: settings have been updated .": {
         "ar": "\u0625\u0634\u0639\u0627\u0631: \u062a\u0645 \u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a.",
@@ -2142,17 +2487,27 @@
     },
     "Notifications": {
         "ar": "\u0625\u062e\u0637\u0627\u0631\u0627\u062a",
+        "de": "Benachrichtigungen",
         "en": "Notifications",
         "es": "Notificaciones",
         "fr": "Notifications",
-        "it": "notifiche"
+        "gu": "\u0ab8\u0ac2\u0a9a\u0aa8\u0abe\u0a93",
+        "hi": "\u0938\u0942\u091a\u0928\u093e\u090f\u0902",
+        "it": "notifiche",
+        "mr": "\u0938\u0942\u091a\u0928\u093e",
+        "ta": "\u0b85\u0bb1\u0bbf\u0bb5\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd"
     },
     "Now": {
         "ar": "\u0627\u0644\u0622\u0646",
+        "de": "Jetzt",
         "en": "Now",
         "es": "Ahora",
         "fr": "\u00c0 pr\u00e9sent",
-        "it": "Adesso"
+        "gu": "\u0ab9\u0ab5\u0ac7",
+        "hi": "\u0905\u092c",
+        "it": "Adesso",
+        "mr": "\u0906\u0924\u093e",
+        "ta": "\u0b87\u0baa\u0bcd\u0baa\u0bcb\u0ba4\u0bc1"
     },
     "Number": {
         "ar": "\u0631\u0642\u0645",
@@ -2177,10 +2532,15 @@
     },
     "Office": {
         "ar": "\u0645\u0643\u062a\u0628. \u0645\u0642\u0631. \u0645\u0631\u0643\u0632",
+        "de": "B\u00fcro",
         "en": "Office",
         "es": "Oficina",
         "fr": "Bureau",
-        "it": "Ufficio"
+        "gu": "\u0a93\u0aab\u0abf\u0ab8",
+        "hi": "\u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f",
+        "it": "Ufficio",
+        "mr": "\u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f",
+        "ta": "\u0b85\u0bb2\u0bc1\u0bb5\u0bb2\u0b95\u0bae\u0bcd"
     },
     "Office : ": {
         "en": "Office : ",
@@ -2211,24 +2571,30 @@
     },
     "Oldest Processed Tickets": {
         "ar": "\u0627\u0644\u0623\u0642\u062f\u0645 \u062a\u0630\u0627\u0643\u0631 \u0645\u0639\u0627\u0644\u062c\u062a\u0647\u0627",
+        "de": "\u00c4lteste verarbeitete Tickets",
         "en": "Oldest Processed Tickets",
         "es": "Entradas procesadas m\u00e1s antiguas",
         "fr": "Tickets trait\u00e9s les plus anciens",
-        "it": "Biglietti trasformati pi\u00f9 antichi."
+        "it": "Biglietti trasformati pi\u00f9 antichi.",
+        "mr": "\u0938\u0930\u094d\u0935\u093e\u0924 \u091c\u0941\u0928\u0940 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u0947\u0932\u0947\u0932\u0940 \u0924\u093f\u0915\u093f\u091f\u0947"
     },
     "Oldest Tickets": {
         "ar": "\u0623\u0642\u062f\u0645 \u062a\u0630\u0627\u0643\u0631",
+        "de": "\u00c4lteste Tickets",
         "en": "Oldest Tickets",
         "es": "Entradas m\u00e1s antiguas",
         "fr": "Tickets les plus anciens",
-        "it": "Biglietti pi\u00f9 antichi"
+        "it": "Biglietti pi\u00f9 antichi",
+        "mr": "\u0938\u0930\u094d\u0935\u093e\u0924 \u091c\u0941\u0928\u0940 \u0924\u093f\u0915\u093f\u091f\u0947"
     },
     "On-Hold": {
         "ar": "\u0641\u064a \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0631",
+        "de": "In der Warteschleife",
         "en": "On-Hold",
         "es": "En espera",
         "fr": "En attente",
-        "it": "In attesa"
+        "it": "In attesa",
+        "mr": "\u0911\u0928-\u0939\u094b\u0932\u094d\u0921"
     },
     "One second": {
         "ar": "\u062b\u0627\u0646\u064a\u0629 \u0648\u0627\u062d\u062f\u0629",
@@ -2251,33 +2617,45 @@
         "fr": "Seuls les types de fichiers multim\u00e9dia autoris\u00e9s \u00e0 \u00eatre t\u00e9l\u00e9charg\u00e9s sont",
         "it": "Lo sono solo i tipi di file multimediali che possono essere caricati"
     },
+    "Operator": {
+        "en": "Operator"
+    },
     "Operators": {
         "ar": "\u0627\u0644\u0639\u0627\u0645\u0644\u064a\u0646",
+        "de": "Betreiber",
         "en": "Operators",
         "es": "Operadores",
         "fr": "Op\u00e9rateurs",
-        "it": "operatori"
+        "gu": "\u0a93\u0aaa\u0ab0\u0ac7\u0a9f\u0ab0\u0acb",
+        "hi": "\u0911\u092a\u0930\u0947\u091f\u0930\u094d\u0938",
+        "it": "operatori",
+        "mr": "\u0911\u092a\u0930\u0947\u091f\u0930\u094d\u0938",
+        "ta": "\u0b86\u0baa\u0bb0\u0bc7\u0b9f\u0bcd\u0b9f\u0bb0\u0bcd\u0b95\u0bb3\u0bcd"
     },
     "Operators list": {
         "ar": "\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0645\u0634\u063a\u0644\u064a\u0646",
         "en": "Operators list",
         "es": "Lista de operadores",
         "fr": "Liste des op\u00e9rateurs",
-        "it": "Elenco degli operatori"
+        "it": "Elenco degli operatori",
+        "mr": "\u0911\u092a\u0930\u0947\u091f\u0930 \u092f\u093e\u0926\u0940"
     },
     "Operators total": {
         "ar": "\u0645\u062c\u0645\u0648\u0639 \u0627\u0644\u0645\u0634\u063a\u0644\u064a\u0646",
         "en": "Operators total",
         "es": "Operadores en total",
         "fr": "Nombre total d'op\u00e9rateurs",
-        "it": "Operatori totali"
+        "it": "Operatori totali",
+        "mr": "\u090f\u0915\u0942\u0923 \u0911\u092a\u0930\u0947\u091f\u0930"
     },
     "Order by": {
         "ar": "\u062a\u0631\u062a\u064a\u0628 \u062d\u0633\u0628",
+        "de": "Bestellen nach",
         "en": "Order by",
         "es": "Ordenar",
         "fr": "Command\u00e9 par",
-        "it": "Ordinato da"
+        "it": "Ordinato da",
+        "mr": "\u0926\u094d\u0935\u093e\u0930\u0947 \u0911\u0930\u094d\u0921\u0930 \u0915\u0930\u093e"
     },
     "Password must be at least of 5 and at most 15 letters": {
         "ar": "\u064a\u062c\u0628 \u0623\u0646 \u062a\u0643\u0648\u0646 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 5 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644 \u0648\u0639\u0644\u0649 \u0627\u0644\u0623\u0643\u062b\u0631 15 \u062d\u0631\u0641\u064b\u0627",
@@ -2300,6 +2678,11 @@
         "fr": "Veuillez entrer un num\u00e9ro de ticket:",
         "it": "Si prega di inserire un numero di biglietto:"
     },
+    "Please select a task to pull a tick for": {
+        "en": "Please select a task to pull a tick for",
+        "mr": "\u0915\u0943\u092a\u092f\u093e \u091f\u093f\u0915 \u0915\u093e\u0922\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0915\u093e\u0930\u094d\u092f \u0928\u093f\u0935\u0921\u093e",
+        "ta": "\u0b9f\u0bbf\u0b95\u0bcd \u0b8e\u0b9f\u0bc1\u0b95\u0bcd\u0b95 \u0b92\u0bb0\u0bc1 \u0baa\u0ba3\u0bbf\u0baf\u0bc8\u0ba4\u0bcd \u0ba4\u0bc7\u0bb0\u0bcd\u0ba8\u0bcd\u0ba4\u0bc6\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd"
+    },
     "Please, enter the ID number to be registered along with your ticket": {
         "en": "Please, enter the ID number to be registered along with your ticket",
         "fr": "Veuillez entrer l'ID du num\u00e9ro pour \u00eatre enregistr\u00e9 avec votre ticket"
@@ -2313,7 +2696,8 @@
         "en": "Please, enter the name to be registered along with your ticket",
         "es": "Por favor, ingrese el nombre para ser registrado junto con su boleto",
         "fr": "Entrez le nom \u00e0 enregistrer avec votre ticket s'il vous pla\u00eet",
-        "it": "Per favore, inserisci il nome da registrare insieme al tuo biglietto"
+        "it": "Per favore, inserisci il nome da registrare insieme al tuo biglietto",
+        "mr": "\u0915\u0943\u092a\u092f\u093e, \u0924\u0941\u092e\u091a\u094d\u092f\u093e \u0924\u093f\u0915\u093f\u091f\u093e\u0938\u0939 \u0928\u094b\u0902\u0926\u0923\u0940\u0915\u0943\u0924 \u0928\u093e\u0935 \u092a\u094d\u0930\u0935\u093f\u0937\u094d\u091f \u0915\u0930\u093e"
     },
     "Please, enter the nick name to be registered along with your ticket": {
         "en": "Please, enter the nick name to be registered along with your ticket",
@@ -2332,10 +2716,12 @@
     },
     "Prefix": {
         "ar": "\u0627\u062e\u062a\u0635\u0627\u0631",
+        "de": "Pr\u00e4fix",
         "en": "Prefix",
         "es": "Prefijo",
         "fr": "Pr\u00e9fixe",
-        "it": "Prefisso"
+        "it": "Prefisso",
+        "mr": "\u0909\u092a\u0938\u0930\u094d\u0917"
     },
     "Preview": {
         "ar": "\u0645\u0639\u0627\u064a\u0646\u0629",
@@ -2388,52 +2774,73 @@
     },
     "Printied ticket :": {
         "ar": "\u062a\u0630\u0643\u0631\u0629 \u0627\u0644\u0645\u0637\u0628\u0648\u0639\u0629:",
+        "de": "Ausgedrucktes Ticket:",
         "en": "Printed ticket :",
         "es": "billete impreso:",
         "fr": "Ticket imprim\u00e9:",
-        "it": "biglietto stampato:"
+        "it": "biglietto stampato:",
+        "mr": "\u091b\u093e\u092a\u0940\u0932 \u0924\u093f\u0915\u0940\u091f:"
     },
     "Processed": {
         "ar": "\u0645\u0639\u0627\u0644\u062c\u0629",
+        "de": "Verarbeitet",
         "en": "Processed",
         "es": "Procesada",
         "fr": "Trait\u00e9",
-        "it": "Processed"
+        "it": "Processed",
+        "mr": "\u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e \u0915\u0947\u0932\u0940"
     },
     "Pull": {
         "ar": "\u0633\u062d\u0628. \u0634\u062f",
+        "de": "Ziehen",
         "en": "Pull",
         "es": "Halar",
         "fr": "Appeler",
-        "it": "Tirare"
+        "it": "Tirare",
+        "mr": "\u0913\u0922\u093e"
     },
     "Pull a ticket": {
         "ar": "\u0633\u062d\u0628 \u062a\u0630\u0643\u0631\u0629",
+        "de": "Ziehen Sie ein Ticket",
         "en": "Pull a ticket",
         "es": "Obtener un boleto",
         "fr": "Appeler un ticket",
-        "it": "Tirare un biglietto"
+        "gu": "\u0a9f\u0abf\u0a95\u0abf\u0a9f \u0a96\u0ac7\u0a82\u0a9a\u0acb",
+        "hi": "\u090f\u0915 \u091f\u093f\u0915\u091f \u0916\u0940\u0902\u091a\u094b",
+        "it": "Tirare un biglietto",
+        "mr": "\u0924\u093f\u0915\u0940\u091f \u0915\u093e\u0922\u093e",
+        "ta": "\u0b92\u0bb0\u0bc1 \u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd\u0b9f\u0bc8 \u0b87\u0bb4\u0bc1\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd"
     },
     "Pulled": {
         "ar": "\u0633\u062d\u0628\u062a",
+        "de": "Gezogen",
         "en": "Pulled",
         "es": "Tirado",
         "fr": "Appel\u00e9",
-        "it": "tirato"
+        "it": "tirato",
+        "mr": "\u0913\u0922\u0932\u0947"
+    },
+    "QR Code": {
+        "en": "QR Code",
+        "mr": "QR \u0915\u094b\u0921"
     },
     "QR Code : Office": {
         "ar": "\u0631\u0645\u0632 \u0627\u0644\u0627\u0633\u062a\u062c\u0627\u0628\u0629 \u0627\u0644\u0633\u0631\u064a\u0639\u0629: \u0645\u0643\u062a\u0628",
+        "de": "QR-Code: B\u00fcro",
         "en": "QR Code : Office",
         "es": "C\u00f3digo QR: Oficina",
         "fr": "QR Code: Bureau",
-        "it": "Codice QR: Office"
+        "it": "Codice QR: Office",
+        "mr": "QR \u0915\u094b\u0921: \u0911\u092b\u093f\u0938"
     },
     "QR code - Office": {
         "ar": "\u0631\u0645\u0632 \u0627\u0644\u0627\u0633\u062a\u062c\u0627\u0628\u0629 \u0627\u0644\u0633\u0631\u064a\u0639\u0629 - \u0645\u0643\u062a\u0628",
+        "de": "QR-Code \u2013 B\u00fcro",
         "en": "QR code - Office",
         "es": "C\u00f3digo QR - Oficina",
         "fr": "QR code - Bureau",
-        "it": "Codice QR - Ufficio"
+        "it": "Codice QR - Ufficio",
+        "mr": "QR \u0915\u094b\u0921 - \u0911\u092b\u093f\u0938"
     },
     "QR code : All tickets": {
         "ar": "\u0631\u0645\u0632 \u0627\u0644\u0627\u0633\u062a\u062c\u0627\u0628\u0629 \u0627\u0644\u0633\u0631\u064a\u0639\u0629: \u062c\u0645\u064a\u0639 \u0627\u0644\u062a\u0630\u0627\u0643\u0631",
@@ -2444,31 +2851,51 @@
     },
     "QR code display screen": {
         "ar": "\u0634\u0627\u0634\u0629 \u0639\u0631\u0636 \u0631\u0645\u0632 \u0627\u0644\u0627\u0633\u062a\u062c\u0627\u0628\u0629 \u0627\u0644\u0633\u0631\u064a\u0639\u0629",
+        "de": "QR-Code-Anzeigebildschirm",
         "en": "QR code display screen",
         "es": "Pantalla de visualizaci\u00f3n del c\u00f3digo QR",
         "fr": "\u00c9cran d'affichage du QR code",
-        "it": "Schermo di visualizzazione del codice QR"
+        "gu": "QR \u0a95\u0acb\u0aa1 \u0aa1\u0abf\u0ab8\u0acd\u0aaa\u0acd\u0ab2\u0ac7 \u0ab8\u0acd\u0a95\u0acd\u0ab0\u0ac0\u0aa8",
+        "hi": "\u0915\u094d\u092f\u0942\u0906\u0930 \u0915\u094b\u0921 \u0921\u093f\u0938\u094d\u092a\u094d\u0932\u0947 \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "it": "Schermo di visualizzazione del codice QR",
+        "mr": "QR \u0915\u094b\u0921 \u0921\u093f\u0938\u094d\u092a\u094d\u0932\u0947 \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "ta": "QR \u0b95\u0bc1\u0bb1\u0bbf\u0baf\u0bc0\u0b9f\u0bc1 \u0b95\u0bbe\u0b9f\u0bcd\u0b9a\u0bbf \u0ba4\u0bbf\u0bb0\u0bc8"
     },
     "QR code main page": {
         "ar": "\u0635\u0641\u062d\u0629 QR code \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629",
+        "de": "QR-Code-Hauptseite",
         "en": "QR code main page",
         "es": "P\u00e1gina principal del c\u00f3digo QR",
         "fr": "Page principale du QR code",
-        "it": "Pagina principale del codice QR"
+        "gu": "QR \u0a95\u0acb\u0aa1 \u0aae\u0ac1\u0a96\u0acd\u0aaf \u0aaa\u0ac3\u0ab7\u0acd\u0aa0",
+        "hi": "\u0915\u094d\u092f\u0942\u0906\u0930 \u0915\u094b\u0921 \u092e\u0941\u0916\u094d\u092f \u092a\u0943\u0937\u094d\u0920",
+        "it": "Pagina principale del codice QR",
+        "mr": "QR \u0915\u094b\u0921 \u092e\u0941\u0916\u094d\u092f \u092a\u0943\u0937\u094d\u0920",
+        "ta": "QR \u0b95\u0bc1\u0bb1\u0bbf\u0baf\u0bc0\u0b9f\u0bcd\u0b9f\u0bbf\u0ba9\u0bcd \u0bae\u0bc1\u0ba4\u0ba9\u0bcd\u0bae\u0bc8\u0baa\u0bcd \u0baa\u0b95\u0bcd\u0b95\u0bae\u0bcd"
     },
     "QR code touch screen": {
         "ar": "\u0631\u0645\u0632 \u0627\u0644\u0627\u0633\u062a\u062c\u0627\u0628\u0629 \u0627\u0644\u0633\u0631\u064a\u0639\u0629 \u0644\u0645\u0633 \u0627\u0644\u0634\u0627\u0634\u0629",
+        "de": "QR-Code-Touchscreen",
         "en": "QR code touch screen",
         "es": "Pantalla t\u00e1ctil de c\u00f3digo QR",
         "fr": "\u00c9cran tactile du QR code",
-        "it": "Touch screen con codice QR"
+        "gu": "QR \u0a95\u0acb\u0aa1 \u0a9f\u0a9a \u0ab8\u0acd\u0a95\u0acd\u0ab0\u0ac0\u0aa8",
+        "hi": "\u0915\u094d\u092f\u0942\u0906\u0930 \u0915\u094b\u0921 \u091f\u091a \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "it": "Touch screen con codice QR",
+        "mr": "QR \u0915\u094b\u0921 \u091f\u091a \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "ta": "QR \u0b95\u0bc1\u0bb1\u0bbf\u0baf\u0bc0\u0b9f\u0bc1 \u0ba4\u0bca\u0b9f\u0bc1\u0ba4\u0bbf\u0bb0\u0bc8"
     },
     "Queue management made easy and simple for all": {
         "ar": "\u062c\u0639\u0644 \u0625\u062f\u0627\u0631\u0629 \u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0631 \u0633\u0647\u0644\u0629 \u0648\u0628\u0633\u064a\u0637\u0629 \u0644\u0644\u062c\u0645\u064a\u0639",
+        "de": "Die Warteschlangenverwaltung ist f\u00fcr alle einfach und unkompliziert",
         "en": "Queue management made easy and simple for all",
         "es": "Gesti\u00f3n de colas f\u00e1cil y simple para todos",
         "fr": "La gestion des files d'attente rendue facile et simple pour tous",
-        "it": "Gestione delle code resa facile e semplice per tutti"
+        "gu": "\u0a95\u0aa4\u0abe\u0ab0 \u0ab5\u0acd\u0aaf\u0ab5\u0ab8\u0acd\u0aa5\u0abe\u0aaa\u0aa8 \u0aac\u0aa7\u0abe \u0aae\u0abe\u0a9f\u0ac7 \u0ab8\u0ab0\u0ab3 \u0a85\u0aa8\u0ac7 \u0ab8\u0ab0\u0ab3 \u0aac\u0aa8\u0abe\u0ab5\u0acd\u0aaf\u0ac1\u0a82",
+        "hi": "\u0915\u0924\u093e\u0930 \u092a\u094d\u0930\u092c\u0902\u0927\u0928 \u0915\u094b \u0938\u092d\u0940 \u0915\u0947 \u0932\u093f\u090f \u0906\u0938\u093e\u0928 \u0914\u0930 \u0938\u0930\u0932 \u092c\u0928\u093e \u0926\u093f\u092f\u093e \u0917\u092f\u093e",
+        "it": "Gestione delle code resa facile e semplice per tutti",
+        "mr": "\u0930\u093e\u0902\u0917 \u0935\u094d\u092f\u0935\u0938\u094d\u0925\u093e\u092a\u0928 \u0938\u0930\u094d\u0935\u093e\u0902\u0938\u093e\u0920\u0940 \u0938\u094b\u092a\u0947 \u0906\u0923\u093f \u0938\u094b\u092a\u0947 \u0915\u0947\u0932\u0947 \u0906\u0939\u0947",
+        "ta": "\u0bb5\u0bb0\u0bbf\u0b9a\u0bc8 \u0bae\u0bc7\u0bb2\u0bbe\u0ba3\u0bcd\u0bae\u0bc8 \u0b85\u0ba9\u0bc8\u0bb5\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0b8e\u0bb3\u0bbf\u0ba4\u0bbe\u0ba9\u0ba4\u0bc1 \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0b8e\u0bb3\u0bbf\u0bae\u0bc8\u0baf\u0bbe\u0ba9\u0ba4\u0bc1"
     },
     "Red": {
         "ar": "\u0623\u062d\u0645\u0631",
@@ -2482,7 +2909,9 @@
         "en": "Register",
         "es": "Registro",
         "fr": "Valider",
-        "it": "Registrare"
+        "it": "Registrare",
+        "mr": "\u0928\u094b\u0902\u0926\u0923\u0940 \u0915\u0930\u093e",
+        "ta": "\u0baa\u0ba4\u0bbf\u0bb5\u0bc1 \u0b9a\u0bc6\u0baf\u0bcd\u0baf\u0bc1\u0b99\u0bcd\u0b95\u0bb3\u0bcd"
     },
     "Registered": {
         "ar": "\u0645\u0633\u062c\u0644",
@@ -2500,10 +2929,12 @@
     },
     "Registered ticket value :": {
         "ar": "\u0642\u064a\u0645\u0629 \u062a\u0630\u0643\u0631\u0629 \u0627\u0644\u0645\u0633\u062c\u0644\u0629:",
+        "de": "Registrierter Ticketwert:",
         "en": "Registered ticket value :",
         "es": "valor del boleto registrada:",
         "fr": "valeur du ticket enregistr\u00e9:",
-        "it": "valore del biglietto Registrato:"
+        "it": "valore del biglietto Registrato:",
+        "mr": "\u0928\u094b\u0902\u0926\u0923\u0940\u0915\u0943\u0924 \u0924\u093f\u0915\u0940\u091f \u092e\u0942\u0932\u094d\u092f:"
     },
     "Remeber me : ": {
         "ar": "\u062a\u0630\u0643\u0631\u0646\u0649 :",
@@ -2514,10 +2945,15 @@
     },
     "Remember me : ": {
         "ar": "\u062a\u0630\u0643\u0631\u0646\u0649 :",
+        "de": "Erinnere dich an mich :",
         "en": "Remember me :",
         "es": "Recu\u00e9rdame :",
         "fr": "Rester connect\u00e9 :",
-        "it": "Ricordati di me :"
+        "gu": "\u0aae\u0aa8\u0ac7 \u0aaf\u0abe\u0aa6 \u0ab0\u0abe\u0a96\u0acb:",
+        "hi": "\u092e\u0941\u091d\u0947 \u092f\u093e\u0926 \u0915\u0930\u094b :",
+        "it": "Ricordati di me :",
+        "mr": "\u092e\u0932\u093e \u0932\u0915\u094d\u0937\u093e\u0924 \u0920\u0947\u0935\u093e:",
+        "ta": "\u0b8e\u0ba9\u0bcd\u0ba9\u0bc8 \u0ba8\u0bbf\u0ba9\u0bc8\u0bb5\u0bbf\u0bb2\u0bcd \u0b95\u0bca\u0bb3\u0bcd\u0bb3\u0bc1\u0b99\u0bcd\u0b95\u0bb3\u0bcd:"
     },
     "Reminder : aliases are only supported in English.": {
         "ar": "\u062a\u0630\u0643\u064a\u0631: \u064a\u062a\u0645 \u062f\u0639\u0645 \u0627\u0644\u0623\u0633\u0645\u0627\u0621 \u0627\u0644\u0645\u0633\u062a\u0639\u0627\u0631\u0629 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629 \u0641\u0642\u0637.",
@@ -2549,7 +2985,8 @@
         "en": "Reminder: Change the default password, to disable this message",
         "es": "Recordatorio: cambie la contrase\u00f1a predeterminada para desactivar este mensaje",
         "fr": "Rappel: Changer le mot de passe par d\u00e9faut, pour d\u00e9sactiver ce message",
-        "it": "Promemoria: modifica la password predefinita, per disabilitare questo messaggio"
+        "it": "Promemoria: modifica la password predefinita, per disabilitare questo messaggio",
+        "mr": "\u0938\u094d\u092e\u0930\u0923\u092a\u0924\u094d\u0930: \u0939\u093e \u0938\u0902\u0926\u0947\u0936 \u0905\u0915\u094d\u0937\u092e \u0915\u0930\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0921\u0940\u092b\u0949\u0932\u094d\u091f \u092a\u093e\u0938\u0935\u0930\u094d\u0921 \u092c\u0926\u0932\u093e"
     },
     "Reminder: Display screen is meant to be displayed on large sized screen so it does not support scalability": {
         "ar": "\u062a\u0630\u0643\u064a\u0631: \u0645\u0646 \u0627\u0644\u0645\u0641\u062a\u0631\u0636 \u0623\u0646 \u064a\u062a\u0645 \u0639\u0631\u0636 \u0634\u0627\u0634\u0629 \u0627\u0644\u0639\u0631\u0636 \u0639\u0644\u0649 \u0634\u0627\u0634\u0629 \u0643\u0628\u064a\u0631\u0629 \u0627\u0644\u062d\u062c\u0645 \u0628\u062d\u064a\u062b \u0644\u0627 \u062a\u062f\u0639\u0645 \u0642\u0627\u0628\u0644\u064a\u0629 \u0627\u0644\u062a\u0648\u0633\u0639",
@@ -2588,10 +3025,15 @@
     },
     "Repeat announcement": {
         "ar": "\u0625\u0639\u0644\u0627\u0646 \u0645\u062a\u0643\u0631\u0631",
+        "de": "Ansage wiederholen",
         "en": "Repeat announcement",
         "es": "Repita el anuncio",
         "fr": "R\u00e9p\u00e9ter l'annonce",
-        "it": "Ripeti l'annuncio"
+        "gu": "\u0a9c\u0abe\u0ab9\u0ac7\u0ab0\u0abe\u0aa4\u0aa8\u0ac1\u0a82 \u0aaa\u0ac1\u0aa8\u0ab0\u0abe\u0ab5\u0ab0\u0acd\u0aa4\u0aa8 \u0a95\u0ab0\u0acb",
+        "hi": "\u0918\u094b\u0937\u0923\u093e \u0926\u094b\u0939\u0930\u093e\u090f\u0901",
+        "it": "Ripeti l'annuncio",
+        "mr": "\u0918\u094b\u0937\u0923\u093e \u092a\u0941\u0928\u094d\u0939\u093e \u0915\u0930\u093e",
+        "ta": "\u0bae\u0bc0\u0ba3\u0bcd\u0b9f\u0bc1\u0bae\u0bcd \u0b85\u0bb1\u0bbf\u0bb5\u0bbf\u0baa\u0bcd\u0baa\u0bc1"
     },
     "Required not less than 3 nor more than 300 letters": {
         "en": "Required not less than 3 nor more than 300 letters"
@@ -2612,10 +3054,12 @@
     },
     "Reset": {
         "ar": "\u0625\u0639\u0627\u062f\u0629 \u062a\u0639\u064a\u064a\u0646",
+        "de": "Zur\u00fccksetzen",
         "en": "Reset",
         "es": "Reiniciar",
         "fr": "R\u00e9initialiser",
-        "it": "Reset"
+        "it": "Reset",
+        "mr": "\u0930\u0940\u0938\u0947\u091f \u0915\u0930\u093e"
     },
     "Reset admin password": {
         "ar": "Reset admin password",
@@ -2632,10 +3076,15 @@
     },
     "Restoring the form": {
         "ar": "\u0627\u0633\u062a\u0639\u0627\u062f\u0629 \u0627\u0644\u0646\u0645\u0648\u0630\u062c",
+        "de": "Wiederherstellen des Formulars",
         "en": "Restoring the form",
         "es": "Restaurando la forma",
         "fr": "Restaurer le formulaire",
-        "it": "Ripristinare il modulo"
+        "gu": "\u0aab\u0acb\u0ab0\u0acd\u0aae \u0aaa\u0ac1\u0aa8\u0a83\u0ab8\u0acd\u0aa5\u0abe\u0aaa\u0abf\u0aa4 \u0a95\u0ab0\u0ac0 \u0ab0\u0ab9\u0acd\u0aaf\u0ac1\u0a82 \u0a9b\u0ac7",
+        "hi": "\u092a\u094d\u0930\u092a\u0924\u094d\u0930 \u0915\u094b \u092a\u0941\u0928\u0930\u094d\u0938\u094d\u0925\u093e\u092a\u093f\u0924 \u0915\u0930\u0928\u093e",
+        "it": "Ripristinare il modulo",
+        "mr": "\u092b\u0949\u0930\u094d\u092e \u092a\u0941\u0928\u0930\u094d\u0938\u0902\u091a\u092f\u093f\u0924 \u0915\u0930\u0924 \u0906\u0939\u0947",
+        "ta": "\u0baa\u0b9f\u0bbf\u0bb5\u0ba4\u0bcd\u0ba4\u0bc8 \u0bae\u0bc0\u0b9f\u0bcd\u0b9f\u0bc6\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bbf\u0bb1\u0ba4\u0bc1"
     },
     "Role": {
         "ar": "\u0648\u0638\u064a\u0641\u0629",
@@ -2657,17 +3106,27 @@
     },
     "Screens": {
         "ar": "\u0634\u0627\u0634\u0627\u062a",
+        "de": "Bildschirme",
         "en": "Screens",
         "es": "Pantallas",
         "fr": "\u00c9crans",
-        "it": "schermi"
+        "gu": "\u0ab8\u0acd\u0a95\u0acd\u0ab0\u0ac0\u0aa8\u0acd\u0ab8",
+        "hi": "\u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "it": "schermi",
+        "mr": "\u092a\u0921\u0926\u0947",
+        "ta": "\u0ba4\u0bbf\u0bb0\u0bc8\u0b95\u0bb3\u0bcd"
     },
     "Search": {
         "ar": "\u0628\u062d\u062b",
+        "de": "Suchen",
         "en": "Search",
         "es": "Buscar",
         "fr": "Rechercher",
-        "it": "Ricerca"
+        "gu": "\u0ab6\u0acb\u0aa7\u0acb",
+        "hi": "\u0916\u094b\u091c",
+        "it": "Ricerca",
+        "mr": "\u0936\u094b\u0927\u093e",
+        "ta": "\u0ba4\u0bc7\u0b9f\u0bc1"
     },
     "Search results": {
         "ar": "\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0628\u062d\u062b",
@@ -2902,10 +3361,12 @@
     },
     "Select ticket current status :": {
         "ar": "\u062d\u062f\u062f \u062a\u0630\u0643\u0631\u0629 \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u062d\u0627\u0644\u064a:",
+        "de": "Aktuellen Status des Tickets ausw\u00e4hlen:",
         "en": "Select ticket current status :",
         "es": "Elija un billete estado actual:",
         "fr": "S\u00e9lectionnez l'\u00e9tat actuel du ticket :",
-        "it": "Acquista biglietti stato attuale:"
+        "it": "Acquista biglietti stato attuale:",
+        "mr": "\u0924\u093f\u0915\u093f\u091f\u093e\u091a\u0940 \u0938\u0926\u094d\u092f \u0938\u094d\u0925\u093f\u0924\u0940 \u0928\u093f\u0935\u0921\u093e:"
     },
     "Select ticket prefix : ": {
         "ar": "\u062d\u062f\u062f \u0628\u0627\u062f\u0626\u0629 \u0627\u0644\u062a\u0630\u0643\u0631\u0629:",
@@ -2944,10 +3405,12 @@
     },
     "Select unique prefix for the office : ": {
         "ar": "\u062d\u062f\u062f \u0628\u0627\u062f\u0626\u0629 \u0641\u0631\u064a\u062f\u0629 \u0644\u0644\u0645\u0643\u062a\u0628:",
+        "de": "W\u00e4hlen Sie ein eindeutiges Pr\u00e4fix f\u00fcr das B\u00fcro aus:",
         "en": "Select unique prefix for the office :",
         "es": "Seleccione el prefijo \u00fanico para la oficina:",
         "fr": "S\u00e9lectionnez un pr\u00e9fixe unique pour le bureau:",
-        "it": "Seleziona il prefisso univoco per l'ufficio:"
+        "it": "Seleziona il prefisso univoco per l'ufficio:",
+        "mr": "\u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f\u093e\u0938\u093e\u0920\u0940 \u0905\u0926\u094d\u0935\u093f\u0924\u0940\u092f \u0909\u092a\u0938\u0930\u094d\u0917 \u0928\u093f\u0935\u0921\u093e:"
     },
     "Select uploaded video to use : ": {
         "ar": "\u062d\u062f\u062f \u0641\u064a\u062f\u064a\u0648 \u062a\u0645 \u062a\u062d\u0645\u064a\u0644\u0647 \u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647:",
@@ -3019,10 +3482,15 @@
     },
     "Single Row Queuing": {
         "ar": "\u0635\u0641 \u0648\u0627\u062d\u062f \u0641\u064a \u0642\u0627\u0626\u0645\u0629 \u0627\u0646\u062a\u0638\u0627\u0631",
+        "de": "Warteschlangen f\u00fcr einzelne Zeilen",
         "en": "Single Row Queuing",
         "es": "De una hilera de cola",
         "fr": "Une seul file d'attente",
-        "it": "Singolo Queuing Row"
+        "gu": "\u0ab8\u0abf\u0a82\u0a97\u0ab2 \u0ab0\u0acb \u0a95\u0aa4\u0abe\u0ab0",
+        "hi": "\u090f\u0915\u0932 \u092a\u0902\u0915\u094d\u0924\u093f \u0915\u0924\u093e\u0930",
+        "it": "Singolo Queuing Row",
+        "mr": "\u090f\u0915\u0932 \u092a\u0902\u0915\u094d\u0924\u0940 \u0930\u093e\u0902\u0917\u0947\u0924",
+        "ta": "\u0b92\u0bb1\u0bcd\u0bb1\u0bc8 \u0bb5\u0bb0\u0bbf\u0b9a\u0bc8 \u0bb5\u0bb0\u0bbf\u0b9a\u0bc8"
     },
     "Slide effect": {
         "ar": "\u062a\u0623\u062b\u064a\u0631 \u0627\u0644\u0634\u0631\u064a\u062d\u0629",
@@ -3099,7 +3567,11 @@
         "en": "Spanish",
         "es": "Espa\u00f1ol",
         "fr": "Espagnol",
-        "it": "spagnolo"
+        "gu": "\u0ab8\u0acd\u0aaa\u0ac7\u0aa8\u0abf\u0ab6",
+        "hi": "\u0938\u094d\u092a\u0948\u0928\u093f\u0936",
+        "it": "spagnolo",
+        "mr": "\u0938\u094d\u092a\u0945\u0928\u093f\u0936",
+        "ta": "\u0bb8\u0bcd\u0baa\u0bbe\u0ba9\u0bbf\u0bb7\u0bcd"
     },
     "Specific time to execute the task in :": {
         "ar": "\u0632\u0645\u0646\u064a \u0645\u062d\u062f\u062f \u0644\u062a\u0646\u0641\u064a\u0630 \u0627\u0644\u0645\u0647\u0645\u0629 \u0641\u064a:",
@@ -3152,10 +3624,15 @@
     },
     "Strict Tasks Pulling": {
         "ar": "\u0627\u0644\u0645\u0647\u0627\u0645 \u0635\u0627\u0631\u0645\u0629 \u0633\u062d\u0628",
+        "de": "Strenge Aufgaben ziehen",
         "en": "Strict Tasks Pulling",
         "es": "Tareas estrictas Tirando",
         "fr": "T\u00e2ches strictes Pulling",
-        "it": "Compiti severe Pulling"
+        "gu": "\u0ab8\u0a96\u0aa4 \u0a95\u0abe\u0ab0\u0acd\u0aaf\u0acb \u0aaa\u0ac1\u0ab2\u0abf\u0a82\u0a97",
+        "hi": "\u0938\u0916\u094d\u0924 \u0915\u093e\u0930\u094d\u092f \u0916\u0940\u0902\u091a\u0928\u093e",
+        "it": "Compiti severe Pulling",
+        "mr": "\u0915\u0920\u094b\u0930 \u0915\u093e\u0930\u094d\u092f\u0947 \u0916\u0947\u091a\u0923\u0947",
+        "ta": "\u0b95\u0b9f\u0bc1\u0bae\u0bc8\u0baf\u0bbe\u0ba9 \u0baa\u0ba3\u0bbf\u0b95\u0bb3\u0bcd \u0b87\u0bb4\u0bc1\u0ba4\u0bcd\u0ba4\u0bb2\u0bcd"
     },
     "Subtitle : Secondary text box will be displayed under main title": {
         "ar": "\u0639\u0646\u0648\u0627\u0646 \u0641\u0631\u0639\u064a: \u0633\u064a\u062a\u0645 \u0639\u0631\u0636 \u0645\u0631\u0628\u0639 \u0627\u0644\u0646\u0635 \u0627\u0644\u062b\u0627\u0646\u0648\u064a \u062a\u062d\u062a \u0627\u0644\u0639\u0646\u0648\u0627\u0646 \u0627\u0644\u0631\u0626\u064a\u0633\u064a",
@@ -3171,12 +3648,28 @@
         "fr": "Bien s\u00fbr, j'ai activ\u00e9 Javascript",
         "it": "Certo, ho abilitato Javascript"
     },
+    "T9633561": {
+        "en": "T9633561"
+    },
+    "Tamil": {
+        "en": "Tamil",
+        "es": "Tamil",
+        "fr": "Tamoul",
+        "gu": "\u0aa4\u0aae\u0abf\u0ab2",
+        "hi": "\u0924\u093e\u092e\u093f\u0932",
+        "mr": "\u0924\u092e\u093f\u0933",
+        "ta": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd"
+    },
     "Task": {
         "ar": "\u0645\u0647\u0645\u0629",
         "en": "Task",
         "es": "Tarea",
         "fr": "T\u00e2che",
-        "it": "Compito"
+        "gu": "\u0a95\u0abe\u0ab0\u0acd\u0aaf",
+        "hi": "\u0915\u093e\u092e",
+        "it": "Compito",
+        "mr": "\u0915\u093e\u0930\u094d\u092f",
+        "ta": "\u0baa\u0ba3\u0bbf"
     },
     "Task : ": {
         "en": "Task : ",
@@ -3259,7 +3752,8 @@
         "en": "The default account",
         "es": "La cuenta predeterminada",
         "fr": "Le compte par d\u00e9faut",
-        "it": "L'account predefinito"
+        "it": "L'account predefinito",
+        "mr": "\u0921\u0940\u092b\u0949\u0932\u094d\u091f \u0916\u093e\u0924\u0947"
     },
     "The picture of the template is automatically changed to the one selected": {
         "ar": "\u064a\u062a\u0645 \u062a\u063a\u064a\u064a\u0631 \u0635\u0648\u0631\u0629 \u0627\u0644\u0642\u0627\u0644\u0628 \u062a\u0644\u0642\u0627\u0626\u064a\u064b\u0627 \u0625\u0644\u0649 \u0627\u0644\u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u062d\u062f\u062f\u0629",
@@ -3309,10 +3803,19 @@
     },
     "Ticket": {
         "ar": "\u062a\u0630\u0643\u0631\u0629",
+        "de": "Ticket",
         "en": "Ticket",
         "es": "Boleto",
         "fr": "Ticket",
-        "it": "Biglietto"
+        "gu": "\u0a9f\u0abf\u0a95\u0abf\u0a9f",
+        "hi": "\u091f\u093f\u0915\u091f",
+        "it": "Biglietto",
+        "mr": "\u0924\u093f\u0915\u0940\u091f",
+        "ta": "\u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc6\u0b9f\u0bcd"
+    },
+    "Ticket has been issued, pleas wait your turn": {
+        "en": "Ticket has been issued, pleas wait your turn",
+        "mr": "\u0924\u093f\u0915\u0940\u091f \u091c\u093e\u0930\u0940 \u0915\u0947\u0932\u0947 \u0906\u0939\u0947, \u0915\u0943\u092a\u092f\u093e \u0906\u092a\u0932\u094d\u092f\u093e \u0935\u0933\u0923\u093e\u091a\u0940 \u092a\u094d\u0930\u0924\u0940\u0915\u094d\u0937\u093e \u0915\u0930\u093e"
     },
     "Ticket type": {
         "ar": "\u0646\u0648\u0639 \u0627\u0644\u062a\u0630\u0643\u0631\u0629",
@@ -3339,7 +3842,8 @@
         "en": "Tickets pulled",
         "es": "Entradas tiradas",
         "fr": "Tickets appel\u00e9s",
-        "it": "Biglietti tirati"
+        "it": "Biglietti tirati",
+        "mr": "\u0924\u093f\u0915\u093f\u091f\u0947 \u0915\u093e\u0922\u0932\u0940"
     },
     "Tickets template": {
         "ar": "\u0642\u0627\u0644\u0628 \u0627\u0644\u062a\u0630\u0627\u0643\u0631",
@@ -3350,10 +3854,12 @@
     },
     "Tickets total": {
         "ar": "\u0645\u062c\u0645\u0648\u0639 \u0627\u0644\u062a\u0630\u0627\u0643\u0631",
+        "de": "Tickets insgesamt",
         "en": "Tickets total",
         "es": "Entradas totales",
         "fr": "Total des tickets",
-        "it": "I biglietti sono in totale"
+        "it": "I biglietti sono in totale",
+        "mr": "\u090f\u0915\u0942\u0923 \u0924\u093f\u0915\u093f\u091f\u0947"
     },
     "Time : ": {
         "en": "Time : ",
@@ -3432,10 +3938,15 @@
     },
     "Touch screen": {
         "ar": "\u0634\u0627\u0634\u0629 \u0627\u0644\u0644\u0645\u0633",
+        "de": "Touch-Screen",
         "en": "Touch screen",
         "es": "Pantalla t\u00e1ctil",
         "fr": "\u00c9cran tactile",
-        "it": "Touch screen"
+        "gu": "\u0a9f\u0a9a \u0ab8\u0acd\u0a95\u0acd\u0ab0\u0ac0\u0aa8",
+        "hi": "\u091f\u091a \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "it": "Touch screen",
+        "mr": "\u091f\u091a \u0938\u094d\u0915\u094d\u0930\u0940\u0928",
+        "ta": "\u0ba4\u0bca\u0b9f\u0bc1\u0ba4\u0bbf\u0bb0\u0bc8"
     },
     "Two seconds": {
         "ar": "\u062b\u0627\u0646\u064a\u062a\u064a\u0646",
@@ -3467,10 +3978,12 @@
     },
     "Unattended": {
         "ar": "\u063a\u064a\u0631 \u0627\u0644\u0645\u0631\u0627\u0642\u0628",
+        "de": "Unbeaufsichtigt",
         "en": "Unattended",
         "es": "Desesperado",
         "fr": "Abandonn\u00e9",
-        "it": "incustodito"
+        "it": "incustodito",
+        "mr": "\u0905\u092a\u094d\u0930\u093e\u092a\u094d\u092f"
     },
     "Unused files": {
         "ar": "\u0627\u0644\u0645\u0644\u0641\u0627\u062a \u063a\u064a\u0631 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u0629",
@@ -3481,17 +3994,24 @@
     },
     "Update": {
         "ar": "\u062a\u062d\u062f\u064a\u062b",
+        "de": "Aktualisieren",
         "en": "Update",
         "es": "Actualizar",
         "fr": "Mettre \u00e0 jour",
-        "it": "Aggiornare"
+        "it": "Aggiornare",
+        "mr": "\u0905\u092a\u0921\u0947\u091f \u0915\u0930\u093e"
     },
     "Update ": {
         "ar": "\u062a\u062d\u062f\u064a\u062b",
+        "de": "Aktualisieren",
         "en": "Update ",
         "es": "Actualizar",
         "fr": "Mettre \u00e0 jour",
-        "it": "Aggiornare"
+        "gu": "\u0a85\u0aaa\u0aa1\u0ac7\u0a9f \u0a95\u0ab0\u0acb",
+        "hi": "\u0905\u0926\u094d\u092f\u0924\u0928",
+        "it": "Aggiornare",
+        "mr": "\u0905\u092a\u0921\u0947\u091f \u0915\u0930\u093e",
+        "ta": "\u0baa\u0bc1\u0ba4\u0bc1\u0baa\u0bcd\u0baa\u0bbf\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd"
     },
     "Update Admin": {
         "ar": "\u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0627\u062f\u0627\u0631\u064a\u0629",
@@ -3509,24 +4029,29 @@
     },
     "Update office": {
         "ar": "\u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0645\u0643\u062a\u0628",
+        "de": "B\u00fcro aktualisieren",
         "en": "Update office",
         "es": "Actualizar la oficina",
         "fr": "Mettre \u00e0 jour le bureau",
-        "it": "Ufficio di aggiornamento"
+        "it": "Ufficio di aggiornamento",
+        "mr": "\u0911\u092b\u093f\u0938 \u0905\u092a\u0921\u0947\u091f \u0915\u0930\u093e"
     },
     "Update task": {
         "ar": "\u062a\u062d\u062f\u064a\u062b \u0627\u0644\u0645\u0647\u0645\u0629",
         "en": "Update task",
         "es": "Actualizar tarea",
         "fr": "Mettre \u00e0 jour la t\u00e2che",
-        "it": "Attivit\u00e0 di aggiornamento"
+        "it": "Attivit\u00e0 di aggiornamento",
+        "mr": "\u0915\u093e\u0930\u094d\u092f \u0905\u0926\u094d\u092f\u0924\u0928\u093f\u0924 \u0915\u0930\u093e"
     },
     "Update ticket": {
         "ar": "\u062a\u062d\u062f\u064a\u062b \u062a\u0630\u0643\u0631\u0629",
+        "de": "Ticket aktualisieren",
         "en": "Update ticket",
         "es": "billete de actualizaci\u00f3n",
         "fr": "Mise \u00e0 jour de ticket",
-        "it": "biglietto di Aggiornamento"
+        "it": "biglietto di Aggiornamento",
+        "mr": "\u0924\u093f\u0915\u0940\u091f \u0905\u092a\u0921\u0947\u091f \u0915\u0930\u093e"
     },
     "Update token": {
         "ar": "\u062a\u062d\u062f\u064a\u062b \u0631\u0645\u0632",
@@ -3592,10 +4117,15 @@
     },
     "Users": {
         "ar": "\u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u064a\u0646",
+        "de": "Benutzer",
         "en": "Users",
         "es": "Usuarios",
         "fr": "Utilisateurs",
-        "it": "utenti"
+        "gu": "\u0ab5\u0aaa\u0ab0\u0abe\u0ab6\u0a95\u0ab0\u0acd\u0aa4\u0abe\u0a93",
+        "hi": "\u0909\u092a\u092f\u094b\u0917\u0915\u0930\u094d\u0924\u093e\u0913\u0902",
+        "it": "utenti",
+        "mr": "\u0935\u093e\u092a\u0930\u0915\u0930\u094d\u0924\u0947",
+        "ta": "\u0baa\u0baf\u0ba9\u0bb0\u0bcd\u0b95\u0bb3\u0bcd"
     },
     "Users list": {
         "ar": "\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u064a\u0646",
@@ -3611,12 +4141,17 @@
         "fr": "Nombre total d'utilisateurs",
         "it": "Totale utenti"
     },
+    "V6302990": {
+        "en": "V6302990"
+    },
     "Value": {
         "ar": "\u0627\u0644\u0642\u064a\u0645\u0629",
+        "de": "Wert",
         "en": "Value",
         "es": "Valor",
         "fr": "Valeur",
-        "it": "Valore"
+        "it": "Valore",
+        "mr": "\u092e\u0942\u0932\u094d\u092f"
     },
     "Verbal announcement : ": {
         "ar": "\u0627\u0644\u0625\u0639\u0644\u0627\u0646 \u0627\u0644\u0644\u0641\u0638\u064a:",
@@ -3682,10 +4217,15 @@
     },
     "Visual Effects": {
         "ar": "\u062a\u0623\u062b\u064a\u0631\u0627\u062a \u0628\u0635\u0631\u064a\u0629",
+        "de": "Visuelle Effekte",
         "en": "Visual Effects",
         "es": "Efectos visuales",
         "fr": "Effets visuels",
-        "it": "Effetti visivi"
+        "gu": "\u0ab5\u0abf\u0a9d\u0acd\u0aaf\u0ac1\u0a85\u0ab2 \u0a87\u0aab\u0ac7\u0a95\u0acd\u0a9f\u0acd\u0ab8",
+        "hi": "\u0926\u0943\u0936\u094d\u092f \u092a\u094d\u0930\u092d\u093e\u0935",
+        "it": "Effetti visivi",
+        "mr": "\u0935\u094d\u0939\u093f\u091c\u094d\u092f\u0941\u0905\u0932 \u0907\u092b\u0947\u0915\u094d\u091f\u094d\u0938",
+        "ta": "\u0b95\u0bbe\u0b9f\u0bcd\u0b9a\u0bbf \u0bb5\u0bbf\u0bb3\u0bc8\u0bb5\u0bc1\u0b95\u0bb3\u0bcd"
     },
     "Wait for announcement to finish:": {
         "ar": "\u0627\u0646\u062a\u0638\u0631 \u0627\u0644\u0627\u0639\u0644\u0627\u0646 \u0627\u0644\u0649 \u0627\u0644\u0646\u0647\u0627\u064a\u0629:",
@@ -3696,10 +4236,12 @@
     },
     "Waiting": {
         "ar": "\u0627\u0646\u062a\u0638\u0627\u0631",
+        "de": "Warten",
         "en": "Waiting",
         "es": "Esperando",
         "fr": "Attendre",
-        "it": "In attesa"
+        "it": "In attesa",
+        "mr": "\u0935\u093e\u091f \u092a\u093e\u0939\u0924 \u0906\u0939\u0947"
     },
     "Waiting list": {
         "ar": "\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0627\u0646\u062a\u0638\u0627\u0631",
@@ -3745,17 +4287,20 @@
     },
     "Warning : Delete office": {
         "ar": "\u062a\u062d\u0630\u064a\u0631: \u062d\u0630\u0641 \u0627\u0644\u0645\u0643\u062a\u0628",
+        "de": "Achtung: B\u00fcro l\u00f6schen",
         "en": "Warning : Delete office",
         "es": "Advertencia: Eliminar la oficina",
         "fr": "Attention: Supprimer le bureau",
-        "it": "Avviso: elimina l'ufficio"
+        "it": "Avviso: elimina l'ufficio",
+        "mr": "\u091a\u0947\u0924\u093e\u0935\u0923\u0940: \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u0939\u091f\u0935\u093e"
     },
     "Warning : Delete task": {
         "ar": "\u062a\u062d\u0630\u064a\u0631: \u062d\u0630\u0641 \u0627\u0644\u0645\u0647\u0645\u0629",
         "en": "Warning : Delete task",
         "es": "Advertencia: Eliminar tarea",
         "fr": "Attention: Supprimer la t\u00e2che",
-        "it": "Avviso: elimina attivit\u00e0"
+        "it": "Avviso: elimina attivit\u00e0",
+        "mr": "\u091a\u0947\u0924\u093e\u0935\u0923\u0940: \u0915\u093e\u0930\u094d\u092f \u0939\u091f\u0935\u093e"
     },
     "Warning : Delete token": {
         "ar": "\u062a\u062d\u0630\u064a\u0631: \u0631\u0645\u0632 \u0627\u0644\u062d\u0630\u0641",
@@ -3787,17 +4332,20 @@
     },
     "Warning : Rest all tasks": {
         "ar": "\u062a\u062d\u0630\u064a\u0631: \u0627\u0633\u062a\u0631\u0627\u062d\u0629 \u062c\u0645\u064a\u0639 \u0627\u0644\u0645\u0647\u0627\u0645",
+        "de": "Warnung: Alle Aufgaben ruhen lassen",
         "en": "Warning : Rest all tasks",
         "es": "Advertencia: Descanse todas las tareas",
         "fr": "Attention: R\u00e9initialiser toutes les t\u00e2ches",
-        "it": "Avviso: riposa tutte le attivit\u00e0"
+        "it": "Avviso: riposa tutte le attivit\u00e0",
+        "mr": "\u091a\u0947\u0924\u093e\u0935\u0923\u0940: \u0938\u0930\u094d\u0935 \u0915\u093e\u0930\u094d\u092f\u0947 \u0935\u093f\u0936\u094d\u0930\u093e\u0902\u0924\u0940 \u0918\u094d\u092f\u093e"
     },
     "Warning : Rest task": {
         "ar": "\u062a\u062d\u0630\u064a\u0631: \u0645\u0647\u0645\u0629 \u0627\u0644\u0631\u0627\u062d\u0629",
         "en": "Warning : Rest task",
         "es": "Advertencia: tarea de descanso",
         "fr": "Attention: T\u00e2che de repos",
-        "it": "Avvertenza: attivit\u00e0 di riposo"
+        "it": "Avvertenza: attivit\u00e0 di riposo",
+        "mr": "\u091a\u0947\u0924\u093e\u0935\u0923\u0940: \u0935\u093f\u0936\u094d\u0930\u093e\u0902\u0924\u0940 \u0915\u093e\u0930\u094d\u092f"
     },
     "White": {
         "ar": "\u0623\u0628\u064a\u0636",
@@ -3829,10 +4377,12 @@
     },
     "Yes": {
         "ar": "\u0646\u0639\u0645 \u0641\u0639\u0644\u0627",
+        "de": "Ja",
         "en": "Yes",
         "es": "S\u00ed",
         "fr": "Oui",
-        "it": "s\u00ec"
+        "it": "s\u00ec",
+        "mr": "\u0939\u094b\u092f"
     },
     "You are attempting to delete a file which won't be retrievable , Are you sure of that ?": {
         "ar": "\u0625\u0646\u0643 \u062a\u062d\u0627\u0648\u0644 \u062d\u0630\u0641 \u0627\u0644\u0645\u0644\u0641 \u0627\u0644\u0630\u064a \u0644\u0646 \u064a\u0643\u0648\u0646 \u0642\u0627\u0628\u0644\u0627 \u0644\u0644\u0627\u0633\u062a\u0631\u062c\u0627\u0639\u060c \u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u0630\u0644\u0643\u061f",
@@ -3853,7 +4403,8 @@
         "en": "You are attempting to delete a task whit its all tickets which will not be retrievable , Are you sure of that ?",
         "es": "Est\u00e1 intentando eliminar una tarea con todos sus tickets que no ser\u00e1n recuperables. \u00bfEst\u00e1 seguro de eso?",
         "fr": "Vous essayez de supprimer une t\u00e2che avec tous ses tickets qui ne seront pas r\u00e9cup\u00e9rables, \u00cates-vous s\u00fbr?",
-        "it": "Stai tentando di eliminare un'attivit\u00e0 con tutti i ticket che non saranno recuperabili, ne sei sicuro?"
+        "it": "Stai tentando di eliminare un'attivit\u00e0 con tutti i ticket che non saranno recuperabili, ne sei sicuro?",
+        "mr": "\u0924\u0941\u092e\u094d\u0939\u0940 \u090f\u0916\u093e\u0926\u0947 \u0915\u093e\u0930\u094d\u092f \u0939\u091f\u0935\u0923\u094d\u092f\u093e\u091a\u093e \u092a\u094d\u0930\u092f\u0924\u094d\u0928 \u0915\u0930\u0924 \u0906\u0939\u093e\u0924 \u091c\u094d\u092f\u093e\u091a\u0940 \u0938\u0930\u094d\u0935 \u0924\u093f\u0915\u093f\u091f\u0902 \u092a\u0930\u0924 \u092e\u093f\u0933\u0935\u0924\u093e \u092f\u0947\u0923\u093e\u0930 \u0928\u093e\u0939\u0940\u0924, \u0924\u0941\u092e\u094d\u0939\u093e\u0932\u093e \u092f\u093e\u091a\u0940 \u0916\u093e\u0924\u094d\u0930\u0940 \u0906\u0939\u0947 \u0915\u093e?"
     },
     "You are attempting to delete a user which will not be retrievable , Are you sure of that ?": {
         "ar": "\u0623\u0646\u062a \u062a\u062d\u0627\u0648\u0644 \u062d\u0630\u0641 \u0645\u0633\u062a\u062e\u062f\u0645 \u0644\u0627 \u064a\u0645\u0643\u0646 \u0627\u0633\u062a\u0639\u0627\u062f\u062a\u0647 \u060c \u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u0630\u0644\u0643\u061f",
@@ -3899,10 +4450,12 @@
     },
     "You are attempting to delete an office with its all tickets which will not be retrievable , Are you sure of that ?": {
         "ar": "\u0623\u0646\u062a \u062a\u062d\u0627\u0648\u0644 \u062d\u0630\u0641 \u0645\u0643\u062a\u0628 \u0628\u0647 \u062c\u0645\u064a\u0639 \u062a\u0630\u0627\u0643\u0631\u0647 \u0627\u0644\u062a\u064a \u0644\u0646 \u062a\u0643\u0648\u0646 \u0642\u0627\u0628\u0644\u0629 \u0644\u0644\u0625\u0633\u062a\u0631\u062c\u0627\u0639 \u060c \u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u0630\u0644\u0643\u061f",
+        "de": "Sie versuchen, ein B\u00fcro mit allen nicht mehr abrufbaren Tickets zu l\u00f6schen. Sind Sie da sicher?",
         "en": "You are attempting to delete an office with its all tickets which will not be retrievable , Are you sure of that ?",
         "es": "Est\u00e1 intentando eliminar una oficina con todas sus entradas, que no ser\u00e1n recuperables. \u00bfEst\u00e1 seguro de eso?",
         "fr": "Vous essayez de supprimer un bureau avec tous ses tickets, cette action est irr\u00e9versible. \u00cates-vous s\u00fbr?",
-        "it": "Stai tentando di eliminare un ufficio con tutti i ticket che non saranno recuperabili, ne sei sicuro?"
+        "it": "Stai tentando di eliminare un ufficio con tutti i ticket che non saranno recuperabili, ne sei sicuro?",
+        "mr": "\u0924\u0941\u092e\u094d\u0939\u0940 \u090f\u0916\u093e\u0926\u0947 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u0939\u091f\u0935\u0923\u094d\u092f\u093e\u091a\u093e \u092a\u094d\u0930\u092f\u0924\u094d\u0928 \u0915\u0930\u0924 \u0906\u0939\u093e\u0924 \u091c\u094d\u092f\u093e\u091a\u0940 \u0938\u0930\u094d\u0935 \u0924\u093f\u0915\u093f\u091f\u0947 \u092a\u0930\u0924 \u092e\u093f\u0933\u0935\u0924\u093e \u092f\u0947\u0923\u093e\u0930 \u0928\u093e\u0939\u0940\u0924, \u0924\u0941\u092e\u094d\u0939\u093e\u0932\u093e \u092f\u093e\u091a\u0940 \u0916\u093e\u0924\u094d\u0930\u0940 \u0906\u0939\u0947 \u0915\u093e?"
     },
     "You are attempting to delete every office and task under it with all tickets, which won't be retrievable , Are you sure of that ?": {
         "ar": "\u0623\u0646\u062a \u062a\u062d\u0627\u0648\u0644 \u062d\u0630\u0641 \u0643\u0644 \u0645\u0643\u062a\u0628 \u0648\u0645\u0647\u0645\u0629 \u062a\u062d\u062a\u0647 \u0645\u0639 \u062c\u0645\u064a\u0639 \u0627\u0644\u062a\u0630\u0627\u0643\u0631 \u060c \u0648\u0627\u0644\u062a\u064a \u0644\u0646 \u062a\u0643\u0648\u0646 \u0642\u0627\u0628\u0644\u0629 \u0644\u0644\u0625\u0633\u062a\u0631\u062c\u0627\u0639 \u060c \u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u0630\u0644\u0643\u061f",
@@ -3916,14 +4469,17 @@
         "en": "You are attempting to reset a task to zero, with its all tickets been deleted and will not be retrievable , Are you sure of that ?",
         "es": "Est\u00e1 intentando restablecer una tarea a cero, con todos sus tickets eliminados y no ser\u00e1 recuperable, \u00bfest\u00e1 seguro de eso?",
         "fr": "Vous essayez de r\u00e9initialiser une t\u00e2che \u00e0 z\u00e9ro, tous ses tickets vont \u00e9t\u00e9 supprim\u00e9s et ne seront pas r\u00e9cup\u00e9rables, \u00cates-vous s\u00fbr?",
-        "it": "Stai tentando di ripristinare un'attivit\u00e0 a zero, con tutti i ticket cancellati e non recuperabili, ne sei sicuro?"
+        "it": "Stai tentando di ripristinare un'attivit\u00e0 a zero, con tutti i ticket cancellati e non recuperabili, ne sei sicuro?",
+        "mr": "\u0924\u0941\u092e\u094d\u0939\u0940 \u090f\u0916\u093e\u0926\u0947 \u0915\u093e\u0930\u094d\u092f \u0936\u0942\u0928\u094d\u092f\u093e\u0935\u0930 \u0930\u0940\u0938\u0947\u091f \u0915\u0930\u0923\u094d\u092f\u093e\u091a\u093e \u092a\u094d\u0930\u092f\u0924\u094d\u0928 \u0915\u0930\u0924 \u0906\u0939\u093e\u0924, \u0924\u094d\u092f\u093e\u091a\u0940 \u0938\u0930\u094d\u0935 \u0924\u093f\u0915\u093f\u091f\u0947 \u0939\u091f\u0935\u0932\u0940 \u0917\u0947\u0932\u0940 \u0906\u0939\u0947\u0924 \u0906\u0923\u093f \u0924\u0940 \u092a\u0930\u0924 \u092e\u093f\u0933\u0935\u0924\u093e \u092f\u0947\u0923\u093e\u0930 \u0928\u093e\u0939\u0940\u0924, \u0924\u0941\u092e\u094d\u0939\u093e\u0932\u093e \u092f\u093e\u091a\u0940 \u0916\u093e\u0924\u094d\u0930\u0940 \u0906\u0939\u0947 \u0915\u093e?"
     },
     "You are attempting to reset an office to zero, with its all tickets been deleted and will not be retrievable , Are you sure of that ?": {
         "ar": "\u0623\u0646\u062a \u062a\u062d\u0627\u0648\u0644 \u0625\u0639\u0627\u062f\u0629 \u062a\u0639\u064a\u064a\u0646 \u0645\u0643\u062a\u0628 \u0625\u0644\u0649 \u0635\u0641\u0631 \u060c \u0645\u0639 \u062d\u0630\u0641 \u062c\u0645\u064a\u0639 \u062a\u0630\u0627\u0643\u0631\u0647 \u0648\u0644\u0646 \u064a\u0643\u0648\u0646 \u0642\u0627\u0628\u0644\u0627\u064b \u0644\u0644\u0627\u0633\u062a\u0631\u062f\u0627\u062f \u060c \u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u0630\u0644\u0643\u061f",
+        "de": "Sie versuchen, ein B\u00fcro auf Null zur\u00fcckzusetzen, wobei alle Tickets gel\u00f6scht wurden und nicht mehr wiederhergestellt werden k\u00f6nnen. Sind Sie da sicher?",
         "en": "You are attempting to reset an office to zero, with its all tickets been deleted and will not be retrievable , Are you sure of that ?",
         "es": "Est\u00e1 intentando restablecer una oficina a cero, con todos sus tickets eliminados y no ser\u00e1 recuperable. \u00bfEst\u00e1 seguro de eso?",
         "fr": "Vous essayez de r\u00e9initialiser un bureau \u00e0 z\u00e9ro, tous ses tickets vont \u00e9t\u00e9 supprim\u00e9s et ne seront pas r\u00e9cup\u00e9rables, \u00cates-vous s\u00fbr?",
-        "it": "Stai tentando di ripristinare un ufficio a zero, con tutti i ticket cancellati e non recuperabili, ne sei sicuro?"
+        "it": "Stai tentando di ripristinare un ufficio a zero, con tutti i ticket cancellati e non recuperabili, ne sei sicuro?",
+        "mr": "\u0924\u0941\u092e\u094d\u0939\u0940 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f \u0936\u0942\u0928\u094d\u092f\u093e\u0935\u0930 \u0930\u0940\u0938\u0947\u091f \u0915\u0930\u0923\u094d\u092f\u093e\u091a\u093e \u092a\u094d\u0930\u092f\u0924\u094d\u0928 \u0915\u0930\u0924 \u0906\u0939\u093e\u0924, \u0924\u094d\u092f\u093e\u091a\u0940 \u0938\u0930\u094d\u0935 \u0924\u093f\u0915\u093f\u091f\u0947 \u0939\u091f\u0935\u0932\u0940 \u0917\u0947\u0932\u0940 \u0906\u0939\u0947\u0924 \u0906\u0923\u093f \u0924\u0940 \u092a\u0930\u0924 \u092e\u093f\u0933\u0935\u0924\u093e \u092f\u0947\u0923\u093e\u0930 \u0928\u093e\u0939\u0940\u0924, \u0924\u0941\u092e\u094d\u0939\u093e\u0932\u093e \u092f\u093e\u091a\u0940 \u0916\u093e\u0924\u094d\u0930\u0940 \u0906\u0939\u0947 \u0915\u093e?"
     },
     "You are attempting to reset every office and task to zero, with all tickets erased, that won't be retrievable , Are you sure of that ?": {
         "ar": "\u0623\u0646\u062a \u062a\u062d\u0627\u0648\u0644 \u0625\u0639\u0627\u062f\u0629 \u062a\u0639\u064a\u064a\u0646 \u0643\u0644 \u0645\u0643\u062a\u0628 \u0648\u0645\u0647\u0645\u0629 \u0625\u0644\u0649 \u0627\u0644\u0635\u0641\u0631 \u060c \u0645\u0639 \u0645\u062d\u0648 \u062c\u0645\u064a\u0639 \u0627\u0644\u062a\u0630\u0627\u0643\u0631 \u060c \u0627\u0644\u062a\u064a \u0644\u0646 \u062a\u0643\u0648\u0646 \u0642\u0627\u0628\u0644\u0629 \u0644\u0644\u0625\u0633\u062a\u0631\u062c\u0627\u0639 \u060c \u0647\u0644 \u0623\u0646\u062a \u0645\u062a\u0623\u0643\u062f \u0645\u0646 \u0630\u0644\u0643\u061f",
@@ -3934,17 +4490,27 @@
     },
     "You are not using Firefox browser, which this project is designed and most suited for.": {
         "ar": "\u0623\u0646\u062a \u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0645\u062a\u0635\u0641\u062d Firefox \u060c \u0627\u0644\u0630\u064a \u0635\u0645\u0645 \u0647\u0630\u0627 \u0627\u0644\u0645\u0634\u0631\u0648\u0639 \u0648\u0623\u0643\u062b\u0631 \u0645\u0644\u0627\u0621\u0645\u0629 \u0644\u0647.",
+        "de": "Sie verwenden nicht den Firefox-Browser, f\u00fcr den dieses Projekt entwickelt und am besten geeignet ist.",
         "en": "You are not using Firefox browser, which this project is designed and most suited for.",
         "es": "No est\u00e1 utilizando el navegador Firefox, que este proyecto est\u00e1 dise\u00f1ado y m\u00e1s adecuado para.",
         "fr": "Vous n'utilisez pas le navigateur Firefox, pour lequel ce projet est con\u00e7u et le mieux adapt\u00e9.",
-        "it": "Non stai utilizzando il browser Firefox, per il quale questo progetto \u00e8 stato progettato e pi\u00f9 adatto."
+        "gu": "\u0aa4\u0aae\u0ac7 \u0aab\u0abe\u0aaf\u0ab0\u0aab\u0acb\u0a95\u0acd\u0ab8 \u0aac\u0acd\u0ab0\u0abe\u0a89\u0a9d\u0ab0\u0aa8\u0acb \u0a89\u0aaa\u0aaf\u0acb\u0a97 \u0a95\u0ab0\u0ac0 \u0ab0\u0ab9\u0acd\u0aaf\u0abe\u0a82 \u0aa8\u0aa5\u0ac0, \u0a9c\u0ac7\u0aa8\u0abe \u0aae\u0abe\u0a9f\u0ac7 \u0a86 \u0aaa\u0acd\u0ab0\u0acb\u0a9c\u0ac7\u0a95\u0acd\u0a9f \u0aa1\u0abf\u0a9d\u0abe\u0a87\u0aa8 \u0a95\u0ab0\u0ab5\u0abe\u0aae\u0abe\u0a82 \u0a86\u0ab5\u0acd\u0aaf\u0acb \u0a9b\u0ac7 \u0a85\u0aa8\u0ac7 \u0ab8\u0acc\u0aa5\u0ac0 \u0ab5\u0aa7\u0ac1 \u0a85\u0aa8\u0ac1\u0a95\u0ac2\u0ab3 \u0a9b\u0ac7.",
+        "hi": "\u0906\u092a \u092b\u093c\u093e\u092f\u0930\u092b\u093c\u0949\u0915\u094d\u0938 \u092c\u094d\u0930\u093e\u0909\u091c\u093c\u0930 \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0928\u0939\u0940\u0902 \u0915\u0930 \u0930\u0939\u0947 \u0939\u0948\u0902, \u091c\u093f\u0938\u0915\u0947 \u0932\u093f\u090f \u092f\u0939 \u092a\u094d\u0930\u094b\u091c\u0947\u0915\u094d\u091f \u0921\u093f\u091c\u093c\u093e\u0907\u0928 \u0915\u093f\u092f\u093e \u0917\u092f\u093e \u0939\u0948 \u0914\u0930 \u091c\u094b \u0907\u0938\u0915\u0947 \u0932\u093f\u090f \u0938\u092c\u0938\u0947 \u0909\u092a\u092f\u0941\u0915\u094d\u0924 \u0939\u0948\u0964",
+        "it": "Non stai utilizzando il browser Firefox, per il quale questo progetto \u00e8 stato progettato e pi\u00f9 adatto.",
+        "mr": "\u0924\u0941\u092e\u094d\u0939\u0940 \u092b\u093e\u092f\u0930\u092b\u0949\u0915\u094d\u0938 \u092c\u094d\u0930\u093e\u0909\u091d\u0930 \u0935\u093e\u092a\u0930\u0924 \u0928\u093e\u0939\u0940, \u091c\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0939\u093e \u092a\u094d\u0930\u0915\u0932\u094d\u092a \u0921\u093f\u091d\u093e\u0907\u0928 \u0915\u0947\u0932\u0947\u0932\u093e \u0906\u0939\u0947 \u0906\u0923\u093f \u0938\u0930\u094d\u0935\u093e\u0924 \u092f\u094b\u0917\u094d\u092f \u0906\u0939\u0947.",
+        "ta": "\u0b87\u0ba8\u0bcd\u0ba4 \u0ba4\u0bbf\u0b9f\u0bcd\u0b9f\u0bae\u0bcd \u0bb5\u0b9f\u0bbf\u0bb5\u0bae\u0bc8\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0bae\u0bbf\u0b95\u0bb5\u0bc1\u0bae\u0bcd \u0baa\u0bca\u0bb0\u0bc1\u0ba4\u0bcd\u0ba4\u0bae\u0bbe\u0ba9 Firefox \u0b89\u0bb2\u0bbe\u0bb5\u0bbf\u0baf\u0bc8 \u0ba8\u0bc0\u0b99\u0bcd\u0b95\u0bb3\u0bcd \u0baa\u0baf\u0ba9\u0bcd\u0baa\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0bb5\u0bbf\u0bb2\u0bcd\u0bb2\u0bc8."
     },
     "You are using an older version of FQM, a newer release is available on fqms.github.io": {
         "ar": "\u0623\u0646\u062a \u062a\u0633\u062a\u062e\u062f\u0645 \u0625\u0635\u062f\u0627\u0631\u064b\u0627 \u0642\u062f\u064a\u0645\u064b\u0627 \u0645\u0646 FQM \u060c \u064a\u062a\u0648\u0641\u0631 \u0625\u0635\u062f\u0627\u0631 \u0623\u062d\u062f\u062b \u0639\u0644\u0649 fqms.github.io",
+        "de": "Sie verwenden eine \u00e4ltere Version von FQM, eine neuere Version ist auf fqms.github.io verf\u00fcgbar",
         "en": "You are using an older version of FQM, a newer release is available on fqms.github.io",
         "es": "Est\u00e1 utilizando una versi\u00f3n anterior de FQM, una versi\u00f3n m\u00e1s reciente est\u00e1 disponible en fqms.github.io",
         "fr": "Vous utilisez une ancienne version de FQM, une version plus r\u00e9cente est disponible sur fqms.github.io",
-        "it": "Stai utilizzando una versione precedente di FQM, una versione pi\u00f9 recente \u00e8 disponibile su fqms.github.io"
+        "gu": "\u0aa4\u0aae\u0ac7 FQM \u0aa8\u0abe \u0a9c\u0ac2\u0aa8\u0abe \u0ab8\u0a82\u0ab8\u0acd\u0a95\u0ab0\u0aa3\u0aa8\u0acb \u0a89\u0aaa\u0aaf\u0acb\u0a97 \u0a95\u0ab0\u0ac0 \u0ab0\u0ab9\u0acd\u0aaf\u0abe\u0a82 \u0a9b\u0acb, fqms.github.io \u0aaa\u0ab0 \u0aa8\u0ab5\u0ac0 \u0ab0\u0abf\u0ab2\u0ac0\u0a9d \u0a89\u0aaa\u0ab2\u0aac\u0acd\u0aa7 \u0a9b\u0ac7.",
+        "hi": "\u0906\u092a FQM \u0915\u0947 \u092a\u0941\u0930\u093e\u0928\u0947 \u0938\u0902\u0938\u094d\u0915\u0930\u0923 \u0915\u093e \u0909\u092a\u092f\u094b\u0917 \u0915\u0930 \u0930\u0939\u0947 \u0939\u0948\u0902, \u090f\u0915 \u0928\u092f\u093e \u0930\u093f\u0932\u0940\u091c\u093c fqms.github.io \u092a\u0930 \u0909\u092a\u0932\u092c\u094d\u0927 \u0939\u0948",
+        "it": "Stai utilizzando una versione precedente di FQM, una versione pi\u00f9 recente \u00e8 disponibile su fqms.github.io",
+        "mr": "\u0924\u0941\u092e\u094d\u0939\u0940 FQM \u091a\u0940 \u091c\u0941\u0928\u0940 \u0906\u0935\u0943\u0924\u094d\u0924\u0940 \u0935\u093e\u092a\u0930\u0924 \u0906\u0939\u093e\u0924, fqms.github.io \u0935\u0930 \u0928\u0935\u0940\u0928 \u0930\u093f\u0932\u0940\u091d \u0909\u092a\u0932\u092c\u094d\u0927 \u0906\u0939\u0947.",
+        "ta": "\u0ba8\u0bc0\u0b99\u0bcd\u0b95\u0bb3\u0bcd FQM \u0b87\u0ba9\u0bcd \u0baa\u0bb4\u0bc8\u0baf \u0baa\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc8\u0baa\u0bcd \u0baa\u0baf\u0ba9\u0bcd\u0baa\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0b95\u0bbf\u0bb1\u0bc0\u0bb0\u0bcd\u0b95\u0bb3\u0bcd, \u0baa\u0bc1\u0ba4\u0bbf\u0baf \u0bb5\u0bc6\u0bb3\u0bbf\u0baf\u0bc0\u0b9f\u0bc1 fqms.github.io \u0b87\u0bb2\u0bcd \u0b95\u0bbf\u0b9f\u0bc8\u0b95\u0bcd\u0b95\u0bbf\u0bb1\u0ba4\u0bc1."
     },
     "You can search tickets with any of the following parameters, if you wish to exclude any of them, simply leave it unchanged": {
         "ar": "\u064a\u0645\u0643\u0646\u0643 \u0627\u0644\u0628\u062d\u062b \u0639\u0646 \u0627\u0644\u062a\u0630\u0627\u0643\u0631 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0623\u064a\u064d\u0651 \u0645\u0646 \u0627\u0644\u0645\u0639\u0644\u0645\u0627\u062a \u0627\u0644\u062a\u0627\u0644\u064a\u0629 \u060c \u0625\u0630\u0627 \u0643\u0646\u062a \u062a\u0631\u063a\u0628 \u0641\u064a \u0627\u0633\u062a\u0628\u0639\u0627\u062f \u0623\u064a\u064d\u0651 \u0645\u0646\u0647\u0627 \u060c \u0645\u0627 \u0639\u0644\u064a\u0643 \u0633\u0648\u0649 \u062a\u0631\u0643\u0647\u0627 \u062f\u0648\u0646 \u062a\u063a\u064a\u064a\u0631",
@@ -3955,10 +4521,15 @@
     },
     "You made changes on the previous form without submitting. Do you wish to restore it ?": {
         "ar": "\u0642\u0645\u062a \u0628\u0625\u062c\u0631\u0627\u0621 \u062a\u063a\u064a\u064a\u0631\u0627\u062a \u0639\u0644\u0649 \u0627\u0644\u0646\u0645\u0648\u0630\u062c \u0627\u0644\u0633\u0627\u0628\u0642 \u062f\u0648\u0646 \u062a\u0642\u062f\u064a\u0645. \u0647\u0644 \u062a\u0631\u063a\u0628 \u0641\u064a \u0627\u0633\u062a\u0639\u0627\u062f\u062a\u0647\u0627\u061f",
+        "de": "Sie haben am vorherigen Formular \u00c4nderungen vorgenommen, ohne es abzusenden. M\u00f6chten Sie es wiederherstellen?",
         "en": "You made changes on the previous form without submitting. Do you wish to restore it ?",
         "es": "Hiciste cambios en el formulario anterior sin enviarlos. \u00bfDeseas restaurarlo?",
         "fr": "Vous avez effectu\u00e9 des modifications sur le formulaire pr\u00e9c\u00e9dent sans le soumettre. Voulez-vous le restaurer?",
-        "it": "Hai apportato modifiche al modulo precedente senza inviarlo. Vuoi ripristinarlo?"
+        "gu": "\u0aa4\u0aae\u0ac7 \u0ab8\u0aac\u0aae\u0abf\u0a9f \u0a95\u0ab0\u0acd\u0aaf\u0abe \u0ab5\u0abf\u0aa8\u0abe \u0aaa\u0abe\u0a9b\u0ab2\u0abe \u0aab\u0acb\u0ab0\u0acd\u0aae\u0aae\u0abe\u0a82 \u0aab\u0ac7\u0ab0\u0aab\u0abe\u0ab0\u0acb \u0a95\u0ab0\u0acd\u0aaf\u0abe \u0a9b\u0ac7. \u0ab6\u0ac1\u0a82 \u0aa4\u0aae\u0ac7 \u0aa4\u0ac7\u0aa8\u0ac7 \u0aaa\u0ac1\u0aa8\u0a83\u0ab8\u0acd\u0aa5\u0abe\u0aaa\u0abf\u0aa4 \u0a95\u0ab0\u0ab5\u0abe \u0aae\u0abe\u0a82\u0a97\u0acb \u0a9b\u0acb?",
+        "hi": "\u0906\u092a\u0928\u0947 \u092a\u093f\u091b\u0932\u0947 \u092b\u093c\u0949\u0930\u094d\u092e \u092e\u0947\u0902 \u092c\u093f\u0928\u093e \u0938\u092c\u092e\u093f\u091f \u0915\u093f\u090f \u092c\u0926\u0932\u093e\u0935 \u0915\u0930 \u0926\u093f\u090f \u0939\u0948\u0902. \u0915\u094d\u092f\u093e \u0906\u092a \u0907\u0938\u0947 \u092a\u0941\u0928\u0930\u094d\u0938\u094d\u0925\u093e\u092a\u093f\u0924 \u0915\u0930\u0928\u093e \u091a\u093e\u0939\u0924\u0947 \u0939\u0948\u0902?",
+        "it": "Hai apportato modifiche al modulo precedente senza inviarlo. Vuoi ripristinarlo?",
+        "mr": "\u0924\u0941\u092e\u094d\u0939\u0940 \u0938\u092c\u092e\u093f\u091f \u0928 \u0915\u0930\u0924\u093e \u092e\u093e\u0917\u0940\u0932 \u092b\u0949\u0930\u094d\u092e\u092e\u0927\u094d\u092f\u0947 \u092c\u0926\u0932 \u0915\u0947\u0932\u0947 \u0906\u0939\u0947\u0924. \u0906\u092a\u0923 \u0924\u0947 \u092a\u0941\u0928\u0930\u094d\u0938\u0902\u091a\u092f\u093f\u0924 \u0915\u0930\u0942 \u0907\u091a\u094d\u091b\u093f\u0924\u093e?",
+        "ta": "\u0b9a\u0bae\u0bb0\u0bcd\u0baa\u0bcd\u0baa\u0bbf\u0b95\u0bcd\u0b95\u0bbe\u0bae\u0bb2\u0bc7\u0baf\u0bc7 \u0bae\u0bc1\u0ba8\u0bcd\u0ba4\u0bc8\u0baf \u0baa\u0b9f\u0bbf\u0bb5\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd \u0bae\u0bbe\u0bb1\u0bcd\u0bb1\u0b99\u0bcd\u0b95\u0bb3\u0bc8\u0b9a\u0bcd \u0b9a\u0bc6\u0baf\u0bcd\u0ba4\u0bc1\u0bb3\u0bcd\u0bb3\u0bc0\u0bb0\u0bcd\u0b95\u0bb3\u0bcd. \u0b85\u0ba4\u0bc8 \u0bae\u0bc0\u0b9f\u0bcd\u0b9f\u0bc6\u0b9f\u0bc1\u0b95\u0bcd\u0b95 \u0bb5\u0bbf\u0bb0\u0bc1\u0bae\u0bcd\u0baa\u0bc1\u0b95\u0bbf\u0bb1\u0bc0\u0bb0\u0bcd\u0b95\u0bb3\u0bbe?"
     },
     "You must choose unique prefix": {
         "ar": "\u064a\u062c\u0628 \u0639\u0644\u064a\u0643 \u0627\u062e\u062a\u064a\u0627\u0631 \u0628\u0627\u062f\u0626\u0629 \u0641\u0631\u064a\u062f\u0629",
@@ -3990,10 +4561,15 @@
     },
     "Your current version of the software is outdated, please visit the website to downloaded a new version.": {
         "ar": "\u0627\u0644\u0625\u0635\u062f\u0627\u0631 \u0627\u0644\u062d\u0627\u0644\u064a \u0645\u0646 \u0627\u0644\u0628\u0631\u0646\u0627\u0645\u062c \u0647\u0648 \u0639\u0641\u0627 \u0639\u0644\u064a\u0647\u0627 \u0627\u0644\u0632\u0645\u0646\u060c \u064a\u0631\u062c\u0649 \u0632\u064a\u0627\u0631\u0629 \u0627\u0644\u0645\u0648\u0642\u0639 \u0644\u062a\u062d\u0645\u064a\u0644 \u0646\u0633\u062e\u0629 \u062c\u062f\u064a\u062f\u0629.",
+        "de": "Ihre aktuelle Version der Software ist veraltet. Bitte besuchen Sie die Website, um eine neue Version herunterzuladen.",
         "en": "Your current version of the software is outdated, please visit the website to downloaded a new version.",
         "es": "Su versi\u00f3n actual del software est\u00e1 actualizado, por favor visite el sitio web para descargar una nueva versi\u00f3n.",
         "fr": "Votre version actuelle du logiciel est obsol\u00e8te, visitez le site Web pour t\u00e9l\u00e9charger une nouvelle version.",
-        "it": "La versione corrente del software non \u00e8 aggiornato, si prega di visitare il sito web per scaricare una nuova versione."
+        "gu": "\u0ab8\u0ac9\u0aab\u0acd\u0a9f\u0ab5\u0ac7\u0ab0\u0aa8\u0ac1\u0a82 \u0aa4\u0aae\u0abe\u0ab0\u0ac1\u0a82 \u0ab5\u0ab0\u0acd\u0aa4\u0aae\u0abe\u0aa8 \u0ab8\u0a82\u0ab8\u0acd\u0a95\u0ab0\u0aa3 \u0a9c\u0ac2\u0aa8\u0ac1\u0a82 \u0a9b\u0ac7, \u0a95\u0ac3\u0aaa\u0abe \u0a95\u0ab0\u0ac0\u0aa8\u0ac7 \u0aa8\u0ab5\u0ac1\u0a82 \u0ab8\u0a82\u0ab8\u0acd\u0a95\u0ab0\u0aa3 \u0aa1\u0abe\u0a89\u0aa8\u0ab2\u0acb\u0aa1 \u0a95\u0ab0\u0ab5\u0abe \u0aae\u0abe\u0a9f\u0ac7 \u0ab5\u0ac7\u0aac\u0ab8\u0abe\u0a87\u0a9f\u0aa8\u0ac0 \u0aae\u0ac1\u0ab2\u0abe\u0a95\u0abe\u0aa4 \u0ab2\u0acb.",
+        "hi": "\u0938\u0949\u092b\u093c\u094d\u091f\u0935\u0947\u092f\u0930 \u0915\u093e \u0906\u092a\u0915\u093e \u0935\u0930\u094d\u0924\u092e\u093e\u0928 \u0938\u0902\u0938\u094d\u0915\u0930\u0923 \u092a\u0941\u0930\u093e\u0928\u093e \u0939\u094b \u091a\u0941\u0915\u093e \u0939\u0948, \u0915\u0943\u092a\u092f\u093e \u0928\u092f\u093e \u0938\u0902\u0938\u094d\u0915\u0930\u0923 \u0921\u093e\u0909\u0928\u0932\u094b\u0921 \u0915\u0930\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0935\u0947\u092c\u0938\u093e\u0907\u091f \u092a\u0930 \u091c\u093e\u090f\u0901\u0964",
+        "it": "La versione corrente del software non \u00e8 aggiornato, si prega di visitare il sito web per scaricare una nuova versione.",
+        "mr": "\u0924\u0941\u092e\u091a\u0940 \u0938\u0949\u092b\u094d\u091f\u0935\u0947\u0905\u0930\u091a\u0940 \u0935\u0930\u094d\u0924\u092e\u093e\u0928 \u0906\u0935\u0943\u0924\u094d\u0924\u0940 \u091c\u0941\u0928\u0940 \u091d\u093e\u0932\u0940 \u0906\u0939\u0947, \u0915\u0943\u092a\u092f\u093e \u0928\u0935\u0940\u0928 \u0906\u0935\u0943\u0924\u094d\u0924\u0940 \u0921\u093e\u0909\u0928\u0932\u094b\u0921 \u0915\u0930\u0923\u094d\u092f\u093e\u0938\u093e\u0920\u0940 \u0935\u0947\u092c\u0938\u093e\u0907\u091f\u0932\u093e \u092d\u0947\u091f \u0926\u094d\u092f\u093e.",
+        "ta": "\u0bae\u0bc6\u0ba9\u0bcd\u0baa\u0bca\u0bb0\u0bc1\u0bb3\u0bbf\u0ba9\u0bcd \u0ba4\u0bb1\u0bcd\u0baa\u0bcb\u0ba4\u0bc8\u0baf \u0baa\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc1 \u0b95\u0bbe\u0bb2\u0bbe\u0bb5\u0ba4\u0bbf\u0baf\u0bbe\u0ba9\u0ba4\u0bc1, \u0baa\u0bc1\u0ba4\u0bbf\u0baf \u0baa\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc8\u0baa\u0bcd \u0baa\u0ba4\u0bbf\u0bb5\u0bbf\u0bb1\u0b95\u0bcd\u0b95 \u0b87\u0ba3\u0bc8\u0baf\u0ba4\u0bb3\u0ba4\u0bcd\u0ba4\u0bc8\u0baa\u0bcd \u0baa\u0bbe\u0bb0\u0bcd\u0bb5\u0bc8\u0baf\u0bbf\u0b9f\u0bb5\u0bc1\u0bae\u0bcd."
     },
     "blind": {
         "ar": "\u0628\u0644\u064a\u0646\u062f",
@@ -4014,7 +4590,8 @@
         "en": "cancel",
         "es": "cancelar",
         "fr": "Annuler",
-        "it": "Annulla"
+        "it": "Annulla",
+        "mr": "\u0930\u0926\u094d\u0926 \u0915\u0930\u093e"
     },
     "choose a font for title :": {
         "ar": "\u0627\u062e\u062a\u0631 \u062e\u0637\u064b\u0627 \u0644\u0644\u0639\u0646\u0648\u0627\u0646:",
@@ -4262,24 +4839,35 @@
     },
     "let's start": {
         "ar": "\u0644\u0646\u0628\u062f\u0623",
+        "de": "Fangen wir an",
         "en": "let's start",
         "es": "Empecemos",
         "fr": "Connexion",
-        "it": "Iniziamo"
+        "gu": "\u0a9a\u0abe\u0ab2\u0acb \u0ab6\u0ab0\u0ac2 \u0a95\u0ab0\u0ac0\u0a8f",
+        "hi": "\u091a\u0932\u094b \u0936\u0941\u0930\u0942 \u0915\u0930\u094b",
+        "it": "Iniziamo",
+        "mr": "\u091a\u0932\u093e \u0938\u0941\u0930\u0941\u0935\u093e\u0924 \u0915\u0930\u0942\u092f\u093e",
+        "ta": "\u0b86\u0bb0\u0bae\u0bcd\u0baa\u0bbf\u0b95\u0bcd\u0b95\u0bb2\u0bbe\u0bae\u0bcd"
     },
     "login": {
         "ar": "\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644",
         "en": "login",
         "es": "iniciar sesi\u00f3n",
         "fr": "s'identifier",
-        "it": "accesso"
+        "it": "accesso",
+        "mr": "\u0932\u0949\u0917\u093f\u0928"
     },
     "main page": {
         "ar": "\u0627\u0644\u0635\u0641\u062d\u0629 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629",
+        "de": "Hauptseite",
         "en": "main page",
         "es": "pagina principal",
         "fr": "page d'accueil",
-        "it": "pagina principale"
+        "gu": "\u0aae\u0ac1\u0a96\u0acd\u0aaf \u0aaa\u0ac3\u0ab7\u0acd\u0aa0",
+        "hi": "\u092e\u0941\u0916\u094d\u092f \u092a\u0943\u0937\u094d\u0920",
+        "it": "pagina principale",
+        "mr": "\u092e\u0941\u0916\u094d\u092f \u092a\u0943\u0937\u094d\u0920",
+        "ta": "\u0bae\u0bc1\u0b95\u0bcd\u0b95\u0bbf\u0baf \u0baa\u0b95\u0bcd\u0b95\u0bae\u0bcd"
     },
     "make sure you followed the given conditions !": {
         "ar": "\u062a\u0623\u0643\u062f \u0645\u0646 \u0627\u062a\u0628\u0627\u0639 \u0627\u0644\u0634\u0631\u0648\u0637 \u0627\u0644\u0645\u062d\u062f\u062f\u0629!",
@@ -4332,6 +4920,15 @@
         "fr": "palpiter",
         "it": "pulsare"
     },
+    "qr Code": {
+        "en": "qr Code",
+        "es": "qr Code",
+        "fr": "Code QR",
+        "gu": "qr \u0a95\u0acb\u0aa1",
+        "hi": "\u0915\u094d\u092f\u0942 \u0906\u0930 \u0938\u0902\u0939\u093f\u0924\u093e",
+        "mr": "\u0915\u094d\u092f\u0942\u0906\u0930 \u0915\u094b\u0921",
+        "ta": "qr \u0b95\u0bc1\u0bb1\u0bbf\u0baf\u0bc0\u0b9f\u0bc1"
+    },
     "scale": {
         "ar": "\u0645\u0642\u064a\u0627\u0633",
         "en": "scale",
@@ -4357,6 +4954,13 @@
         "fr": "secouer",
         "it": "scuotere"
     },
+    "sid": {
+        "en": "sid",
+        "gu": "sid",
+        "hi": "\u0938\u093f\u0921",
+        "mr": "sid",
+        "ta": "\u0b9a\u0bbf\u0ba4\u0bcd"
+    },
     "size": {
         "ar": "\u0628\u062d\u062c\u0645",
         "en": "size",
@@ -4380,10 +4984,15 @@
     },
     "source-code": {
         "ar": "\u0645\u0635\u062f\u0631 \u0627\u0644\u0631\u0645\u0632",
+        "de": "Quellcode",
         "en": "source-code",
         "es": "c\u00f3digo fuente",
         "fr": "code source",
-        "it": "codice sorgente"
+        "gu": "\u0ab8\u0acd\u0aa4\u0acd\u0ab0\u0acb\u0aa4-\u0a95\u0acb\u0aa1",
+        "hi": "\u0938\u094b\u0930\u094d\u0938 \u0915\u094b\u0921",
+        "it": "codice sorgente",
+        "mr": "\u0938\u094d\u0924\u094d\u0930\u094b\u0924-\u0915\u094b\u0921",
+        "ta": "\u0bae\u0bc2\u0bb2 \u0b95\u0bc1\u0bb1\u0bbf\u0baf\u0bc0\u0b9f\u0bc1"
     },
     "sunday": {
         "ar": "\u0627\u0644\u0623\u062d\u062f",
@@ -4439,17 +5048,30 @@
     },
     "tutorials": {
         "ar": "\u062f\u0631\u0648\u0633",
+        "de": "Tutorials",
         "en": "tutorials",
         "es": "tutoriales",
         "fr": "tutoriels",
-        "it": "tutorial"
+        "gu": "\u0a9f\u0acd\u0aaf\u0ac1\u0a9f\u0acb\u0ab0\u0abf\u0aaf\u0ab2\u0acd\u0ab8",
+        "hi": "\u091f\u094d\u092f\u0942\u091f\u094b\u0930\u093f\u092f\u0932",
+        "it": "tutorial",
+        "mr": "\u091f\u094d\u092f\u0942\u091f\u094b\u0930\u093f\u092f\u0932",
+        "ta": "\u0baa\u0baf\u0bbf\u0bb1\u0bcd\u0b9a\u0bbf\u0b95\u0bb3\u0bcd"
+    },
+    "updated999": {
+        "en": "updated999"
     },
     "website": {
         "ar": "\u0645\u0648\u0642\u0639 \u0627\u0644\u0643\u062a\u0631\u0648\u0646\u064a",
+        "de": "Webseite",
         "en": "website",
         "es": "sitio web",
         "fr": "Site internet",
-        "it": "sito web"
+        "gu": "\u0ab5\u0ac7\u0aac\u0ab8\u0abe\u0a87\u0a9f",
+        "hi": "\u0935\u0947\u092c\u0938\u093e\u0907\u091f",
+        "it": "sito web",
+        "mr": "\u0935\u0947\u092c\u0938\u093e\u0907\u091f",
+        "ta": "\u0b87\u0ba3\u0bc8\u0baf\u0ba4\u0bb3\u0bae\u0bcd"
     },
     "wednesday": {
         "ar": "\u0627\u0644\u0623\u0631\u0628\u0639\u0627\u0621",
@@ -4464,5 +5086,21 @@
         "es": "semana",
         "fr": "la semaine",
         "it": "settimana"
+    },
+    "\u0916\u093e\u0932\u0940": {
+        "en": "\u0916\u093e\u0932\u0940",
+        "hi": "\u0916\u093e\u0932\u0940"
+    },
+    "\u0930\u093f\u0915\u093e\u092e\u0947": {
+        "en": "\u0930\u093f\u0915\u093e\u092e\u0947",
+        "mr": "\u0930\u093f\u0915\u093e\u092e\u0947"
+    },
+    "\u0a96\u0abe\u0ab2\u0ac0": {
+        "en": "\u0a96\u0abe\u0ab2\u0ac0",
+        "gu": "\u0a96\u0abe\u0ab2\u0ac0"
+    },
+    "\u0b95\u0bbe\u0bb2\u0bbf": {
+        "en": "\u0b95\u0bbe\u0bb2\u0bbf",
+        "ta": "\u0b95\u0bbe\u0bb2\u0bbf"
     }
 }

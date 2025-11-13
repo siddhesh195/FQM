@@ -339,7 +339,27 @@ def on_hold(ticket, redirect_to):
     flash('Notice: On-hold status has changed successfully', 'info')
     return redirect(redirect_to)
 
+def process_all_pulled_tickets(all_pulled_tickets):
+    pulled_list = []
 
+    for ticket in (all_pulled_tickets or [])[:10]:
+        # prefer display_text_for_feed if present, otherwise use name/number
+        text = getattr(ticket, 'display_text_for_feed', None) or \
+               (ticket.name if ticket.n else ticket.number) or empty_text
+
+        pulled_list.append({
+            'id': ticket.id,
+            'text': text,
+            'pulled_by': getattr(ticket, 'puller_name', None),
+            # pdt may be None; convert to ISO string for JSON
+            'pdt': ticket.pdt.isoformat() if getattr(ticket, 'pdt', None) else None,
+            'office': getattr(ticket.office, 'display_text', None) or empty_text,
+            'task': getattr(ticket.task, 'name', None) or empty_text,
+        })
+    current_lang = session.get('lang', 'en')
+    return pulled_list
+
+# remove @cache_call() to reflect language changes immediately
 @core.route('/feed', defaults={'office_id': None})
 @core.route('/feed/<int:office_id>')
 @cache_call('json')
@@ -352,6 +372,13 @@ def feed(office_id=None):
     current_ticket_text = current_ticket and current_ticket.display_text or empty_text
     current_ticket_office_name = current_ticket and current_ticket.office.display_text or empty_text
     current_ticket_task_name = current_ticket and current_ticket.task.name or empty_text
+    all_pulled_tickets = data.Serial.get_all_pulled_tickets(office_id)
+    try:
+        pulled_tickets = process_all_pulled_tickets(all_pulled_tickets)
+    except Exception as e:
+        log_error(e)
+        pulled_tickets = []
+
 
     def _resolve_ticket_index(_index):
         return '' if display_settings.hide_ticket_index else f'{_index + 1}. '
@@ -386,6 +413,7 @@ def feed(office_id=None):
     return jsonify(con=current_ticket_office_name,
                    cot=current_ticket_text,
                    cott=current_ticket_task_name,
+                    pulled=pulled_tickets,
                    **tickets_parameters)
 
 
@@ -409,7 +437,7 @@ def set_repeat_announcement(status, office_id=None):
     repeat_announcement.set(office_id, active)
     return jsonify(status=active)
 
-
+# remove @cache_call() to reflect language changes immediately
 @core.route('/display', defaults={'office_id': None})
 @core.route('/display/<int:office_id>')
 @cache_call()
@@ -431,7 +459,7 @@ def display(office_id=None):
                            alias=aliases_settings, vid=video_settings,
                            feed_url=feed_url, office_id=office_id)
 
-
+# remove @cache_call() to reflect language changes immediately
 @core.route('/touch/<int:a>', defaults={'office_id': None})
 @core.route('/touch/<int:a>/<int:office_id>')
 @cache_call()

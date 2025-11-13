@@ -75,6 +75,9 @@ reloadIf('/touch/0')
  }
 </style>
 {% if a == 4 %}
+  <a href="javascript:history.back()" class="btn btn-lg btn-secondary ar1">
+    {{ translate('Back', 'en', [defLang]) }}
+  </a>
   <div class="row vertical-center">
       <div class="col-xs-12 well">
   	    <form method="POST" enctype="multipart/form-data" id="fm">

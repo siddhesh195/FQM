@@ -61,7 +61,9 @@ def clear_funcs_cache(cached_funcs_getter):
         @functools.wraps(wrapped)
         def wrapper(*args, **kwargs):
             for func in cached_funcs_getter():
-                func.cache_clear()
+                cc = getattr(func, "cache_clear", None)
+                if callable(cc):
+                    cc()
 
             return wrapped(*args, **kwargs)
     

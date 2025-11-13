@@ -182,7 +182,8 @@ def do_until_truthy(todo, getter):
 
 
 def clear_cache():
-    touch.cache_clear()
+    if hasattr(touch, "cache_clear") and callable(touch.cache_clear):
+        touch.cache_clear()
 
 
 @atexit.register

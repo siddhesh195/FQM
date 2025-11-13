@@ -61,7 +61,7 @@ class SearchForm(LocalizedForm):
 
 class ProcessedTicketForm(LocalizedForm):
     printed = BooleanField('Printied ticket :',
-                           validators=[InputRequired('')])
+                           validators=[])
     value = StringField('Registered ticket value :')
     status = SelectField('Select ticket current status :',
                          coerce=str,

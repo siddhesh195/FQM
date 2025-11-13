@@ -55,7 +55,9 @@ def setup_events(db):
             )
 
             for endpoint in endpoints:
-                endpoint.cache_clear()
+                cc = getattr(endpoint, "cache_clear", None)
+                if callable(cc):
+                    cc()
 
     event.listen(db.session, 'after_commit', clear_cache)
 
