@@ -129,7 +129,7 @@ $(document).ready(function () {
 			{% set task_serial = serial.filter_by(task_id=o_id) %}
 			{{ panel_footer([
 				[it(['Tickets total', task_serial.count()]), it(['Waiting', task_serial.waiting.count(), 'danger'])],
-				[it(['Processed', task_serial.processed.count()]), it(['Unattended', task_serial.unattended.count(), 'warning'])],
+				[it(['Processed', task_serial.processed.count()]), it(['Attended', task_serial.attended.count(), 'warning'])],
 			])}}
 			<div class="row text-center">
 		    	<div class="pagination">

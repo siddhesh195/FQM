@@ -9,9 +9,10 @@ from uuid import uuid4
 
 from app.middleware import db
 from app.constants import (USER_ROLES, DEFAULT_PASSWORD, PREFIXES, TICKET_WAITING,
-                           TICKET_PROCESSED, TICKET_UNATTENDED, USER_ROLE_ADMIN,
+                           TICKET_PROCESSED, TICKET_ATTENDED, USER_ROLE_ADMIN,
                            TICKET_ORDER_NEWEST, TICKET_ORDER_NEWEST_PROCESSED,
                            TICKET_ORDER_OLDEST, TICKET_ORDER_OLDEST_PROCESSED)
+from flask import flash, has_request_context
 
 mtasks = db.Table(
     'mtasks',
@@ -208,11 +209,11 @@ class Task(db.Model, Mixin):
 class SerialQuery(BaseQuery):
     @property
     def processed(self):
-        return self.filter_by(p=True)
+        return self.filter_by(p=True,status=TICKET_PROCESSED)
 
     @property
-    def unattended(self):
-        return self.filter_by(p=True, status=TICKET_UNATTENDED)
+    def attended(self):
+        return self.filter_by(p=True, status=TICKET_ATTENDED)
 
     @property
     def waiting(self):
@@ -224,7 +225,7 @@ class Serial(db.Model, TicketsMixin, Mixin):
     query_class = SerialQuery
     STATUS_WAITING = TICKET_WAITING
     STATUS_PROCESSED = TICKET_PROCESSED
-    STATUS_UNATTENDED = TICKET_UNATTENDED
+    STATUS_ATTENDED = TICKET_ATTENDED
 
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer)
@@ -354,7 +355,9 @@ class Serial(db.Model, TicketsMixin, Mixin):
             Last ticket pulled record.
         '''
         last_ticket = cls.query.filter_by(p=True)\
-                               .filter(cls.number != 100)
+                               .filter(cls.number != 100)\
+                               .filter(cls.status != TICKET_ATTENDED)\
+                               .filter(cls.status != TICKET_PROCESSED)
 
         if office_id:
             last_ticket = last_ticket.filter_by(office_id=office_id)
@@ -376,7 +379,8 @@ class Serial(db.Model, TicketsMixin, Mixin):
             List of all pulled tickets.
         '''
         pulled_tickets = cls.query.filter_by(p=True)\
-                                   .filter(cls.number != 100)
+                                   .filter(cls.number != 100).filter(cls.status != TICKET_ATTENDED)\
+                                   .filter(cls.status != TICKET_PROCESSED)
         if office_id:
             pulled_tickets = pulled_tickets.filter_by(office_id=office_id)
 
@@ -532,16 +536,20 @@ class Serial(db.Model, TicketsMixin, Mixin):
             office_id: int
                 id of the office from which the ticket is pulled.
         '''
+        if self.p==True:
+            
+            return 
         self.p = True
         self.pdt = datetime.utcnow()
         self.pulledBy = puller_id or getattr(current_user, 'id', None)
-        self.status = TICKET_PROCESSED
+        
 
         if office_id:
             self.office_id = office_id
 
         db.session.add(self)
         db.session.commit()
+        return True
 
     def toggle_on_hold(self):
         ''' Toggle the ticket `on_hold` status. '''

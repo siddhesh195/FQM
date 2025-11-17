@@ -6,7 +6,7 @@ from uuid import uuid4
 from .. import TEST_PREFIX, get_first_office_with_tickets
 from app.database import Task, Office, Serial
 from app.utils import ids
-from app.constants import TICKET_UNATTENDED
+from app.constants import TICKET_ATTENDED
 
 
 @pytest.mark.usefixtures('c')
@@ -243,12 +243,12 @@ def test_update_ticket(c):
     if not ticket.p:
         ticket.pull(ticket.office.id)
 
-    assert ticket.status != TICKET_UNATTENDED
+    assert ticket.status != TICKET_ATTENDED
 
     c.post(f'/serial_u/{ticket.id}/testing', data={
         'value': ticket.name,
         'printed': not ticket.n,
-        'status': TICKET_UNATTENDED
+        'status': TICKET_ATTENDED
     })
 
-    assert Serial.get(ticket.id).status == TICKET_UNATTENDED
+    assert Serial.get(ticket.id).status == TICKET_ATTENDED

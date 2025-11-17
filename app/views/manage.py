@@ -8,7 +8,7 @@ from app.helpers import (reject_operator, reject_no_offices, is_operator, is_off
                          is_common_task_operator, reject_setting, get_or_reject, decode_links,
                          ticket_orders)
 from app.forms.manage import OfficeForm, TaskForm, SearchForm, ProcessedTicketForm
-from app.constants import TICKET_WAITING
+from app.constants import TICKET_WAITING,TICKET_ATTENDED
 from app.cache import clear_funcs_cache
 from app.events import get_cached_serial_funcs, get_cached_task_funcs
 

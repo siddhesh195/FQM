@@ -49,8 +49,8 @@ DATABASE_FILE = 'data.sqlite'
 
 PREFIXES = [p for p in list(map(lambda i: chr(i).upper(), range(97, 123)))]
 
-TICKET_STATUSES = ['Waiting', 'Processed', 'Unattended']
-TICKET_WAITING, TICKET_PROCESSED, TICKET_UNATTENDED = TICKET_STATUSES
+TICKET_STATUSES = ['Waiting', 'Processed', 'Attended']
+TICKET_WAITING, TICKET_PROCESSED, TICKET_ATTENDED = TICKET_STATUSES
 TICKET_ORDER_NEWEST = 'newest tickets'
 TICKET_ORDER_NEWEST_PROCESSED = 'newest processed tickets'
 TICKET_ORDER_OLDEST = 'oldest tickets'

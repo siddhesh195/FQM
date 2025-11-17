@@ -1,7 +1,7 @@
 
 {% macro ticket_color(ticket) %}
 {% if ticket.on_hold %} text-muted
-{% elif ticket.status == ticket.STATUS_UNATTENDED %} text-warning
+{% elif ticket.status == ticket.STATUS_ATTENDED %} text-warning
 {% elif ticket.p %} text-primary 
 {% else %} text-danger {% endif %}
 {% endmacro %}

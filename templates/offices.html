@@ -143,7 +143,7 @@ $(document).ready(function () {
 	    <div class="panel-footer text-center">
 			{{ panel_footer([
 				[it(['Tickets total', serial.count()]), it(['Waiting', serial.waiting.count(), 'danger'])],
-				[it(['Processed', serial.processed.count()]), it(['Unattended', serial.unattended.count(), 'warning'])],
+				[it(['Processed', serial.processed.count()]), it(['Attended', serial.attended.count(), 'warning'])],
 			])}}
 			<div class="row text-center">
 		    	<div class="pagination">
