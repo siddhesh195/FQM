@@ -78,10 +78,10 @@
 		    		({{ translate('Issued', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
-		    		({{ translate('Pulled', 'en', [defLang]) }})
+		    		({{ translate('Status', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
-		    		({{ translate('In-Waiting', 'en', [defLang]) }})
+		    		({{ translate('Waiting Time  of Current Status', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-3">
 		    		({{ translate('Value', 'en', [defLang]) }})
@@ -100,11 +100,14 @@
 					  {{ moment(o.timestamp).format('L') }}
 		  		</div>
 		  		<div class="col-xs-12 col-sm-2">
-		    		{% if o.p %} <u>{{ o.puller_name }} / {{ moment(o.pdt).fromNow() }}</u>
-		    		{% else %} <u>{{ translate('Waiting', 'en', [defLang]) }}</u> {% endif %}
+		    		{% if o.p and o.status=='Waiting' %} Pulled and yet to attend
+					{% elif o.p and o.status=='Attended' %}  Attended 
+					{% elif o.p and o.status=='Processed' %} Processed
+					{% elif not o.p %} Waiting to be pulled {% endif %}
+
 				</div>
 				<div class="col-xs-12 col-sm-2">
-					{% if o.p %} <u> {{ moment_wrapper(moment(o.timestamp)).toTime(o.pdt) }} </u>
+					{% if o.p %} <u> {{ moment(o.pdt).fromNow() }}</u>
 					{% else %} <u> {{ moment_wrapper(moment(o.timestamp)).toNow() }} </u> {% endif %}
 				</div>
 		  		<div class="col-xs-12 col-sm-3">
@@ -122,7 +125,7 @@
 		<div class="panel-footer text-center">
 			{{ panel_footer([
 				[it(['Tickets total', serial.count()]), it(['Waiting', serial.waiting.count(), 'danger'])],
-				[it(['Processed', serial.processed.count()]), it(['Unattended', serial.unattended.count(), 'warning'])],
+				[it(['Processed', serial.processed.count()]), it(['Attended', serial.attended.count(), 'warning'])],
 			]) }}
 	    	<div class="row text-center">
 				<div class="pagination">
