@@ -2,7 +2,7 @@ import os
 import pickle
 from sys import platform
 from uuid import uuid4
-from flask import url_for, flash, render_template, redirect, session, jsonify, Blueprint
+from flask import url_for, flash, render_template, redirect, session, jsonify, Blueprint, request
 from flask_login import current_user, login_required, login_user
 
 import app.database as data
@@ -15,6 +15,8 @@ from app.helpers import (reject_no_offices, reject_operator, is_operator, reject
                          reject_setting, get_or_reject)
 from app.cache import cache_call, clear_funcs_cache
 from app.events import get_cached_serial_funcs
+from app.modify_database_inits import modify_Touch_Store_init,modify_Aliases_init
+from app.helpers2 import generate_token_for_task, process_all_pulled_tickets
 
 core = Blueprint('core', __name__)
 
@@ -94,6 +96,7 @@ class SharedAnnouncementDecorator:
 @core.route('/log/<n>', methods=['GET', 'POST'])
 def root(n=None):
     ''' welcome view and login. '''
+    
     form = LoginForm()
     has_default_password = data.User.has_default_password()
     wrong_credentials = n == 'a'
@@ -145,22 +148,43 @@ def serial(task, office_id=None):
     ticket_settings = data.Printer.get()
     printed = not touch_screen_stings.n
     numeric_ticket_form = ticket_settings.value == 2
-    name_or_number = remove_string_noise(form.name.data or '',
-                                         lambda s: s.startswith('0'),
-                                         lambda s: s[1:]) or None
+    auto_mode = False
+    try:
+        auto_mode = str(request.args.get('auto', '')).lower() in ('1', 'true', 'yes')
+    except Exception as e:
+        log_error(e)
+        flash('Error: could not generate the token', 'warning')
+        return redirect(url_for('core.touch', a=2, office_id=office_id))
+        
 
     # NOTE: if it is registered ticket, will display the form
-    if not form.validate_on_submit() and not printed:
+    if not auto_mode and not form.validate_on_submit() and not printed:
         return render_template('touch.html', title=touch_screen_stings.title,
                                tnumber=numeric_ticket_form, ts=touch_screen_stings,
                                bgcolor=touch_screen_stings.bgcolor, a=4, done=False,
                                page_title='Touch Screen - Enter name ', form=form,
                                dire='multimedia/', alias=data.Aliases.query.first(),
                                office_id=office_id)
+    identifier = None
+    # if using the form, extract name_or_number as before
+    if not auto_mode:
+        identifier = remove_string_noise(form.name.data or '',
+                                             lambda s: s.startswith('0'),
+                                             lambda s: s[1:]) or None
+       
+    else:
+        # auto mode: decide token strategy. Example: use short UUID by default.
+        # If you need numeric sequential tokens, see notes below.
+        try:
+            identifier = generate_token_for_task(task, office)  # helper below
+        except Exception as e:
+            log_error(e)
+            flash('Error: could not generate the token', 'danger')
+            return redirect(url_for('core.touch', a=2, office_id=office_id))
 
     new_ticket, exception = data.Serial.create_new_ticket(task,
                                                           office,
-                                                          name_or_number)
+                                                          identifier)                                               
 
     if exception:
         flash('Error: you must have available printer, to use printed', 'danger')
@@ -315,8 +339,11 @@ def pull_unordered(ticket_id, redirect_to, office_id=None):
         flash('Error: operators are not allowed to access the page ', 'danger')
         return redirect(url_for('core.root'))
 
-    ticket.pull((office or ticket.office).id)
-    flash('Notice: Ticket has been pulled ..', 'info')
+    if ticket.pull((office or ticket.office).id):
+        flash('Notice: Ticket has been pulled ..', 'info')
+    else:
+        flash('Error: Ticket could not be pulled ..', 'danger')
+   
     return redirect(redirect_to)
 
 
@@ -339,25 +366,7 @@ def on_hold(ticket, redirect_to):
     flash('Notice: On-hold status has changed successfully', 'info')
     return redirect(redirect_to)
 
-def process_all_pulled_tickets(all_pulled_tickets):
-    pulled_list = []
 
-    for ticket in (all_pulled_tickets or [])[:10]:
-        # prefer display_text_for_feed if present, otherwise use name/number
-        text = getattr(ticket, 'display_text_for_feed', None) or \
-               (ticket.name if ticket.n else ticket.number) or empty_text
-
-        pulled_list.append({
-            'id': ticket.id,
-            'text': text,
-            'pulled_by': getattr(ticket, 'puller_name', None),
-            # pdt may be None; convert to ISO string for JSON
-            'pdt': ticket.pdt.isoformat() if getattr(ticket, 'pdt', None) else None,
-            'office': getattr(ticket.office, 'display_text', None) or empty_text,
-            'task': getattr(ticket.task, 'name', None) or empty_text,
-        })
-    current_lang = session.get('lang', 'en')
-    return pulled_list
 
 # remove @cache_call() to reflect language changes immediately
 @core.route('/feed', defaults={'office_id': None})
@@ -371,6 +380,12 @@ def feed(office_id=None):
     empty_text = gtranslator.translate('Empty', dest=[session.get('lang')])
     current_ticket_text = current_ticket and current_ticket.display_text or empty_text
     current_ticket_office_name = current_ticket and current_ticket.office.display_text or empty_text
+    try:
+        current_ticket_pulled_by_name = current_ticket and current_ticket.puller_name or empty_text
+        print(current_ticket_pulled_by_name)
+    except Exception as e:
+        current_ticket_pulled_by_name = empty_text
+        print(e)
     current_ticket_task_name = current_ticket and current_ticket.task.name or empty_text
     all_pulled_tickets = data.Serial.get_all_pulled_tickets(office_id)
     try:
@@ -413,6 +428,7 @@ def feed(office_id=None):
     return jsonify(con=current_ticket_office_name,
                    cot=current_ticket_text,
                    cott=current_ticket_task_name,
+                   cpbn=current_ticket_pulled_by_name,
                     pulled=pulled_tickets,
                    **tickets_parameters)
 
@@ -440,13 +456,13 @@ def set_repeat_announcement(status, office_id=None):
 # remove @cache_call() to reflect language changes immediately
 @core.route('/display', defaults={'office_id': None})
 @core.route('/display/<int:office_id>')
-@cache_call()
 def display(office_id=None):
     ''' display screen view. '''
     display_settings = data.Display_store.query.first()
     slideshow_settings = data.Slides_c.query.first()
     slides = data.Slides.query.order_by(data.Slides.id.desc()).all() or None
-    aliases_settings = data.Aliases.query.first()
+    aliases_settings = modify_Aliases_init(data.Aliases.query.first())
+    
     video_settings = data.Vid.query.first()
     feed_url = url_for('core.feed', office_id=office_id)
 
@@ -476,10 +492,17 @@ def touch(a, office_id=None):
 
     if office:
         tasks = tasks.filter(data.Task.offices.contains(office))
+    try:
+        touch_screen_stings = modify_Touch_Store_init(touch_screen_stings)
+    except Exception as e:
+        log_error(e)
+    if a==2:
+        touch_screen_stings.message= "Error: could not generate the token"
+    
 
     return render_template('touch.html', ts=touch_screen_stings, tasks=tasks.all(),
                            tnumber=numeric_ticket_form, page_title='Touch Screen',
-                           alias=aliases_settings, form=form, d=a == 1,
+                           alias=aliases_settings, form=form, d=a == 1 or a==2,
                            a=touch_screen_stings.tmp, office_id=office_id)
 
 
