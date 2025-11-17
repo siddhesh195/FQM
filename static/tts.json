@@ -1,7 +1,7 @@
 {
     "en-us": {
         "language": "English",
-        "message": " , please proceed to the {} number : "
+        "message": " , please proceed to {} : "
     },
     "ar": {
         "language": "Arabic",
