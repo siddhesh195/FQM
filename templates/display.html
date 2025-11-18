@@ -50,9 +50,8 @@
 			
             Object.keys(announcement_texts).forEach(function(lang) {
                 if (announcement_texts[lang] && announcement_texts[lang].message) {
-				
-                    announcement_texts[lang].message = announcement_texts[lang].message
-                        .replace(/{}/g, "{{ alias.office }}");
+				    //below is example of dynamic content replacement. uncomment and modify as needed
+                    //announcement_texts[lang].message = announcement_texts[lang].message.replace(/{}/g, "{{ alias.office }}");
                 }
             });
             }
