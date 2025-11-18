@@ -17,6 +17,7 @@ from app.cache import cache_call, clear_funcs_cache
 from app.events import get_cached_serial_funcs
 from app.modify_database_inits import modify_Touch_Store_init,modify_Aliases_init
 from app.helpers2 import generate_token_for_task, process_all_pulled_tickets
+from app.constants import TICKET_WAITING
 
 core = Blueprint('core', __name__)
 
@@ -165,7 +166,7 @@ def serial(task, office_id=None):
                                page_title='Touch Screen - Enter name ', form=form,
                                dire='multimedia/', alias=data.Aliases.query.first(),
                                office_id=office_id)
-    identifier = None
+    identifier = ""
     # if using the form, extract name_or_number as before
     if not auto_mode:
         identifier = remove_string_noise(form.name.data or '',
@@ -179,7 +180,7 @@ def serial(task, office_id=None):
             identifier = generate_token_for_task(task, office)  # helper below
         except Exception as e:
             log_error(e)
-            flash('Error: could not generate the token', 'danger')
+           
             return redirect(url_for('core.touch', a=2, office_id=office_id))
 
     new_ticket, exception = data.Serial.create_new_ticket(task,
@@ -198,8 +199,8 @@ def serial(task, office_id=None):
 
         log_error(exception)
         return redirect(url_for('core.root'))
-
-    return redirect(url_for('core.touch', a=1, office_id=office_id))
+    
+    return redirect(url_for('core.touch', a=1,identifier=identifier, office_id=office_id))
 
 
 @core.route('/serial_r/<int:o_id>')
@@ -332,6 +333,9 @@ def pull_unordered(ticket_id, redirect_to, office_id=None):
     if not ticket or ticket.on_hold:
         flash('Error: wrong entry, something went wrong', 'danger')
         return redirect(url_for('core.root'))
+    if ticket.p and ticket.status == TICKET_WAITING:
+        flash('Error: Ticket has already been pulled ..', 'danger')
+        return redirect(redirect_to)
 
     if is_operator() and not (is_office_operator(ticket.office_id)
                               if strict_pulling else
@@ -368,7 +372,7 @@ def on_hold(ticket, redirect_to):
 
 
 
-# remove @cache_call() to reflect language changes immediately
+# remove @cache_call('json') to reflect language changes immediately
 @core.route('/feed', defaults={'office_id': None})
 @core.route('/feed/<int:office_id>')
 @cache_call('json')
@@ -476,11 +480,13 @@ def display(office_id=None):
                            feed_url=feed_url, office_id=office_id)
 
 # remove @cache_call() to reflect language changes immediately
-@core.route('/touch/<int:a>', defaults={'office_id': None})
-@core.route('/touch/<int:a>/<int:office_id>')
+@core.route('/touch/<int:a>', defaults={'identifier': None,'office_id': None})
+@core.route('/touch/<int:a>/<int:office_id>',defaults={'identifier':None})
+@core.route('/touch/<int:a>/<string:identifier>/', defaults={'office_id': None})
+@core.route('/touch/<int:a>/<string:identifier>/<int:office_id>')
 @cache_call()
 @reject_setting('single_row', True)
-def touch(a, office_id=None):
+def touch(a, identifier="", office_id=None):
     ''' touch screen view. '''
     form = TouchSubmitForm()
     touch_screen_stings = data.Touch_store.query.first()
@@ -498,6 +504,8 @@ def touch(a, office_id=None):
         log_error(e)
     if a==2:
         touch_screen_stings.message= "Error: could not generate the token"
+    elif a==1:
+        touch_screen_stings.message= "Your token is" + " " + str(identifier)
     
 
     return render_template('touch.html', ts=touch_screen_stings, tasks=tasks.all(),

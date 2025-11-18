@@ -1,6 +1,7 @@
 from app.middleware import gtranslator
 import uuid
 from app.database import User
+from app.constants import TICKET_WAITING
 
 def get_translation(text, language):
     """Translate text to the specified language using gtranslator."""
@@ -20,13 +21,14 @@ def process_all_pulled_tickets(all_pulled_tickets):
 
     for ticket in (all_pulled_tickets or [])[:10]:
         try:
-            print(ticket.status,"ticket status")
             user = User.query.filter_by(id=ticket.pulledBy).first()
             pulled_by_name = user.name if user else "Unknown"
         except Exception as e:
             pulled_by_name = "Error"
-            print(e)
-
+            continue
+        if ticket.status != TICKET_WAITING:
+            continue
+       
         empty_text = 'Empty'
         
         pulled_list.append({

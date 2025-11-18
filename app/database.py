@@ -379,8 +379,7 @@ class Serial(db.Model, TicketsMixin, Mixin):
             List of all pulled tickets.
         '''
         pulled_tickets = cls.query.filter_by(p=True)\
-                                   .filter(cls.number != 100).filter(cls.status != TICKET_ATTENDED)\
-                                   .filter(cls.status != TICKET_PROCESSED)
+                                   .filter(cls.number != 100)
         if office_id:
             pulled_tickets = pulled_tickets.filter_by(office_id=office_id)
 
