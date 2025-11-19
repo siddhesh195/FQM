@@ -82,7 +82,25 @@
 		return $el;
 
 	}
-    
+
+	var send_gtts_request = function (message, language,data_cot,data_cpbn) {
+		var promise = $.Deferred()
+		var link = '/gtts/' + language + '/'
+		if (singleRowQueuing) link += data.cot
+		else link += data_cot + message + data_cpbn
+
+		if (!data_cot) promise.reject()
+		else $.get(link)
+			.then(function(json) { promise.resolve(json.mp3) })
+			.fail(function(e) { promise.reject(e) })
+
+		return promise
+
+	}
+	 
+    let current_user_id = {{ current_user.id }}
+	var latestStreamData = {last_pulled_by_each_user: {}};
+
 	var stream = JsonStream({
 		url: "{{ feed_url }}",
 		duration: refreshRate / 1000,
@@ -94,8 +112,10 @@
 		effect: "{{ ts.effect }}",
 		ensure_value: 'w9',
 		todo: function (data, toPlay) {
-			var emptyText = "{{ translate('Empty', 'en', [defLang]) }}";
+			latestStreamData = data;
 
+			var emptyText = "{{ translate('Empty', 'en', [defLang]) }}";
+          
             // --- Pulled tickets handler (runs for every update)
             (function updatePulledSection() {
                 try {
@@ -140,19 +160,13 @@
 				}
 				if (playAnnouncements) {
 					$.when.apply($, languages.map(function(language, index) {
-						var promise = $.Deferred()
-						var message = announcement_texts[language].message
-						var link = '/gtts/' + language + '/'
-
-						if (singleRowQueuing) link += data.cot
-						else link += data.cot + message + data.cpbn
-
-						if (!data.con || !data.cot) promise.reject()
-						else $.get(link)
-							.then(function(json) { promise.resolve(json.mp3) })
-							.fail(function(e) { promise.reject(e) })
-
-						return promise
+						
+						return send_gtts_request(
+							announcement_texts[language].message,
+							language,
+							singleRowQueuing ? data.cot : data.cot,
+							singleRowQueuing ? '' : data.cpbn
+						)
 					}))
 					.then(function() {
 						var files = $.makeArray(arguments).sort()
@@ -167,21 +181,51 @@
 		
 	})
 
+	var make_repeat_announcement = function(user_id){
+		current_user_latest_pulled= latestStreamData.last_pulled_by_each_user[user_id];
+		if (current_user_latest_pulled){
+            send_gtts_request("please proceed to", "en-us", current_user_latest_pulled.name,  current_user_latest_pulled.pulled_by)
+            .then(function (mp3) {
+                // Same style as JsonStream
+                var files = [mp3];
+
+                if (playAudioNotification) {
+                    files.unshift(audioNotification);
+                }
+
+                play(files);   // <-- your play(...) function
+                })
+            .fail(function (e) {
+                console.log("Error in repeat announcement:", e);
+                });
+		}
+	}
+
 	var watcher = setInterval(function () {
 		var url = '/repeat_announcement'
 		var officeId = '{{ office_id }}'
-
+		var meta_by_user_id = null;
+		
+		url += '/' + current_user_id;
 		if (officeId !== 'None') url += '/' + officeId
-
+        
 		$.get(url)
 			.then(function (j) {
-				if (j.status && !processedRepeats[j.id]) {
-					console.log(processedRepeats);
-					play(Player.files)
-					processedRepeats[j.id] = true
+				
+				meta_by_user_id = j.meta_by_user_id;
+				for (const [user_id,meta] of Object.entries(meta_by_user_id)) {
+					const uuid = meta['uuid']
+					if (!processedRepeats[uuid]){
+							
+                        make_repeat_announcement(user_id);
+						processedRepeats[uuid] = true;
+					}
+						
 				}
 			})
-			.fail(function (e) { console.log(e) })
+			.fail(function (e) { console.log(e);
+				
+			 })
 	}, refreshRate / 2)
 
 </script>

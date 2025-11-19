@@ -16,7 +16,7 @@ from app.helpers import (reject_no_offices, reject_operator, is_operator, reject
 from app.cache import cache_call, clear_funcs_cache
 from app.events import get_cached_serial_funcs
 from app.modify_database_inits import modify_Touch_Store_init,modify_Aliases_init
-from app.helpers2 import generate_token_for_task, process_all_pulled_tickets
+from app.helpers2 import generate_token_for_task, process_all_pulled_tickets,last_pulled_ticket_by_each_user
 from app.constants import TICKET_WAITING
 
 core = Blueprint('core', __name__)
@@ -51,10 +51,17 @@ class SharedAnnouncementDecorator:
         else:
             self.__state.clear()
 
-    def set(self, office_id, status):
+    def set(self, office_id, status,user_id):
         state = self.get_state() or {}
         state[office_id] = status
-        state.setdefault('ids', {})[office_id] = uuid4()
+        state.setdefault('ids', {})
+        state.setdefault('meta_by_user_id', {})
+
+        uuid = uuid4()
+        state["ids"][office_id] = uuid
+        state['meta_by_user_id'][user_id] = {
+            "uuid": str(uuid)
+        }
         self.set_state(state)
 
     def get(self, office_id):
@@ -62,7 +69,10 @@ class SharedAnnouncementDecorator:
 
     def get_id(self, office_id):
         return (self.get_state() or {}).get('ids', {}).get(office_id)
-
+    
+    def get_state_by_user_id(self, office_id, user_id):
+        return self.get_state().get('meta_by_user_id', {})
+    
     def _wrapper(self, *args, **kwargs):
         pre_state = state = self.get_state()
 
@@ -398,6 +408,11 @@ def feed(office_id=None):
         log_error(e)
         pulled_tickets = []
 
+    try:
+        last_pulled_ticket_by_each_user_dict = last_pulled_ticket_by_each_user(all_pulled_tickets)
+    except Exception as e:
+        log_error(e)
+        last_pulled_ticket_by_each_user_dict = {}
 
     def _resolve_ticket_index(_index):
         return '' if display_settings.hide_ticket_index else f'{_index + 1}. '
@@ -434,27 +449,32 @@ def feed(office_id=None):
                    cott=current_ticket_task_name,
                    cpbn=current_ticket_pulled_by_name,
                     pulled=pulled_tickets,
+                    last_pulled_by_each_user=last_pulled_ticket_by_each_user_dict,
                    **tickets_parameters)
 
 
-@core.route('/repeat_announcement', defaults={'office_id': None})
-@core.route('/repeat_announcement/<int:office_id>')
+@core.route('/repeat_announcement/<int:user_id>', defaults={'office_id': None})
+@core.route('/repeat_announcement/<int:user_id>/<int:office_id>')
 @SharedAnnouncementDecorator
-def repeat_announcement(office_id=None):
+def repeat_announcement(user_id,office_id=None):
     ''' get repeat TTS announcement. '''
+    meta_by_user_id=repeat_announcement.get_state_by_user_id(office_id, user_id)
+   
+  
     return jsonify(
         status=repeat_announcement.get(office_id),
-        id=repeat_announcement.get_id(office_id),
+        meta_by_user_id=meta_by_user_id
     )
 
 
-@core.route('/set_repeat_announcement/<int:status>', defaults={'office_id': None})
-@core.route('/set_repeat_announcement/<int:status>/<int:office_id>')
+@core.route('/set_repeat_announcement/<int:status>/<int:UserId>', defaults={'office_id': None})
+@core.route('/set_repeat_announcement/<int:status>/<int:UserId>/<int:office_id>')
 @login_required
-def set_repeat_announcement(status, office_id=None):
+def set_repeat_announcement(status,UserId, office_id=None):
     ''' set repeat TTS announcement status. '''
     active = bool(status)
-    repeat_announcement.set(office_id, active)
+    print(UserId,"User ID")
+    repeat_announcement.set(office_id, active,UserId)
     return jsonify(status=active)
 
 # remove @cache_call() to reflect language changes immediately

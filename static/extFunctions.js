@@ -36,9 +36,11 @@ var flashMsg = function (cate) {
     $('.postFlash > .alert-' + cate).removeClass('hide')
 }
 
-var announce = function (officeId) {
+var announce = function (UserId,officeId) {
     // to $.get for repeating announcement and displaying flash message for success or failure
     var url = '/set_repeat_announcement/1';
+
+    url+= '/' + UserId
 
     if (officeId !== undefined) url += '/' + officeId
 

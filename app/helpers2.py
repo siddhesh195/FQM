@@ -42,3 +42,28 @@ def process_all_pulled_tickets(all_pulled_tickets):
         })
     
     return pulled_list
+
+def last_pulled_ticket_by_each_user(all_pulled_tickets):
+    last_pulled_dict = {}
+
+    for ticket in all_pulled_tickets or []:
+        try:
+            user = User.query.filter_by(id=ticket.pulledBy).first()
+            pulled_by_name = user.name if user else "Unknown"
+        except Exception as e:
+            pulled_by_name = "Error"
+            continue
+        if ticket.status != TICKET_WAITING:
+            continue
+        
+        if ticket.pulledBy not in last_pulled_dict or ticket.pdt > last_pulled_dict[ticket.pulledBy]['pdt']:
+            last_pulled_dict[ticket.pulledBy] = {
+                'id': ticket.id,
+                'name': ticket.name,
+                'pulled_by': pulled_by_name,
+                'pdt': ticket.pdt,
+                'office': getattr(ticket.office, 'display_text', None) or 'Empty',
+                'task': getattr(ticket.task, 'name', None) or 'Empty',
+            }
+    
+    return last_pulled_dict
