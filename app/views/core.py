@@ -452,7 +452,7 @@ def feed(office_id=None):
                     last_pulled_by_each_user=last_pulled_ticket_by_each_user_dict,
                    **tickets_parameters)
 
-
+@core.route('/repeat_announcement', defaults={'office_id': None,'user_id':None})
 @core.route('/repeat_announcement/<int:user_id>', defaults={'office_id': None})
 @core.route('/repeat_announcement/<int:user_id>/<int:office_id>')
 @SharedAnnouncementDecorator
@@ -466,14 +466,14 @@ def repeat_announcement(user_id,office_id=None):
         meta_by_user_id=meta_by_user_id
     )
 
-
+@core.route('/set_repeat_announcement/<int:status>', defaults={'office_id': None, 'UserId': None})
 @core.route('/set_repeat_announcement/<int:status>/<int:UserId>', defaults={'office_id': None})
 @core.route('/set_repeat_announcement/<int:status>/<int:UserId>/<int:office_id>')
 @login_required
-def set_repeat_announcement(status,UserId, office_id=None):
+def set_repeat_announcement(status,UserId=None, office_id=None):
     ''' set repeat TTS announcement status. '''
     active = bool(status)
-    print(UserId,"User ID")
+   
     repeat_announcement.set(office_id, active,UserId)
     return jsonify(status=active)
 
