@@ -74,3 +74,44 @@ var updateUrlParamAndNavigate = function(param, value) {
     url.search = searchParams.toString()
     window.location.href = url.toString()
 }
+
+function setupScrollMarquee($scrollContent) {
+    if (!$scrollContent || !$scrollContent.length) return;
+
+    var container = $scrollContent.closest('.scroll-container');
+    if (!container.length) return;
+
+    var contentEl = $scrollContent.get(0);
+    
+
+    // 1) If nothing inside, nothing to do
+    if (!contentEl.children.length) {
+        contentEl.style.animationDuration = '0s';
+        return;
+    }
+
+    // 2) Build a clean HTML snapshot of current items
+    var originalHTML = '';
+    for (var i = 0; i < contentEl.children.length; i++) {
+        originalHTML += contentEl.children[i].outerHTML;
+    }
+
+    // 3) Duplicate content for seamless loop: [A B C A B C]
+    contentEl.innerHTML = originalHTML + originalHTML;
+
+    // 4) Measure distance: we want to scroll through half of the duplicated width
+    //    (that equals one full original sequence).
+    var fullWidth = contentEl.scrollWidth;      // width of [A B C A B C]
+    var distance = fullWidth / 2;               // pixels to move for one cycle
+
+    // 5) Decide desired speed: pixels per second
+    //    You can tweak this number to taste (slower/faster).
+    var pixelsPerSecond = 240;                   // e.g. 80 px/s
+
+    // 6) Duration in seconds = distance / speed
+    var durationSeconds = distance / pixelsPerSecond;
+
+    // 7) Apply animation duration
+    contentEl.style.animationDuration = durationSeconds + 's';
+}
+

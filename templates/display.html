@@ -115,6 +115,59 @@
 			latestStreamData = data;
 
 			var emptyText = "{{ translate('Empty', 'en', [defLang]) }}";
+			(function updateScrollTicker() {
+                // Find the scroll-content container (exists only in tv == 1 template)
+                var $scrollContent = $('.scroll-content');
+                if (!$scrollContent.length) {
+                    return;
+                }
+
+                // Collect all non-empty w1..wN values from the data
+                var tickets = [];
+                var maxSlots = 99;   // because backend creates up to 99 w-slots
+
+                for (var i = 1; i <= maxSlots; i++) {
+                    var key = 'w' + i;
+
+                    // stop if the key does not exist at all
+                    if (!Object.prototype.hasOwnProperty.call(data, key)) {
+                        break;
+                    }
+
+                    var value = data[key];
+
+                    // skip completely empty values
+                    if (value && value.trim() !== '') {
+                        tickets.push(value);
+                    }
+                }
+
+                // Clear previous content
+                $scrollContent.empty();
+
+                // If there are no tickets, show one "Empty" item
+                if (tickets.length === 0) {
+                    var $emptyItem = $('<p>')
+                        .addClass('watchit inline scroll-item')
+                        .text(emptyText);
+                    $scrollContent.append($emptyItem);
+                    return;
+                }
+
+               // Create one <p> per ticket
+               for (var j = 0; j < tickets.length; j++) {
+                   var $item = $('<p>')
+                    .addClass('watchit inline scroll-item')
+                    .text(tickets[j]);
+
+                // Optional: keep 'stream' attribute if you like, but it is not required now
+                // $item.attr('stream', 'w' + (j + 1));
+
+                $scrollContent.append($item);
+                }
+		        setupScrollMarquee($scrollContent);
+            })();
+            // --- end scroll ticker handler ---
           
             // --- Pulled tickets handler (runs for every update)
             (function updatePulledSection() {
@@ -483,34 +536,27 @@
     </thead>
     <tbody>
         <tr>
-            <td stream="user_name1">{{ translate('Empty', 'en', [defLang]) }}</td>
-            <td stream="pulled_by1">{{ translate('Empty', 'en', [defLang]) }}</td>
+            <td stream="user_name1"> Empty</td>
+            <td stream="pulled_by1"> Empty</td>
         </tr>
         <tr>
-            <td stream="user_name2">{{ translate('Empty', 'en', [defLang]) }}</td>
-            <td stream="pulled_by2">{{ translate('Empty', 'en', [defLang]) }}</td>
+            <td stream="user_name2"> Empty</td>
+            <td stream="pulled_by2"> Empty</td>
         </tr>
         <tr>
-            <td stream="user_name3">{{ translate('Empty', 'en', [defLang]) }}</td>
-            <td stream="pulled_by3">{{ translate('Empty', 'en', [defLang]) }}</td>
+            <td stream="user_name3"> Empty</td>
+            <td stream="pulled_by3"> Empty</td>
         </tr>
         <tr>
-            <td stream="user_name4">{{ translate('Empty', 'en', [defLang]) }}</td>
-            <td stream="pulled_by4">{{ translate('Empty', 'en', [defLang]) }}</td>
+            <td stream="user_name4"> Empty</td>
+            <td stream="pulled_by4"> Empty</td>
         </tr>
     </tbody>
 </table>
 
 <div class="scroll-container">
   <div class="scroll-content">
-    <p class="watchit inline scroll-item" stream="w1"></p>
-    <p class="watchit inline scroll-item" stream="w2"></p>
-    <p class="watchit inline scroll-item" stream="w3"></p>
-    <p class="watchit inline scroll-item" stream="w4"></p>
-    <p class="watchit inline scroll-item" stream="w5"></p>
-    <p class="watchit inline scroll-item" stream="w6"></p>
-    <p class="watchit inline scroll-item" stream="w7"></p>
-    <p class="watchit inline scroll-item" stream="w8"></p>
+   
   </div>
 </div>
 
