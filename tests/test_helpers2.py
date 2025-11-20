@@ -1,5 +1,4 @@
 import pytest
-from app.middleware import db
 from app import helpers2
 
 class FakeSerial:
