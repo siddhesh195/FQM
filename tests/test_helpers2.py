@@ -83,6 +83,38 @@ def test_process_all_pulled_tickets(monkeypatch):
     assert result[0]['task'] == 'Task1'
 
 
+@pytest.mark.usefixtures('c')
+def test_last_pulled_ticket_by_each_user(monkeypatch):
+
+    monkeypatch.setattr(helpers2,'User', FakeUser)
+    office1 = FakeOffice(1,'Office1',None)
+    task1 = FakeTask(1,'Task1')
+   
+    user1=FakeUser(1,'User1')
+    user2=FakeUser(2,'User2')
+
+    FakeUser.db= [user1,user2]
+
+    FakeUser.query = Query(FakeUser.db)
+
+    from app.helpers2 import last_pulled_ticket_by_each_user
+
+    
+    tickets = [
+        FakeSerial(1,'Ticket1',1,office1,task1,"Waiting"),
+        FakeSerial(2,'Ticket2',1,office1,task1,"Waiting"),
+        FakeSerial(3,'Ticket3',2,office1,task1,"Waiting"),
+    ]
+    tickets[0].pdt = 10
+    tickets[1].pdt = 20
+    tickets[2].pdt = 15
+
+    result = last_pulled_ticket_by_each_user(tickets)
+    assert len(result) == 2
+    assert result[1]['name'] == 'Ticket2'  # Last ticket for user 1
+    assert result[2]['name'] == 'Ticket3'  # Only ticket for user 2
+
+
 
 
 
