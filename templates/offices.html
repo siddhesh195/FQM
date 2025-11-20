@@ -98,10 +98,10 @@ $(document).ready(function () {
 				    ({{ translate('Issued', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
-				    ({{ translate('Pulled', 'en', [defLang]) }})
+				    ({{ translate('Status', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
-		    		({{ translate('In-Waiting', 'en', [defLang]) }})
+		    		({{ translate('Waiting Time  of Current Status', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-3">
 				    ({{ translate('Value', 'en', [defLang]) }})
@@ -120,11 +120,14 @@ $(document).ready(function () {
 		    			<u>{{ moment(o.timestamp).format('L') }}</u>
 		  			</div>
 		  			<div class="col-xs-12 col-sm-2">
-						{% if o.p %} <u>{{ users.filter_by(id=o.pulledBy).first().name }} / {{ moment(o.pdt).fromNow() }}</u>
-		  				{% else %} <u>{{ translate('Waiting', 'en', [defLang]) }}</u> {% endif %}
-					</div>
+		    		    {% if o.p and o.status=='Waiting' %} Pulled and yet to attend
+					    {% elif o.p and o.status=='Attended' %}  Attended 
+					    {% elif o.p and o.status=='Processed' %} Processed
+					    {% elif not o.p %} Waiting to be pulled {% endif %}
+
+				    </div>
 					<div class="col-xs-12 col-sm-2">
-						{% if o.p %} <u> {{ moment_wrapper(moment(o.timestamp)).toTime(o.pdt) }} </u>
+						{% if o.p %} <u> {{ moment(o.pdt).fromNow() }} </u>
 						{% else %} <u> {{ moment_wrapper(moment(o.timestamp)).toNow() }} </u> {% endif %}
 					</div>
 		  			<div class="col-xs-12 col-sm-3">
