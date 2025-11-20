@@ -10,14 +10,17 @@
 .scroll-content {
     display: inline-block;
     white-space: nowrap;
-    animation: scroll-left 18s linear infinite;
+    /* animation will still be set here, but duration will be controlled by JS */
+    animation-name: scroll-left;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
 }
 
-
-
+/* Seamless marquee: move only half of the duplicated width */
 @keyframes scroll-left {
-    0%   { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
 
