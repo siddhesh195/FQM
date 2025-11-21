@@ -2,6 +2,9 @@ from app.middleware import gtranslator
 import uuid
 from app.database import User
 from app.constants import TICKET_WAITING
+from flask_login import current_user
+from app.middleware import db
+from datetime import datetime
 
 def get_translation(text, language):
     """Translate text to the specified language using gtranslator."""
@@ -67,3 +70,12 @@ def last_pulled_ticket_by_each_user(all_pulled_tickets):
             }
     
     return last_pulled_dict
+
+def update_last_seen_helper():
+    ''' adding the last time user logged in '''
+    print("Updating last seen for user...")
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        print("Last seen updated to:", current_user.last_seen)
+        db.session.add(current_user)
+        db.session.commit()

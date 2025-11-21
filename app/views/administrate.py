@@ -21,14 +21,6 @@ def load_user(user_id):
     return data.User.query.get(int(user_id))
 
 
-@administrate.before_request
-def update_last_seen():
-    ''' adding the last time user logged in '''
-    if current_user.is_authenticated:
-        current_user.last_seen = datetime.utcnow()
-        db.session.add(current_user)
-        db.session.commit()
-
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():

@@ -18,6 +18,7 @@ from app.events import get_cached_serial_funcs
 from app.modify_database_inits import modify_Touch_Store_init,modify_Aliases_init
 from app.helpers2 import generate_token_for_task, process_all_pulled_tickets,last_pulled_ticket_by_each_user
 from app.constants import TICKET_WAITING
+from app.helpers2 import update_last_seen_helper
 
 core = Blueprint('core', __name__)
 
@@ -138,6 +139,7 @@ def root(n=None):
             return redirect(url_for('core.root', n='a'))
 
         login_user(user, remember=bool(form.rm.data))
+        update_last_seen_helper()
         return logged_in_all_good()
 
     return render_template('index.html', operators=data.Operators.query,
