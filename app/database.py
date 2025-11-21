@@ -219,6 +219,13 @@ class SerialQuery(BaseQuery):
     def waiting(self):
         return self.filter_by(p=False)
 
+    @property
+    def unattended(self):
+        all_pulled_tickets_count = self.filter_by(p=True).count()
+        all_attended_tickets_count = self.filter_by(p=True, status=TICKET_ATTENDED).count()
+        all_processed_tickets_count = self.filter_by(p=True, status=TICKET_PROCESSED).count()
+        return all_pulled_tickets_count - (all_attended_tickets_count + all_processed_tickets_count)
+
 
 class Serial(db.Model, TicketsMixin, Mixin):
     __tablename__ = "serials"

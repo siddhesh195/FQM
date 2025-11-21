@@ -72,7 +72,7 @@
         <div class="panel-body">
 	    	<div class="row text-center ar2 h3 text-muted hidden-xs">
 				<div class="col-xs-1">
-		    		({{ translate('Ticket', 'en', [defLang]) }})
+		    		({{ translate('Token Serial Number', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
 		    		({{ translate('Issued', 'en', [defLang]) }})
@@ -84,7 +84,7 @@
 		    		({{ translate('Waiting Time  of Current Status', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-3">
-		    		({{ translate('Value', 'en', [defLang]) }})
+		    		({{ translate('Token', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
 					({{ translate('Actions', 'en', [defLang]) }})
@@ -126,6 +126,7 @@
 			{{ panel_footer([
 				[it(['Tickets total', serial.count()]), it(['Waiting', serial.waiting.count(), 'danger'])],
 				[it(['Processed', serial.processed.count()]), it(['Attended', serial.attended.count(), 'warning'])],
+				[it(['Unattended', serial.unattended, 'info'])]
 			]) }}
 	    	<div class="row text-center">
 				<div class="pagination">
