@@ -113,6 +113,30 @@ def test_last_pulled_ticket_by_each_user(monkeypatch):
     assert result[1]['name'] == 'Ticket2'  # Last ticket for user 1
     assert result[2]['name'] == 'Ticket3'  # Only ticket for user 2
 
+@pytest.mark.usefixtures('c')
+def test_generate_token_for_task():
+    from app.helpers2 import generate_token_for_task
+    token = generate_token_for_task()
+    assert len(token) == 8
+    assert token.isupper()
+
+@pytest.mark.usefixtures('c')
+def test_get_translation(monkeypatch):
+    from app.helpers2 import get_translation
+
+    class FakeTranslator:
+        def translate(self, text, dest):
+            class Result:
+                def __init__(self, text):
+                    self.text = text + "_translated"
+            return Result(text).text
+
+    monkeypatch.setattr(helpers2, 'gtranslator', FakeTranslator())
+
+    translated = get_translation("Hello", "es")
+    assert translated == "Hello_translated"
+   
+
 
 
 

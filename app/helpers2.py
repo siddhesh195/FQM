@@ -10,7 +10,7 @@ def get_translation(text, language):
 
     return translated
 
-def generate_token_for_task(task, office):
+def generate_token_for_task():
     # Option A: short random token (safe, no race). Good if token doesn't have to be monotonic.
     
     return uuid.uuid4().hex[:8].upper()
