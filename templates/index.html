@@ -69,45 +69,13 @@
                         <a class="lightit" href="https://fqms.github.io/" target="_blank">
                             <img src="{{ url_for('static', filename='images/favicon.png') }}" class="image-responsive">
                         </a>
-                        <h1 class="text text-muted" >Free Queue Manager</h1>
-                        <h3 class="text text-muted mb-1"><i>Version {{ version }}</i></h3>
+                        <h1 class="text text-muted" >Digital Queue Management System</h1>
+                        
                         <h3 class="text text-danger mb-1 mt-1 outdated hidden">
                             {{ translate("Your current version of the software is outdated, please visit the website to downloaded a new version.", "en", [defLang]) }}
                         </h3>
-                        {% for toAdd in [['hidden-md hidden-lg', '4x'], ['hidden-sm hidden-xs', '5x']] %}
-        		        <div class="col-xs-12 text-center mt-2 mb-4 {{toAdd[0]}}">
-                            <a href="https://www.youtube.com/channel/UC9_zci_JGr2hXBxziYbMMBw/videos"
-                                data-toggle="tooltip"
-                                title='Youtube {{ translate("tutorials", 'en', [defLang]) }}'
-                                target="_blank"
-                            >
-                                <i class="fa fa-{{toAdd[1]}} fa-fw fa-youtube-play text-muted"></i>
-                            </a>
-                            <a href="https://fqms.github.io/"
-                                data-toggle="tooltip"
-                                title='FQM {{ translate("website", 'en', [defLang]) }}'
-                                target="_blank"
-                            >
-                                <i class="fa fa-{{toAdd[1]}} fa-fw fa-rss-square text-muted text-inverse"></i>
-                            </a>
-        	                <a href="https://github.com/mrf345/fqm"
-                              data-toggle="tooltip"
-                              title='FQM {{ translate("source-code", "en", [defLang]) }}'
-                              target="_blank"
-                            >
-                                <i class="fa fa-{{toAdd[1]}} fa-fw fa-github-square text-muted"></i>
-                            </a>
-                            <a href="#" data-toggle="modal" data-target="#root_qr"
-                              data-toggle="tooltip"
-                              title='QR - {{ translate("main page", 'en', [defLang]) }}'
-                            >
-                                <i class="fa fa-{{toAdd[1]}} fa-fw fa-qrcode text-muted"></i>
-                            </a>
-                        </div>
-                        {% endfor %}
-                        <h2 class="text text-primary mb-2">
-                            {{ translate('Queue management made easy and simple for all', 'en', [defLang]) }}
-                        </h2>
+                        
+                    
                     	{% if current_user.is_authenticated %}
                     	<h2 class="text text-warning u"> ( {{ current_user.name }} )</h2>
                     	<h3 class="text text-muted u mb-2">
@@ -132,15 +100,10 @@
                             <a class="btn btn-lg btn-primary" href="{{ url_for('manage_app.manage') }}">
                         {% endif %}
                     	{% else %}
-                        <h3 class='text text-muted i mt-3 mb-4'>
-                            {% for curLang in [['en', 'English'], ['it', 'Italian'], ['es', 'Spanish'], ['ar', 'Arabic'], ['fr', 'French']] %}
-                            {% if defLang != curLang[0] %}|| <a href="{{ url_for('language_switch', language=curLang[0]) }}">{{curLang[1]}}</a> ||{% endif %}
-                            {% endfor %}
-                        </h3>
                     	<a class="btn btn-lg btn-primary" data-target="#upd" data-toggle="modal">
                     	{% endif %}
                     		<strong class='mb-3'>
-                                {{ translate("let's start", 'en', [defLang]) }}
+                                Login
                             </strong>
                     	</a>
                     </div>

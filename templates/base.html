@@ -79,9 +79,17 @@
         </noscript>
         <div class="widw">
             {% if settings.visual_effects %}
-                <center><img class="img-responsive mb-1"  style="width: 30%;" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></center>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 30">
+                <!-- Background Rectangle (optional) -->
+                <rect width="300" height="60" fill="#0066CC" rx="5"/>
+  
+                <!-- Logo Text -->
+                <text x="150" y="21" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">
+                    Aplab
+                </text>
+            </svg>
             {% endif %}
-            <nav class="navbar navbar-inverse">
+            <nav class="navbar navbar-default">
     	        <div class="container-fluid">
     	            <div class="navbar-header">
     		            <button type="button" class="navbar-toggle navbar-toggle-sidebar collapsed">
@@ -323,22 +331,6 @@
             {% if settings.visual_effects %}
             <footer class="pull-left footer widw mt-3">
     	        <div class="row mt-1">
-    	            <div class="col-xs-8 col-md-3 col-xs-offset-2 col-md-offset-2 pb-1">
-                        <a href="{{ url_for('static', filename='mpl.html') }}" target="_blank"
-                            data-toggle="tooltip" title="{{ translate('License', 'en', [defLang]) }}"
-                        >
-                            <center>
-                                <img src="{{ url_for('static', filename='images/license.png') }}"
-                                    class="lightit mb-1 img-responsive" width="35%"
-                                >
-                            </center>
-                            <h4 class="text text-center lightit ar1 text-muted">
-                                <strong>
-                                    {{ translate('All credit reserved to the author of FQM. This work is a free, open-source project licensed under Mozilla Public License version 2.0 .', 'en', [defLang]) }}
-                                </strong>
-                            </h4>
-                        </a>
-    	            </div>
     	            <div class="col-sm-6">
     		            <div class="row pt-1">
                             {% for theRow in
@@ -346,24 +338,6 @@
                                 ["col-md-7 col-lg-8  hidden-xs hidden-sm col-md-offset-4 col-lg-offset-4 pb-1", "5x"]] 
                             %}
     		                    <div class="{{ theRow[0] }}">
-                                    <a href="https://www.youtube.com/channel/UC9_zci_JGr2hXBxziYbMMBw/videos" target="_blank"
-                                        data-toggle="tooltip"
-                                        title="Youtube {{ translate('tutorials', 'en', [defLang]) }}"
-                                    >
-                                        <i class="fa fa-{{theRow[1]}} fa-fw fa-youtube text-muted"></i>
-                                    </a>
-                                    <a href="https://fqms.github.io/" target="_blank"
-                                        data-toggle="tooltip"
-                                        title="FQM {{ translate('website', 'en', [defLang]) }}"
-                                    >
-                                        <i class="fa fa-{{theRow[1]}} fa-fw fa-rss text-muted"></i>
-                                    </a>
-    		    	                <a href="https://github.com/mrf345/fqm" target="_blank"
-                                        data-toggle="tooltip"
-                                        title="FQM {{ translate('source-code', 'en', [defLang]) }}"
-                                    >
-                                        <i class="fa fa-{{theRow[1]}} fa-fw fa-github text-muted"></i>
-                                    </a>
     		    	                <a href="#" data-toggle="modal" data-target="#root_qr"
                                         data-toggle="tooltip"
                                         title="QR - {{ translate('main page', 'en', [defLang]) }}"

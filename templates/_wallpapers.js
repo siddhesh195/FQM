@@ -5,6 +5,7 @@ $('{{ selector }}').css({
     'background-repeat': 'no-repeat',
     'background-position': 'center',
     'background-attachment': 'fixed',
-    'background-image': "linear-gradient({{ overlay }}, {{ overlay }}), url({{ url_for('static', filename='images/dbg.jpg') }})"
+    'background-color': '#ffffff',   // pure white background
+    'background-image': 'none'       // removes image wallpaper
 })
 {% endmacro %}
