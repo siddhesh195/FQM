@@ -187,7 +187,7 @@ def serial(task, office_id=None):
         # auto mode: decide token strategy. Example: use short UUID by default.
         # If you need numeric sequential tokens, see notes below.
         try:
-            identifier = generate_token_for_task(task, office)  # helper below
+            identifier = generate_token_for_task()  # helper below
         except Exception as e:
             log_error(e)
            
@@ -402,6 +402,7 @@ def feed(office_id=None):
         print(e)
     current_ticket_task_name = current_ticket and current_ticket.task.name or empty_text
     all_pulled_tickets = data.Serial.get_all_pulled_tickets(office_id)
+  
     try:
         pulled_tickets = process_all_pulled_tickets(all_pulled_tickets)
     except Exception as e:
@@ -423,26 +424,12 @@ def feed(office_id=None):
             for _index, number in enumerate(range(getattr(current_ticket, 'number', 1) + 1,
                                                   getattr(current_ticket, 'number', 1) + 10))}
     else:
-        waiting_tickets = (data.Serial.get_waiting_list_tickets(office_id) + ([None] * 9))[:9]
+        waiting_tickets = (data.Serial.get_waiting_list_tickets(office_id) + ([None] * 99))[:99]
         tickets_parameters = {
             f'w{_index + 1}':
-            f'{_resolve_ticket_index(_index)}{ticket.display_text_for_feed}' if ticket else empty_text
+            f'{_resolve_ticket_index(_index)}{ticket.display_text_for_feed}' if ticket else ""
             for _index, ticket in enumerate(waiting_tickets)}
 
-    # NOTE: Add last 10 processed tickets, for supported template.
-    if display_settings.tmp == 3:
-        processed_tickets = (data.Serial.get_processed_tickets(office_id, offset=1) + ([None] * 9))[:9]
-        tickets_parameters.update({
-            f'p{_index + 1}':
-            f'{_resolve_ticket_index(_index)}{ticket.display_text_for_feed}' if ticket else empty_text
-            for _index, ticket in enumerate(processed_tickets)})
-
-    # NOTE: Ensure `tickets_parameters` last value is as distinct as the `current_ticket`
-    # To fix `uniqueness` not picking up the change in passed waiting list
-    tickets_parameters[f'w{len(tickets_parameters)}'] = (current_ticket.name
-                                                         if current_ticket.n else
-                                                         current_ticket.number
-                                                         ) if current_ticket else empty_text
 
     return jsonify(con=current_ticket_office_name,
                    cot=current_ticket_text,
