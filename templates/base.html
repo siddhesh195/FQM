@@ -275,25 +275,7 @@
     				                </li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                {% set languages = [['en', 'English'], ['it', 'Italian'], ['es', 'Spanish'], ['ar', 'Arabic'], ['fr', 'French']] %}
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {% for curLang in languages %}
-                                    {% if defLang == curLang[0] %} {{ curLang[1] }} {% endif %}
-                                    {% endfor %}
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    {% for curLang in languages %}
-                                    <li {% if defLang == curLang[0] %} class="active" {% endif %}>
-                                        <a href="{{ url_for('language_switch' , language=curLang[0]) }}">
-                                            <span class="fa fa-{% if curLang[0] == 'en' %}globe{% else %}language{% endif %}"></span>
-                                            {{curLang[1]}}
-                                        </a>
-                                    </li>  
-                                    {% endfor %}
-                                </ul>
-    			            </li>
+                           
     		            </ul>
     	            </div>
     	        </div>
@@ -329,27 +311,7 @@
     	        {% block page_content %} {% endblock %}
             </div>
             {% if settings.visual_effects %}
-            <footer class="pull-left footer widw mt-3">
-    	        <div class="row mt-1">
-    	            <div class="col-sm-6">
-    		            <div class="row pt-1">
-                            {% for theRow in
-                                [["col-xs-12 hidden-lg hidden-md text-center col-sm-offset-6 pb-1", "3x"], 
-                                ["col-md-7 col-lg-8  hidden-xs hidden-sm col-md-offset-4 col-lg-offset-4 pb-1", "5x"]] 
-                            %}
-    		                    <div class="{{ theRow[0] }}">
-    		    	                <a href="#" data-toggle="modal" data-target="#root_qr"
-                                        data-toggle="tooltip"
-                                        title="QR - {{ translate('main page', 'en', [defLang]) }}"
-                                    >
-                                        <i class="fa fa-{{theRow[1]}} fa-fw fa-qrcode text-muted"></i>
-                                    </a>
-                                </div>
-                            {% endfor %}
-        	    	    </div>
-    	            </div>
-    	        </div>
-            </footer>
+            
             {% endif %}
         </div>
         {% from '_modals.html' import qrModal %}
