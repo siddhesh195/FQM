@@ -50,7 +50,35 @@ class FakeUser:
     def __init__(self,id,name):
         self.id = id
         self.name = name
+
+class FakeCurrentUser:
+    def __init__(self, authenticated):
+        self.authenticated = authenticated
+        self.last_seen = None
+        
+    @classmethod
+    def is_authenticated(self):
+        return self.authenticated
     
+        
+
+class Fake_Session:
+    def __init__(self):
+        self.added=None
+        self.committed=None
+
+    def add(self,data):
+            self.added=data
+    def commit(self):
+        self.committed= self.added
+    
+
+class FakeDB:
+    db_data=None
+
+    @property
+    def session(cls):
+        return Fake_Session()
 
 
 @pytest.mark.usefixtures('c')
@@ -135,7 +163,19 @@ def test_get_translation(monkeypatch):
 
     translated = get_translation("Hello", "es")
     assert translated == "Hello_translated"
-   
+
+@pytest.mark.usefixtures('c')
+def test_update_last_seen_helper(monkeypatch):
+    from app.helpers2 import update_last_seen_helper
+
+    FakeCurrentUserInstance = FakeCurrentUser(authenticated=True)
+    db= FakeDB()
+    monkeypatch.setattr(helpers2,'current_user', FakeCurrentUserInstance)
+    monkeypatch.setattr(helpers2,'db', db)
+
+    update_last_seen_helper()
+    
+
 
 
 
