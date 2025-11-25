@@ -318,5 +318,8 @@
         {{ qrModal([['touch_qr', translate('QR code touch screen', 'en', [defLang]), qrcode(url_for('core.touch', a=0, _external=True))],
         ['display_qr', translate('QR code display screen', 'en', [defLang]), qrcode(url_for('core.display', _external=True))],
         ['root_qr', translate('QR code main page', 'en', [defLang]), qrcode(url_for('core.root', _external=True))]], close=translate('Exit', 'en', [defLang])) }}
+        <script src="{{ url_for('static', filename='vendor/vue/vue.global.prod.js') }}"></script>
+        <script src="{{ url_for('static', filename='vendor/axios/axios.min.js') }}"></script>
+        {% block scripts %}{% endblock %}
     </body>
 </html>

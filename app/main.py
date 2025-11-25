@@ -23,6 +23,7 @@ from app.views.administrate import administrate
 from app.views.core import core
 from app.views.customize import cust_app
 from app.views.manage import manage_app
+from app.views.reports import reports
 from app.utils import (absolute_path, log_error, create_default_records, get_bp_endpoints)
 from app.helpers import is_user_office_operator
 from app.database import Serial
@@ -78,6 +79,7 @@ def create_app(config={}):
     app.register_blueprint(cust_app)
     app.register_blueprint(manage_app)
     app.register_blueprint(setup_api(), url_prefix='/api/v1')
+    app.register_blueprint(reports)
     app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
     return app

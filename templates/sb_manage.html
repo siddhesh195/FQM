@@ -65,6 +65,14 @@
 				</a>
 			</li>
 			{% endif %}
+			{% if not settings.single_row %}
+			    <li>
+				    <a href="{{ url_for('reports.reports_home') }}">
+			    		<span class="fa "></span>
+			    		<strong>View Reports</strong>
+					</a>
+				</li>
+			{% endif %}
 			<!-- Dropdown--> 
 			{% if not settings.single_row %}
 			{% for office in offices %}
