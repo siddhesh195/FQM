@@ -5,6 +5,8 @@ from app.constants import TICKET_WAITING
 from flask_login import current_user
 from app.middleware import db
 from datetime import datetime
+import io
+from openpyxl import Workbook
 
 def get_translation(text, language):
     """Translate text to the specified language using gtranslator."""
@@ -79,3 +81,51 @@ def update_last_seen_helper():
         print("Last seen updated to:", current_user.last_seen)
         db.session.add(current_user)
         db.session.commit()
+
+def build_reports_excel(statistics_by_office_name):
+    """
+    statistics_by_office_name = {
+        "Office A": {
+            "total_count": 10,
+            "attended_count": 8,
+            "unattended_count": 2,
+            "waiting_count": 1,
+            "processed_count": 7,
+        },
+        ...
+    }
+    Returns: (BytesIO, filename)
+    """
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Reports"
+
+    # Header row
+    ws.append([
+        "Office",
+        "Total",
+        "Attended",
+        "Unattended",
+        "Waiting",
+        "Processed",
+    ])
+
+    # Data rows
+    for office_name, stats in statistics_by_office_name.items():
+        ws.append([
+            office_name,
+            stats.get("total_count", 0),
+            stats.get("attended_count", 0),
+            stats.get("unattended_count", 0),
+            stats.get("waiting_count", 0),
+            stats.get("processed_count", 0),
+        ])
+
+    # Save to in-memory bytes buffer
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"reports_{ts}.xlsx"
+    return output, filename

@@ -174,6 +174,58 @@ def test_update_last_seen_helper(monkeypatch):
     monkeypatch.setattr(helpers2,'db', db)
 
     update_last_seen_helper()
+
+
+@pytest.mark.usefixtures('c')
+def test_build_reports_excel():
+    from app.helpers2 import build_reports_excel
+    import os
+    import pandas as pd
+    mock_data = {
+    "Office A": {
+        "total_count": 15,
+        "attended_count": 10,
+        "unattended_count": 5,
+        "waiting_count": 3,
+        "processed_count": 7,
+    },
+    "Office B": {
+        "total_count": 20,
+        "attended_count": 12,
+        "unattended_count": 8,
+        "waiting_count": 1,
+        "processed_count": 11,
+    }
+}
+
+
+    excel_io, filename = build_reports_excel(mock_data)
+
+    # Save locally to test
+    
+    with open(filename, "wb") as f:
+        f.write(excel_io.read())
+    
+    
+    df = pd.read_excel(filename)
+    
+    try:
+        assert df['Office'][0]=="Office A"
+        assert df['Office'][1]=="Office B"
+        assert df['Total'][0]==15
+        assert df['Total'][1]== 20
+        assert df['Attended'][0]==10
+        assert df['Attended'][1]== 12
+        assert df['Unattended'][0]==5
+        assert df['Unattended'][1]== 8
+        assert df['Waiting'][0]==3
+        assert df['Waiting'][1]== 1
+        assert df['Processed'][0]==7
+        assert df['Processed'][1]== 11
+        
+    
+    finally:
+        os.remove(filename)
     
 
 
