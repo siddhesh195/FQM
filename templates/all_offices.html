@@ -83,10 +83,13 @@
 				<div class="col-xs-2">
 		    		({{ translate('Waiting Time  of Current Status', 'en', [defLang]) }})
 				</div>
-				<div class="col-xs-3">
+				<div class="col-xs-2">
 		    		({{ translate('Token', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
+		    		({{ translate('Timestamp', 'en', [defLang]) }})
+				</div>
+				<div class="col-xs-1">
 					({{ translate('Actions', 'en', [defLang]) }})
 				</div>
 	    	</div>
@@ -110,10 +113,14 @@
 					{% if o.p %} <u> {{ moment(o.pdt).fromNow() }}</u>
 					{% else %} <u> {{ moment_wrapper(moment(o.timestamp)).toNow() }} </u> {% endif %}
 				</div>
-		  		<div class="col-xs-12 col-sm-3">
+		  		<div class="col-xs-12 col-sm-2">
 		    		{% if o.n %}<u> {{ o.name }} </u> {% else %} <u> {{ translate('None', 'en', [defLang]) }}/{{ translate('Printed', 'en', [defLang]) }} </u> {% endif %}
 		  		</div>
+				
 				<div class="col-xs-12 col-sm-2">
+					<u>  {{ o.timestamp }}</u>
+				</div>
+				<div class="col-xs-12 col-sm-1">
 					{{ ticket_actions(o) }}
 				</div>
 			</div>
