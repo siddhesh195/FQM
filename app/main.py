@@ -1,7 +1,7 @@
 import os
 from functools import reduce
 from urllib.parse import quote
-from flask import Flask, request, Markup, session, redirect, url_for, flash, render_template
+from flask import Flask, request, Markup, session, redirect, url_for, flash, render_template, jsonify
 from flask_migrate import upgrade as database_upgrade
 from flask_moment import Moment
 from flask_uploads import configure_uploads
@@ -149,6 +149,18 @@ def bundle_app(config={}):
     @app.errorhandler(500)
     @app.errorhandler(413)
     def page_not_found(error):
+        import traceback
+        print("\n===== INTERNAL SERVER ERROR (raw) =====")
+        traceback.print_exc()
+        print("===== END ERROR =====\n")
+      
+        code = getattr(error, 'code', None)
+        if request.path.startswith('/feed'):
+            # log the real error for debugging
+            if code != 404:
+                log_error(error)
+            return jsonify({'error': 'internal error', 'code': code}), code or 500
+        
         ''' Adding error handlers on main app instance. '''
         if getattr(error, 'code', None) == 413:
             flash('Error: file uploaded is too large ', 'danger')
