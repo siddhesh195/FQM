@@ -74,52 +74,58 @@ $(document).ready(function () {
         <div class="panel-body">
 	    	<div class="row text-center h3 text-muted hidden-xs ar2">
 				<div class="col-xs-1">
-				    ({{ translate('Ticket', 'en', [defLang]) }})
+				    ({{ translate('Token Serial Number', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
 				    ({{ translate('Issued', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
-				    ({{ translate('Pulled', 'en', [defLang]) }})
+				    ({{ translate('Status', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
-					({{ translate('In-Waiting', 'en', [defLang]) }})
-				</div>
-				<div class="col-xs-3">
-				    ({{ translate('Value', 'en', [defLang]) }})
+		    		({{ translate('Waiting Time  of Current Status', 'en', [defLang]) }})
 				</div>
 				<div class="col-xs-2">
+				    ({{ translate('Token', 'en', [defLang]) }})
+				</div>
+				<div class="col-xs-2">
+				    ({{ translate('Timestamp', 'en', [defLang]) }})
+				</div>
+				<div class="col-xs-1">
 					({{ translate('Actions', 'en', [defLang]) }})
 				</div>
 	    	</div>
 	    	{% for o in tasksp %}
 	    	
-	    	<div class="row well ar1 h4 text-center {{ ticket_color(o) }} ">
-	    	  <div class="col-xs-12 col-sm-1">
-				<b> {% for oo in o.offices %} {{ oo.prefix }} {% endfor %} {# offices.filter_by(id=o.office_id).first().prefix #}{{ o.number }}.</b>
-	    	  </div>
-	    	  <div class="col-xs-12 col-sm-2">
-				<u>{{ moment(o.timestamp).format('L') }}</u>
-	    	  </div>
-	    	  <div class="col-xs-12 col-sm-2">
-				{% if o.p %} <u>{{ users.filter_by(id=o.pulledBy).first().name }} / {{ moment(o.pdt).fromNow() }}</u>
-				{% else %}
-				<u>{{ translate('Waiting', 'en', [defLang]) }}</u>
-				{% endif %}
-			  </div>
-			  <div class="col-xs-12 col-sm-2">
-				{% if o.p %} <u> {{ moment_wrapper(moment(o.timestamp)).toTime(o.pdt) }} </u>
-				{% else %} <u> {{ moment_wrapper(moment(o.timestamp)).toNow() }} </u> {% endif %}
-			  </div>
-	    	  <div class="col-xs-12 col-sm-3">
-				{% if o.n %}<u> {{ o.name }} </u> {% else %}
-				<u> {{ translate('None', 'en', [defLang]) }}/{{ translate('Printed', 'en', [defLang]) }} </u>
-				{% endif %}
-	    	  </div>
-			  <div class="col-xs-12 col-sm-2">
-				{{ ticket_actions(o) }}
-			  </div>
-	    	</div>
+	    	    <div class="row well h4 ar1 text-center {{ ticket_color(o) }}">
+		  			<div class="col-xs-12 col-sm-1">
+		    			<b> {{ office.prefix }}{{ o.number }}.</b>
+		  			</div>
+		  			<div class="col-xs-12 col-sm-2">
+		    			<u>{{ moment(o.timestamp).format('L') }}</u>
+		  			</div>
+		  			<div class="col-xs-12 col-sm-2">
+		    		    {% if o.p and o.status=='Waiting' %} Pulled and yet to attend
+					    {% elif o.p and o.status=='Attended' %}  Attended 
+					    {% elif o.p and o.status=='Processed' %} Processed
+					    {% elif not o.p %} Waiting to be pulled {% endif %}
+
+				    </div>
+					<div class="col-xs-12 col-sm-2">
+						{% if o.p %} <u> {{ moment(o.pdt).fromNow() }} </u>
+						{% else %} <u> {{ moment_wrapper(moment(o.timestamp)).toNow() }} </u> {% endif %}
+					</div>
+		  			<div class="col-xs-12 col-sm-2">
+		  		  		{% if o.n %}<u> {{ o.name }} </u> {% else %}
+		  		    	<u> {{ translate('None', 'en', [defLang]) }}/{{ translate('Printed', 'en', [defLang]) }} </u> {% endif %}
+		  			</div>
+					<div class="col-xs-12 col-sm-2">
+					    <u>  {{ o.timestamp }}</u>
+					</div>
+					<div class="col-xs-12 col-sm-1">
+						{{ ticket_actions(o) }}
+					</div>
+				</div>
 
 			{{ processed_ticket_modal(tickets_form, o, ofc_id) }}
 			{% endfor %}
