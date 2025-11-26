@@ -393,16 +393,18 @@ def feed(office_id=None):
     display_settings = data.Display_store.get()
     single_row = data.Settings.get().single_row
     current_ticket = data.Serial.get_last_pulled_ticket(office_id)
-    empty_text = gtranslator.translate('Empty', dest=[session.get('lang')])
+    empty_text = 'Empty'
+    office = getattr(current_ticket, 'office', None) if current_ticket else None
+    task = getattr(current_ticket, 'task', None) if current_ticket else None
     current_ticket_text = current_ticket and current_ticket.display_text or empty_text
-    current_ticket_office_name = current_ticket and current_ticket.office.display_text or empty_text
+    current_ticket_office_name = getattr(office, 'display_text', empty_text) or empty_text 
     try:
         current_ticket_pulled_by_name = current_ticket and current_ticket.puller_name or empty_text
         print(current_ticket_pulled_by_name)
     except Exception as e:
         current_ticket_pulled_by_name = empty_text
         print(e)
-    current_ticket_task_name = current_ticket and current_ticket.task.name or empty_text
+    current_ticket_task_name   = getattr(task, 'name', empty_text) or empty_text
     all_pulled_tickets = data.Serial.get_all_pulled_tickets(office_id)
   
     try:
