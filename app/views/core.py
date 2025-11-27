@@ -19,6 +19,7 @@ from app.modify_database_inits import modify_Touch_Store_init,modify_Aliases_ini
 from app.helpers2 import generate_token_for_task, process_all_pulled_tickets,last_pulled_ticket_by_each_user
 from app.constants import TICKET_WAITING
 from app.helpers2 import update_last_seen_helper
+from uuid import uuid4
 
 core = Blueprint('core', __name__)
 
@@ -433,14 +434,15 @@ def feed(office_id=None):
             f'w{_index + 1}':
             f'{_resolve_ticket_index(_index)}{ticket.display_text_for_feed}' if ticket else ""
             for _index, ticket in enumerate(waiting_tickets)}
-
-
+    uuid = str(uuid4())
+    
     return jsonify(con=current_ticket_office_name,
                    cot=current_ticket_text,
                    cott=current_ticket_task_name,
                    cpbn=current_ticket_pulled_by_name,
                     pulled=pulled_tickets,
                     last_pulled_by_each_user=last_pulled_ticket_by_each_user_dict,
+                    uuid=uuid,
                    **tickets_parameters)
 
 @core.route('/repeat_announcement', defaults={'office_id': None,'user_id':None})

@@ -28,7 +28,8 @@
 		auto_start: true,
 		autoplay_warning: playAudioNotification || playAnnouncements,
 	})
-	var processedRepeats = {};
+	var processedRepeats_by_uuid = {};
+	var processedRepeats_by_cot = {};
 
 	function play (files) {
 		if (files.length) {
@@ -211,7 +212,7 @@
 		        if(data.cot=='Empty' || data.con=='Empty') {
 					return;
 				}
-				if (playAnnouncements) {
+				if (playAnnouncements && !processedRepeats_by_cot[data.cot]) {
 					$.when.apply($, languages.map(function(language, index) {
 						
 						return send_gtts_request(
@@ -226,6 +227,7 @@
 
 						if (playAudioNotification) files.unshift(audioNotification)
 						play(files)
+						processedRepeats_by_cot[data.cot] = true
 					}).fail(function (e) { console.log(e) })
 				} else if (playAudioNotification) play([audioNotification])
 			} 
@@ -268,10 +270,10 @@
 				meta_by_user_id = j.meta_by_user_id;
 				for (const [user_id,meta] of Object.entries(meta_by_user_id)) {
 					const uuid = meta['uuid']
-					if (!processedRepeats[uuid]){
+					if (!processedRepeats_by_uuid[uuid]){
 							
                         make_repeat_announcement(user_id);
-						processedRepeats[uuid] = true;
+						processedRepeats_by_uuid[uuid] = true;
 					}
 						
 				}
@@ -522,9 +524,7 @@
 {% elif tv == 1 %}
 <!-- Keep this hidden streams section so jsonstream does not break because of not having these streams -->
 <div id="hidden-streams" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;">
-  <span stream="con" class="effectit ensureit">Empty</span>
-  <span stream="cott" class="effectit ensureit">Empty</span>
-  <span stream="cot" class="effectdoit ensureit">Empty</span>
+  <span stream="uuid" class="effectdoit ensureit">Empty</span>
 </div>
 <!-- ✅ Pulled tickets section -->
 <table class="table table-bordered table-striped tickets-table">
