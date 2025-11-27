@@ -18,7 +18,7 @@ EXPORT_DELIMETERS = [',', '\t', '\n', '*', '#']
 EXPORT_OPTIONS = {0: 'Comma', 1: 'Tab', 2: 'New line', 3: 'Star', 4: 'Hashtag'}
 
 TOUCH_TEMPLATES = [(0, 'First Template'), (1, 'Second Template'), (2, 'Third Template')]
-DISPLAY_TEMPLATES = TOUCH_TEMPLATES + [(3, 'Fourth Template')]
+DISPLAY_TEMPLATES =  [ (1, 'First Template')]
 
 
 BOOLEAN_SELECT = [(1, 'Activated'), (0, 'Deactivated')]

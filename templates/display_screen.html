@@ -76,9 +76,7 @@
                 </h4>
     		    {{ form.csrf_token }}
     		    {{ render_field(form.display, class="form-control") }}
-                <h4 class="text-center text-danger warn hide pb-1 pt-3 ar2">
-                    | {{ translate('Reminder: First template is the only template that supports slideshow and video .', 'en', [defLang]) }} |
-                </h4>
+                
                 <p class='pb-5'></p>
                 {{ unique_btns(translate('Previous', 'en', [defLang]), translate('Apply', 'en', [defLang]), translate('Next', 'en', [defLang])) }}
                 <p class='pb-3'></p>
