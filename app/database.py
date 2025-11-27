@@ -394,7 +394,7 @@ class Serial(db.Model, TicketsMixin, Mixin):
                               .all()
 
     @classmethod
-    def get_waiting_list_tickets(cls, office_id=None, limit=9):
+    def get_waiting_list_tickets(cls, office_id=None):
         ''' get list of waiting tickets to be processed next.
 
         Parameters
@@ -415,7 +415,6 @@ class Serial(db.Model, TicketsMixin, Mixin):
             waiting_tickets = waiting_tickets.filter(cls.office_id == office_id)
 
         return waiting_tickets.order_by(cls.pdt.desc())\
-                              .limit(limit)\
                               .all()
 
     @classmethod

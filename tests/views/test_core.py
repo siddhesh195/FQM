@@ -621,7 +621,7 @@ def test_feed_stream_tickets_preferences_enabled(c):
     display_settings.always_show_ticket_number = True
     display_settings.tmp = 3
     db.session.commit()
-    tickets = Serial.get_waiting_list_tickets(limit=8)
+    tickets = Serial.get_waiting_list_tickets()
     processed_tickets = Serial.get_processed_tickets(limit=8, offset=1)
     current_ticket = Serial.get_last_pulled_ticket()
 
@@ -652,7 +652,7 @@ def test_feed_stream_tickets_preferences_and_show_office_name_enabled(c):
     display_settings.tmp = 3
     db.session.commit()
 
-    tickets = Serial.get_waiting_list_tickets(limit=8)
+    tickets = Serial.get_waiting_list_tickets()
     processed_tickets = Serial.get_processed_tickets(limit=8, offset=1)
     current_ticket = Serial.get_last_pulled_ticket()
 
@@ -683,8 +683,7 @@ def test_feed_office_with_preferences_enabled(c):
     display_settings.always_show_ticket_number = True
     db.session.commit()
     current_ticket = Serial.get_last_pulled_ticket()
-    tickets = Serial.get_waiting_list_tickets(office_id=current_ticket.office.id,
-                                              limit=8)
+    tickets = Serial.get_waiting_list_tickets(office_id=current_ticket.office.id)
 
     response = c.get(f'/feed/{current_ticket.office.id}', follow_redirects=True)
 
@@ -706,7 +705,7 @@ def test_feed_stream_tickets_preferences_disabled(c):
     display_settings.prefix = False
     display_settings.always_show_ticket_number = False
     db.session.commit()
-    tickets = Serial.get_waiting_list_tickets(limit=8)
+    tickets = Serial.get_waiting_list_tickets()
     current_ticket = Serial.get_last_pulled_ticket()
 
     response = c.get('/feed', follow_redirects=True)
