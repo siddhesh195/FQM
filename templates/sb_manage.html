@@ -65,7 +65,7 @@
 				</a>
 			</li>
 			{% endif %}
-			{% if not settings.single_row %}
+			{% if not settings.single_row and current_user.role_id==1%}
 			    <li>
 				    <a href="{{ url_for('reports.reports_home') }}">
 			    		<span class="fa "></span>
