@@ -104,9 +104,9 @@ def build_reports_excel(statistics_by_office_name):
     ws.append([
         "Office",
         "Total",
-        "Attended",
-        "Unattended",
-        "Waiting",
+        "Processing",
+        "Pulled",
+        "Unpulled",
         "Processed",
     ])
 
