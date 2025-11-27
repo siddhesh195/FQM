@@ -214,12 +214,12 @@ def test_build_reports_excel():
         assert df['Office'][1]=="Office B"
         assert df['Total'][0]==15
         assert df['Total'][1]== 20
-        assert df['Attended'][0]==10
-        assert df['Attended'][1]== 12
-        assert df['Unattended'][0]==5
-        assert df['Unattended'][1]== 8
-        assert df['Waiting'][0]==3
-        assert df['Waiting'][1]== 1
+        assert df['Processing'][0]==10
+        assert df['Processing'][1]== 12
+        assert df['Pulled'][0]==5
+        assert df['Pulled'][1]== 8
+        assert df['Unpulled'][0]==3
+        assert df['Unpulled'][1]== 1
         assert df['Processed'][0]==7
         assert df['Processed'][1]== 11
         
