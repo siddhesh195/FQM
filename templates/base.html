@@ -39,7 +39,7 @@
                     {% if dropdown %} $("{{ dropdown }}").collapse('show') {% endif %} // sidebar collapse for all
                     {% if hash %} $("{{ hash }}").addClass('active') {% endif %} // activating item regardless of uniqueness activation
                     {% if navbar %} $("{{ navbar }}").addClass("active") {% endif %} // activating navbar category
-                    {% if getattr(current_user, 'role_id', None) == 3 %}
+                    {% if getattr(current_user, 'role_id', None) == 1 %}
                         $('#cls').collapse('show')
                         $('#dropdown-lvl{{ ooid }}').collapse('show')
                     {% endif %}
@@ -223,6 +223,7 @@
                                         </a>
                                     </li>
                                     {% for office in offices %}
+                                    {% if current_user.role_id==1 or current_user.id in office.office_operators_set%}
                                     <li class="dropdown-header">( {{ office.display_text }} )</li>
                                     <li>
     				                    <a href="{{ url_for('core.touch', a=0, office_id=office.id) }}" target="_blank">
@@ -236,6 +237,7 @@
                                             {{ translate('Display screen', 'en', [defLang]) }}
                                         </a>
                                     </li>
+                                    {% endif %}
                                     {% endfor %}
                                     {% endif %}
                                 </ul>

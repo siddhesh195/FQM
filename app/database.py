@@ -138,6 +138,10 @@ class Office(db.Model, Mixin):
 
         return f'{self.prefix if show_prefix else ""}{self.name}'
 
+    @property
+    def office_operators_set(self):
+        return {op.id for op in self.operators}
+
     def delete_all(self):
         for ticket in self.tickets:
             db.session.delete(ticket)
