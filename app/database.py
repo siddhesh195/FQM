@@ -140,7 +140,14 @@ class Office(db.Model, Mixin):
 
     @property
     def office_operators_set(self):
-        return {op.id for op in self.operators}
+        office_operator_id_set=set()
+        try:
+            for op in self.operators:
+                office_operator_id_set.add(op.id)
+        except:
+            pass
+
+        return office_operator_id_set
 
     def delete_all(self):
         for ticket in self.tickets:
