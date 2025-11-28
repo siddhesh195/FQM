@@ -721,7 +721,15 @@ def test_feed_stream_tickets_preferences_disabled(c):
 
 
 @pytest.mark.usefixtures('c')
-def test_display_screen(c):
+def test_display_screen_all_offices(c,monkeypatch):
+    class current_user_class:
+        def __init__(self):
+            self.role_id=2
+        
+    import app.views.core
+    current_user = current_user_class()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
+
     display_settings = Display_store.query.first()
 
     response = c.get('/display', follow_redirects=True)

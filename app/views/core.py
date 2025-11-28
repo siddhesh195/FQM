@@ -475,6 +475,22 @@ def set_repeat_announcement(status,UserId=None, office_id=None):
 @core.route('/display/<int:office_id>')
 def display(office_id=None):
     ''' display screen view. '''
+   
+    if current_user.role_id !=1:
+        allowed_role_ids = {1,2,3} 
+        if current_user.role_id not in allowed_role_ids:
+            return jsonify(error="You are not authorized to access display page"), 403
+        if office_id:
+            office = data.Office.get(office_id)
+            if not office:
+                return jsonify(error="Office not found"), 404
+            office_operators = office.operators
+            office_operators_id_set= set()
+            for operator in office_operators:
+                office_operators_id_set.add(operator.id)
+            if current_user.id not in office_operators_id_set:
+                return jsonify(error="You are not authorized to access display page of this office"), 403
+    
     display_settings = data.Display_store.query.first()
     slideshow_settings = data.Slides_c.query.first()
     slides = data.Slides.query.order_by(data.Slides.id.desc()).all() or None
