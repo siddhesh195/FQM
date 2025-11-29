@@ -5,15 +5,13 @@
 <div id="app" class="container" style="margin-top: 20px;" v-cloak>
    
     
-    <button class="btn btn-default btn-sm pull-right" @click= "loadexampleComponent">
-        <div v-if="!TicketStatusComponent">Open Ticket Status Report</div>
-        <div v-if="TicketStatusComponent">Close Ticket Status Report</div>
+    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('TicketStatusComponent')">
+        <div v-if="!Components['TicketStatusComponent']">Open Ticket Status Report</div>
+        <div v-if="Components['TicketStatusComponent']">Close Ticket Status Report</div>
     </button>
 
-
-    
     <!-- Component appears here -->
-    <component :is="TicketStatusComponent"
+    <component :is="Components['TicketStatusComponent']"
     :report_route_url="'{{ url_for('reports.reports_data') }}'"
     :make_excel_url="'{{ url_for('reports.make_reports_excel') }}'"
     >
@@ -36,22 +34,26 @@
     
         data() {
             return {
-           
-                TicketStatusComponent: null
+                
+                Components:{
+                    TicketStatusComponent: null
+                }
             };
         },
 
         methods: {
         
-            async loadexampleComponent() {
-               // Dynamically load JS file from /static
-                if (this.TicketStatusComponent) {
-                this.TicketStatusComponent = null; // Unload component
-                 return; // Already loaded
-               }
-               const module = await import("{{ url_for('static', filename='ticket_status_report.js') }}");
-              this.TicketStatusComponent = markRaw(module.default);   // Set component
+            async loadComponent(component_name) {
+                // Dynamically load JS file from /static
+                const component = this.Components[component_name];
+                if (component) {
+                    this.Components[component_name] = null; // Unload component
+                    return; // Already loaded
+                }
+                const module = await import("{{ url_for('static', filename='ticket_status_report.js') }}");
+                this.Components[component_name] = markRaw(module.default);   // Set component
             }
+        
         }
     }).mount('#app');
 </script>
