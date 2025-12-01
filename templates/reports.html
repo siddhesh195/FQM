@@ -23,7 +23,7 @@
     </component>
     
     <component :is="Components['TaskFrequencyComponent']"
-    :report_route_url="'{{ url_for('reports.make_task_reports') }}'"
+    :report_route_url="'{{ url_for('reports.make_task_frequency_reports') }}'"
     :show-swal-message = "showSwalMessage_var"
     @office-selected="handle_office_selected"
     

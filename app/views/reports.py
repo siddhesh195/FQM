@@ -74,11 +74,11 @@ def make_reports_excel():
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
 
-@reports.route('/make_task_reports',methods=['POST'])
+@reports.route('/make_task_frequency_reports',methods=['POST'])
 @login_required
 @reject_operator
-def make_task_reports():
-    # Placeholder for future implementation
+def make_task_frequency_reports():
+
     data= request.get_json()
 
     start_date_str = data.get('start_date')
@@ -99,7 +99,7 @@ def make_task_reports():
         print(e,"error fetching tickets")
         return jsonify({"error": "some error occurred"})
 
-    print(fetched_tickets)
+   
     try:
        return jsonify(fetched_tickets)
     except:
