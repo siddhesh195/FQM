@@ -1,13 +1,13 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import login_required
 import app.database as data
 from app.helpers import reject_operator
 
 from app.middleware import db
 from flask import jsonify
-from app.helpers2 import build_reports_excel
+from app.helpers2 import build_reports_excel,fetch_tickets_by_date_range
 from flask import send_file
-
+from datetime import datetime
 
 reports = Blueprint('reports', __name__)
 
@@ -73,3 +73,34 @@ def make_reports_excel():
         download_name=filename,
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
+
+@reports.route('/make_task_reports',methods=['POST'])
+@login_required
+@reject_operator
+def make_task_reports():
+    # Placeholder for future implementation
+    data= request.get_json()
+
+    start_date_str = data.get('start_date')
+    end_date_str = data.get('end_date')
+
+    try:
+        start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+        end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
+    except:
+        print("Invalid date format")
+        return jsonify({"error": "Invalid date format. Use YYYY-MM-DD."})
+    if start_date > end_date:
+        return jsonify({"error": "Start date cannot be after end date."})
+
+    try:
+        fetched_tickets=fetch_tickets_by_date_range(start_date, end_date)
+    except Exception as e:
+        print(e,"error fetching tickets")
+        return jsonify({"error": "some error occurred"})
+
+    print(fetched_tickets)
+    try:
+       return jsonify(fetched_tickets)
+    except:
+        return jsonify({"error": "some error occurred while sending data"})

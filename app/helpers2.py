@@ -1,10 +1,10 @@
 from app.middleware import gtranslator
 import uuid
-from app.database import User
+from app.database import User, Serial, Office, Task
 from app.constants import TICKET_WAITING
 from flask_login import current_user
 from app.middleware import db
-from datetime import datetime
+from datetime import datetime, timedelta
 import io
 from openpyxl import Workbook
 
@@ -129,3 +129,46 @@ def build_reports_excel(statistics_by_office_name):
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"reports_{ts}.xlsx"
     return output, filename
+
+def fetch_tickets_by_date_range(start_date, end_date):
+    """
+    Fetch tickets from the database within the specified date range.
+    Args:
+        start_date (datetime): The start date for filtering tickets.
+        end_date (datetime): The end date for filtering tickets.
+    
+    Returns:
+        List of tickets within the date range.
+    """
+    all_offices = Office.query.all()
+
+    all_office_ids = [office.id for office in all_offices]
+
+    office_id_to_name = {office.id: office.name for office in all_offices}
+
+    tickets_by_office_names={}
+    end_date = end_date +  timedelta(days=1)
+
+    for office_id in all_office_ids:
+        office_name = office_id_to_name[office_id]
+        all_office_tickets= Serial.all_office_tickets(office_id=office_id)
+        filtered_ticket_objects_list = all_office_tickets.filter(Serial.timestamp >= start_date, Serial.timestamp <= end_date).all()
+        #make filter tickets list from query object
+        
+        task_frequency_dict = {}
+        for ticket_object in filtered_ticket_objects_list:
+            task = Task.query.get(ticket_object.task_id)
+            task_name = task.name
+            if task_name not in task_frequency_dict:
+                task_frequency_dict[task_name] =1
+            else:
+                task_frequency_dict[task_name] +=1
+
+        tickets_by_office_names[office_name] = task_frequency_dict
+
+
+    return tickets_by_office_names
+
+        
+    
+    

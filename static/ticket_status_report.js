@@ -1,4 +1,4 @@
-// MyComponent.js
+
 export default {
   name: "TicketStatusReport",
 
@@ -86,7 +86,7 @@ export default {
   template: `
     <div class="row">
       <div class="col-xs-12">
-        <h2 style="margin-top: 0;"> Reports </h2>
+        <h2 style="margin-top: 0;"> Ticket Status Report </h2>
 
         <button class="btn btn-default btn-sm pull-right"
           @click="fetch_reports"
