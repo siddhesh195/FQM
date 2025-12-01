@@ -1,5 +1,6 @@
 import pytest
 from app import helpers2
+from app.middleware import db
 
 class FakeSerial:
     def __init__(self,id,name,pulled_by, office,task,status):
@@ -227,10 +228,89 @@ def test_build_reports_excel():
     finally:
         os.remove(filename)
     
+@pytest.mark.usefixtures('c')
+def test_fetch_tickets_by_date_range(monkeypatch):
+    from app.helpers2 import fetch_tickets_by_date_range
+    from app.database import Serial, Task, Office
+    import datetime as dt
 
+    timestamps_of_tokens ={
+        "Token 1":{"year":2022,"month":1,"day":1,"hour":10,"minute":0,"second":0},
+        "Token 2":{"year":2022,"month":1,"day":4,"hour":10,"minute":0,"second":0},
+        "Token 3":{"year":2022,"month":2,"day":7,"hour":10,"minute":0,"second":0},
+        "Token 4":{"year":2022,"month":3,"day":11,"hour":10,"minute":0,"second":0},
+        "Token 5":{"year":2022,"month":7,"day":1,"hour":10,"minute":0,"second":0},
+        "Token 6":{"year":2022,"month":8,"day":1,"hour":10,"minute":0,"second":0},
+        "Token 7":{"year":2022,"month":9,"day":14,"hour":10,"minute":0,"second":0},
+        "Token 8":{"year":2022,"month":10,"day":16,"hour":10,"minute":0,"second":0}
+    }
 
+    def initialize_data():
 
+        def create_tickets():
 
+            Serial.create_new_ticket(task=task1, office=office1, name_or_number="Token 1")
+            Serial.create_new_ticket(task=task2, office=office1, name_or_number="Token 2")
+            Serial.create_new_ticket(task=task2, office=office1, name_or_number="Token 3")
+            Serial.create_new_ticket(task=task2, office=office1, name_or_number="Token 4")
+            
+            Serial.create_new_ticket(task=task1, office=office1, name_or_number="Token 5")
+            Serial.create_new_ticket(task=task3, office=office1, name_or_number="Token 6")
+            Serial.create_new_ticket(task=task3, office=office1, name_or_number="Token 7")
+            Serial.create_new_ticket(task=task3, office=office1, name_or_number="Token 8")
+            
+            
+            db.session.commit()
+            
 
+        Office1 = Office(name='Office1')
+        
 
-                    
+        Task1 = Task(name='Task1')
+        Task2 = Task(name='Task2')
+        Task3 = Task(name='Task3')
+
+        db.session.add(Office1)
+       
+        db.session.add(Task1)
+        db.session.add(Task2)
+        db.session.add(Task3)
+        db.session.commit()
+        task1 = Task.query.filter_by(name='Task1').first()
+        task2 = Task.query.filter_by(name='Task2').first()
+        task3 = Task.query.filter_by(name='Task3').first()
+
+        office1 = Office.query.filter_by(name='Office1').first()
+      
+        create_tickets()
+    
+    def replace_timestamps(tickets,year=2023,month=1,day=1,time_hour=0,time_minute=0,time_second=0):
+        
+        for ticket in tickets:
+            ticket.timestamp = ticket.timestamp.replace(year=year, month=month, day=day, hour=time_hour, minute=time_minute, second=time_second,microsecond=0)
+        db.session.commit()
+    
+    initialize_data()
+    all_offices_query_object = Office.query
+    office1 = all_offices_query_object.filter_by(name='Office1').first()
+
+    get_all_office_tickets = Serial.all_office_tickets(office_id=office1.id)
+
+    
+
+    for ticket in get_all_office_tickets:
+        timestamp_info = timestamps_of_tokens.get(ticket.name)
+        replace_timestamps([ticket], year=timestamp_info['year'], month=timestamp_info['month'], day=timestamp_info['day'], time_hour=timestamp_info['hour'], time_minute=timestamp_info['minute'], time_second=timestamp_info['second'])
+
+    start_date1 = dt.datetime(2022, 1, 1, 0, 0, 0)
+    end_date1 = dt.datetime(2022, 6, 30, 23, 59, 59)
+
+    start_date2 = dt.datetime(2022, 7, 1, 0, 0, 0)
+    end_date2 = dt.datetime(2022, 12, 31, 23, 59, 59)
+
+    get_all_office_tickets = fetch_tickets_by_date_range(start_date1, end_date1)['Office1']
+
+    get_all_office_tickets2 = fetch_tickets_by_date_range(start_date2, end_date2)['Office1']
+
+    assert get_all_office_tickets == {'Task1': 1, 'Task2': 3}
+    assert get_all_office_tickets2 == {'Task1': 1, 'Task3': 3}

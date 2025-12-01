@@ -147,7 +147,7 @@ def fetch_tickets_by_date_range(start_date, end_date):
     office_id_to_name = {office.id: office.name for office in all_offices}
 
     tickets_by_office_names={}
-    end_date = end_date +  timedelta(days=1)
+    end_date = end_date 
 
     for office_id in all_office_ids:
         office_name = office_id_to_name[office_id]
