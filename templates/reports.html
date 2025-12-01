@@ -70,7 +70,11 @@
                 showSwalMessage_var: null,
                 pieChartHelper: null,
                 task_frequency_data: null,
-                OfficeTaskCharts_office_name: null
+                OfficeTaskCharts_office_name: null,
+                
+                Child_like_components:{
+                    'TaskFrequencyComponent': ['OfficeTaskCharts']
+                }
                 
             };
         },
@@ -83,6 +87,7 @@
                 const component = this.Components[component_name];
                 if (component) {
                     this.Components[component_name] = null; // Unload component
+                    this.closeChildLikeComponents(component_name);
                     return; // Already loaded
                 }
                 const module = await import(this.URLs[component_name]);
@@ -96,6 +101,12 @@
                 this.loadComponent('OfficeTaskCharts')
                 // You can add further handling logic here
                 
+            },
+            closeChildLikeComponents(parent_component_name){
+                const child_components = this.Child_like_components[parent_component_name] || [];
+                child_components.forEach(child_name => {
+                    this.Components[child_name] = null;
+                });
             }
         },
         

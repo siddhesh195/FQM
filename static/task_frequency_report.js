@@ -29,7 +29,7 @@ export default {
             this.showSwalMessage("Please select both start and end dates.");
             return;
         }
-        console.log("Fetching reports from", this.report_route_url);
+       
         axios.post(this.report_route_url, {
             
                 start_date: this.selectedStartDate,
@@ -39,14 +39,13 @@ export default {
         .then(response => {
             // Handle the response data
             response.data;
-            console.log(response.data);
+           
             if (response.data.error){
                 this.showSwalMessage(response.data.error);
                 return;
             }
             this.reports = response.data;
             this.get_office_names();
-            this.showSwalMessage("Reports fetched successfully.");
             
         })
         .catch(err => {
@@ -81,7 +80,7 @@ export default {
           <button class="btn btn-default btn-sm pull-right"
             @click="fetch_reports"
             v-if="!loading">
-            Refresh
+            Fetch Reports
           </button>
         </div>
 
