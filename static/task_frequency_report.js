@@ -8,6 +8,10 @@ export default {
     },
     showSwalMessage: {
       type: Function
+    },
+    reports_fetched: {
+      type: Object,
+      default: null
     }
   },
 
@@ -46,6 +50,7 @@ export default {
             }
             this.reports = response.data;
             this.get_office_names();
+            this.$emit('reports-fetched', this.reports);
             
         })
         .catch(err => {
@@ -71,7 +76,9 @@ export default {
     }
   },
   mounted() {
- 
+
+    this.reports = this.reports_fetched || {};
+    this.get_office_names();
   },
   template: `
       <div class="row">

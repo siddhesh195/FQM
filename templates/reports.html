@@ -25,7 +25,10 @@
     <component :is="Components['TaskFrequencyComponent']"
     :report_route_url="'{{ url_for('reports.make_task_frequency_reports') }}'"
     :show-swal-message = "showSwalMessage_var"
+    :reports_fetched="fetched_reports"
     @office-selected="handle_office_selected"
+    @reports-fetched="handle_reports_fetched($event)"
+
     
     >
     </component>
@@ -71,6 +74,7 @@
                 pieChartHelper: null,
                 task_frequency_data: null,
                 OfficeTaskCharts_office_name: null,
+                fetched_reports: null,
                 
                 Child_like_components:{
                     'TaskFrequencyComponent': ['OfficeTaskCharts']
@@ -107,6 +111,15 @@
                 child_components.forEach(child_name => {
                     this.Components[child_name] = null;
                 });
+            },
+            handle_reports_fetched(reports){
+
+                // You can add further handling logic here
+                this.fetched_reports = reports;
+                this.Components['OfficeTaskCharts'] = null; 
+                this.Components['TaskFrequencyComponent'] = null;
+                this.loadComponent('TaskFrequencyComponent');
+
             }
         },
         
