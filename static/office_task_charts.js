@@ -34,9 +34,7 @@ export default {
    
   },
   mounted() {
-    console.log(this.frequency_data)
-    console.log(this.office_name)
-    console.log(this.pie_chart_helper)
+    
     this.chart = this.pie_chart_helper(this.$refs.canvas, this.frequency_data);
   },
   template: `
@@ -46,10 +44,32 @@ export default {
           
           
         </div>
-
-        <div style="max-width:400px">
+        <div class="col-md-6 col-12">
+          <div style="max-width:400px">
             <canvas ref="canvas"></canvas>
+          </div>
         </div>
+        
+        <div class="col-md-6 col-12" v-if="frequency_data && Object.keys(frequency_data).length">
+          <h4 class="mt-3">Task Frequency Details</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Frequency</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(value, label) in frequency_data" :key="label">
+                  <td>{{ label }}</td>
+                  <td>{{ value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
 
       </div>
     
