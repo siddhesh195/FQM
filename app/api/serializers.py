@@ -25,4 +25,8 @@ TaskSerializer = api.model('Task', {
     'name': fields.String(required=False, description='task name.'),
     'timestamp': fields.DateTime(required=False, description='date and time of task creation.'),
     'hidden': fields.Boolean(required=False, description='task is is hidden in the touch screen.'),
+    'threshold': fields.Integer(
+        required=False,
+        description='task threshold (null means infinite).'
+    )
 })
