@@ -23,6 +23,11 @@ style.innerHTML = `
     padding: 1rem 2rem !important;
     border-radius: 0.5rem !important;
     }
+    .custom-toast-size {
+        font-size: 18px !important;
+        padding: 20px 24px !important;
+        min-height: 70px !important;
+    }
 `;
 document.head.appendChild(style);
 
@@ -44,6 +49,21 @@ function showSwalMessage(message, duration = null) {
     }).then(() => {
         if (duration) {
             setTimeout(() => Swal.close(), duration);
+        }
+    });
+}
+
+function showToast(message, type = "success", duration = 5000, position = "center") {
+    Swal.fire({
+        toast: true,
+        position: position,
+        icon: type,          // "success", "error", "warning", "info", "question"
+        title: message,
+        showConfirmButton: false,
+        timer: duration,
+        timerProgressBar: true,
+        customClass: {
+          popup: "custom-toast-size"
         }
     });
 }

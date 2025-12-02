@@ -9,6 +9,9 @@ export default {
     showSwalMessage: {
       type: Function
     },
+    showToast: {
+      type: Function
+    },
     reports_fetched: {
       type: Object,
       default: null
@@ -48,6 +51,7 @@ export default {
                 this.showSwalMessage(response.data.error);
                 return;
             }
+            this.showToast("Reports fetched successfully.");
             this.reports = response.data;
             this.get_office_names();
             const data_to_send = {
@@ -91,20 +95,25 @@ export default {
   template: `
       <div class="row">
         <div class="col-xs-12">
-          <h2 style="margin-top: 0;"> Task Frequency Report </h2>
-          <button class="btn btn-default btn-sm pull-right"
-            @click="fetch_reports"
-            v-if="!loading">
-            Fetch Reports
-          </button>
+          <h2 style="margin-top: 0;"> Task Frequency Report Date Selection </h2>
+          <h4>Select Date Range, fetch and then select office</h4>
+          
         </div>
-
+        <div class="col-xs-12">
         <label for="my-date">Pick a start date:</label>
         <input type="date" name="my-date" v-model="selectedStartDate">
 
         <label for="my-date">Pick a end date:</label>
         <input type="date"  name="my-date" v-model="selectedEndDate">
-
+        </div>
+        <div class="col-xs-12">
+        <br>
+        <button class="btn btn-default btn-sm "
+            @click="fetch_reports"
+            v-if="!loading">
+            Fetch Reports
+        </button>
+        </div>
         <label>Select Office:</label>
         <select v-model="selectedOffice">
           <option disabled value="">Select office</option>
@@ -112,6 +121,7 @@ export default {
           {{ office }}
           </option>
         </select>
+
     
       </div>
     
