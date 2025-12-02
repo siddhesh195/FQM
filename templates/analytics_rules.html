@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %} FQM - {{ page_title }} {% endblock %}
+
+{% block page_content %}
+<div id="app" class="container" style="margin-top: 20px;" v-cloak>
+
+    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('TaskThresholdComponent')">
+        <div v-if="!Components['TaskThresholdComponent']">Open  Task Threshold</div>
+        <div v-if="Components['TaskThresholdComponent']">Close Task Threshold</div>
+    </button>
+
+    <component :is="Components['TaskThresholdComponent']"
+    :get_all_tasks_url="get_all_tasks_url"
+    :update_task_threshold_url="update_task_threshold_url"
+    >
+    </component>
+   
+    
+   
+    
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+
+<script type="module">
+
+    import { createApp, markRaw } from "{{ url_for('static', filename='vendor/vue/vue.esm-browser.prod.js') }}";
+
+    createApp({
+        delimiters: ['[[', ']]'],
+    
+        data() {
+            return {
+                Components:{
+                    TaskThresholdComponent: null
+                    
+                },
+                URLs:{
+                    TaskThresholdComponent : "{{ url_for('static', filename='task_thresholds.js') }}"
+                },
+                get_all_tasks_url: "{{ url_for('analytics_rules.get_all_tasks') }}",
+                update_task_threshold_url: "{{ url_for('analytics_rules.update_task_threshold') }}"
+        
+                
+            };
+        },
+
+        methods: {
+            async loadComponent(component_name) {
+           
+                // Dynamically load JS file from /static
+                const component = this.Components[component_name];
+                if (component) {
+                    this.Components[component_name] = null; // Unload component
+                    return; // Already loaded
+                }
+                const module = await import(this.URLs[component_name]);
+                this.Components[component_name] = markRaw(module.default);   // Set component
+            }
+         
+        },
+        
+        mounted() {
+      
+        }
+    }).mount('#app');
+</script>
+
+{% endblock %}

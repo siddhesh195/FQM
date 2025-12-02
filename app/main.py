@@ -1,7 +1,7 @@
 import os
 from functools import reduce
 from urllib.parse import quote
-from flask import Flask, request, Markup, session, redirect, url_for, flash, render_template, jsonify
+from flask import Flask, request, Markup, session, redirect, url_for, flash, render_template, jsonify, current_app
 from flask_migrate import upgrade as database_upgrade
 from flask_moment import Moment
 from flask_uploads import configure_uploads
@@ -24,6 +24,7 @@ from app.views.core import core
 from app.views.customize import cust_app
 from app.views.manage import manage_app
 from app.views.reports import reports
+from app.views.analytics_rules import analytics_rules
 from app.utils import (absolute_path, log_error, create_default_records, get_bp_endpoints)
 from app.helpers import is_user_office_operator
 from app.database import Serial
@@ -80,6 +81,7 @@ def create_app(config={}):
     app.register_blueprint(manage_app)
     app.register_blueprint(setup_api(), url_prefix='/api/v1')
     app.register_blueprint(reports)
+    app.register_blueprint(analytics_rules)
     app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
     return app
@@ -149,12 +151,17 @@ def bundle_app(config={}):
     @app.errorhandler(500)
     @app.errorhandler(413)
     def page_not_found(error):
+
+        code = getattr(error, 'code', None)
+
+        
         import traceback
+        print("request.path:", request.path)
         print("\n===== INTERNAL SERVER ERROR (raw) =====")
         traceback.print_exc()
         print("===== END ERROR =====\n")
       
-        code = getattr(error, 'code', None)
+        
         if request.path.startswith('/feed'):
             # log the real error for debugging
             if code != 404:

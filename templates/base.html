@@ -195,6 +195,13 @@
                                         </a>
                                     </li>
                                     {% endif %}
+                                    <li class="dropdown-header">( {{ translate('Analytics Rules', 'en', [defLang]) }} )</li>
+                                    <li>
+                                        <a href="{{ url_for('analytics_rules.analytics_rules_home') }}">
+                                            <span class="fa fa-key"></span>
+                                            {{ translate('Task Thresholds', 'en', [defLang]) }} 
+                                        </a>
+                                    </li>
                                     {% endif %}
                                 </ul>
                             </li>
