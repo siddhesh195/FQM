@@ -21,6 +21,12 @@ def _make_serial(db_session, office, task, number, name, printed=False, status=N
     return s
 
 @pytest.mark.usefixtures("c")
+def test_reports_home(c):
+    resp = c.get("/reports")   # adjust prefix
+    assert resp.status_code == 200
+    assert b"Reports" in resp.data
+
+@pytest.mark.usefixtures("c")
 def test_reports_data(c):
     office = data.Office(name="Pune Office")
     task = data.Task(name="Dummy Task")
