@@ -174,6 +174,7 @@ class Task(db.Model, Mixin):
     name = db.Column(db.String(300))
     timestamp = db.Column(db.DateTime(), index=True, default=datetime.utcnow)
     hidden = db.Column(db.Boolean, default=False, nullable=True)
+    threshold = db.Column(db.Integer, nullable=True)
 
     def __init__(self, name='Generic', hidden=False):
         self.name = name
@@ -201,6 +202,10 @@ class Task(db.Model, Mixin):
             ).count()
         )
         return self.offices[0]
+    
+    @classmethod
+    def get_all_tasks(cls):
+        return cls.query.filter_by(hidden=False)
 
     @property
     def tickets(self):
