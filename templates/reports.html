@@ -35,6 +35,7 @@
 
     <component :is="Components['OfficeTaskCharts']"
     :frequency_data="task_frequency_data"
+    :report_dates="fetched_reports_dates"
     :office_name="OfficeTaskCharts_office_name"
     :show-swal-message = "showSwalMessage_var"
     :pie_chart_helper = "pieChartHelper"
@@ -75,6 +76,7 @@
                 task_frequency_data: null,
                 OfficeTaskCharts_office_name: null,
                 fetched_reports: null,
+                fetched_reports_dates: null,
                 
                 Child_like_components:{
                     'TaskFrequencyComponent': ['OfficeTaskCharts']
@@ -116,6 +118,7 @@
          
                 // You can add further handling logic here
                 this.fetched_reports = reports.reports;
+                this.fetched_reports_dates = reports.dates;
                 this.Components['OfficeTaskCharts'] = null; 
                 this.Components['TaskFrequencyComponent'] = null;
                 this.loadComponent('TaskFrequencyComponent');
