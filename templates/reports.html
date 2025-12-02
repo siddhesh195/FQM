@@ -113,9 +113,9 @@
                 });
             },
             handle_reports_fetched(reports){
-
+         
                 // You can add further handling logic here
-                this.fetched_reports = reports;
+                this.fetched_reports = reports.reports;
                 this.Components['OfficeTaskCharts'] = null; 
                 this.Components['TaskFrequencyComponent'] = null;
                 this.loadComponent('TaskFrequencyComponent');

@@ -50,7 +50,15 @@ export default {
             }
             this.reports = response.data;
             this.get_office_names();
-            this.$emit('reports-fetched', this.reports);
+            const data_to_send = {
+              reports: this.reports,
+              dates: {
+                start_date: this.selectedStartDate,
+                end_date: this.selectedEndDate
+              }
+            }
+        
+            this.$emit('reports-fetched', data_to_send);
             
         })
         .catch(err => {
