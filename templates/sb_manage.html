@@ -31,6 +31,17 @@
 					{% endif %}
 			    </a>
 			</li>
+			<li id="da2" >
+			    <a href="{{ url_for('offices.offices_home') }}">
+				    <span class="fa fa-ticket"></span>
+				    {{ translate('All tickets', 'en', [defLang]) }}
+				    {% if not settings.single_row %}
+				        <span class="badge pull-right">
+					        {{ active_tickets }}
+				        </span>
+				    {% endif %}
+			    </a>
+			</li>
 			<li  id="da5" >
 				<a href="{{ url_for('core.pull') }}">
 						<span class="fa fa-{% if settings.single_row %}plus{% else %}minus{% endif %}"></span>
