@@ -67,3 +67,43 @@ function showToast(message, type = "success", duration = 5000, position = "cente
         }
     });
 }
+
+async function openProcessTicketDialog(select_choices) {
+  const optionsHtml = select_choices
+    .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
+    .join("");
+  const { value: formData } = await Swal.fire({
+    title: 'Process Ticket',
+    html: `
+      <div style="text-align: left;">
+       
+        
+        <label style="display: block; margin-bottom: 5px; margin-top: 15px;">Select ticket current status:</label>
+        <select id="swal-status" class="swal2-input">
+          ${optionsHtml}
+        </select>
+        
+        
+      </div>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    preConfirm: () => {
+   
+      const status = document.getElementById('swal-status').value;
+
+      if (!status) {
+        Swal.showValidationMessage('You must choose a ticket status');
+        return false;
+      }
+
+      return {
+        status: status
+      };
+    }
+  });
+
+  // If user cancels, formData will be undefined
+  return formData || null;
+}
