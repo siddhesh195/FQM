@@ -18,6 +18,7 @@ def analytics_rules_home():
 
 
 @analytics_rules.route('/get_all_tasks')
+@login_required
 def get_all_tasks():
     if current_user.role_id != 1:
         return jsonify({'error': 'Unauthorized access'}), 403
@@ -31,6 +32,7 @@ def get_all_tasks():
 
 
 @analytics_rules.route('/update_task_threshold', methods=['POST'])
+@login_required
 def update_task_threshold():
     if current_user.role_id != 1:
         return jsonify({'error': 'Unauthorized access'}), 403
