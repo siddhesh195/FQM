@@ -67,3 +67,10 @@ class ProcessedTicketForm(LocalizedForm):
                          coerce=str,
                          choices=[(s, s) for s in TICKET_STATUSES],
                          validators=[InputRequired('You must chose a ticket status')])
+
+class ProcessedTicketForm2(LocalizedForm):
+   
+    status = SelectField('Select ticket current status :',
+                         coerce=str,
+                         choices=[(s, s) for s in TICKET_STATUSES],
+                         validators=[InputRequired('You must chose a ticket status')])
