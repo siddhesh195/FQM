@@ -1,7 +1,7 @@
 import pytest
 from time import sleep
 
-from . import c  # noqa
+from . import c,app  # noqa
 from app.tasks import stop_tasks, get_task
 
 @pytest.fixture

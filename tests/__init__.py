@@ -191,27 +191,35 @@ def before_exit():
     os.path.isfile(DB_PATH) and os.remove(DB_PATH)
     os.path.isfile(absolute_path('errors.log')) and os.remove(absolute_path('errors.log'))
 
-
 @pytest.fixture
-def c():
+def app():
     dump_db = f'{DB_PATH}.backup'
     dump_exists = os.path.isfile(dump_db)
 
-    if dump_exists:
-        shutil.copyfile(dump_db, DB_PATH)
+    app_config = {
+        'LOGIN_DISABLED': True,
+        'WTF_CSRF_ENABLED': False,   # default for most tests
+        'TESTING': True,
+        'DB_NAME': DB_NAME,
+        'SQLALCHEMY_DATABASE_URI': f'sqlite:///{DB_PATH}?check_same_thread=False'
+    }
 
-    app_config = {'LOGIN_DISABLED': True,
-                  'WTF_CSRF_ENABLED': False,
-                  'TESTING': True,
-                  'DB_NAME': DB_NAME,
-                  'SQLALCHEMY_DATABASE_URI': f'sqlite:///{DB_PATH}?check_same_thread=False'}
     app = bundle_app(app_config)
-
     stop_tasks()
     clear_cache()
+
+    # context created here makes session & db available
+    with app.app_context():
+        if dump_exists:
+            shutil.copyfile(dump_db, DB_PATH)
+        else:
+            setup_data()
+            shutil.copyfile(DB_PATH, dump_db)
+
+        yield app
+
+
+@pytest.fixture
+def c(app):
     with app.test_client() as client:
-        with app.app_context():
-            if not dump_exists:
-                setup_data()
-                shutil.copyfile(DB_PATH, dump_db)
-            yield client
+        yield client
