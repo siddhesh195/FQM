@@ -19,6 +19,9 @@ def analytics_rules_home():
 
 @analytics_rules.route('/get_all_tasks')
 def get_all_tasks():
+    if current_user.role_id != 1:
+        return jsonify({'error': 'Unauthorized access'}), 403
+    
     all_tasks = Task.get_all_tasks()
     
 
@@ -29,6 +32,8 @@ def get_all_tasks():
 
 @analytics_rules.route('/update_task_threshold', methods=['POST'])
 def update_task_threshold():
+    if current_user.role_id != 1:
+        return jsonify({'error': 'Unauthorized access'}), 403
     data = request.get_json()
     task_name = data.get('task_name')
     new_threshold = data.get('new_threshold')

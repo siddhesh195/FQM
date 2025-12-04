@@ -1,14 +1,12 @@
 import pytest
 
-
+class MockUser:
+        def __init__(self):
+            self.role_id = 1  # Admin role for testing
 
 @pytest.mark.usefixtures("c")
 def test_analytics_rules_home(c,monkeypatch):
 
-    
-    class MockUser:
-        def __init__(self):
-            self.role_id = 1  # Admin role for testing
     
     mock_user = MockUser()
     monkeypatch.setattr('app.views.analytics_rules.current_user', mock_user)
@@ -19,7 +17,10 @@ def test_analytics_rules_home(c,monkeypatch):
 
 
 @pytest.mark.usefixtures("c")
-def test_update_task_threshold(c):
+def test_update_task_threshold(c,monkeypatch):
+
+    mock_user = MockUser()
+    monkeypatch.setattr('app.views.analytics_rules.current_user', mock_user)
     url = '/get_all_tasks'
     resp = c.get(url)
     assert resp.status_code == 200
