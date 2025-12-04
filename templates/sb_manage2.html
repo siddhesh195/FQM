@@ -33,15 +33,14 @@
 				    {% endif %}
 			    </a>
 			</li>
-			<li  id="da5" >
-				<a href="{{ url_for('core.pull') }}">
+			<li >
+				<a @click="pullTicket()">
 						<span class="fa fa-{% if settings.single_row %}plus{% else %}minus{% endif %}"></span>
 						{{ translate('Generate a ticket' if settings.single_row else 'Pull a ticket', 'en', [defLang]) }}
 						
 						<span class="badge pull-right">
 							[[ active_tickets_number ]]
 						</span>
-					
 				</a>
 			</li>
 			{% if not settings.single_row %}

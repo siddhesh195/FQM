@@ -201,6 +201,24 @@
                         console.error("Error fetching active tickets:", error);
                         
                     });
+            },
+            pullTicket() {
+                axios.post("{{ url_for('offices.pull_next_ticket') }}", {
+                    o_id: null,
+                    ofc_id: null
+                })
+                .then(response => {
+                    this.fetchData();  // Refresh data after pulling
+                    if (response.data.status === 'success') {
+                        showSwalMessage(response.data.message);
+                    } else {
+                        showSwalMessage("Error: " + response.data.message);
+                    }
+                   
+                })
+                .catch(error => {
+                    console.error("Error pulling ticket:", error);
+                });
             }
         },
 

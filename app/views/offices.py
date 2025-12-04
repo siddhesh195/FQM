@@ -133,11 +133,50 @@ def update_token_details():
 
 @offices.route('/get_number_of_active_tickets', methods=['GET'])
 @login_required
+@reject_operator
 def get_all_active_tickets():
     active_tickets = get_number_of_active_tickets_cached()
     return jsonify({'active_tickets': active_tickets})
 
 
+@login_required
+@offices.route('/pull_next_ticket', methods=['POST'])
+@reject_operator
+def pull_next_ticket():
+
+    def operators_not_allowed():
+        return jsonify({'status': 'error', 'message': 'Unauthorized to pull this ticket'})
+
+    json_data = request.get_json()
+    o_id = json_data.get("o_id")
+    ofc_id = json_data.get("ofc_id")
+
+    settings = data.Settings.get()
+    strict_pulling = settings.strict_pulling
+    single_row = settings.single_row
+    task = data.Task.get(0 if single_row else o_id)
+    office = data.Office.get(0 if single_row else ofc_id)
+    global_pull = not bool(o_id and ofc_id)
+
+    if global_pull:
+        if not single_row and is_operator():
+            return operators_not_allowed()
+    else:
+        if not task:
+            return jsonify({'status': 'error', 'message': 'Task not found'})
+    if is_operator() and not (is_office_operator(ofc_id)
+                                  if strict_pulling else
+                                  is_common_task_operator(task.id)):
+            return operators_not_allowed()
+    next_ticket = data.Serial.get_next_ticket(task_id=o_id,
+                                              office_id=ofc_id)
+    if not next_ticket:
+        return jsonify({'status': 'error', 'message': 'No tickets available to pull'})
+    next_ticket.pull(office and office.id or next_ticket.office_id)
+    return jsonify({'status': 'success', 'message': f'Ticket {next_ticket.name} pulled successfully',
+                    'ticket_name': next_ticket.name,
+                    'ticket_id': next_ticket.id,
+                    'office_id': next_ticket.office_id})
 
     
     
