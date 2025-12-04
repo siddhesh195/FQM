@@ -2,13 +2,21 @@
 {% block title %} FQM - {{ page_title }} {% endblock %}
 
 
-{%- from "sb_manage.html" import sb_manage with context %}
+{%- from "sb_manage2.html" import sb_manage with context %}
 {% block sidebar %}
  {{ sb_manage() }}
 {% endblock %}
 
 {% block page_content %}
-<div id="app" class="container" style="margin-top: 20px;" v-cloak>
+    <div>
+        <input
+            type="text"
+            class="form-control"
+            placeholder="Search tickets..."
+            v-model="searchQuery"
+            style="width: 250px;"
+        >
+    </div>
 
     <table class="table table-bordered table-striped table-sm">
         <thead>
@@ -28,6 +36,16 @@
                 <td>[[ row.pulled_by ]]</td>
                 <td>[[ row.pulled ? 'Yes' : 'No' ]]</td>
                 <td>[[ row.timestamp ]]</td>
+                <td>
+                    <a @click="EditTicket(row.name)" >
+                        <span class="mr-1 fa fa-pencil text-warning">
+                        </span>
+                    </a>
+
+                    <a @click="PullTicket(row.name,row.office_id,row.ticket_id)" >
+                        <span class="fa fa-minus text-primary"></span>
+                    </a>
+                </td>
             </tr>
             <tr v-if="paginatedRows.length === 0">
                 <td :colspan="columns.length" class="text-center">
@@ -69,8 +87,6 @@
         </ul>
     </nav>
 
- 
-</div>
 {% endblock %}
 
 
@@ -96,10 +112,16 @@
                     { label: 'Pulled By'},
                     { label: 'Pulled?'},
                     { label: 'Time'},
+                    { label: 'Actions'}
                 ],
                 // pagination
                 currentPage: 1,
                 perPage: 10,   // change as you like
+                csrf_token: "{% if form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
+                openProcessTicketDialog_var: null,
+                status_choices: {{ status_choices|tojson }},
+                active_tickets_number: '',
+                searchQuery: ''
             };
         },
 
@@ -126,8 +148,60 @@
 
             prevPage() {
                 this.goToPage(this.currentPage - 1);
+            },
+            async EditTicket(ticketName) {
+                // Open modal logic here
+                const response = await this.submitTicketForm(ticketName);
+                
+            },
+            PullTicket(ticketName,officeId,ticketId) {
+              
+                axios.post("{{ url_for('offices.pull_ticket') }}", {
+                    ticket_name: ticketName,
+                    office_id: officeId,
+                    ticket_id: ticketId
+                })
+                .then(response => {
+                    this.fetchData();  // Refresh data after pulling
+                    if (response.data.status === 'success') {
+                        showSwalMessage("Successfully pulled ticket: " + ticketName);
+                    } else {
+                        showSwalMessage("Error: " + response.data.message);
+                    }
+                   
+                })
+                .catch(error => {
+                    console.error("Error pulling ticket:", error);
+                });
+            },
+
+            async submitTicketForm(ticketName) {
+                const formData = await this.openProcessTicketDialog_var(this.status_choices);
+                if (!formData) {
+                    return;
+                }
+                const response = await axios.post("{{ url_for('offices.update_token_details') }}",{
+                    ticket_name: ticketName,
+                    status: formData.status,
+                    csrf_token: this.csrf_token
+                });
+                if (response.data.status === 'success') {
+                    showSwalMessage(response.data.message);
+                } else {
+                    showSwalMessage("Error: " + response.data.message);
+                }
+            },
+
+            getNumberOfActiveTickets() {
+                axios.get("{{ url_for('offices.get_all_active_tickets') }}")
+                    .then(response => {
+                        this.active_tickets_number = response.data.active_tickets;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching active tickets:", error);
+                        
+                    });
             }
-           
         },
 
         computed:{
@@ -138,23 +212,50 @@
                     : Math.ceil(this.rows.length / this.perPage);
             },
 
+            filteredRows() {
+                // no search → return all rows
+                if (!this.searchQuery) {
+                    return this.rows;
+                }
+
+                const q = this.searchQuery.toLowerCase();
+
+                return this.rows.filter(row => {
+                    return [
+                        row.name,
+                        row.number,
+                        row.office_name,
+                        row.task_name,
+                        row.status,
+                        row.pulled_by,
+                        row.timestamp
+                   ] 
+                   .filter(v => v !== null && v !== undefined)
+                   .some(v => String(v).toLowerCase().includes(q));
+                });
+            },
+
             paginatedRows() {
                 const start = (this.currentPage - 1) * this.perPage;
                 const end   = start + this.perPage;
-                return this.rows.slice(start, end);
+                return this.filteredRows.slice(start, end);
             }
         },
         
         mounted() {
+          
             this.fetchData();
             this.intervalId = setInterval(this.fetchData, 2000)
+            this.intervalId2 = setInterval(this.getNumberOfActiveTickets, 2000)
+            this.openProcessTicketDialog_var = openProcessTicketDialog;
+        
         },
         beforeUnmount() {
             clearInterval(this.intervalId);
         }
     });
    
-    app.mount('#app');
+    app.mount('#all_offices_app');
    
 </script>
 

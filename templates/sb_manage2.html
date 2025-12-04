@@ -3,6 +3,7 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
 {% macro sb_manage() %}
+
 <div class="col-md-2 sidebar">
     <div class="row">
 	<!-- uncomment code for absolute positioning tweek see top comment in css -->
@@ -20,24 +21,14 @@
 				{{ translate('Search', 'en', [defLang]) }}
 			    </a>
 			</li>
-			<li id="da2" >
-			    <a href="{{ url_for('manage_app.all_offices') }}">
-				<span class="fa fa-ticket"></span>
-				{{ translate('All tickets', 'en', [defLang]) }}
-					{% if not settings.single_row %}
-					<span class="badge pull-right">
-						{{ active_tickets }}
-					</span>
-					{% endif %}
-			    </a>
-			</li>
+			
 			<li id="da2" >
 			    <a href="{{ url_for('offices.offices_home') }}">
 				    <span class="fa fa-ticket"></span>
-				    {{ translate('All tickets Vue', 'en', [defLang]) }}
+				    {{ translate('All tickets', 'en', [defLang]) }}
 				    {% if not settings.single_row %}
 				        <span class="badge pull-right">
-					        {{ active_tickets }}
+					        [[ active_tickets_number ]]
 				        </span>
 				    {% endif %}
 			    </a>
@@ -46,11 +37,11 @@
 				<a href="{{ url_for('core.pull') }}">
 						<span class="fa fa-{% if settings.single_row %}plus{% else %}minus{% endif %}"></span>
 						{{ translate('Generate a ticket' if settings.single_row else 'Pull a ticket', 'en', [defLang]) }}
-						{% if active_tickets >= 1 %}
+						
 						<span class="badge pull-right">
-							{{ active_tickets }}
+							[[ active_tickets_number ]]
 						</span>
-						{% endif %}
+					
 				</a>
 			</li>
 			{% if not settings.single_row %}
@@ -168,4 +159,5 @@
 	</div>
     </div>
 </div>
+
 {% endmacro %}
