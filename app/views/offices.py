@@ -106,6 +106,7 @@ def pull_ticket():
 
 
 @offices.route('/update_token_details',methods=['POST'])
+@login_required
 def update_token_details():
 
     form = ProcessedTicketForm2()
