@@ -95,8 +95,8 @@
 			    <div id="dropdown-lvl{{ office.id }}" class="panel-collapse collapse">
 				<div class="panel-body">
 				    <ul class="nav navbar-nav">
-					<li  id="t1{{ office.id }}" >
-					    <a href="{{ url_for('manage_app.offices', o_id=office.id) }}">
+					<li >
+					    <a href="{{ url_for('offices.offices_home', o_id=office.id) }}">
 						<span class="fa fa-ticket"></span>
 						{{ translate('All tickets', 'en', [defLang]) }}
 					    </a>

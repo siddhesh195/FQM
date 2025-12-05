@@ -16,11 +16,12 @@ from app.middleware import db
 offices = Blueprint('offices', __name__)
 
 
-@offices.route('/all_offices_vue', methods=['GET', 'POST'])
+@offices.route('/all_offices_vue', methods=['GET', 'POST'],defaults={'o_id': None})
+@offices.route('/all_offices_vue/<int:o_id>', methods=['GET', 'POST'])
 @login_required
 @reject_operator
-def offices_home():
-
+def offices_home(o_id=None):
+    
     offices=data.Office.query
     operators=data.Operators.query
     tasks=data.Task
@@ -31,18 +32,22 @@ def offices_home():
     ]
 
     
-    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices)
+    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id)
 
 @offices.route('/all_offices_tickets', methods=['GET', 'POST'])
 @login_required
 @reject_operator
 def all_offices_tickets():
     order_by = TICKET_ORDER_NEWEST_PROCESSED
-    tickets = data.Serial.all_clean()\
+    o_id = request.json.get("o_id") if request.is_json else None
+    if o_id:
+        tickets = data.Serial.all_clean().filter_by(office_id=o_id)\
+                         .order_by(*data.Serial.ORDERS.get(order_by, []))
+    else:
+        tickets = data.Serial.all_clean()\
                          .order_by(*data.Serial.ORDERS.get(order_by, []))
     
     tickets_data=[]
-
 
     for ticket in tickets:
         ticket_task_id = ticket.task_id
@@ -70,7 +75,6 @@ def all_offices_tickets():
 
 
     return jsonify(tickets_data)
-
 
 @offices.route('/pull_ticket',methods=['POST'])
 @login_required

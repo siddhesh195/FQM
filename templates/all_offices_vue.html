@@ -127,7 +127,9 @@
 
         methods: {
             fetchData() {
-                axios.get("{{ url_for('offices.all_offices_tickets') }}")
+                axios.post("{{ url_for('offices.all_offices_tickets') }}",{
+                    o_id: {% if office_id is not none %}{{ office_id }}{% else %}null{% endif %}
+                })
                     .then(response => {
                         this.rows = response.data;
                        
@@ -261,7 +263,7 @@
         },
         
         mounted() {
-          
+
             this.fetchData();
             this.intervalId = setInterval(this.fetchData, 2000)
             this.intervalId2 = setInterval(this.getNumberOfActiveTickets, 2000)
