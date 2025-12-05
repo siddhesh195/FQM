@@ -84,12 +84,10 @@
 				{{ loop.index }}.{{ translate('Office', 'en', [defLang]) }}  {{ office.prefix }}{{ office.name }}
 				<span class="caret"></span>
 				<!-- To solve counting all the common and non-common tasks tickets -->
-				{% set total_tickets = get_active_tickets_office(office.id) %}
-				{% if total_tickets > 0 %}
 				<span class="badge pull-right">
-					{{ total_tickets }}
+					[[active_tickets_office[{{office.id}}] ]]
 				</span>
-				{% endif %}
+			
 			    </a>
 			    <!-- Dropdown level 1 -->
 			    <div id="dropdown-lvl{{ office.id }}" class="panel-collapse collapse">

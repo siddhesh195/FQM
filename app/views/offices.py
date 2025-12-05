@@ -7,6 +7,7 @@ import app.database as data
 from app.constants import TICKET_ORDER_NEWEST_PROCESSED,TICKET_WAITING
 
 from app.helpers import is_operator,is_office_operator,is_common_task_operator,get_number_of_active_tickets_cached
+from app.helpers import get_number_of_active_tickets_office_cached
 
 from app.forms.manage import ProcessedTicketForm2
 
@@ -30,9 +31,23 @@ def offices_home(o_id=None):
         {"value": value, "label": label}
         for value, label in form.status.choices
     ]
+    office_ids=[]
+    if o_id:
+        office_ids.append(o_id)
+    else:
+        try:
+            all_offices = offices.all()
+            for office in all_offices:
+                office_ids.append(office.id)
+        except:
+            pass
 
     
-    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id)
+
+
+    
+    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id,
+                           office_ids=office_ids)
 
 @offices.route('/all_offices_tickets', methods=['GET', 'POST'])
 @login_required
@@ -140,6 +155,16 @@ def update_token_details():
 @reject_operator
 def get_all_active_tickets():
     active_tickets = get_number_of_active_tickets_cached()
+    return jsonify({'active_tickets': active_tickets})
+
+
+@offices.route('/get_number_of_active_office_tickets', methods=['GET', 'POST'])
+@login_required
+@reject_operator
+def get_all_active_office_tickets():
+    json_data = request.get_json()
+    o_id = json_data.get("o_id") if request.is_json else None
+    active_tickets = get_number_of_active_tickets_office_cached(o_id)
     return jsonify({'active_tickets': active_tickets})
 
 
