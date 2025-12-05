@@ -34,7 +34,7 @@
 			    </a>
 			</li>
 			<li >
-				<a @click="pullTicket()">
+				<a @click="pullnextTicket()">
 						<span class="fa fa-{% if settings.single_row %}plus{% else %}minus{% endif %}"></span>
 						{{ translate('Generate a ticket' if settings.single_row else 'Pull a ticket', 'en', [defLang]) }}
 						
@@ -129,16 +129,16 @@
 					    </a>
 					</li>
 					<!-- Pull is shifted to here -->
-					<li  id="tf{{ office.id }}" >
-						<a href="{{ url_for('core.pull', o_id=task.id, ofc_id=office.id) }}">
+					<li>
+						<a @click="pullnextTicket( {{ task.id }}, {{ office.id }} )">
 								<span class="fa fa-minus"></span>
 								{{ translate('Pull a ticket', 'en', [defLang]) }}
-								{% set task_tickets = get_active_tickets_task(office.id, task.id) %}
-								{% if task_tickets >= 1 %}
 								<span class="badge pull-right">
-									{{ task_tickets }}
+								    <div v-if="active_tickets_task_by_office[{{office.id}}] && active_tickets_task_by_office[{{office.id}}][{{task.id}}] !== undefined">
+										[[ active_tickets_task_by_office[{{office.id}}][{{task.id}}] ]]
+									</div>
+									
 								</span>
-								{% endif %}
 						</a>
 					</li>
 					{% endfor %}
