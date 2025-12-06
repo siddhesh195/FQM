@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block title %} FQM - {{ page_title }} {% endblock %}
 
+{%block head%}
+{{ super() }}
+<script src="{{ url_for('static', filename='chartHelper.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/chart/chart.js') }}"></script>
+
+{% endblock %}
+
 {% block page_content %}
 <div id="app" class="container" style="margin-top: 20px;" v-cloak>
    
@@ -29,8 +36,6 @@
     :reports_fetched="fetched_reports"
     @office-selected="handle_office_selected"
     @reports-fetched="handle_reports_fetched($event)"
-
-    
     >
     </component>
 
@@ -40,7 +45,6 @@
     :office_name="OfficeTaskCharts_office_name"
     :show-swal-message = "showSwalMessage_var"
     :pie_chart_helper = "pieChartHelper"
-    
     >
     </component>
 

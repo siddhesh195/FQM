@@ -16,58 +16,43 @@
     </component>
    
     
-   
-    
 
 </div>
+{% endblock %}
+
+{% block vue_data %}
+    Components:{
+        TaskThresholdComponent: null
+    },
+    URLs:{
+        TaskThresholdComponent : "{{ url_for('static', filename='task_thresholds.js') }}"
+    },
+    get_all_tasks_url: "{{ url_for('analytics_rules.get_all_tasks') }}",
+    update_task_threshold_url: "{{ url_for('analytics_rules.update_task_threshold') }}"         
+
+{% endblock %}
+
+{% block vue_methods %}
+    async loadComponent(component_name) {
+           
+        // Dynamically load JS file from /static
+        const component = this.Components[component_name];
+        if (component) {
+            this.Components[component_name] = null; // Unload component
+            return; // Already loaded
+        }
+        const module = await import(this.URLs[component_name]);
+        this.Components[component_name] = markRaw(module.default);   // Set component
+    }
+
+
 {% endblock %}
 
 
 {% block scripts %}
 
 
-<script type="module">
-
-    import { createApp, markRaw } from "{{ url_for('static', filename='vendor/vue/vue.esm-browser.prod.js') }}";
-
-    createApp({
-        delimiters: ['[[', ']]'],
-    
-        data() {
-            return {
-                Components:{
-                    TaskThresholdComponent: null
-                    
-                },
-                URLs:{
-                    TaskThresholdComponent : "{{ url_for('static', filename='task_thresholds.js') }}"
-                },
-                get_all_tasks_url: "{{ url_for('analytics_rules.get_all_tasks') }}",
-                update_task_threshold_url: "{{ url_for('analytics_rules.update_task_threshold') }}"
-        
-                
-            };
-        },
-
-        methods: {
-            async loadComponent(component_name) {
-           
-                // Dynamically load JS file from /static
-                const component = this.Components[component_name];
-                if (component) {
-                    this.Components[component_name] = null; // Unload component
-                    return; // Already loaded
-                }
-                const module = await import(this.URLs[component_name]);
-                this.Components[component_name] = markRaw(module.default);   // Set component
-            }
-         
-        },
-        
-        mounted() {
-      
-        }
-    }).mount('#app');
-</script>
-
 {% endblock %}
+
+
+

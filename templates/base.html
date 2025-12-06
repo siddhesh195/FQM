@@ -72,8 +72,6 @@
        
         </script>
         <script src="{{ url_for('static', filename='swal_helper.js') }}"></script>
-        <script src="{{ url_for('static', filename='chartHelper.js') }}"></script>
-       <script src="{{ url_for('static', filename='vendor/chart/chart.js') }}"></script>
         <style>
         [v-cloak] {
         opacity: 0;
@@ -301,7 +299,7 @@
     	        </div>
             </nav>
         </div>
-        <div id="all_offices_app" class="container" style="margin-top: 20px;">
+        <div id="vue_app" class="container" style="margin-top: 20px;">
             <div class="container-fluid main-container">
                 {% block sidebar %}{% endblock %}
                 <div class="col-md-{% if adme %}12{% else %}10{% endif %} content hide postFlash">
@@ -354,7 +352,6 @@
                     data() {
                         return {
                             
-                           
                             {% block vue_data %}
                              
                             {% endblock %}
@@ -363,8 +360,6 @@
 
                     methods: {
                         
-                    
-                        
                         {% block vue_methods %}
 
                         {% endblock %}
@@ -372,7 +367,6 @@
 
                     computed:{
 
-                        
                         {% block vue_computed %}
 
                         {% endblock %}
@@ -392,7 +386,7 @@
                     }
                 });
    
-                app.mount('#all_offices_app');
+                app.mount('#vue_app');
    
             </script>
         
