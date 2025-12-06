@@ -21,8 +21,8 @@ offices = Blueprint('offices', __name__)
 @offices.route('/all_offices_vue/<int:o_id>', methods=['GET', 'POST'])
 @login_required
 def offices_home(o_id=None):
-    if not o_id and not is_operator():
-        return jsonify({'status': 'error', 'message': 'Office ID is required for non-operators'}), 400
+    if not o_id and is_operator():
+        return jsonify({'status': 'error', 'message': 'Office ID is required for operators'}), 400
     
     offices=data.Office.query
     operators=data.Operators.query
