@@ -302,39 +302,39 @@
             </nav>
         </div>
         <div id="all_offices_app" class="container" style="margin-top: 20px;">
-        <div class="container-fluid main-container">
-            {% block sidebar %}{% endblock %}
-            <div class="col-md-{% if adme %}12{% else %}10{% endif %} content hide postFlash">
-                <!-- For announcement flash message -->
-                <div class="alert alert-dismissable alert-info hide">
-                    <button class="close" onclick="$('.postFlash').addClass('hide')">&times;</button>
-                    {% set tra1 = translate('Notice: repeating announcement successfully.', 'en', [defLang]).split(':') %}
-                    <h4 class="text text-center ar2">[ <strong>{{tra1[0]}}</strong>: {{tra1[1]}}]</h4>
+            <div class="container-fluid main-container">
+                {% block sidebar %}{% endblock %}
+                <div class="col-md-{% if adme %}12{% else %}10{% endif %} content hide postFlash">
+                    <!-- For announcement flash message -->
+                    <div class="alert alert-dismissable alert-info hide">
+                        <button class="close" onclick="$('.postFlash').addClass('hide')">&times;</button>
+                        {% set tra1 = translate('Notice: repeating announcement successfully.', 'en', [defLang]).split(':') %}
+                        <h4 class="text text-center ar2">[ <strong>{{tra1[0]}}</strong>: {{tra1[1]}}]</h4>
+                    </div>
+                    <div class="alert alert-dismissable alert-danger hide">
+                        <button class="close" onclick="$('.postFlash').addClass('hide')">&times;</button>
+                        {% set tra2 = translate('Error: failed to repeat announcement.', 'en', [defLang]).split(':') %}
+                        <h4 class="text text-center ar2">[ <strong>{{ tra2[0] }}</strong>: {{ tra2[1] }} ]</h4>
+                    </div>
                 </div>
-                <div class="alert alert-dismissable alert-danger hide">
-                    <button class="close" onclick="$('.postFlash').addClass('hide')">&times;</button>
-                    {% set tra2 = translate('Error: failed to repeat announcement.', 'en', [defLang]).split(':') %}
-                    <h4 class="text text-center ar2">[ <strong>{{ tra2[0] }}</strong>: {{ tra2[1] }} ]</h4>
+                {% for category, message in get_flashed_messages(with_categories=true) %}
+                    {% set tra = message and translate(message, 'en', [defLang]) %}
+                    {% if tra %}
+                    <div class="col-md-{% if adme %}12{% else %}10{% endif %} content">
+                        <div class="alert alert-{{ category }} alert-dismissable">
+                            <button class="close" type="button" data-dismiss="alert">&times;</button>
+                            <h4 class="text text-center ar2">[ <strong>{{ tra.split(':')[0] }}</strong>: {{ tra.split(':')[1] }} ]</h4>
+    	                </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="col-md-{% if adme %}12{% else %}10{% endif %} content mb-1">
+    	            {% block page_content %} {% endblock %}
                 </div>
-            </div>
-            {% for category, message in get_flashed_messages(with_categories=true) %}
-                {% set tra = message and translate(message, 'en', [defLang]) %}
-                {% if tra %}
-                <div class="col-md-{% if adme %}12{% else %}10{% endif %} content">
-                    <div class="alert alert-{{ category }} alert-dismissable">
-                        <button class="close" type="button" data-dismiss="alert">&times;</button>
-                        <h4 class="text text-center ar2">[ <strong>{{ tra.split(':')[0] }}</strong>: {{ tra.split(':')[1] }} ]</h4>
-    	            </div>
-                </div>
-                {% endif %}
-            {% endfor %}
-            <div class="col-md-{% if adme %}12{% else %}10{% endif %} content mb-1">
-    	        {% block page_content %} {% endblock %}
-            </div>
-            {% if settings.visual_effects %}
+                {% if settings.visual_effects %}
             
-            {% endif %}
-        </div>
+                {% endif %}
+            </div>
         </div>
         {% from '_modals.html' import qrModal %}
         {{ qrModal([['touch_qr', translate('QR code touch screen', 'en', [defLang]), qrcode(url_for('core.touch', a=0, _external=True))],
