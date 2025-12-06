@@ -173,6 +173,8 @@ def test_update_token_details_success(app,c):
     ticket_to_update = all_tickets[3]
     ticket_name = ticket_to_update.name
     current_status = ticket_to_update.status
+    ticket_to_update.p = True  #Ensure ticket is pulled
+    db.session.commit()
     new_status = None
     for status in TICKET_STATUSES:
         if status != current_status:

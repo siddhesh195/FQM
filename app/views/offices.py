@@ -4,7 +4,7 @@ from app.helpers import reject_operator
 
 import app.database as data
 
-from app.constants import TICKET_ORDER_NEWEST_PROCESSED,TICKET_WAITING
+from app.constants import TICKET_ORDER_NEWEST_PROCESSED,TICKET_WAITING,TICKET_PROCESSED, TICKET_ATTENDED
 
 from app.helpers import is_operator,is_office_operator,is_common_task_operator,get_number_of_active_tickets_cached
 from app.helpers import get_number_of_active_tickets_office_cached, get_number_of_active_tickets_task_cached
@@ -139,6 +139,9 @@ def update_token_details():
         return jsonify({'status': 'error', 'message': 'Ticket not found'})
     try:
         if form.validate_on_submit():
+            if (status ==TICKET_PROCESSED or status == TICKET_ATTENDED) and not ticket.p:
+                return jsonify({'status': 'error', 'message': 'Ticket must be pulled before processing/attending'})
+
             if status==TICKET_WAITING:
                 ticket.p= False
             ticket.status=status
