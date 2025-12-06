@@ -20,8 +20,9 @@ offices = Blueprint('offices', __name__)
 @offices.route('/all_offices_vue', methods=['GET', 'POST'],defaults={'o_id': None})
 @offices.route('/all_offices_vue/<int:o_id>', methods=['GET', 'POST'])
 @login_required
-@reject_operator
 def offices_home(o_id=None):
+    if not o_id and not is_operator():
+        return jsonify({'status': 'error', 'message': 'Office ID is required for non-operators'}), 400
     
     offices=data.Office.query
     operators=data.Operators.query
@@ -52,7 +53,6 @@ def offices_home(o_id=None):
 
 @offices.route('/all_offices_tickets', methods=['GET', 'POST'])
 @login_required
-@reject_operator
 def all_offices_tickets():
     order_by = TICKET_ORDER_NEWEST_PROCESSED
     o_id = request.json.get("o_id") if request.is_json else None
@@ -161,7 +161,6 @@ def get_all_active_tickets():
 
 @offices.route('/get_number_of_active_office_tickets', methods=['GET', 'POST'])
 @login_required
-@reject_operator
 def get_all_active_office_tickets():
     json_data = request.get_json()
     o_id = json_data.get("o_id") if request.is_json else None
@@ -171,7 +170,6 @@ def get_all_active_office_tickets():
 
 @offices.route('/get_number_of_active_task_tickets', methods=['GET', 'POST'])
 @login_required
-@reject_operator
 def get_all_active_task_tickets():
     json_data = request.get_json()
     t_id = json_data.get("t_id")
@@ -182,7 +180,6 @@ def get_all_active_task_tickets():
 
 @login_required
 @offices.route('/pull_next_ticket', methods=['POST'])
-@reject_operator
 def pull_next_ticket():
 
     def operators_not_allowed():

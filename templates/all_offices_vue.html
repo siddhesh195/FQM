@@ -89,9 +89,6 @@
 {% endblock %}
 
 
-
-   
-
 {% block vue_data %}
     searchQuery: '',
     // pagination
@@ -221,6 +218,7 @@
 
 {% endblock %}
 
+
 {% block vue_computed %}
 
     totalPages() {
@@ -260,6 +258,7 @@
 
 {% endblock %}
 
+
 {% block vue_mounted %}
     this.fetchData();
     this.fetchData_interval = setInterval(this.fetchData, 2000)
@@ -268,10 +267,10 @@
 
 {% endblock %}
 
+
 {% block vue_before_unmount %}
     clearInterval(this.fetchData_interval);
     
-
 {% endblock %}
                     
 

@@ -122,6 +122,7 @@ def root(n=None):
         if is_operator() and not single_row:
             destination = url_for('manage_app.offices',
                                   o_id=data.Operators.get(current_user.id).office_id)
+            destination = url_for('offices.offices_home', o_id=data.Operators.get(current_user.id).office_id)
         elif should_redirect:
             destination = f'{session.get("next_url", "/")}'
             session['next_url'] = None
