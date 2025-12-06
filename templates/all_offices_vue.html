@@ -32,7 +32,7 @@
                 <td>[[ row.number ]]</td>
                 <td>[[ row.office_name ]]</td>
                 <td>[[ row.task_name ]]</td>
-                <td>[[ givestatus(row.status) ]]</td>
+                <td>[[ givestatus(row.status,row.pulled) ]]</td>
                 <td>[[ row.pulled_by ]]</td>
                 <td>[[ row.timestamp ]]</td>
                 <td>
@@ -111,11 +111,7 @@
     openProcessTicketDialog_var: null,
     status_choices: {{ status_choices|tojson }},
     csrf_token: "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
-    active_tickets_number: '',
-    active_tickets_office: {},
-    active_tickets_task_by_office: {},
-    office_ids: {{ office_ids }},
-    task_ids: {{ task_ids }},
+    
 {% endblock %}
 
 
@@ -204,58 +200,13 @@
         // Open modal logic here
         const response = await this.submitTicketForm(ticketName);
     },
-    getTaskActiveTickets(officeId) {
-        for (const task_id of this.task_ids) {
-            this.getNumberOfActiveTicketsTask(task_id, officeId);
+   
+    givestatus(status,pulled){
+        if( status == 'Waiting' && !pulled){
+            return 'Not Pulled';
         }
-    },
-                        
-    getOfficeActiveTickets() {
-        for (const office_id of this.office_ids) {
-           this.getNumberOfActiveTicketsOffice(office_id);
-           this.getTaskActiveTickets(office_id);
-        }
-    },
-    getNumberOfActiveTicketsOffice(office_id=null) {
-        axios.post("{{ url_for('offices.get_all_active_office_tickets') }}",{
-            o_id: office_id
-        })
-        .then(response => {
-            this.active_tickets_office[office_id] = response.data.active_tickets;
-        })
-        .catch(error => {
-            console.error("Error fetching active tickets:", error);
-        });
-    },
-    getNumberOfActiveTickets() {
-        axios.get("{{ url_for('offices.get_all_active_tickets') }}")
-        .then(response => {
-            this.active_tickets_number = response.data.active_tickets;
-        })
-        .catch(error => {
-            console.error("Error fetching active tickets:", error);
-        });
-    },
-
-    getNumberOfActiveTicketsTask(task_id=null, office_id=null) {
-        axios.post("{{ url_for('offices.get_all_active_task_tickets') }}",{
-            t_id: task_id,
-            office_id: office_id
-        })
-        .then(response => {
-            // Handle the response if needed
-            if(!this.active_tickets_task_by_office[office_id]){
-                this.active_tickets_task_by_office[office_id] = {};
-            }
-            this.active_tickets_task_by_office[office_id][task_id] = response.data.active_tickets;
-        })
-        .catch(error => {
-            console.error("Error fetching active task tickets:", error);
-        });
-    },
-    givestatus(status){
-        if( status == 'Waiting'){
-            return 'Waiting to be pulled';
+        else if( status == 'Waiting' && pulled){
+            return 'Pulled';
         }
         else if( status == 'Attended'){
             return 'Processing';
@@ -312,16 +263,14 @@
 {% block vue_mounted %}
     this.fetchData();
     this.intervalId = setInterval(this.fetchData, 2000)
-    this.intervalId2 = setInterval(this.getNumberOfActiveTickets, 2000)
-    this.intervalId3 = setInterval(this.getOfficeActiveTickets, 2000)
+    
     this.openProcessTicketDialog_var = openProcessTicketDialog;
 
 {% endblock %}
 
 {% block vue_before_unmount %}
     clearInterval(this.intervalId);
-    clearInterval(this.intervalId2);
-    clearInterval(this.intervalId3);
+    
 
 {% endblock %}
                     
