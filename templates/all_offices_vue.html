@@ -262,14 +262,14 @@
 
 {% block vue_mounted %}
     this.fetchData();
-    this.intervalId = setInterval(this.fetchData, 2000)
+    this.fetchData_interval = setInterval(this.fetchData, 2000)
     
     this.openProcessTicketDialog_var = openProcessTicketDialog;
 
 {% endblock %}
 
 {% block vue_before_unmount %}
-    clearInterval(this.intervalId);
+    clearInterval(this.fetchData_interval);
     
 
 {% endblock %}
