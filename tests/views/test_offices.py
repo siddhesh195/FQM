@@ -249,8 +249,53 @@ def test_get_all_active_tickets(c):
     assert json_response_after_pull['active_tickets'] == current_active_tickets_count - 1
 
     
+@pytest.mark.usefixtures("c")
+def test_pull_next_ticket(c):
+    #create new office
+    new_office = data.Office(name="Test Office for Ticket Pull")
+    db.session.add(new_office)
+    db.session.commit()
+    office_id = new_office.id
 
+    #create new task
+    office= data.Office.get(office_id)
+    new_task = data.Task(name="Test Task for Ticket Pull")
+    db.session.add(new_task)
+    db.session.commit()
 
+    #attach task to office
+    task = data.Task.query.filter_by(name="Test Task for Ticket Pull").first()
+    office.tasks.append(task)
+    db.session.commit()
+    task_id = task.id
     
+    
+    #create few tickets with different timestamps
+    import datetime
+    now = datetime.datetime.utcnow()
+    ticket_names = []
+    for i in range(3):
+        ticket,exception = data.Serial.create_new_ticket(office=office,task=task,name_or_number=f"TestTicket{i+1}")
+        ticket_names.append(ticket.name)
+        if not exception:
+            ticket.timestamp = now + datetime.timedelta(minutes=i)
+            db.session.commit()
+    
+    #confirm tickets are created
+    all_tickets = data.Serial.query.filter_by(office_id=office_id, task_id=task_id).all()
+    assert len(all_tickets) == 3
 
+    url='/pull_next_ticket'
+
+    payload = {
+        'o_id': task_id,
+        'ofc_id': office_id
+    }
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+ 
+    assert json_response['status'] == 'success'
+    assert json_response['message'] == f'Ticket {ticket_names[0]} pulled successfully'
+    assert json_response['ticket_name'] == ticket_names[0]
 
