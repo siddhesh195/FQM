@@ -32,9 +32,8 @@
                 <td>[[ row.number ]]</td>
                 <td>[[ row.office_name ]]</td>
                 <td>[[ row.task_name ]]</td>
-                <td>[[ row.status ]]</td>
+                <td>[[ givestatus(row.status) ]]</td>
                 <td>[[ row.pulled_by ]]</td>
-                <td>[[ row.pulled ? 'Yes' : 'No' ]]</td>
                 <td>[[ row.timestamp ]]</td>
                 <td>
                     <a @click="EditTicket(row.name)" >
@@ -100,13 +99,12 @@
     perPage: 10,
     rows: [],
     columns: [
-            { label: 'Token Name'},
-            { label: 'Number'},
+            { label: 'Token'},
+            { label: 'Serial Number'},
             { label: 'Office'},
             { label: 'Task'},
             { label: 'Status'},
             { label: 'Pulled By'},
-            { label: 'Pulled?'},
             { label: 'Time'},
             { label: 'Actions'}
         ],
@@ -254,6 +252,20 @@
         .catch(error => {
             console.error("Error fetching active task tickets:", error);
         });
+    },
+    givestatus(status){
+        if( status == 'Waiting'){
+            return 'Waiting to be pulled';
+        }
+        else if( status == 'Attended'){
+            return 'Processing';
+        }
+        else if( status == 'Processed'){
+            return 'Processed';
+        }
+        else{
+            return 'Unknown';
+        }
     }
 
 {% endblock %}
