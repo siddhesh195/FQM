@@ -25,6 +25,8 @@ def test_reports_home(c):
     resp = c.get("/reports")   # adjust prefix
     assert resp.status_code == 200
     assert b"Reports" in resp.data
+    assert b"Open Task Frequency Report" in resp.data
+    assert b"Open Ticket Status Report" in resp.data
 
 @pytest.mark.usefixtures("c")
 def test_reports_data(c):
