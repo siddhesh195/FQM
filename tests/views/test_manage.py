@@ -159,7 +159,13 @@ def test_add_office(c):
 
 
 @pytest.mark.usefixtures('c')
-def test_add_task(c):
+def test_add_task(c,monkeypatch):
+    class User:
+        def __init__(self):
+            self.role_id=1
+    current_user=User()
+    monkeypatch.setattr('app.views.manage.current_user', current_user)
+    
     office = Office.query.first()
     name = f'{uuid4()}'.replace('-', '')
 

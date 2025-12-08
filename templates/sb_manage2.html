@@ -116,12 +116,14 @@
 					</li>
 			<!-- Fix: pulling tickets by task_id instead of office_id -->
 			<!-- Will include pull ticket under task instead of all tickets, fast and simple -->
+			        {% if current_user.role_id==1 %}
 					<li  id="t3{{ office.id }}" >
 					    <a href="{{ url_for('manage_app.task_a', o_id=office.id) }}">
 						<span class="fa fa-plus"></span>
 						{{ translate('Add new task', 'en', [defLang]) }}
 					    </a>
 					</li>
+				    {% endif %}
 					{% for task in tasks.in_offices(office.id) %}
 					<li id="tt{{office.id }}{{ task.id }}" >
 					    <a href="{{ url_for('offices.offices_home', o_id=office.id) }}">
