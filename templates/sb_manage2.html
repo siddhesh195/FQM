@@ -124,8 +124,8 @@
 					</li>
 					{% for task in tasks.in_offices(office.id) %}
 					<li id="tt{{office.id }}{{ task.id }}" >
-					    <a href="{{ url_for('manage_app.task', o_id=task.id, ofc_id=office.id) }}">
-						{{ loop.index }}.  {{ task.name }}
+					    <a href="{{ url_for('offices.offices_home', o_id=office.id) }}">
+						{{ loop.index }}.  {{ task.name }} 
 					    </a>
 					</li>
 					<!-- Pull is shifted to here -->
