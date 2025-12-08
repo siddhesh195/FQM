@@ -411,7 +411,7 @@
             return 'Not Pulled';
         }
         else if( status == 'Waiting' && pulled){
-            return 'Pulled';
+            return 'Is Pulled';
         }
         else if( status == 'Attended'){
             return 'Processing';
@@ -449,7 +449,7 @@
                 row.number,
                 row.office_name,
                 row.task_name,
-                row.status,
+                this.givestatus(row.status,row.pulled),
                 row.pulled_by,
                 row.timestamp
             ] 
@@ -462,6 +462,14 @@
         const start = (this.currentPage - 1) * this.perPage;
         const end   = start + this.perPage;
         return this.filteredRows.slice(start, end);
+    }
+
+{% endblock %}
+
+{% block vue_watch %}
+    searchQuery() {
+        
+        this.currentPage = 1; // Reset to first page on new search
     }
 
 {% endblock %}

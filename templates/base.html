@@ -425,6 +425,12 @@
 
                         {% endblock %}
                     },
+                    watch: {
+
+                        {% block vue_watch %}
+
+                        {% endblock %}
+                    },
         
                     mounted() {
                         this.getNumberOfActiveTickets_interval = setInterval(this.getNumberOfActiveTickets, 2000)
