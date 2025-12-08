@@ -117,8 +117,9 @@
     	            </div>
     	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     		            <ul class="nav navbar-nav navbar-left">
-                            <li id="snb1"><a href="{{ url_for('manage_app.manage') }}">{{ translate('Management', 'en', [defLang]) }}</a></li>
                             {% if getattr(current_user, 'role_id', None) == 1 %}
+                            <li id="snb1"><a href="{{ url_for('manage_app.manage') }}">{{ translate('Management', 'en', [defLang]) }}</a></li>
+            
     		                    <li id="snb2"><a href="{{ url_for('cust_app.customize') }}">{{ translate('Customization', 'en', [defLang]) }}</a></li>
                             <li class="dropdown" id='snb3'>
     			                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
