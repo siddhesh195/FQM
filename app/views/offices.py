@@ -219,5 +219,15 @@ def pull_next_ticket():
                     'ticket_id': next_ticket.id,
                     'office_id': next_ticket.office_id})
 
-    
+
+@offices.route('/fetch_office_and_task_ids', methods=['GET'])
+@login_required
+def fetch_office_and_task_ids():
+    offices = data.Office.query.all()
+    tasks = data.Task.query.all()
+
+    office_ids = [office.id for office in offices]
+    task_ids = [task.id for task in tasks]
+
+    return jsonify({'office_ids': office_ids, 'task_ids': task_ids})
     
