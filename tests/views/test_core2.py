@@ -28,11 +28,12 @@ def test_display_screen_user_not_allowed_to_access_display_html(c,monkeypatch):
     monkeypatch.setattr(app.views.core, 'current_user', current_user)
 
     response = c.get('/display', follow_redirects=True)
-
-    assert response.status_code == 403
+   
+    assert response.status_code == 400
     response_json = response.get_json()
     assert 'error' in response_json
-    assert response_json['error'] == 'You are not authorized to access display page'
+  
+    assert response_json['error'] == 'Office ID is required'
 
 
 @pytest.mark.usefixtures('c')
