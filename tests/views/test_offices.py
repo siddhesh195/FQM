@@ -299,3 +299,243 @@ def test_pull_next_ticket(c):
     assert json_response['message'] == f'Ticket {ticket_names[0]} pulled successfully'
     assert json_response['ticket_name'] == ticket_names[0]
 
+
+@pytest.mark.usefixtures("app","c")
+def test_add_offices_form_validation_failed_no_csrf(app,c,monkeypatch):
+
+    app.config["WTF_CSRF_ENABLED"] = True
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    url='/add_office'
+    
+    #Test adding a new office
+    payload = {
+        'name': 'New Test Office',
+        'prefix': 'N'
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Form validation failed'
+
+
+@pytest.mark.usefixtures("app","c")
+def test_add_offices_form_validation_pass_and_failed_due_to_name_length(app,c,monkeypatch):
+    app.config["WTF_CSRF_ENABLED"] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    #Get correct CSRF token from session:
+    with app.test_request_context():
+        token = generate_csrf()
+
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+    name2=""
+    for _ in range(300):
+        name2 += "A"
+    name=name2+"A"  #301 characters
+
+    
+    url='/add_office'
+    
+    #Test adding a new office
+    payload = {
+        'name': name,
+        'prefix': 'A',
+        'csrf_token': token
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+    print(json_response)
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Form validation failed'
+
+    #Verify that office is not added in database
+    added_office = data.Office.query.filter_by(name=name).first()
+    assert added_office is None
+
+    payload2 = {
+        'name': name2,
+        'prefix': 'A',
+        'csrf_token': token
+    }
+    resp2 = c.post(url,json=payload2)
+    assert resp2.status_code == 200
+    json_response2 = resp2.get_json()
+    
+    assert json_response2['status'] == 'success'
+    assert json_response2['message'] == 'Office added successfully'
+
+    #Verify that office is added in database
+    added_office2 = data.Office.query.filter_by(name=name2).first()
+    assert added_office2 is not None
+   
+
+
+@pytest.mark.usefixtures("app","c")
+def test_add_offices_form_validation_failed_due_to_wrong_prefix(app,c,monkeypatch):
+    app.config["WTF_CSRF_ENABLED"] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    #Get correct CSRF token from session:
+    with app.test_request_context():
+        token = generate_csrf()
+
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    url='/add_office'
+    
+    #Test adding a new office
+    #wrong prefix
+    #prefix should only be from form choices
+    payload = {
+        'name': 'New Test Office',
+        'prefix': 'NT',
+        'csrf_token': token
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+    print(json_response)
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Form validation failed'
+
+    #Verify that office is not added in database
+    added_office = data.Office.query.filter_by(name='New Test Office').first()
+    assert added_office is None
+    
+
+
+@pytest.mark.usefixtures("app","c")
+def test_add_offices_office_name_exists(app,c,monkeypatch):
+
+    app.config["WTF_CSRF_ENABLED"] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    #Get correct CSRF token from session:
+    with app.test_request_context():
+        token = generate_csrf()
+
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    #Create an office to test duplicate name
+    existing_office = data.Office(name="Existing Office", prefix="E")
+    db.session.add(existing_office)
+    db.session.commit()
+
+    url='/add_office'
+    
+    #Test adding a new office with existing name but different prefix
+    # same prefix will cause form validation error
+    payload = {
+        'name': 'Existing Office',
+        'prefix': 'A',
+        'csrf_token': token
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Office name already exists'
+
+   
+
+
+@pytest.mark.usefixtures("app","c")
+def test_add_offices_unauthorized_access(app,c,monkeypatch):
+
+    app.config["WTF_CSRF_ENABLED"] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    #Get correct CSRF token from session:
+    with app.test_request_context():
+        token = generate_csrf()
+
+    class user:
+        def __init__(self):
+            self.role_id = 2  #Non-admin role
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    url='/add_office'
+    
+    #Test adding a new office
+    payload = {
+        'name': 'Another Test Office',
+        'prefix': 'AT',
+        'csrf_token': token
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Unauthorized access'
+
+@pytest.mark.usefixtures("app","c")
+def test_add_offices_success(app,c,monkeypatch):
+
+    app.config["WTF_CSRF_ENABLED"] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    #Get correct CSRF token from session:
+    with app.test_request_context():
+        token = generate_csrf()
+
+    class user:
+        def __init__(self):
+            self.role_id = 1  #Admin role
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    url='/add_office'
+    
+    #Test adding a new office
+    payload = {
+        'name': 'Test Office',
+        'prefix': 'T',
+        'csrf_token': token
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+    assert json_response['status'] == 'success'
+    assert json_response['message'] == 'Office added successfully'
+
+    #Verify that office is added in database
+    added_office = data.Office.query.filter_by(name='Test Office').first()
+    assert added_office is not None
+    assert added_office.name == 'Test Office'
+    assert added_office.prefix == 'T'
