@@ -213,6 +213,7 @@
                                     <span class="caret"></span>
                                 </a>
     			                <ul class="dropdown-menu" role="menu">
+                                    {% if current_user.role_id==1 %}
                                     <li class="dropdown-header">( {{ translate('General Screens', 'en', [defLang]) }} )</li>
     			                    <li>
     				                    <a href="{{ url_for('core.display') }}" target="_blank">
@@ -226,7 +227,9 @@
                                             {{ translate('Display screen', 'en', [defLang]) }} (QR Code)
                                         </a>
                                     </li>
-                                    {% if not settings.single_row %}
+                                    {% endif %}
+                                    {% if not settings.single_row  %}
+                                    {% if current_user.role_id==1%}
                                     <li>
     				                    <a href="{{ url_for('core.touch', a=0) }}" target="_blank">
     				                        <span class="fa fa-desktop"></span>
@@ -239,6 +242,8 @@
                                             {{ translate('Touch screen', 'en', [defLang]) }} (QR Code)
                                         </a>
                                     </li>
+                                    {% endif %}
+                                   
                                     {% for office in offices %}
                                     {% if current_user.role_id==1 or current_user.id in office.office_operators_set%}
                                     <li class="dropdown-header">( {{ office.display_text }} )</li>
