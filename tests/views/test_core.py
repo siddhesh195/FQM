@@ -774,7 +774,7 @@ def test_feed_stream_tickets_preferences_disabled(c):
 def test_display_screen_all_offices(c,monkeypatch):
     class current_user_class:
         def __init__(self):
-            self.role_id=2
+            self.role_id=1
         
     import app.views.core
     current_user = current_user_class()
