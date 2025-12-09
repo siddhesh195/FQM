@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.helpers import reject_operator
 
 import app.database as data
@@ -238,20 +238,26 @@ def fetch_office_and_task_ids():
 @login_required
 def add_office():
     ''' add an office. '''
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'})
     form = OfficeForm()
     office_name = remove_string_noise(form.name.data or '',
                                       lambda s: s.startswith('0'),
                                       lambda s: s[1:]) or None
+    
+    if request.method == 'POST':
 
-    if form.validate_on_submit():
-        if data.Office.query.filter_by(name=form.name.data).first():
+        if form.validate_on_submit():
+            if data.Office.query.filter_by(name=form.name.data).first():
+                return jsonify({'status': 'error', 'message': 'Office name already exists'})
+            
+            
+            db.session.add(data.Office(office_name, form.prefix.data.upper()))
+            db.session.commit()
        
-            return jsonify({'status': 'error', 'message': 'Office name already exists'})
-
-        db.session.add(data.Office(office_name, form.prefix.data.upper()))
-        db.session.commit()
-       
-        return jsonify({'status': 'success', 'message': 'Office added successfully'})
+            return jsonify({'status': 'success', 'message': 'Office added successfully'})
+        else:
+            return jsonify({'status': 'error', 'message': 'Form validation failed'})
 
     return render_template('office_add.html',
                            form=form,
