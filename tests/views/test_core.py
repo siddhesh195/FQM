@@ -739,7 +739,14 @@ def test_display_screen_all_offices(c,monkeypatch):
 
 
 @pytest.mark.usefixtures('c')
-def test_touch_screen(c):
+def test_touch_screen(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
+
     touch_screen_settings = Touch_store.query.first()
     tasks = Task.query.all()
 
@@ -752,7 +759,13 @@ def test_touch_screen(c):
 
 
 @pytest.mark.usefixtures('c')
-def test_touch_screen_office(c):
+def test_touch_screen_office(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     office = choice(Office.query.all())
     touch_screen_settings = Touch_store.query.first()
     tasks = Task.query.filter(Task.offices.contains(office))
