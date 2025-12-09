@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request
 from flask_login import login_required
 from app.helpers import reject_operator
 
@@ -12,6 +12,9 @@ from app.helpers import get_number_of_active_tickets_office_cached, get_number_o
 from app.forms.manage import ProcessedTicketForm2
 
 from app.middleware import db
+
+from app.forms.manage import OfficeForm
+from app.utils import remove_string_noise
 
 
 offices = Blueprint('offices', __name__)
@@ -230,4 +233,32 @@ def fetch_office_and_task_ids():
     task_ids = [task.id for task in tasks]
 
     return jsonify({'office_ids': office_ids, 'task_ids': task_ids})
-    
+
+@offices.route('/add_office', methods=['POST'])
+@login_required
+def office_a():
+    ''' add an office. '''
+    form = OfficeForm()
+    office_name = remove_string_noise(form.name.data or '',
+                                      lambda s: s.startswith('0'),
+                                      lambda s: s[1:]) or None
+
+    if form.validate_on_submit():
+        if data.Office.query.filter_by(name=form.name.data).first():
+       
+            return jsonify({'status': 'error', 'message': 'Office name already exists'})
+
+        db.session.add(data.Office(office_name, form.prefix.data.upper()))
+        db.session.commit()
+       
+        return jsonify({'status': 'success', 'message': 'Office added successfully'})
+
+    return render_template('office_add.html',
+                           form=form,
+                           page_title='Adding new office',
+                           offices=data.Office.query,
+                           tasks=data.Task,
+                           operators=data.Operators.query,
+                           navbar='#snb1',
+                           hash='#da3',
+                           serial=data.Serial.all_clean())
