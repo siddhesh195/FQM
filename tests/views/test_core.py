@@ -26,7 +26,12 @@ def test_welcome_root_and_login(c):
 
 
 @pytest.mark.usefixtures('c')
-def test_new_registered_ticket(c):
+def test_new_registered_ticket(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     touch_screen_settings = Touch_store.query.first()
     touch_screen_settings.n = True
     db.session.commit()
