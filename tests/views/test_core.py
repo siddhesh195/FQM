@@ -53,7 +53,12 @@ def test_new_registered_ticket(c,monkeypatch):
 
 
 @pytest.mark.usefixtures('c')
-def test_new_noisy_registered_ticket(c):
+def test_new_noisy_registered_ticket(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     touch_screen_settings = Touch_store.query.first()
     touch_screen_settings.n = True
     db.session.commit()
@@ -76,6 +81,11 @@ def test_new_noisy_registered_ticket(c):
 
 @pytest.mark.usefixtures('c')
 def test_new_printed_ticket(c, monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     last_ticket = None
     mock_printer = MagicMock()
     monkeypatch.setattr(escpos.printer, 'Usb', mock_printer)
@@ -164,6 +174,11 @@ def test_new_printed_ticket_with_aliases(c, monkeypatch):
 
 @pytest.mark.usefixtures('c')
 def test_new_printed_ticket_windows(c, monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     last_ticket = None
     printer_name = 'testing_printer'
     printer_path = 'testing_path'
@@ -207,6 +222,11 @@ def test_new_printed_ticket_windows(c, monkeypatch):
 
 @pytest.mark.usefixtures('c')
 def test_new_printed_ticket_lp(c, monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     last_ticket = None
     printer_name = 'testing_printer'
     printer_path = 'testing_path'
@@ -248,6 +268,11 @@ def test_new_printed_ticket_lp(c, monkeypatch):
 
 @pytest.mark.usefixtures('c')
 def test_new_printed_ticket_arabic(c, monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     last_ticket = None
     mock_printer = MagicMock()
     mock_pil = MagicMock()
@@ -294,6 +319,11 @@ def test_new_printed_ticket_arabic(c, monkeypatch):
 
 @pytest.mark.usefixtures('c')
 def test_new_printed_ticket_windows_arabic(c, monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     last_ticket = None
     printer_name = 'testing_printer'
     printer_path = 'testing_path'
@@ -345,6 +375,11 @@ def test_new_printed_ticket_windows_arabic(c, monkeypatch):
 
 @pytest.mark.usefixtures('c')
 def test_new_printed_ticket_lp_arabic(c, monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     last_ticket = None
     printer_name = 'testing_printer'
     printer_path = 'testing_path'
@@ -464,7 +499,12 @@ def test_reset_all(c):
 
 @pytest.mark.usefixtures('c')
 @pytest.mark.parametrize('_', range(TEST_REPEATS))
-def test_generate_new_tickets(_, c):
+def test_generate_new_tickets(_, c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     touch_screen_settings = Touch_store.query.first()
     touch_screen_settings.n = True
     db.session.commit()
@@ -503,7 +543,12 @@ def test_pull_tickets_from_all(_, c):
 
 
 @pytest.mark.usefixtures('c')
-def test_office_assigned_for_common_task_ticket(c):
+def test_office_assigned_for_common_task_ticket(c, monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     task = Task.get_first_common()
     data = {'name': 'TESTING PRINTED TICKET'}
     office_with_least_waiting_tickets = next(iter(sorted(
