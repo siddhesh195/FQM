@@ -15,12 +15,6 @@
 		<div class="side-menu-container">
 		    <ul class="nav navbar-nav">
 			{% if getattr(current_user, 'role_id', None) != 3 or settings.single_row %}
-			<li id="da1" >
-			    <a href="{{ url_for('manage_app.search') }}">
-				<span class="fa fa-search"></span>
-				{{ translate('Search', 'en', [defLang]) }}
-			    </a>
-			</li>
 			
 			<li id="da2" >
 			    <a href="{{ url_for('offices.offices_home') }}">
@@ -45,7 +39,7 @@
 			</li>
 			{% if not settings.single_row %}
 			<li id="da3">
-			    <a href="{{ url_for('manage_app.office_a') }}">
+			    <a href="{{ url_for('offices.add_office') }}">
 				<span class="fa fa-plus"></span>
 				{{ translate('Add new office', 'en', [defLang]) }}
 			    </a>

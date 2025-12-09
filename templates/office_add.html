@@ -53,7 +53,7 @@
 office_name: '',
 office_prefix: '',
 csrf_token:  "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
-add_office_url: "{{ url_for('offices.office_a') }}"
+add_office_url: "{{ url_for('offices.add_office') }}"
 
 {% endblock %}
 

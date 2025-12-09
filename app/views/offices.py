@@ -234,9 +234,9 @@ def fetch_office_and_task_ids():
 
     return jsonify({'office_ids': office_ids, 'task_ids': task_ids})
 
-@offices.route('/add_office', methods=['POST'])
+@offices.route('/add_office', methods=['POST', 'GET'])
 @login_required
-def office_a():
+def add_office():
     ''' add an office. '''
     form = OfficeForm()
     office_name = remove_string_noise(form.name.data or '',
