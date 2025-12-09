@@ -3,10 +3,16 @@ import pytest
 from . import TEST_REPEATS
 from app.database import Task, Settings, Serial, Office
 from app.settings import single_row
+import app.views.core
 
 
 @pytest.mark.usefixtures('c')
-def test_single_row_restrictions_enabled(c):
+def test_single_row_restrictions_enabled(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     task = Task.get()
     office = task.offices[0]
 
@@ -37,7 +43,13 @@ def test_single_row_restrictions_enabled(c):
 
 
 @pytest.mark.usefixtures('c')
-def test_single_row_restrictions_disabled(c):
+def test_single_row_restrictions_disabled(c,monkeypatch):
+
+    class user:
+        def __init__(self):
+            self.role_id=1
+    current_user = user()
+    monkeypatch.setattr(app.views.core, 'current_user', current_user)
     task = Task.get()
     office = task.offices[0]
 
