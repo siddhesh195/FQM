@@ -359,7 +359,7 @@ def test_add_offices_form_validation_pass_and_failed_due_to_name_length(app,c,mo
     resp = c.post(url,json=payload)
     assert resp.status_code == 200
     json_response = resp.get_json()
-    print(json_response)
+  
     assert json_response['status'] == 'error'
     assert json_response['message'] == 'Form validation failed'
 
