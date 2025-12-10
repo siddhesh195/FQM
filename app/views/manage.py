@@ -1,4 +1,4 @@
-from flask import url_for, flash, request, render_template, redirect, Blueprint
+from flask import url_for, flash, request, render_template, redirect, Blueprint, jsonify
 from flask_login import current_user, login_required
 
 import app.database as data
@@ -8,7 +8,7 @@ from app.helpers import (reject_operator, reject_no_offices, is_operator, is_off
                          is_common_task_operator, reject_setting, get_or_reject, decode_links,
                          ticket_orders)
 from app.forms.manage import OfficeForm, TaskForm, SearchForm, ProcessedTicketForm
-from app.constants import TICKET_WAITING,TICKET_ATTENDED
+from app.constants import TICKET_WAITING
 from app.cache import clear_funcs_cache
 from app.events import get_cached_serial_funcs, get_cached_task_funcs
 
@@ -23,8 +23,9 @@ def manage():
     if is_operator() and not data.Settings.get().single_row:
         operator = data.Operators.get(current_user.id)
 
-        flash('Error: operators are not allowed to access the page ', 'danger')
-        return redirect(url_for('manage_app.offices', o_id=operator.office_id))
+        return jsonify({'error': 'operators are not allowed to access the page '})
+  
+
 
     return render_template('manage.html',
                            page_title='Management',
@@ -421,6 +422,10 @@ def task_a(office):
     ''' to add a task '''
     form = TaskForm()
 
+    if current_user.role_id !=1:
+        flash('Error: only admins are allowed to access the page ', 'danger')
+        return redirect(url_for('core.root'))
+
     if is_operator() and not is_office_operator(office.id):
         flash('Error: operators are not allowed to access the page ', 'danger')
         return redirect(url_for('core.root'))
@@ -480,14 +485,21 @@ def serial_u(ticket_id, redirect_to, o_id=None):
         return redirect(redirect_to)
 
     if form.validate_on_submit():
+        
+        try:
+            from core import feed
+            feed.cache_clear()
+        except Exception:
+            pass
+        if form.status.data==TICKET_WAITING:
+            ticket.p = False
+        
         ticket.name = form.value.data or ''
         ticket.n = not form.printed.data
         ticket.status = form.status.data
 
-        if ticket.status == TICKET_WAITING:
-            ticket.p = False
 
         db.session.commit()
 
-    flash('Notice: Ticket details updated successfully', 'info')
+        flash('Notice: Ticket details updated successfully', 'info')
     return redirect(redirect_to)
