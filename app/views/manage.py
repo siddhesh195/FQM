@@ -371,7 +371,7 @@ def task_d(task, ofc_id):
 def common_task_a():
     ''' to add a common task '''
     form = TaskForm(common=True)
-
+    
     if form.validate_on_submit():
         task = data.Task(form.name.data, form.hidden.data)
 
@@ -421,8 +421,12 @@ def common_task_a():
 def task_a(office):
     ''' to add a task '''
     form = TaskForm()
-
-    if current_user.role_id !=1:
+    
+    try:
+        if current_user.role_id !=1:
+            flash('Error: only admins are allowed to access the page ', 'danger')
+            return redirect(url_for('core.root'))
+    except:
         flash('Error: only admins are allowed to access the page ', 'danger')
         return redirect(url_for('core.root'))
 

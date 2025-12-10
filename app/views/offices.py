@@ -24,6 +24,13 @@ offices = Blueprint('offices', __name__)
 @offices.route('/all_offices_vue/<int:o_id>', methods=['GET', 'POST'])
 @login_required
 def offices_home(o_id=None):
+    
+    try:
+        if not current_user.role_id:
+            return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+    except:
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+    
     if not o_id and current_user.role_id!=1:
         return jsonify({'status': 'error', 'message': 'Office ID is required for Non Admins'}), 400
 
