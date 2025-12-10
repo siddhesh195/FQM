@@ -120,8 +120,7 @@ def root(n=None):
         destination = url_for('manage_app.manage')
 
         if is_operator() and not single_row:
-            destination = url_for('manage_app.offices',
-                                  o_id=data.Operators.get(current_user.id).office_id)
+         
             destination = url_for('offices.offices_home', o_id=data.Operators.get(current_user.id).office_id)
         elif should_redirect:
             destination = f'{session.get("next_url", "/")}'
@@ -226,7 +225,7 @@ def serial_r(office):
     single_row = data.Settings.get().single_row
     office = data.Office.get(office.id)
     office_redirection = url_for('manage_app.all_offices')\
-        if single_row else url_for('manage_app.offices', o_id=office.id)
+        if single_row else url_for('offices.offices_home', o_id=office.id)
 
     if (is_operator() and not is_office_operator(office.id)) and not single_row:
         flash('Error: operators are not allowed to access the page ', 'danger')
