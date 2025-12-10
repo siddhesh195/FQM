@@ -208,7 +208,7 @@ def reject_operator(function):
 
 
 def reject_no_offices(function):
-    ''' Decorator to flash and redirect to `manage_app.all_offices`
+    ''' Decorator to flash and redirect to `offices.offices_home`
         if there's not any offices created yet.
 
     Parameters
@@ -226,7 +226,7 @@ def reject_no_offices(function):
             return function(*args, **kwargs)
         with current_app.app_context():
             flash('Error: No offices exist to delete', 'danger')
-            return redirect(url_for('manage_app.all_offices'))
+            return redirect(url_for('offices.offices_home'))
 
     return decorated
 
