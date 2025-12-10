@@ -7,12 +7,192 @@ from flask_wtf.csrf import generate_csrf
 
 
 @pytest.mark.usefixtures("c")
-def test_offices_home(c):
+def test_offices_home_admin_login(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id = 1  #Admin role
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
     url='/all_offices_vue'
     resp = c.get(url)
     assert resp.status_code == 200
     assert b"Offices" in resp.data
 
+
+@pytest.mark.usefixtures("c")
+def test_offices_home_non_admin_login_failure(c,monkeypatch):
+    
+    class user:
+        def __init__(self):
+            self.role_id = 2  #non admin role_id
+   
+    current_user = user()
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+    url='/all_offices_vue'
+    resp = c.get(url)
+    assert resp.status_code == 400
+    assert b"Office ID is required for Non Admins" in resp.data
+
+
+@pytest.mark.usefixtures("c")
+def test_offices_home_operator_access(c,monkeypatch):
+    class user:
+        def __init__(self,id):
+            self.role_id = 3  #Operator role_id
+            self.id =id
+    
+    #create a new User
+    
+    new_user= data.User(name="Operator User",password="password", role_id=3)
+
+    db.session.add(new_user)
+    db.session.commit()
+    
+    to_be_operator_user = data.User.query.filter_by(name="Operator User").first()
+    assert to_be_operator_user is not None
+    
+    # monkeypatch current_user to be the created user
+    current_user = user(to_be_operator_user.id)
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    #create two new offices
+
+    office1 = data.Office(name="ABC Office", prefix="A")
+    office2 = data.Office(name="XYZ Office", prefix="X")
+    db.session.add(office1)
+    db.session.add(office2)
+    db.session.commit()
+    office_abc = data.Office.query.filter_by(name="ABC Office").first()
+    office_xyz = data.Office.query.filter_by(name="XYZ Office").first()
+    assert office_abc is not None
+    assert office_xyz is not None
+    office_abc_id = office_abc.id
+
+
+    #assign operator to one office
+    operator_user = data.Operators(id=to_be_operator_user.id, office_id=office_abc.id)
+   
+    db.session.add(operator_user)
+    db.session.commit()
+
+
+    operator = data.Operators.query.filter_by(id=current_user.id).first()
+    assert operator is not None
+    
+    # send wrong office id to access
+    url=f'/all_offices_vue/{office_abc_id}'
+    resp = c.get(url)
+   
+    assert resp.status_code == 200
+    assert b"Offices" in resp.data
+
+
+@pytest.mark.usefixtures("c")
+def test_offices_home_operator_failure(c,monkeypatch):
+    class user:
+        def __init__(self,id):
+            self.role_id = 3  #Operator role_id
+            self.id =id
+    
+    #create a new User
+    
+    new_user= data.User(name="Operator User",password="password", role_id=3)
+
+    db.session.add(new_user)
+    db.session.commit()
+    
+    to_be_operator_user = data.User.query.filter_by(name="Operator User").first()
+    assert to_be_operator_user is not None
+    
+    # monkeypatch current_user to be the created user
+    current_user = user(to_be_operator_user.id)
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    #create two new offices
+
+    office1 = data.Office(name="ABC Office", prefix="A")
+    office2 = data.Office(name="XYZ Office", prefix="X")
+    db.session.add(office1)
+    db.session.add(office2)
+    db.session.commit()
+    office_abc = data.Office.query.filter_by(name="ABC Office").first()
+    office_xyz = data.Office.query.filter_by(name="XYZ Office").first()
+    assert office_abc is not None
+    assert office_xyz is not None
+    office_abc_id = office_abc.id
+    office_xyz_id = office_xyz.id
+
+
+    #assign operator to one office
+    operator_user = data.Operators(id=to_be_operator_user.id, office_id=office_abc.id)
+   
+    db.session.add(operator_user)
+    db.session.commit()
+
+
+    operator = data.Operators.query.filter_by(id=current_user.id).first()
+    assert operator is not None
+    
+    url=f'/all_offices_vue/{office_xyz_id}'
+    resp = c.get(url)
+    json= resp.get_json()
+    assert resp.status_code == 403
+    assert json['status'] == 'error'
+    assert json['message'] == 'Unauthorized access to this office'
+   
+@pytest.mark.usefixtures("c")
+def test_offices_home_non_existent_office(c,monkeypatch):
+    class user:
+        def __init__(self,id):
+            self.role_id = 3  #Operator role_id
+            self.id =id
+    
+    #create a new User
+    
+    new_user= data.User(name="Operator User",password="password", role_id=3)
+
+    db.session.add(new_user)
+    db.session.commit()
+    
+    to_be_operator_user = data.User.query.filter_by(name="Operator User").first()
+    assert to_be_operator_user is not None
+    
+    # monkeypatch current_user to be the created user
+    current_user = user(to_be_operator_user.id)
+    monkeypatch.setattr('app.views.offices.current_user', current_user)
+
+    #create two new offices
+
+    office1 = data.Office(name="ABC Office", prefix="A")
+    office2 = data.Office(name="XYZ Office", prefix="X")
+    db.session.add(office1)
+    db.session.add(office2)
+    db.session.commit()
+    office_abc = data.Office.query.filter_by(name="ABC Office").first()
+    office_xyz = data.Office.query.filter_by(name="XYZ Office").first()
+    assert office_abc is not None
+    assert office_xyz is not None
+    office_abc_id = office_abc.id
+    office_xyz_id = office_xyz.id
+
+
+    #assign operator to one office
+    operator_user = data.Operators(id=to_be_operator_user.id, office_id=office_abc.id)
+   
+    db.session.add(operator_user)
+    db.session.commit()
+
+
+    operator = data.Operators.query.filter_by(id=current_user.id).first()
+    assert operator is not None
+    non_existent_office_id = 9999
+    url=f'/all_offices_vue/{non_existent_office_id}'
+    resp = c.get(url)
+    json= resp.get_json()
+    assert resp.status_code == 404
+    assert json['status'] == 'error'
+    assert json['message'] == 'Office not found'
+   
 
 @pytest.mark.usefixtures("c")
 def test_all_offices_tickets(c):
@@ -29,7 +209,7 @@ def test_all_offices_tickets(c):
     for ticket in json_response:
         names.append(ticket['name'])
         offices.append(ticket['office_name'])
-    print(offices)
+
     assert len(names) == 8
     assert len(offices) == 8
 
@@ -416,7 +596,7 @@ def test_add_offices_form_validation_failed_due_to_wrong_prefix(app,c,monkeypatc
     resp = c.post(url,json=payload)
     assert resp.status_code == 200
     json_response = resp.get_json()
-    print(json_response)
+  
     assert json_response['status'] == 'error'
     assert json_response['message'] == 'Form validation failed'
 
