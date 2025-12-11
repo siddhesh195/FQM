@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_uploads import UploadSet, ALL
-from flask_googletrans import translator
 from flask_gtts import gtts
 
 from app.constants import MIGRATION_FOLDER
@@ -105,10 +104,7 @@ class RedisGtts(gtts):
         raise exception
 
 
-class FasterTranslator(translator):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.languages = set(self.languages)
+
 
 
 # NOTE: Work around for flask imports and registering blueprints
@@ -119,9 +115,7 @@ migrate = Migrate(directory=MIGRATION_FOLDER, compare_type=True)
 login_manager = LoginManager()
 login_manager.login_view = "login"
 files = UploadSet('files', ALL)
-gtranslator = FasterTranslator(cache=True,
-                               skip_app=True,
-                               service_urls=['translate.googleapis.com'])
+
 gTTs = RedisGtts(route=True, failsafe=True, logging=False)
 celery_app = LazyCelery()
 redis = Redis('redis', db=3)

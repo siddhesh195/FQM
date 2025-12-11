@@ -17,7 +17,8 @@ from app.helpers import (get_all_offices_cached,
                          get_number_of_active_tickets_task_cached,
                          get_settings_cached)
 
-from app.middleware import db, login_manager, files, gtranslator, gTTs, migrate
+from app.middleware import db, login_manager, files, gTTs, migrate
+from app.mock_translator import gtranslator
 from app.printer import get_printers_usb
 from app.views.administrate import administrate
 from app.views.core import core
@@ -73,7 +74,7 @@ def create_app(config={}):
                            'static/webfont.select.min.js', 'static/css/webfont.select.css'])
     gTTs.init_app(app)
     gtranslator.init_app(app)
-    gtranslator.readonly = True
+   
 
     # Register blueprints
     app.register_blueprint(administrate)
