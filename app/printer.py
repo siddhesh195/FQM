@@ -10,7 +10,6 @@ from bidi.algorithm import get_display
 from PIL import Image, ImageDraw, ImageFont
 
 from app.utils import absolute_path, get_with_alias, log_error, convert_to_int_or_hex, execute
-from app.middleware import gtranslator
 from app.constants import VERSION, PRINTED_TICKET_DIMENSIONS, PRINTED_TICKET_MAXIMUM_HEIGH_OR_WIDTH
 
 
@@ -157,10 +156,7 @@ def assign(vendor_id, product_id, in_ep=None, out_ep=None):
 
 
 def get_translation(text, language):
-    translated = gtranslator.translate(text, dest=[language])
-
-    if language == 'en':
-        translated = get_with_alias().get(text) or translated
+    
 
     return text
 

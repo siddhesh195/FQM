@@ -1,4 +1,4 @@
-from app.middleware import gtranslator
+
 import uuid
 from app.database import User, Serial, Office, Task
 from app.constants import TICKET_WAITING
@@ -9,8 +9,8 @@ import io
 from openpyxl import Workbook
 
 def get_translation(text, language):
-    """Translate text to the specified language using gtranslator."""
-    
+ 
+
     return text
 
 def generate_token_for_task():

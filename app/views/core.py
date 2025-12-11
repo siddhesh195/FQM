@@ -7,7 +7,7 @@ from flask_login import current_user, login_required, login_user
 
 import app.database as data
 import app.settings as settings_handlers
-from app.middleware import db, gtranslator, redis
+from app.middleware import db, redis
 from app.utils import log_error, remove_string_noise
 from app.forms.core import LoginForm, TouchSubmitForm
 from app.helpers import (reject_no_offices, reject_operator, is_operator, reject_not_admin,

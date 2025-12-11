@@ -8,7 +8,6 @@ from gevent import monkey, pywsgi
 from gevent.event import Event as thevent
 
 from app.utils import absolute_path, solve_path, get_accessible_ips, get_random_available_port, is_port_available
-from app.middleware import gtranslator
 from app.constants import SUPPORTED_LANGUAGES, VERSION
 from app.tasks import stop_tasks
 from app.database import User
@@ -131,8 +130,7 @@ class MainWindow(QWidget):
             self.status_label.setText(self.get_translation('Server is <u> Not running </u> <br>'))
 
     def get_translation(self, text):
-        current_language = list(self.languages.keys())[self.languages_list.currentIndex()]
-        return gtranslator.translate(text, dest=[current_language])
+        return text
 
     def current_language(self):
         return list(self.languages.keys())[self.languages_list.currentIndex()]
