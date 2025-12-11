@@ -10,10 +10,8 @@ from openpyxl import Workbook
 
 def get_translation(text, language):
     """Translate text to the specified language using gtranslator."""
-
-    translated = gtranslator.translate(text, dest=[language])
-
-    return translated
+    
+    return text
 
 def generate_token_for_task():
     # Option A: short random token (safe, no race). Good if token doesn't have to be monotonic.
