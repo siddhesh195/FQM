@@ -1,7 +1,6 @@
 from flask import current_app, session
 from flask_wtf import FlaskForm
 
-from app.middleware import gtranslator as translator
 
 
 class LocalizedForm(FlaskForm):
@@ -21,7 +20,7 @@ class LocalizedForm(FlaskForm):
         with current_app.app_context():
             language = session.get('lang', 'en')
 
-        return translator.translate(text, _from, [language])
+        return text
 
     def __init__(self, *args, **kwargs):
         super(LocalizedForm, self).__init__(*args, **kwargs)
