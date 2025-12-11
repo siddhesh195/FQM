@@ -162,7 +162,7 @@ def get_translation(text, language):
     if language == 'en':
         translated = get_with_alias().get(text) or translated
 
-    return translated
+    return text
 
 
 def printit(printer, ticket, office, tnumber,
