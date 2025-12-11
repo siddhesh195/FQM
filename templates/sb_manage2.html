@@ -75,7 +75,15 @@
 			<li class="panel panel-default da{{ office.id+3 }} {% if ar %} ar1 {% endif %}" id="dropdown">
 			    <a data-toggle="collapse" href="#dropdown-lvl{{ office.id }}">
 				<span class="fa fa-desktop"></span>
-				{{ loop.index }}.{{ translate('Office', 'en', [defLang]) }}  {{ office.prefix }}{{ office.name }}
+				{{ loop.index }}.{{ translate('Office', 'en', [defLang]) }}  {{ office.prefix }}
+				
+				{% if office.name and office.name|length < 8 %}
+                    {{ office.name }}
+				{% elif office.name %}
+					 <span title="{{ office.name }}">- {{ office.name[:8] }}...</span>
+                {% endif %}
+				
+				
 				<span class="caret"></span>
 				<!-- To solve counting all the common and non-common tasks tickets -->
 				<span class="badge pull-right">
