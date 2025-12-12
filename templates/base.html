@@ -33,6 +33,7 @@
         <script src="{{ url_for('static', filename='disciple.js') }}"></script>
         <script src="{{ url_for('static', filename='extFunctions.js') }}"></script>
         <script src="{{ url_for('static', filename='/vendor/sweetalert/sweetalert2@11.js') }}"></script>
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
         {{ beloadingNotifier(version, beload=False, release=translate("You are using an older version of FQM, a newer release is available on fqms.github.io", 'en', [defLang]), firefox=translate("You are not using Firefox browser, which this project is designed and most suited for.", 'en', [defLang]), notifier=notifications) }}
         <script type="text/javascript">
             window.onload = function () {
@@ -393,15 +394,6 @@
                             console.error("Error fetching active tickets:", error);
                         });
                     },
-                    getNumberOfActiveTickets() {
-                        axios.get("{{ url_for('offices.get_all_active_tickets') }}")
-                        .then(response => {
-                            this.active_tickets_number = response.data.active_tickets;
-                        })
-                        .catch(error => {
-                            console.error("Error fetching active tickets:", error);
-                        });
-                    },
 
                     getNumberOfActiveTicketsTask(task_id=null, office_id=null) {
                         axios.post("{{ url_for('offices.get_all_active_task_tickets') }}",{
@@ -434,6 +426,20 @@
 
                     {% endblock %}
                     },
+                    created() {
+                        this.socket = io('http://localhost:8001');
+                        this.socket.on('connect', () => {
+                            console.log('Socket.IO connected:', this.socket.id);
+                        });
+                        this.socket.on('active_tickets', (data) => {
+                            // data = {"ts": "2025-12-12T10:23:45.123456"}
+                            this.active_tickets_number = data.all_active_tickets;
+                            //console.log('Received active_tickets:', data);
+                        });
+                        {% block vue_created %}
+
+                        {% endblock %}
+                    },
 
                     computed:{
 
@@ -450,14 +456,14 @@
         
                     mounted() {
                         this.fetch_office_and_task_ids();
-                        //this.getNumberOfActiveTickets_interval = setInterval(this.getNumberOfActiveTickets, 2000)
+                        
                         //this.getOfficeActiveTickets_interval = setInterval(this.getOfficeActiveTickets, 2000)
                         {% block vue_mounted %}
 
                         {% endblock %}
                     },
                     beforeUnmount() {
-                        //clearInterval(this.getNumberOfActiveTickets_interval);
+                        
                         //clearInterval(this.getOfficeActiveTickets_interval);
                         {% block vue_before_unmount %}
 

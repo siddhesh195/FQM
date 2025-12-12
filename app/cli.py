@@ -7,6 +7,7 @@ from app.utils import get_accessible_ips, get_random_available_port, log_error
 from app.constants import VERSION
 from app.tasks import stop_tasks
 from app.database import User
+from app.scheduler import init_scheduler
 
 
 @click.command()
@@ -23,12 +24,13 @@ def interface(cli, quiet, reset, ip, port):
     * If no `port` is passed it will default to a random port.\n
     '''
     if reset:
-        with bundle_app({'MIGRATION': True}).app_context():
+        with bundle_app({'MIGRATION': True})[0].app_context():
             User.reset_default_password()
             click.echo('Admin password reset successfully')
         return
 
-    app = bundle_app()
+    app, socketio = bundle_app()
+    init_scheduler(app, socketio)
 
     def start_cli():
         alt_ip = ip or get_accessible_ips()[0][1]
@@ -36,18 +38,18 @@ def interface(cli, quiet, reset, ip, port):
         app.config['LOCALADDR'] = alt_ip
         app.config['CLI_OR_DEPLOY'] = True
         app.config['QUIET'] = quiet
-        app.config['SERVER_NAME'] = f'{alt_ip}:{alt_port}'
-
+        #app.config['SERVER_NAME'] = f'{alt_ip}:{alt_port}'
+        
         click.echo(click.style(f'FQM {VERSION} is running on http://{alt_ip}:{alt_port}', bold=True, fg='green'))
         click.echo('')
         click.echo(click.style('Press Control-c to stop', blink=True, fg='black', bg='white'))
 
         try:
-            from gevent import monkey, pywsgi
-            monkey.patch_socket()
-            pywsgi.WSGIServer((str(alt_ip), int(alt_port)),
-                             app,
-                             log=None if quiet else 'default').serve_forever()
+            
+            print('Starting server...')
+            print(f'Listening on http://{alt_ip}:{alt_port}')
+            # IMPORTANT: run with socketio (not WSGIServer)
+            socketio.run(app, host=str(alt_ip), port=int(alt_port), log_output=not quiet)
         except KeyboardInterrupt:
             stop_tasks()
 

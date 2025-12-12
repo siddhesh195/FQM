@@ -18,7 +18,7 @@ if os.environ.get('DOCKER'):
     app_settings['GUNICORN'] = True
 
 if app_settings:
-    app = bundle_app(app_settings)
+    app, socketio = bundle_app(app_settings)
     celery_app.init_app(app)
     celery = celery_app.app
     CeleryTasks.register()

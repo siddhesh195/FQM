@@ -204,7 +204,7 @@ def app():
         'SQLALCHEMY_DATABASE_URI': f'sqlite:///{DB_PATH}?check_same_thread=False'
     }
 
-    app = bundle_app(app_config)
+    app, socketio = bundle_app(app_config)
     stop_tasks()
     clear_cache()
 

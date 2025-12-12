@@ -35,6 +35,7 @@ from app.api.setup import setup_api
 from app.events import setup_events
 from app.constants import (SUPPORTED_LANGUAGES, SUPPORTED_MEDIA_FILES, VERSION, MIGRATION_FOLDER,
                            DATABASE_FILE, SECRET_KEY)
+from flask_socketio import SocketIO
 
 
 def create_app(config={}):
@@ -73,7 +74,9 @@ def create_app(config={}):
     fontpicker(app, local=['static/jquery-ui.min.js', 'static/css/jquery-ui.min.css', 'static/webfont.min.js',
                            'static/webfont.select.min.js', 'static/css/webfont.select.css'])
     gTTs.init_app(app)
-    gtranslator.init_app(app)
+    # mock translator class, can be replaced with real translator later
+    # or remove it altogther if all templates do not use translate method anymore
+    gtranslator.init_app(app) 
    
 
     # Register blueprints
@@ -115,6 +118,9 @@ def create_db(app, testing=False):
 def bundle_app(config={}):
     ''' Create a Flask app, set settings, load extensions, blueprints and create database. '''
     app = create_app(config)
+
+    # init socketio with app
+    socketio = SocketIO(app, async_mode='gevent')   # create and bind to app
 
     # NOTE: avoid creating or interacting with the database during migration
     if not app.config.get('MIGRATION', False):
@@ -161,7 +167,7 @@ def bundle_app(config={}):
         import traceback
         print("request.path:", request.path)
         print("\n===== INTERNAL SERVER ERROR (raw) =====")
-        traceback.print_exc()
+        #traceback.print_exc()
         print("===== END ERROR =====\n")
       
         
@@ -242,4 +248,4 @@ def bundle_app(config={}):
             adme=path in get_bp_endpoints(administrate),
         )
 
-    return app
+    return app, socketio
