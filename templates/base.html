@@ -450,15 +450,15 @@
         
                     mounted() {
                         this.fetch_office_and_task_ids();
-                        this.getNumberOfActiveTickets_interval = setInterval(this.getNumberOfActiveTickets, 2000)
-                        this.getOfficeActiveTickets_interval = setInterval(this.getOfficeActiveTickets, 2000)
+                        //this.getNumberOfActiveTickets_interval = setInterval(this.getNumberOfActiveTickets, 2000)
+                        //this.getOfficeActiveTickets_interval = setInterval(this.getOfficeActiveTickets, 2000)
                         {% block vue_mounted %}
 
                         {% endblock %}
                     },
                     beforeUnmount() {
-                        clearInterval(this.getNumberOfActiveTickets_interval);
-                        clearInterval(this.getOfficeActiveTickets_interval);
+                        //clearInterval(this.getNumberOfActiveTickets_interval);
+                        //clearInterval(this.getOfficeActiveTickets_interval);
                         {% block vue_before_unmount %}
 
                         {% endblock %}
