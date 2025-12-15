@@ -9,9 +9,6 @@ export default {
         update_task_threshold_url:{
             type: String
         },
-        showSwalMessage: {
-            type: Function
-        },
         showToast: {
             type: Function
         }

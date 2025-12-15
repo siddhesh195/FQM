@@ -12,7 +12,6 @@
     <component :is="Components['TaskThresholdComponent']"
     :get_all_tasks_url="get_all_tasks_url"
     :update_task_threshold_url="update_task_threshold_url"
-    :show-swal-message="showSwalMessage_var"
     :show-toast="showToast_var"
     >
     </component>
@@ -31,7 +30,6 @@
     },
     get_all_tasks_url: "{{ url_for('analytics_rules.get_all_tasks') }}",
     update_task_threshold_url: "{{ url_for('analytics_rules.update_task_threshold') }}",
-    showSwalMessage_var: null,
     showToast_var: null
 
 {% endblock %}
@@ -53,7 +51,6 @@
 {% endblock %}
 
 {% block vue_mounted %}
-    this.showSwalMessage_var = showSwalMessage;
     this.showToast_var = showToast;
 {% endblock %}
 
