@@ -382,6 +382,53 @@
                             console.error("Error fetching office and task IDs:", error);
                         });
                     },
+                    pullnextTicket(o_id=null,ofc_id=null) {
+                        axios.post("{{ url_for('offices.pull_next_ticket') }}", {
+                            o_id: o_id,
+                            ofc_id: ofc_id
+                        })
+                        .then(response => {
+                            this.fetchData();  // Refresh data after pulling
+                            if (response.data.status === 'success') {
+                                showSwalMessage(response.data.message);
+                            } else {
+                                showSwalMessage("Error: " + response.data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error pulling ticket:", error);
+                        });
+                    },
+                    
+                    fetchData() {
+                        axios.post("{{ url_for('offices.all_offices_tickets') }}",{
+                            o_id: {% if office_id and office_id is not none %}{{ office_id }}{% else %}null{% endif %}
+                        }).then(response => {
+                             this.rows = response.data;
+                        }).catch(error => {
+                            console.error("Error fetching data:", error);
+                        });      
+                    },
+
+                    PullTicket(ticketName,officeId,ticketId) {
+              
+                        axios.post("{{ url_for('offices.pull_ticket') }}", {
+                            ticket_name: ticketName,
+                            office_id: officeId,
+                            ticket_id: ticketId
+                        })
+                        .then(response => {
+                            this.fetchData();  // Refresh data after pulling
+                            if (response.data.status === 'success') {
+                               showSwalMessage("Successfully pulled ticket: " + ticketName);
+                            } else {
+                                showSwalMessage("Error: " + response.data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error pulling ticket:", error);
+                        });
+                    }
                         
                     {% block vue_methods %}
 
@@ -389,6 +436,7 @@
                     },
                     created() {
                         this.socket = io('http://localhost:8001');
+                        
                         this.socket.on('connect', () => {
                             console.log('Socket.IO connected:', this.socket.id);
                         });
