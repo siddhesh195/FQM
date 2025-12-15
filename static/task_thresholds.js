@@ -10,7 +10,8 @@ export default {
             type: String
         },
         showToast: {
-            type: Function
+            type: Function,
+            required: true
         }
     },
 
