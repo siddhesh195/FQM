@@ -371,46 +371,7 @@
                 },
 
                 methods: {
-                    getTaskActiveTickets(officeId) {
-                        for (const task_id of this.task_ids) {
-                            this.getNumberOfActiveTicketsTask(task_id, officeId);
-                        }
-                    },
-                        
-                    getOfficeActiveTickets() {
-                        for (const office_id of this.office_ids) {
-                            this.getNumberOfActiveTicketsOffice(office_id);
-                            this.getTaskActiveTickets(office_id);
-                        }
-                    },
-                    getNumberOfActiveTicketsOffice(office_id=null) {
-                        axios.post("{{ url_for('offices.get_all_active_office_tickets') }}",{
-                            o_id: office_id
-                        })
-                        .then(response => {
-                            this.active_tickets_office[office_id] = response.data.active_tickets;
-                        })
-                        .catch(error => {
-                            console.error("Error fetching active tickets:", error);
-                        });
-                    },
-
-                    getNumberOfActiveTicketsTask(task_id=null, office_id=null) {
-                        axios.post("{{ url_for('offices.get_all_active_task_tickets') }}",{
-                            t_id: task_id,
-                            office_id: office_id
-                        })
-                        .then(response => {
-                            // Handle the response if needed
-                            if(!this.active_tickets_task_by_office[office_id]){
-                                this.active_tickets_task_by_office[office_id] = {};
-                            }
-                            this.active_tickets_task_by_office[office_id][task_id] = response.data.active_tickets;
-                        })
-                        .catch(error => {
-                            console.error("Error fetching active task tickets:", error);
-                        });
-                    },
+                    
                     fetch_office_and_task_ids() {
                         axios.get("{{ url_for('offices.fetch_office_and_task_ids') }}")
                         .then(response => {
@@ -421,6 +382,53 @@
                             console.error("Error fetching office and task IDs:", error);
                         });
                     },
+                    pullnextTicket(o_id=null,ofc_id=null) {
+                        axios.post("{{ url_for('offices.pull_next_ticket') }}", {
+                            o_id: o_id,
+                            ofc_id: ofc_id
+                        })
+                        .then(response => {
+                            this.fetchData();  // Refresh data after pulling
+                            if (response.data.status === 'success') {
+                                showSwalMessage(response.data.message);
+                            } else {
+                                showSwalMessage("Error: " + response.data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error pulling ticket:", error);
+                        });
+                    },
+                    
+                    fetchData() {
+                        axios.post("{{ url_for('offices.all_offices_tickets') }}",{
+                            o_id: {% if office_id and office_id is not none %}{{ office_id }}{% else %}null{% endif %}
+                        }).then(response => {
+                             this.rows = response.data;
+                        }).catch(error => {
+                            console.error("Error fetching data:", error);
+                        });      
+                    },
+
+                    PullTicket(ticketName,officeId,ticketId) {
+              
+                        axios.post("{{ url_for('offices.pull_ticket') }}", {
+                            ticket_name: ticketName,
+                            office_id: officeId,
+                            ticket_id: ticketId
+                        })
+                        .then(response => {
+                            this.fetchData();  // Refresh data after pulling
+                            if (response.data.status === 'success') {
+                               showSwalMessage("Successfully pulled ticket: " + ticketName);
+                            } else {
+                                showSwalMessage("Error: " + response.data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error pulling ticket:", error);
+                        });
+                    }
                         
                     {% block vue_methods %}
 
@@ -428,13 +436,20 @@
                     },
                     created() {
                         this.socket = io('http://localhost:8001');
+                        
                         this.socket.on('connect', () => {
                             console.log('Socket.IO connected:', this.socket.id);
                         });
                         this.socket.on('active_tickets', (data) => {
-                            // data = {"ts": "2025-12-12T10:23:45.123456"}
+                         
                             this.active_tickets_number = data.all_active_tickets;
-                            //console.log('Received active_tickets:', data);
+                            
+                        });
+                        this.socket.on('active_tickets_by_office_and_task_id', (data) => {
+                           
+                            this.active_tickets_office = data.active_tickets_by_office_id;
+                            this.active_tickets_task_by_office = data.active_tickets_by_task_id;
+                           
                         });
                         {% block vue_created %}
 
@@ -457,14 +472,14 @@
                     mounted() {
                         this.fetch_office_and_task_ids();
                         
-                        //this.getOfficeActiveTickets_interval = setInterval(this.getOfficeActiveTickets, 2000)
+                       
                         {% block vue_mounted %}
 
                         {% endblock %}
                     },
                     beforeUnmount() {
                         
-                        //clearInterval(this.getOfficeActiveTickets_interval);
+                       
                         {% block vue_before_unmount %}
 
                         {% endblock %}

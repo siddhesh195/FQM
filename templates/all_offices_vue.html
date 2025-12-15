@@ -321,23 +321,7 @@
 
 
 {% block vue_methods%}
-    pullnextTicket(o_id=null,ofc_id=null) {
-        axios.post("{{ url_for('offices.pull_next_ticket') }}", {
-            o_id: o_id,
-            ofc_id: ofc_id
-        })
-        .then(response => {
-            this.fetchData();  // Refresh data after pulling
-            if (response.data.status === 'success') {
-                showSwalMessage(response.data.message);
-            } else {
-                showSwalMessage("Error: " + response.data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error pulling ticket:", error);
-        });
-    },
+    
 
     async submitTicketForm(ticketName) {
         const formData = await this.openProcessTicketDialog_var(this.status_choices);
@@ -356,43 +340,6 @@
         }
     },
 
-    PullTicket(ticketName,officeId,ticketId) {
-              
-        axios.post("{{ url_for('offices.pull_ticket') }}", {
-            ticket_name: ticketName,
-            office_id: officeId,
-            ticket_id: ticketId
-        })
-        .then(response => {
-            this.fetchData();  // Refresh data after pulling
-            if (response.data.status === 'success') {
-                showSwalMessage("Successfully pulled ticket: " + ticketName);
-            } else {
-                showSwalMessage("Error: " + response.data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error pulling ticket:", error);
-        });
-    },
-
-    fetchData() {
-        axios.post("{{ url_for('offices.all_offices_tickets') }}",{
-            o_id: {% if office_id is not none %}{{ office_id }}{% else %}null{% endif %}
-        })
-        .then(response => {
-            this.rows = response.data;
-        })
-        .catch(error => {
-            console.error("Error fetching data:", error);
-        });      
-    },
-
-    goToPage(page) {
-        if (page < 1 || page > this.totalPages) return;
-        this.currentPage = page;
-    },
-
     nextPage() {
         this.goToPage(this.currentPage + 1);
     },
@@ -400,6 +347,11 @@
     prevPage() {
         this.goToPage(this.currentPage - 1);
     },
+    goToPage(page) {
+        if (page < 1 || page > this.totalPages) return;
+        this.currentPage = page;
+    },
+   
 
     async EditTicket(ticketName) {
         // Open modal logic here
