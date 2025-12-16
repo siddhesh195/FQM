@@ -234,10 +234,10 @@
                     <tr v-for="row in paginatedRows" :key="row.id || row.name + '-' + row.number">
                         <td>[[ row.name ]]</td>
                         <td>[[ row.number ]]</td>
-                        <td>[[ row.office_name ]]</td>
-                        <td>[[ row.task_name ]]</td>
+                        <td :title="row.office_name">[[ truncate_text(row.office_name, 20) ]]</td>
+                        <td :title="row.task_name">[[ truncate_text(row.task_name, 20) ]]</td>
                         <td><span class="status-badge" style="background: #d4edda; color: #155724;">[[givestatus(row.status,row.pulled)]]</span></td>
-                        <td>[[ row.pulled_by ]]</td>
+                        <td :title="row.pulled_by">[[ truncate_text(row.pulled_by, 20) ]]</td>
                         <td>[[ row.timestamp ]]</td>
                         <td class="action-icons" style="text-align: center;">
                             <a @click="EditTicket(row.name)" >
@@ -322,7 +322,12 @@
 
 {% block vue_methods%}
     
-
+    truncate_text(text, maxLength) {
+        if (text.length <= maxLength) {
+            return text;
+        }
+        return text.substring(0, maxLength) + '...';
+    },
     async submitTicketForm(ticketName) {
         const formData = await this.openProcessTicketDialog_var(this.status_choices);
         if (!formData) {
