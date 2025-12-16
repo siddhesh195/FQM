@@ -403,7 +403,7 @@ def common_task_a():
 
         db.session.commit()
         flash('Notice: a common task has been added.', 'info')
-        return redirect(url_for('manage_app.all_offices'))
+        return redirect(url_for('offices.offices_home'))
     return render_template('task_add.html', form=form,
                            offices=data.Office.query,
                            serial=data.Serial.all_clean(),
@@ -459,7 +459,7 @@ def task_a(office):
             db.session.commit()
 
         flash('Notice: New task been added.', 'info')
-        return redirect(url_for('manage_app.offices', o_id=office.id))
+        return redirect(url_for('offices.offices_home', o_id=office.id))
     return render_template('task_add.html', form=form,
                            offices=data.Office.query,
                            serial=data.Serial.all_clean(),
