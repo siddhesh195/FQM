@@ -211,8 +211,7 @@ def app():
     # context created here makes session & db available
     with app.app_context():
         
-        db.drop_all()
-        db.create_all()
+       
         setup_data()
         shutil.copyfile(DB_PATH, dump_db)
 
