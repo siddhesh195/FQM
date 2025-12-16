@@ -210,11 +210,11 @@ def app():
 
     # context created here makes session & db available
     with app.app_context():
-        if dump_exists:
-            shutil.copyfile(dump_db, DB_PATH)
-        else:
-            setup_data()
-            shutil.copyfile(DB_PATH, dump_db)
+        
+        db.drop_all()
+        db.create_all()
+        setup_data()
+        shutil.copyfile(DB_PATH, dump_db)
 
         yield app
 
