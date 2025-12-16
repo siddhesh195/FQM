@@ -219,7 +219,7 @@
                 style="width: 250px;"
                >
         </div>
-        {% if current_user.role_id == 1 %}
+        {% if current_user.role_id == 1 and not office_id %}
        
         <button class="btn btn-primary" @click="resetAllOffices">
             Reset All Offices
@@ -227,6 +227,14 @@
     
         <button class="btn btn-danger" @click="deleteAllOffices">
             Delete All Offices
+        </button>
+        {% elif current_user.role_id == 1 and office_id %}
+        <button class="btn btn-primary" >
+            Reset this Office
+        </button>
+    
+        <button class="btn btn-danger">
+            Delete this Office
         </button>
 
         {% endif %}
