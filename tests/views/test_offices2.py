@@ -1,5 +1,7 @@
 import pytest
 import app.database as data
+from app.helpers import has_offices
+from tests.__init__ import fill_tickets
 
 
 @pytest.mark.usefixtures("c")
@@ -29,3 +31,27 @@ def test_fetch_office_and_task_ids(c):
 
     assert set(fetched_office_ids) == set(expected_office_ids)
     assert set(fetched_task_ids) == set(expected_task_ids)
+
+@pytest.mark.usefixtures("c")
+def test_reset_all_offices(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    assert has_offices() == True
+    monkeypatch.setattr("app.views.offices.current_user", current_user) 
+
+    tickets = data.Serial.query.filter(data.Serial.number != 100)
+    assert tickets.count() > 0
+    initial_tickets_count = tickets.count()
+    response = c.post("/reset_all_offices")
+    assert response.status_code == 200
+    data_response = response.get_json()
+    assert data_response["status"] == "success"
+    tickets2 = data.Serial.query.filter(data.Serial.number != 100)
+    assert tickets2.count() == 0
+    fill_tickets()
+    tickets3 = data.Serial.query.filter(data.Serial.number != 100)
+    assert tickets3.count() == initial_tickets_count
+    
+
