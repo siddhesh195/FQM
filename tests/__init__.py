@@ -5,6 +5,7 @@ import atexit
 import shutil
 from random import choice, randint
 
+
 from app.main import bundle_app
 from app.middleware import db
 from app.database import (User, Operators, Office, Task, Serial, Media, Touch_store,
@@ -38,6 +39,8 @@ DB_NAME = 'testing.sqlite'
 DB_PATH = absolute_path(DB_NAME)
 TEST_REPEATS = 3
 ENTRY_NUMBER = 4
+
+
 
 
 def teardown_tables(modules):
@@ -190,6 +193,8 @@ def clear_cache():
 def before_exit():
     os.path.isfile(DB_PATH) and os.remove(DB_PATH)
     os.path.isfile(absolute_path('errors.log')) and os.remove(absolute_path('errors.log'))
+
+
 
 @pytest.fixture
 def app():

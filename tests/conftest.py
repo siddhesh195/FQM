@@ -3,6 +3,11 @@ from time import sleep
 
 from . import c,app  # noqa
 from app.tasks import stop_tasks, get_task
+import random
+
+@pytest.fixture(autouse=True)
+def fixed_seed():
+    random.seed(42)
 
 @pytest.fixture
 def get_bg_task():
