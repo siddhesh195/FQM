@@ -291,7 +291,7 @@ def add_office():
 def reset_all_offices():
     ''' reset all offices by removing all tickets. '''
     if current_user.role_id != 1:
-        return jsonify({'status': 'error', 'message': 'Unauthorized access'})
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
     if not has_offices():
         return jsonify({'status': 'error', 'message': 'No offices to reset'})
     

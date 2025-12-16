@@ -33,7 +33,7 @@ def test_fetch_office_and_task_ids(c):
     assert set(fetched_task_ids) == set(expected_task_ids)
 
 @pytest.mark.usefixtures("c")
-def test_reset_all_offices(c,monkeypatch):
+def test_reset_all_offices_success(c,monkeypatch):
     class user:
         def __init__(self):
             self.role_id = 1
@@ -53,5 +53,55 @@ def test_reset_all_offices(c,monkeypatch):
     fill_tickets()
     tickets3 = data.Serial.query.filter(data.Serial.number != 100)
     assert tickets3.count() == initial_tickets_count
+
+@pytest.mark.usefixtures("c")
+def test_reset_all_offices_unauthorized(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id = 2
+    current_user = user()
+    assert has_offices() == True
+    monkeypatch.setattr("app.views.offices.current_user", current_user) 
+
+    response = c.post("/reset_all_offices")
+    assert response.status_code == 403
+    data_response = response.get_json()
+    assert data_response["status"] == "error"
+    assert data_response["message"] == "Unauthorized access"
+
+@pytest.mark.usefixtures("c")
+def test_reset_all_offices_no_offices(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr("app.views.offices.current_user", current_user) 
+    monkeypatch.setattr("app.views.offices.has_offices", lambda: False)
+
+    response = c.post("/reset_all_offices")
+    assert response.status_code == 200
+    data_response = response.get_json()
+    assert data_response["status"] == "error"
+    assert data_response["message"] == "No offices to reset"
+
+@pytest.mark.usefixtures("c")
+def test_reset_all_offices_error(c,monkeypatch):
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    assert has_offices() == True
+    monkeypatch.setattr("app.views.offices.current_user", current_user) 
+    def raise_exception():
+        raise Exception("Database error")
+    monkeypatch.setattr("app.views.offices.data.db.session.commit", raise_exception)
+
+    response = c.post("/reset_all_offices")
+    assert response.status_code == 200
+    data_response = response.get_json()
+    assert data_response["status"] == "error"
+    assert data_response["message"] == "An error occurred while resetting offices"
+    
+
     
 
