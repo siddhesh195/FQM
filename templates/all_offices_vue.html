@@ -219,6 +219,27 @@
                 style="width: 250px;"
                >
         </div>
+        {% if current_user.role_id == 1 and not office_id %}
+       
+        <button class="btn btn-primary" @click="resetAllOffices">
+            Reset All Offices
+        </button>
+    
+        <button class="btn btn-danger" @click="deleteAllOffices">
+            Delete All Offices
+        </button>
+        {% elif current_user.role_id == 1 and office_id %}
+        <button class="btn btn-primary" >
+            Reset this Office
+        </button>
+    
+        <button class="btn btn-danger">
+            Delete this Office
+        </button>
+
+        {% endif %}
+        <br>
+        <br>
 
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -234,10 +255,10 @@
                     <tr v-for="row in paginatedRows" :key="row.id || row.name + '-' + row.number">
                         <td>[[ row.name ]]</td>
                         <td>[[ row.number ]]</td>
-                        <td>[[ row.office_name ]]</td>
-                        <td>[[ row.task_name ]]</td>
+                        <td :title="row.office_name">[[ truncate_text(row.office_name, 20) ]]</td>
+                        <td :title="row.task_name">[[ truncate_text(row.task_name, 20) ]]</td>
                         <td><span class="status-badge" style="background: #d4edda; color: #155724;">[[givestatus(row.status,row.pulled)]]</span></td>
-                        <td>[[ row.pulled_by ]]</td>
+                        <td :title="row.pulled_by">[[ truncate_text(row.pulled_by, 20) ]]</td>
                         <td>[[ row.timestamp ]]</td>
                         <td class="action-icons" style="text-align: center;">
                             <a @click="EditTicket(row.name)" >
@@ -321,8 +342,51 @@
 
 
 {% block vue_methods%}
+   resetAllOffices(){
+    // Confirm action
+    if (!confirm("Are you sure you want to reset all offices? This action cannot be undone.")) {
+        return;
+    }
+    axios.post("{{ url_for('offices.reset_all_offices') }}")
+        .then(response => {
+            if (response.data.status === 'success') {
+                showSwalMessage(response.data.message);
+                this.fetchData(); // Refresh data after reset
+            } else {
+                showSwalMessage("Error: " + response.data.message);
+            }
+        })
+        .catch(error => {
+            showSwalMessage("An error occurred while resetting offices.");
+            console.error(error);
+        });
+    },
+    deleteAllOffices(){
+    // Confirm action
+    if (!confirm("Are you sure you want to delete all offices? This action cannot be undone.")) {
+        return;
+    }
+    axios.post("{{ url_for('offices.delete_all_offices') }}")
+        .then(response => {
+            if (response.data.status === 'success') {
+                showSwalMessage(response.data.message);
+                this.fetchData(); // Refresh data after deletion
+            } else {
+                showSwalMessage("Error: " + response.data.message);
+            }
+        })
+        .catch(error => {
+            showSwalMessage("An error occurred while deleting offices.");
+            console.error(error);
+        });
+    },
     
-
+    truncate_text(text, maxLength) {
+        if (text.length <= maxLength) {
+            return text;
+        }
+        return text.substring(0, maxLength) + '...';
+    },
     async submitTicketForm(ticketName) {
         const formData = await this.openProcessTicketDialog_var(this.status_choices);
         if (!formData) {

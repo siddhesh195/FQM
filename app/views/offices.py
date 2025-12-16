@@ -8,6 +8,7 @@ from app.constants import TICKET_ORDER_NEWEST_PROCESSED,TICKET_WAITING,TICKET_PR
 
 from app.helpers import is_operator,is_office_operator,is_common_task_operator,get_number_of_active_tickets_cached
 from app.helpers import get_number_of_active_tickets_office_cached, get_number_of_active_tickets_task_cached
+from app.helpers import has_offices
 
 from app.forms.manage import ProcessedTicketForm2
 
@@ -284,3 +285,46 @@ def add_office():
                            navbar='#snb1',
                            hash='#da3',
                            serial=data.Serial.all_clean())
+
+@offices.route('/reset_all_offices', methods=['POST'])
+@login_required
+def reset_all_offices():
+    ''' reset all offices by removing all tickets. '''
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+    if not has_offices():
+        return jsonify({'status': 'error', 'message': 'No offices to reset'})
+    
+    
+    tickets = data.Serial.query.filter(data.Serial.number != 100)
+    try:
+        tickets.delete()
+        db.session.commit()
+        return jsonify({'status': 'success', 'message': 'All offices have been reset'})
+    except:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'message': 'An error occurred while resetting offices'})
+
+@offices.route('/delete_all_offices', methods=['POST'])
+@login_required
+def delete_all_offices():
+    ''' delete all offices. '''
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+    if not has_offices():
+        return jsonify({'status': 'error', 'message': 'No offices to delete'})
+    
+    if data.Serial.query.filter(data.Serial.number != 100).count():
+        return jsonify({'status': 'error', 'message': 'Cannot delete offices with existing tickets. Please reset all offices first.'})
+    
+    try:
+        data.Serial.query.delete()
+        data.Office.query.delete()
+        db.session.commit()
+        return jsonify({'status': 'success', 'message': 'All offices have been deleted'})
+    except:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'message': 'An error occurred while deleting offices'})
+    
+    
+
