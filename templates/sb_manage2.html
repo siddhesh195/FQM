@@ -129,7 +129,13 @@
 					{% for task in tasks.in_offices(office.id) %}
 					<li id="tt{{office.id }}{{ task.id }}" >
 					    <a href="{{ url_for('offices.offices_home', o_id=office.id) }}">
-						{{ loop.index }}.  {{ task.name }} 
+						{{ loop.index }}.
+
+						{% if task.name and task.name|length < 8 %}
+                            {{ task.name }}
+				       {% elif task.name %}
+					        <span title="{{ task.name }}">- {{ task.name[:8] }}...</span>
+                       {% endif %}
 					    </a>
 					</li>
 					<!-- Pull is shifted to here -->

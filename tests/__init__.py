@@ -5,6 +5,7 @@ import atexit
 import shutil
 from random import choice, randint
 
+
 from app.main import bundle_app
 from app.middleware import db
 from app.database import (User, Operators, Office, Task, Serial, Media, Touch_store,
@@ -38,6 +39,8 @@ DB_NAME = 'testing.sqlite'
 DB_PATH = absolute_path(DB_NAME)
 TEST_REPEATS = 3
 ENTRY_NUMBER = 4
+
+
 
 
 def teardown_tables(modules):
@@ -191,10 +194,12 @@ def before_exit():
     os.path.isfile(DB_PATH) and os.remove(DB_PATH)
     os.path.isfile(absolute_path('errors.log')) and os.remove(absolute_path('errors.log'))
 
+
+
 @pytest.fixture
 def app():
     dump_db = f'{DB_PATH}.backup'
-    dump_exists = os.path.isfile(dump_db)
+   
 
     app_config = {
         'LOGIN_DISABLED': True,
@@ -210,11 +215,10 @@ def app():
 
     # context created here makes session & db available
     with app.app_context():
-        if dump_exists:
-            shutil.copyfile(dump_db, DB_PATH)
-        else:
-            setup_data()
-            shutil.copyfile(DB_PATH, dump_db)
+        
+       
+        setup_data()
+        shutil.copyfile(DB_PATH, dump_db)
 
         yield app
 
