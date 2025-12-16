@@ -304,6 +304,27 @@ def reset_all_offices():
     except:
         db.session.rollback()
         return jsonify({'status': 'error', 'message': 'An error occurred while resetting offices'})
+
+@offices.route('/delete_all_offices', methods=['POST'])
+@login_required
+def delete_all_offices():
+    ''' delete all offices. '''
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+    if not has_offices():
+        return jsonify({'status': 'error', 'message': 'No offices to delete'})
+    
+    if data.Serial.query.filter(data.Serial.number != 100).count():
+        return jsonify({'status': 'error', 'message': 'Cannot delete offices with existing tickets. Please reset all offices first.'})
+    
+    try:
+        data.Serial.query.delete()
+        data.Office.query.delete()
+        db.session.commit()
+        return jsonify({'status': 'success', 'message': 'All offices have been deleted'})
+    except:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'message': 'An error occurred while deleting offices'})
     
     
 
