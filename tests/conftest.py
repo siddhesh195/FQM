@@ -7,7 +7,7 @@ import random
 
 @pytest.fixture(autouse=True)
 def fixed_seed():
-    random.seed(42)
+    random.seed(24)
 
 @pytest.fixture
 def get_bg_task():
