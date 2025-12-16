@@ -4,8 +4,8 @@
    
 {% macro render_field(field) %}
   {% if field.type != "HiddenField" %}
-    <dt class="ar1 mt-2 mb-1">
-		{{ field.label }}
+    <dt class="ar1 mt-2 mb-1" title="{{ field.label }}">
+		{{ field.label | truncate(15, True, '...')}}
 	</dt>
   {% endif %}
     <dd class="ar1">{{ field(**kwargs)|safe }}
