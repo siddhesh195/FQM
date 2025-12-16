@@ -194,7 +194,7 @@ def before_exit():
 @pytest.fixture
 def app():
     dump_db = f'{DB_PATH}.backup'
-    dump_exists = os.path.isfile(dump_db)
+   
 
     app_config = {
         'LOGIN_DISABLED': True,
