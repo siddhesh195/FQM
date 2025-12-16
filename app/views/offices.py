@@ -52,24 +52,9 @@ def offices_home(o_id=None):
         {"value": value, "label": label}
         for value, label in form.status.choices
     ]
-    office_ids=[]
-    task_ids=[]
-    all_tasks = tasks.query.all()
-    for task in all_tasks:
-        task_ids.append(task.id)
-    if o_id:
-        office_ids.append(o_id)
-    else:
-        try:
-            all_offices = offices.all()
-            for office in all_offices:
-                office_ids.append(office.id)
-        except:
-            pass
-
     
-    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id,
-                           office_ids=office_ids, task_ids=task_ids)
+    
+    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id)
 
 @offices.route('/all_offices_tickets', methods=['GET', 'POST'])
 @login_required
