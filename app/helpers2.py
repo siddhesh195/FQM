@@ -169,4 +169,6 @@ def fetch_tickets_by_date_range(start_date, end_date):
 
         
     
+def to_bool(val):
     
+    return str(val).lower() in ("true")
