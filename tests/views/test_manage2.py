@@ -49,7 +49,7 @@ def test_get_all_tasks_success(c, monkeypatch):
 
 
 @pytest.mark.usefixtures('c')
-def test_unhide_task_not_authorized(c,monkeypatch):
+def test_modify_task_not_authorized(c,monkeypatch):
     class user:
         role_id = 2  # Not an admin
     current_user = user()
@@ -69,7 +69,7 @@ def test_unhide_task_not_authorized(c,monkeypatch):
 
 
 @pytest.mark.usefixtures('c')
-def test_unhide_task_not_found(c, monkeypatch):
+def test_modify_task_not_found(c, monkeypatch):
     class user:
         role_id = 1  # Admin
     current_user = user()
@@ -97,7 +97,7 @@ def test_unhide_task_not_found(c, monkeypatch):
 
 
 @pytest.mark.usefixtures('c')
-def test_unhide_task_no_task_id(c, monkeypatch):
+def test_modify_task_no_task_id(c, monkeypatch):
     class user:
         role_id = 1  # Admin
     current_user = user()
@@ -111,7 +111,7 @@ def test_unhide_task_no_task_id(c, monkeypatch):
 
 
 @pytest.mark.usefixtures('c')
-def test_unhide_task_task_unhide_success(c, monkeypatch):
+def test_modify_task_task_unhide_success(c, monkeypatch):
     class user:
         role_id = 1  # Admin
     current_user = user()
@@ -138,7 +138,7 @@ def test_unhide_task_task_unhide_success(c, monkeypatch):
 
 
 @pytest.mark.usefixtures('c')
-def test_unhide_task_task_hide_success(c, monkeypatch):
+def test_modify_task_task_hide_success(c, monkeypatch):
     class user:
         role_id = 1  # Admin
     current_user = user()
@@ -163,5 +163,30 @@ def test_unhide_task_task_hide_success(c, monkeypatch):
     task = database.Task.query.get(new_task.id)
     assert task.hidden == True
 
+@pytest.mark.usefixtures('c')
+def test_modify_task_name_change_success(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Task
+    new_task = database.Task(name='Original Task Name', hidden=False)
+
+    db.session.add(new_task)
+    db.session.commit()
+
+    #assert the task has the original name
+    task = database.Task.query.get(new_task.id)
+    assert task.name == 'Original Task Name'
+
+    response = c.post('/modify_task', json={'task_id': new_task.id, 'taskName': 'Updated Task Name'})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert data['message'] == f'Task Updated Task Name status updated to None'
+    # Verify that the task name is now updated
+    task = database.Task.query.get(new_task.id)
+    assert task.name == 'Updated Task Name'
 
 

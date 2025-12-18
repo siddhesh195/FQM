@@ -60,6 +60,10 @@ def modify_task():
         status = to_bool(status)
         task.hidden = status
         db.session.commit()
+    
+    if taskName is not None:
+        task.name = taskName
+        db.session.commit()
    
 
     return jsonify({'status': 'success', 'message': f'Task {task.name} status updated to {status}'})
