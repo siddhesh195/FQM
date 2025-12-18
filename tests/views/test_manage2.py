@@ -1,0 +1,167 @@
+import pytest
+import app.database as database
+
+from app.middleware import db
+
+@pytest.mark.usefixtures('c')
+def test_manage_home(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    response = c.get('/manage_home')
+    assert response.status_code == 200
+    assert b'Management Home' in response.data
+
+
+@pytest.mark.usefixtures('c')
+def test_get_all_tasks_not_authorized(c, monkeypatch):
+    class user:
+        role_id = 2  # Not an admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    response = c.get('/get_all_tasks')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Unauthorized'
+
+
+@pytest.mark.usefixtures('c')
+def test_get_all_tasks_success(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # get all existing tasks from the database
+    existing_tasks = database.Task.query.all()
+
+    response = c.get('/get_all_tasks')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert 'tasks' in data
+    assert len(data['tasks']) == len(existing_tasks)
+
+
+
+@pytest.mark.usefixtures('c')
+def test_unhide_task_not_authorized(c,monkeypatch):
+    class user:
+        role_id = 2  # Not an admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+    new_task = database.Task(name='Test Task', hidden=True)
+
+    db.session.add(new_task)
+    db.session.commit()
+    new_task = database.Task.query.filter_by(name='Test Task').first()
+    assert new_task.hidden == True
+
+    response = c.post('/modify_task', json={'task_id': 1, 'status': False})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Unauthorized'
+
+
+@pytest.mark.usefixtures('c')
+def test_unhide_task_not_found(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Task
+    new_task = database.Task(name='Test Task', hidden=True)
+    db.session.add(new_task)
+    db.session.commit()
+
+    new_task = database.Task.query.filter_by(name='Test Task').first()
+    assert new_task.hidden == True
+
+    non_existent_task_name = "Non-existent Task"
+    non_existent_task = database.Task.query.filter_by(name=non_existent_task_name).first()
+
+    assert non_existent_task is None
+
+    non_existent_task_id = 9999  # Assuming this ID does not exist
+    response = c.post(f'/modify_task', json={'task_id': non_existent_task_id, 'status': False})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Task not found'
+
+
+@pytest.mark.usefixtures('c')
+def test_unhide_task_no_task_id(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    response = c.post('/modify_task', json={'status': False})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Task ID not provided'
+
+
+@pytest.mark.usefixtures('c')
+def test_unhide_task_task_unhide_success(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Task
+    new_task = database.Task(name='Test Task to Unhide', hidden=True)
+
+    db.session.add(new_task)
+    db.session.commit()
+
+    #assert the task is hidden
+    task = database.Task.query.get(new_task.id)
+    assert task.hidden == True
+
+    response = c.post('/modify_task', json={'task_id': new_task.id, 'status': False})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert data['message'] == f'Task {new_task.name} status updated to False'
+    # Verify that the task is now unhidden
+    task = database.Task.query.get(new_task.id)
+    assert task.hidden == False
+
+
+@pytest.mark.usefixtures('c')
+def test_unhide_task_task_hide_success(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Task
+    new_task = database.Task(name='Test Task to Unhide', hidden=False)
+
+    db.session.add(new_task)
+    db.session.commit()
+
+    #assert the task is hidden
+    task = database.Task.query.get(new_task.id)
+    assert task.hidden == False
+
+    response = c.post('/modify_task', json={'task_id': new_task.id, 'status': True})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert data['message'] == f'Task {new_task.name} status updated to True'
+    # Verify that the task is now unhidden
+    task = database.Task.query.get(new_task.id)
+    assert task.hidden == True
+
+
+

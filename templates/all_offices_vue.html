@@ -260,7 +260,7 @@
                         <td><span class="status-badge" style="background: #d4edda; color: #155724;">[[givestatus(row.status,row.pulled)]]</span></td>
                         <td :title="row.pulled_by">[[ truncate_text(row.pulled_by, 20) ]]</td>
                         <td>[[ row.timestamp ]]</td>
-                        <td class="action-icons" style="text-align: center;">
+                        <td class="action-icons" >
                             <a @click="EditTicket(row.name)" >
                                 <span class="mr-1 fa fa-pencil text-warning">
                                 </span>
@@ -342,43 +342,43 @@
 
 
 {% block vue_methods%}
-   resetAllOffices(){
-    // Confirm action
-    if (!confirm("Are you sure you want to reset all offices? This action cannot be undone.")) {
-        return;
-    }
-    axios.post("{{ url_for('offices.reset_all_offices') }}")
-        .then(response => {
-            if (response.data.status === 'success') {
-                showSwalMessage(response.data.message);
-                this.fetchData(); // Refresh data after reset
-            } else {
-                showSwalMessage("Error: " + response.data.message);
-            }
-        })
-        .catch(error => {
-            showSwalMessage("An error occurred while resetting offices.");
-            console.error(error);
-        });
+    resetAllOffices(){
+        // Confirm action
+        if (!confirm("Are you sure you want to reset all offices? This action cannot be undone.")) {
+            return;
+        }
+        axios.post("{{ url_for('offices.reset_all_offices') }}")
+            .then(response => {
+                if (response.data.status === 'success') {
+                    showSwalMessage(response.data.message);
+                    this.fetchData(); // Refresh data after reset
+                } else {
+                    showSwalMessage("Error: " + response.data.message);
+                }
+            })
+            .catch(error => {
+                showSwalMessage("An error occurred while resetting offices.");
+                console.error(error);
+            });
     },
     deleteAllOffices(){
-    // Confirm action
-    if (!confirm("Are you sure you want to delete all offices? This action cannot be undone.")) {
-        return;
-    }
-    axios.post("{{ url_for('offices.delete_all_offices') }}")
-        .then(response => {
-            if (response.data.status === 'success') {
-                showSwalMessage(response.data.message);
-                this.fetchData(); // Refresh data after deletion
-            } else {
-                showSwalMessage("Error: " + response.data.message);
-            }
-        })
-        .catch(error => {
-            showSwalMessage("An error occurred while deleting offices.");
-            console.error(error);
-        });
+        // Confirm action
+        if (!confirm("Are you sure you want to delete all offices? This action cannot be undone.")) {
+           return;
+        }
+        axios.post("{{ url_for('offices.delete_all_offices') }}")
+            .then(response => {
+                if (response.data.status === 'success') {
+                    showSwalMessage(response.data.message);
+                    this.fetchData(); // Refresh data after deletion
+                } else {
+                    showSwalMessage("Error: " + response.data.message);
+                }
+            })
+            .catch(error => {
+                showSwalMessage("An error occurred while deleting offices.");
+                console.error(error);
+            });
     },
     
     truncate_text(text, maxLength) {

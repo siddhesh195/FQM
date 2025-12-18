@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %} FQM - {{ page_title }} {% endblock %}
+
+{%block head%}
+{{ super() }}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manage_home.css') }}">
+{% endblock %}
+
+
+
+{% block page_content %}
+<div id="app" class="container" style="margin-top: 20px;" v-cloak>
+   
+    <h1>Management Home</h1>
+
+    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('UnhideTasksComponent')">
+        <div v-if="!Components['UnhideTasksComponent']"> Tasks Management</div>
+        <div v-if="Components['UnhideTasksComponent']">Close Tasks Management</div>
+    </button>
+    <br>
+    <br>
+
+    <component :is="Components['UnhideTasksComponent']"
+    get_all_tasks_url="{{ url_for('manage_app2.get_all_tasks') }}"
+    :openedittaskfunc="openEditTaskDialog_var"
+    >
+    </component>
+
+   
+
+
+</div>
+{% endblock %}
+
+
+{% block vue_data %}
+
+    Components:{
+        UnhideTasksComponent: null,
+    },
+    URLs:{
+        UnhideTasksComponent: "{{ url_for('static', filename='modify_tasks.js') }}"
+    },
+    openEditTaskDialog_var: window.openEditTaskDialog
+
+                   
+{% endblock %}
+
+{% block vue_methods %}
+    async loadComponent(component_name) {
+                
+        const component = this.Components[component_name];
+        if (component) {
+            this.Components[component_name] = null; // Unload component
+            return;
+        }
+        const module = await import(this.URLs[component_name]);
+        this.Components[component_name] = markRaw(module.default);   // Set component
+
+    },
+
+{% endblock %}
+
+{% block vue_computed%}
+    
+
+{% endblock %}
+
+{% block vue_watch%}
+
+
+
+{% endblock %}
+
+{% block vue_mounted %}
+  
+    
+   
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
+
+
+
+
+
