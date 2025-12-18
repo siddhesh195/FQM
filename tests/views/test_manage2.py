@@ -189,4 +189,121 @@ def test_modify_task_name_change_success(c, monkeypatch):
     task = database.Task.query.get(new_task.id)
     assert task.name == 'Updated Task Name'
 
+@pytest.mark.usefixtures('c')
+def test_get_all_offices_not_authorized(c, monkeypatch):
+    class user:
+        role_id = 2  # Not an admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
 
+    response = c.get('/get_all_offices')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Unauthorized'
+
+
+
+@pytest.mark.usefixtures('c')
+def test_get_all_offices_success(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # get all existing offices from the database
+    existing_offices = database.Office.query.all()
+    assert len(existing_offices) > 0  # Ensure there are offices in the database
+
+    response = c.get('/get_all_offices')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert 'offices' in data
+    assert len(data['offices']) == len(existing_offices)
+
+
+@pytest.mark.usefixtures('c')
+def test_modify_office_not_authorized(c,monkeypatch):
+    class user:
+        role_id = 2  # Not an admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+    new_office = database.Office(name='Test Office')
+
+    db.session.add(new_office)
+    db.session.commit()
+    new_office = database.Office.query.filter_by(name='Test Office').first()
+    assert new_office.name == 'Test Office'
+
+    response = c.post('/modify_office', json={'office_id': 1, 'officeName': 'Updated Office'})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Unauthorized'
+
+@pytest.mark.usefixtures('c')
+def test_modify_office_not_found(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Office
+    new_office = database.Office(name='Test Office')
+    db.session.add(new_office)
+    db.session.commit()
+
+    new_office = database.Office.query.filter_by(name='Test Office').first()
+    assert new_office.name == 'Test Office'
+
+    non_existent_office_name = "Non-existent Office"
+    non_existent_office = database.Office.query.filter_by(name=non_existent_office_name).first()
+
+    assert non_existent_office is None
+
+    non_existent_office_id = 9999  # Assuming this ID does not exist
+    response = c.post(f'/modify_office', json={'office_id': non_existent_office_id, 'officeName': 'Updated Name'})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Office not found'
+
+@pytest.mark.usefixtures('c')
+def test_modify_office_no_office_id(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    response = c.post('/modify_office', json={'officeName': 'Updated Name'})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Office ID not provided'
+
+@pytest.mark.usefixtures('c')
+def test_modify_office_name_change_success(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Office
+    new_office = database.Office(name='Original Office Name')
+
+    db.session.add(new_office)
+    db.session.commit()
+
+    #assert the office has the original name
+    office = database.Office.query.get(new_office.id)
+    assert office.name == 'Original Office Name'
+
+    response = c.post('/modify_office', json={'office_id': new_office.id, 'officeName': 'Updated Office Name'})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert data['message'] == f'Office {new_office.name} updated successfully'
+    # Verify that the office name is now updated
+    office = database.Office.query.get(new_office.id)
+    assert office.name == 'Updated Office Name'

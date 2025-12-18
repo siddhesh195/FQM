@@ -14,21 +14,28 @@
    
     <h1>Management Home</h1>
 
-    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('UnhideTasksComponent')">
-        <div v-if="!Components['UnhideTasksComponent']"> Tasks Management</div>
-        <div v-if="Components['UnhideTasksComponent']">Close Tasks Management</div>
+    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('ManageTasksComponent')">
+        <div v-if="!Components['ManageTasksComponent']"> Tasks Management</div>
+        <div v-if="Components['ManageTasksComponent']">Close Tasks Management</div>
+    </button>
+
+    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('ManageOfficesComponent')">
+        <div v-if="!Components['ManageOfficesComponent']"> Offices Management</div>
+        <div v-if="Components['ManageOfficesComponent']">Close Offices Management</div>
     </button>
     <br>
     <br>
 
-    <component :is="Components['UnhideTasksComponent']"
+    <component :is="Components['ManageTasksComponent']"
     get_all_tasks_url="{{ url_for('manage_app2.get_all_tasks') }}"
     :openedittaskfunc="openEditTaskDialog_var"
     >
     </component>
-
-   
-
+    <component :is="Components['ManageOfficesComponent']"
+    get_all_offices_url="{{ url_for('manage_app2.get_all_offices') }}"
+    :openeditofficefunc="openEditOfficeDialog_var"
+    >
+    </component>
 
 </div>
 {% endblock %}
@@ -37,12 +44,16 @@
 {% block vue_data %}
 
     Components:{
-        UnhideTasksComponent: null,
+        ManageTasksComponent: null,
+        ManageOfficesComponent: null
+
     },
     URLs:{
-        UnhideTasksComponent: "{{ url_for('static', filename='modify_tasks.js') }}"
+        ManageTasksComponent: "{{ url_for('static', filename='modify_tasks.js') }}",
+        ManageOfficesComponent: "{{ url_for('static', filename='modify_offices.js') }}"
     },
-    openEditTaskDialog_var: window.openEditTaskDialog
+    openEditTaskDialog_var: window.openEditTaskDialog,
+    openEditOfficeDialog_var: window.openEditOfficeDialog
 
                    
 {% endblock %}

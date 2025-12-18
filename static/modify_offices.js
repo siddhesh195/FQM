@@ -1,13 +1,13 @@
 
 export default {
-    name: "ManageTasks",
+    name: "ManageOffices",
 
     props: {
-        get_all_tasks_url: {
+        get_all_offices_url: {
             type: String,
             required: true
         },
-        openedittaskfunc: {
+        openeditofficefunc: {
             type: Function,
             required: true
         }
@@ -19,20 +19,18 @@ export default {
             // pagination
             currentPage: 1,
             perPage: 5,
-            pageName: 'Manage Tasks',
+            pageName: 'Manage Offices',
             rows: [],
             columns: [
-                { label: 'Task Name'},
-                { label: 'Hidden Status' },
-                { label: 'Offices' },
+                { label: 'Office Name'}
             ],
 
         };
     },
 
     methods: {
-        async EditTask(task_id){
-            const formData = await this.openedittaskfunc();
+        async EditOffice(office_id){
+            const formData = await this.openeditofficefunc();
             if (!formData) {
                 return;
             }
@@ -43,39 +41,34 @@ export default {
                     payload[key]=formData[key];
                 }
             }
-            payload['task_id']=task_id;
-            const url='/modify_task';
+            payload['office_id']=office_id;
+            const url='/modify_office';
             axios.post(url, payload)
             .then(response => {
                 if (response.data.status === "success"){
                     console.log(response.data.message);
                 } else {
-                    console.error("Failed to edit task:", response.data.message);
+                    console.error("Failed to edit office:", response.data.message);
                 }
-                this.get_all_tasks();
+                this.get_all_offices();
             })
             .catch(error => {
-                console.error("There was an error editing the task:", error);
+                console.error("There was an error editing the office:", error);
             });
             
         },
 
-        get_all_tasks(){
+        get_all_offices(){
 
-            axios.get(this.get_all_tasks_url)
+            axios.get(this.get_all_offices_url)
             .then(response => {
-                this.rows = response.data.tasks;
+                this.rows = response.data.offices;
             })
             .catch(error => {
-                console.error("There was an error fetching tasks:", error);
+                console.error("There was an error fetching offices:", error);
             });
         },
-        show_hidden_label(hidden_status){
-            if (hidden_status){
-                return "Is Hidden";
-            }
-            return "Not Hidden";
-        },
+
         nextPage() {
             this.goToPage(this.currentPage + 1);
         },
@@ -109,10 +102,7 @@ export default {
             // filter rows based on search query
             return this.rows.filter(row => {
                 return [
-                    row.name,
-                    row.hidden,
-                    row.offices,
-                    this.show_hidden_label(row.hidden)
+                    row.name
                 ] 
                 .filter(v => v !== null && v !== undefined)
                 .some(v => String(v).toLowerCase().includes(q));
@@ -126,7 +116,7 @@ export default {
         }
     },
     mounted() {
-       this.get_all_tasks();
+       this.get_all_offices();
      
     },
     template: `
@@ -137,7 +127,7 @@ export default {
                     <input
                         type="text"
                         class="form-control"
-                        placeholder="Search tasks..."
+                        placeholder="Search offices..."
                         v-model="searchQuery"
                         style="width: 250px;"
                     >
@@ -146,28 +136,18 @@ export default {
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Task Name</th>
-                                <th> Task Hidden Status</th>
-                                <th> Task Offices</th>
+                                <th>Office Name</th>
                                 <th> Actions </th>
                             </tr>
                         </thead>
                         
                         <tbody>
-                            <tr v-for="task in paginatedRows" :key="task.id">
-                                <td>{{ task.name }}</td>
-                                <td>{{ show_hidden_label(task.hidden) }}</td>
+                            <tr v-for="office in paginatedRows" :key="office.id">
+                                <td>{{ office.name }}</td>
 
-                                <!-- Scrollable cell -->
-                                <td>
-                                    <div class="office-scroll">
-                                        <div v-for="office in task.offices" :key="office">
-                                            {{ office }}
-                                        </div>
-                                    </div>
-                                </td>
+                                
                                 <td class="action-icons">
-                                    <a @click="EditTask(task.id)" >
+                                    <a @click="EditOffice(office.id)" >
                                         <span class="mr-1 fa fa-pencil text-warning">
                                         </span>
                                     </a>

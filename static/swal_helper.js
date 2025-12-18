@@ -118,7 +118,7 @@ async function openEditTaskDialog() {
     .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
     .join("");
   const { value: formData } = await Swal.fire({
-    title: 'Process Ticket',
+    title: 'Edit Task',
     html: `
       <div style="text-align: left;">
         <!-- Task Name Input Field -->
@@ -150,6 +150,43 @@ async function openEditTaskDialog() {
       return {
         status: status,
         taskName: taskName
+      };
+    }
+  });
+
+  // If user cancels, formData will be undefined
+  return formData || null;
+}
+
+
+async function openEditOfficeDialog() {
+ 
+  
+  const { value: formData } = await Swal.fire({
+    title: 'Edit Office',
+    html: `
+      <div style="text-align: left;">
+        <!-- Office Name Input Field -->
+        <label style="display: block; margin-bottom: 5px;">Office Name:</label>
+        <input type="text" id="swal-office-name" class="swal2-input" placeholder="Change Office Name">
+
+      </div>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    preConfirm: () => {
+   
+      
+      const officeName = document.getElementById('swal-office-name').value.trim();
+
+      if (!officeName) {
+        Swal.showValidationMessage('You must modify office name');
+        return false;
+      }
+
+      return {
+        officeName: officeName
       };
     }
   });
