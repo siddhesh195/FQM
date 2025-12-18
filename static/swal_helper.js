@@ -107,3 +107,90 @@ async function openProcessTicketDialog(select_choices) {
   // If user cancels, formData will be undefined
   return formData || null;
 }
+
+async function openEditTaskDialog() {
+  const select_choices = [
+    { value: '', label: 'No Change' },
+    { value: false, label: 'Unhide' },
+    { value: true, label: 'Hide' }
+  ];
+  const optionsHtml = select_choices
+    .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
+    .join("");
+  const { value: formData } = await Swal.fire({
+    title: 'Edit Task',
+    html: `
+      <div style="text-align: left;">
+        <!-- Task Name Input Field -->
+        <label style="display: block; margin-bottom: 5px;">Task Name:</label>
+        <input type="text" id="swal-task-name" class="swal2-input" placeholder="Change Task Name">
+
+        <!-- Hidden or Unhidden -->
+        <label style="display: block; margin-bottom: 5px; margin-top: 15px;">Select task hidden status:</label>
+        <select id="swal-status" class="swal2-input">
+          ${optionsHtml}
+        </select>
+        
+        
+      </div>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    preConfirm: () => {
+   
+      const status = document.getElementById('swal-status').value;
+      const taskName = document.getElementById('swal-task-name').value.trim();
+
+      if (!status && !taskName) {
+        Swal.showValidationMessage('You must modify at least one field');
+        return false;
+      }
+
+      return {
+        status: status,
+        taskName: taskName
+      };
+    }
+  });
+
+  // If user cancels, formData will be undefined
+  return formData || null;
+}
+
+
+async function openEditOfficeDialog() {
+ 
+  
+  const { value: formData } = await Swal.fire({
+    title: 'Edit Office',
+    html: `
+      <div style="text-align: left;">
+        <!-- Office Name Input Field -->
+        <label style="display: block; margin-bottom: 5px;">Office Name:</label>
+        <input type="text" id="swal-office-name" class="swal2-input" placeholder="Change Office Name">
+
+      </div>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    preConfirm: () => {
+   
+      
+      const officeName = document.getElementById('swal-office-name').value.trim();
+
+      if (!officeName) {
+        Swal.showValidationMessage('You must modify office name');
+        return false;
+      }
+
+      return {
+        officeName: officeName
+      };
+    }
+  });
+
+  // If user cancels, formData will be undefined
+  return formData || null;
+}

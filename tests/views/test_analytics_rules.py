@@ -21,7 +21,7 @@ def test_update_task_threshold(c,monkeypatch):
 
     mock_user = MockUser()
     monkeypatch.setattr('app.views.analytics_rules.current_user', mock_user)
-    url = '/get_all_tasks'
+    url = '/get_all_tasks_thresholds'
     resp = c.get(url)
     assert resp.status_code == 200
     data = resp.get_json()
@@ -46,7 +46,7 @@ def test_update_task_threshold(c,monkeypatch):
     resp_data = resp.get_json()
     assert resp_data['message'] == 'Threshold updated successfully'
 
-    url2 = '/get_all_tasks'
+    url2 = '/get_all_tasks_thresholds' 
     resp2 = c.get(url2)
     assert resp2.status_code == 200
     data2 = resp2.get_json()
