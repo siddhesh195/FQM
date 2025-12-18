@@ -17,7 +17,7 @@ def analytics_rules_home():
     return render_template('analytics_rules.html', page_title='Analytics Rules')
 
 
-@analytics_rules.route('/get_all_tasks')
+@analytics_rules.route('/get_all_tasks_thresholds')
 @login_required
 def get_all_tasks():
     if current_user.role_id != 1:
