@@ -225,8 +225,8 @@
             Reset All Offices
         </button>
     
-        <button class="btn btn-danger" @click="deleteAllOffices">
-            Delete All Offices
+        <button class="btn btn-danger" @click="deleteAllOfficesAndTasks">
+            Delete All Offices and Tasks
         </button>
         {% elif current_user.role_id == 1 and office_id %}
         <button class="btn btn-primary" >
@@ -361,24 +361,24 @@
                 console.error(error);
             });
     },
-    deleteAllOffices(){
-        // Confirm action
-        if (!confirm("Are you sure you want to delete all offices? This action cannot be undone.")) {
-           return;
-        }
-        axios.post("{{ url_for('offices.delete_all_offices') }}")
-            .then(response => {
-                if (response.data.status === 'success') {
-                    showSwalMessage(response.data.message);
-                    this.fetchData(); // Refresh data after deletion
-                } else {
-                    showSwalMessage("Error: " + response.data.message);
-                }
-            })
-            .catch(error => {
-                showSwalMessage("An error occurred while deleting offices.");
-                console.error(error);
-            });
+    deleteAllOfficesAndTasks(){
+    // Confirm action
+    if (!confirm("Are you sure you want to delete all offices and tasks? This action cannot be undone.")) {
+        return;
+    }
+    axios.post("{{ url_for('offices.delete_all_offices_and_tasks') }}")
+        .then(response => {
+            if (response.data.status === 'success') {
+                showSwalMessage(response.data.message);
+                this.fetchData(); // Refresh data after deletion
+            } else {
+                showSwalMessage("Error: " + response.data.message);
+            }
+        })
+        .catch(error => {
+            showSwalMessage("An error occurred while deleting offices.");
+            console.error(error);
+        });
     },
     
     truncate_text(text, maxLength) {
