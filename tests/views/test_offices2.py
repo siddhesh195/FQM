@@ -1,7 +1,8 @@
 import pytest
 import app.database as data
 from app.helpers import has_offices
-from tests.__init__ import fill_tickets,fill_offices,fill_tasks,fill_users
+from tests.__init__ import fill_tickets,fill_offices,fill_tasks
+
 
 
 @pytest.mark.usefixtures("c")
@@ -165,9 +166,15 @@ def test_delete_all_offices_and_tasks_success(c, monkeypatch):
     monkeypatch.setattr("app.views.offices.current_user", current_user)
     monkeypatch.setattr("app.views.offices.has_offices", lambda: True)
 
+    #get all tasks
+    tasks = data.Task.query.all()
+    tasks_count_before_deletion = len(tasks)
+    assert tasks_count_before_deletion > 0
+
     #reset all offices first
     tickets = data.Serial.query.filter(data.Serial.number != 100)
     tickets_count_before_deletion = tickets.count()
+    assert tickets_count_before_deletion > 0
     
     response = c.post("/reset_all_offices")
     assert response.status_code == 200
@@ -211,7 +218,7 @@ def test_delete_all_offices_and_tasks_success(c, monkeypatch):
     assert data_response["status"] == "success"
     assert data_response["message"] == "All offices have been deleted"
 
-    #sanity check to ensure offices are deleted
+    #sanity check to ensure offices and tasks are deleted
     offices_after_deletion = data.Office.query.all()
     assert len(offices_after_deletion) == 0
     
@@ -220,7 +227,9 @@ def test_delete_all_offices_and_tasks_success(c, monkeypatch):
 
    
 
+    tasks = data.Task.query.all()
+    assert len(tasks) == tasks_count_before_deletion
 
 
-    
+
 
