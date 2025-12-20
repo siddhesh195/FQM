@@ -304,10 +304,16 @@ def delete_all_offices_and_tasks():
     
     try:
         
-        data.Office.query.delete()
-        data.Task.query.delete()
+        data.Serial.query.delete(synchronize_session=False)
+        offices = data.Office.query.all()
+        
+        # delete offices
+        for office in offices:
+            db.session.delete(office)
+    
+        data.Task.query.delete(synchronize_session=False)
         db.session.commit()
-        return jsonify({'status': 'success', 'message': 'All offices have been deleted'})
+        return jsonify({'status': 'success', 'message': 'All offices and Tasks have been deleted'})
     except:
         db.session.rollback()
         return jsonify({'status': 'error', 'message': 'An error occurred while deleting offices'})

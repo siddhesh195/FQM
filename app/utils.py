@@ -393,6 +393,8 @@ def create_default_records():
                                  role_id=1))
         db.session.commit()
 
+def create_default_background_tasks():
+    ''' create default background tasks if not existing. '''
     for task, settings in BACKGROUNDTASKS_DEFAULTS.items():
         task_settings = data.BackgroundTask.get(name=task)
 
