@@ -88,7 +88,7 @@ class CacheTicketsMixin:
                                                                display_settings.prefix))
                         successes.append(language)
                     except Exception as exception:
-                        log_error(exception, quiet=self.quiet)
+                        #log_error(exception, quiet=self.quiet)
                         self.log(exception, error=True)
 
                 if successes:
