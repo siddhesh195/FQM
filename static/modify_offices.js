@@ -29,6 +29,11 @@ export default {
     },
 
     methods: {
+        DeleteOffice(office_id){
+            if (!confirm("Are you sure you want to delete this office? This action cannot be undone.")){
+                return;
+            }
+        },
         async EditOffice(office_id){
             const formData = await this.openeditofficefunc();
             if (!formData) {
@@ -149,6 +154,10 @@ export default {
                                 <td class="action-icons">
                                     <a @click="EditOffice(office.id)" >
                                         <span class="mr-1 fa fa-pencil text-warning">
+                                        </span>
+                                    </a>
+                                    <a @click="DeleteOffice(office.id)" >
+                                        <span class="mr-1 fa fa-trash text-danger">
                                         </span>
                                     </a>
                                 </td>

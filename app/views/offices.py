@@ -318,3 +318,34 @@ def delete_all_offices_and_tasks():
         db.session.rollback()
         return jsonify({'status': 'error', 'message': 'An error occurred while deleting offices'})
     
+@offices.route('/reset_single_office', methods=['POST'])
+@login_required
+def reset_single_office():
+    ''' reset a single office by removing all its tickets. '''
+
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+
+    json_data = request.get_json()
+    office_id = json_data.get("office_id", None)
+    if not office_id:
+        return jsonify({'status': 'error', 'message': 'Office ID is required'}), 400
+
+    if current_user.role_id != 1 and not is_office_operator(office_id):
+        return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
+    
+    
+    
+    office = data.Office.get(office_id)
+    if not office:
+        return jsonify({'status': 'error', 'message': 'Office not found'})
+    
+    tickets = data.Serial.query.filter_by(office_id=office_id).filter(data.Serial.number != 100)
+    try:
+        tickets.delete()
+        db.session.commit()
+        return jsonify({'status': 'success', 'message': f'Office {office.name} has been reset'})
+    except:
+        db.session.rollback()
+        return jsonify({'status': 'error', 'message': 'An error occurred while resetting the office'})
+
