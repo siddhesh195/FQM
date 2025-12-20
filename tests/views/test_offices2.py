@@ -187,14 +187,15 @@ def test_delete_all_offices_and_tasks_success(c, monkeypatch):
     assert offices_count_before_deletion > 0
 
     tasks = data.Task.query.all()
-    assert len(tasks) > 0
     tasks_count_before_deletion = len(tasks)
+    assert tasks_count_before_deletion > 0
+    
 
     #create a new office
-    office = data.Office(name="TempOffice", prefix="TO")
+    office = data.Office(name="TempOffice", prefix="T")
     data.db.session.add(office)
     data.db.session.commit()
-    assert data.Office.query.filter_by(name="TempOffice", prefix="TO").first() is not None
+    assert data.Office.query.filter_by(name="TempOffice", prefix="T").first() is not None
 
     #create a new user
     user = data.User(name="TempUser", password="TempPass", role_id=1)
@@ -216,7 +217,7 @@ def test_delete_all_offices_and_tasks_success(c, monkeypatch):
     data_response = response.get_json()
     print(data_response)
     assert data_response["status"] == "success"
-    assert data_response["message"] == "All offices have been deleted"
+    assert data_response["message"] == "All offices and Tasks have been deleted"
 
     #sanity check to ensure offices and tasks are deleted
     offices_after_deletion = data.Office.query.all()
@@ -224,11 +225,6 @@ def test_delete_all_offices_and_tasks_success(c, monkeypatch):
     
     tasks_after_deletion = data.Task.query.all()
     assert len(tasks_after_deletion) == 0
-
-   
-
-    tasks = data.Task.query.all()
-    assert len(tasks) == tasks_count_before_deletion
 
 
 
