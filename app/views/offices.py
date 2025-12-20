@@ -290,9 +290,9 @@ def reset_all_offices():
         db.session.rollback()
         return jsonify({'status': 'error', 'message': 'An error occurred while resetting offices'})
 
-@offices.route('/delete_all_offices', methods=['POST'])
+@offices.route('/delete_all_offices_and_tasks', methods=['POST'])
 @login_required
-def delete_all_offices():
+def delete_all_offices_and_tasks():
     ''' delete all offices. '''
     if current_user.role_id != 1:
         return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
@@ -303,10 +303,17 @@ def delete_all_offices():
         return jsonify({'status': 'error', 'message': 'Cannot delete offices with existing tickets. Please reset all offices first.'})
     
     try:
-        data.Serial.query.delete()
-        data.Office.query.delete()
+        
+        data.Serial.query.delete(synchronize_session=False)
+        offices = data.Office.query.all()
+        
+        # delete offices
+        for office in offices:
+            db.session.delete(office)
+    
+        data.Task.query.delete(synchronize_session=False)
         db.session.commit()
-        return jsonify({'status': 'success', 'message': 'All offices have been deleted'})
+        return jsonify({'status': 'success', 'message': 'All offices and Tasks have been deleted'})
     except:
         db.session.rollback()
         return jsonify({'status': 'error', 'message': 'An error occurred while deleting offices'})

@@ -28,7 +28,7 @@ from app.views.manage2 import manage_app2
 from app.views.reports import reports
 from app.views.analytics_rules import analytics_rules
 from app.views.offices import offices
-from app.utils import (absolute_path, log_error, create_default_records, get_bp_endpoints)
+from app.utils import (absolute_path, log_error, create_default_records,create_default_background_tasks, get_bp_endpoints)
 from app.helpers import is_user_office_operator
 from app.database import Serial
 from app.tasks import start_tasks
@@ -37,6 +37,8 @@ from app.events import setup_events
 from app.constants import (SUPPORTED_LANGUAGES, SUPPORTED_MEDIA_FILES, VERSION, MIGRATION_FOLDER,
                            DATABASE_FILE, SECRET_KEY)
 from flask_socketio import SocketIO
+from sqlalchemy import event
+from sqlalchemy.engine import Engine
 
 
 def create_app(config={}):
@@ -78,6 +80,15 @@ def create_app(config={}):
     # mock translator class, can be replaced with real translator later
     # or remove it altogther if all templates do not use translate method anymore
     gtranslator.init_app(app) 
+
+    
+    @event.listens_for(Engine, "connect")
+    def set_sqlite_pragma(dbapi_connection, connection_record):
+        cursor = dbapi_connection.cursor()
+        cursor.execute("PRAGMA foreign_keys=ON")
+        cursor.close()
+    
+    
    
 
     # Register blueprints
@@ -115,6 +126,7 @@ def create_db(app, testing=False):
                 if not isinstance(exception, OperationalError):
                     log_error(exception, quiet=os.name == 'nt')
         create_default_records()
+        create_default_background_tasks()
 
 
 def bundle_app(config={}):

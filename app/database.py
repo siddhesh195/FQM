@@ -16,8 +16,8 @@ from flask import flash, has_request_context
 
 mtasks = db.Table(
     'mtasks',
-    db.Column('office_id', db.Integer, db.ForeignKey('offices.id'), primary_key=True),
-    db.Column('task_id', db.Integer, db.ForeignKey('tasks.id'), primary_key=True))
+    db.Column('office_id', db.Integer, db.ForeignKey('offices.id',ondelete="CASCADE"), primary_key=True),
+    db.Column('task_id', db.Integer, db.ForeignKey('tasks.id',ondelete="CASCADE"), primary_key=True))
 
 
 class Mixin:
@@ -86,7 +86,7 @@ class Office(db.Model, Mixin):
     name = db.Column(db.String(300), unique=True)
     timestamp = db.Column(db.DateTime(), index=True, default=datetime.utcnow)
     prefix = db.Column(db.String(2))
-    operators = db.relationship('Operators', backref='operators')
+    operators = db.relationship('Operators', backref='offices',cascade="all, delete-orphan")
     tasks = db.relationship('Task', secondary=mtasks, lazy='subquery',
                             backref=db.backref('offices', lazy=True))
 
@@ -599,7 +599,7 @@ class Operators(db.Model, Mixin):
     __tablename__ = "operators"
     crap = db.Column(db.Integer, primary_key=True)
     id = db.Column(db.Integer)
-    office_id = db.Column(db.Integer, db.ForeignKey('offices.id'))
+    office_id = db.Column(db.Integer, db.ForeignKey('offices.id',ondelete="CASCADE"))
 
     def __init__(self, id, office_id):
         self.id = id
@@ -841,7 +841,7 @@ class Display_store(db.Model, Mixin):
                  scolor="rgb(224, 224, 224)", audio="false",
                  hfont="El Messiri", tfont="Mada", repeats="3", effect="fade",
                  sfont="Amiri", mduration="3000", rrate="2000",
-                 announce="en-us", ikey=4, vkey=None, akey=None,
+                 announce="en-us", ikey=None, vkey=None, akey=None,
                  anr=2, anrt="each", bgcolor="rgb(0,0,0)", tmp=1,
                  wait_for_announcement=True,
                  hide_ticket_index=False,
@@ -978,7 +978,7 @@ class Vid(db.Model, Mixin):
                      nullable=True)
 
     def __init__(self, vname="", enable=0, ar=1, controls=1,
-                 mute=2, vkey=6):
+                 mute=2, vkey=None):
         self.vname = vname
         self.enable = enable
         self.ar = ar

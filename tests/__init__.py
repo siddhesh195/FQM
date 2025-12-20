@@ -43,16 +43,9 @@ ENTRY_NUMBER = 4
 
 
 
-def teardown_tables(modules):
-    if modules:
-        modules.pop().query.delete()
-        db.session.commit()
-        return teardown_tables(modules)
-
 
 def setup_data():
     db.create_all()
-    teardown_tables(copy.copy(MODULES))
     recreate_defaults(DEFAULT_MODULES)
     fill_offices()
     fill_tasks()
@@ -199,7 +192,9 @@ def before_exit():
 @pytest.fixture
 def app():
     dump_db = f'{DB_PATH}.backup'
-   
+
+    if os.path.exists(DB_PATH):
+        os.remove(DB_PATH) 
 
     app_config = {
         'LOGIN_DISABLED': True,
@@ -215,8 +210,7 @@ def app():
 
     # context created here makes session & db available
     with app.app_context():
-        
-       
+
         setup_data()
         shutil.copyfile(DB_PATH, dump_db)
 
