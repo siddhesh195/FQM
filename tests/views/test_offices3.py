@@ -3,9 +3,13 @@ import app.database as data
 
 
 
-@pytest.mark.skip(reason="needs to enabled after merging in main branch")
+
 @pytest.mark.usefixtures("c")
-def test_delete_an_office_with_operators_error(c,monkeypatch):
+def test_delete_an_office_with_operators_no_error(c,monkeypatch):
+    ''' Test deleting an office that has operators assigned to it.
+        The test ensures that the office is deleted without errors,
+        and that the associated operators are also removed due to cascade delete.
+    '''
 
     class user:
         def __init__(self):
@@ -34,6 +38,11 @@ def test_delete_an_office_with_operators_error(c,monkeypatch):
     data.db.session.commit()
     fetched_operator = data.Operators.query.filter_by(id=fetched_user.id, office_id=fetched_office.id).first()
     assert fetched_operator is not None
+
+    # attempt to delete the office via the endpoint
+    # it should work now due to cascade delete
+    url = '/delete_an_office'
+    response = c.post(url, json={'office_id': fetched_office.id})
 
     
 
