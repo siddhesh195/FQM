@@ -44,6 +44,14 @@
 				{{ translate('Add new office', 'en', [defLang]) }}
 			    </a>
 			</li>
+			{% if current_user.role_id==1 %}
+			<li id="da5" >
+			    <a href="{{ url_for('manage_app2.manage_home') }}">
+				<span ></span>
+				{{ translate('Manage Home', 'en', [defLang]) }}
+			    </a>
+
+			{% endif %}
 			{% if offices.count() > 1 %}
 			<li id="da6" >
 			    <a href="{{ url_for('manage_app.common_task_a') }}">
