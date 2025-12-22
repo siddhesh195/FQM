@@ -33,6 +33,19 @@ export default {
             if (!confirm("Are you sure you want to delete this office? This action cannot be undone.")){
                 return;
             }
+            axios.post('/delete_an_office', {'office_id': office_id})
+            .then(response => {
+                if (response.data.status === "success"){
+                
+                    alert(response.data.message);
+                } else {
+                    alert(response.data.message);
+                }
+                this.get_all_offices();
+            })
+            .catch(error => {
+                console.error("There was an error deleting the office:", error);
+            });
         },
         async EditOffice(office_id){
             const formData = await this.openeditofficefunc();
