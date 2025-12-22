@@ -34,7 +34,7 @@
 				</p>
 				<hr>
                 <div >
-				{{ render_field(form.name, class="form-control", **{'v-model': 'office_name'}) }}
+				{{ render_field(form.name, class="form-control", **{'v-model': 'office_name', 'length': 60}) }}
 				</div>
 				{{ render_field(form.prefix, class="form-control", **{'v-model': 'office_prefix'}) }}
 				<p class="pb-5"></p>
@@ -58,33 +58,33 @@ add_office_url: "{{ url_for('offices.add_office') }}"
 {% endblock %}
 
 {% block vue_methods %}
-addOffice(){
-	
-	axios.post(this.add_office_url, {
-		name: this.office_name,
-		prefix: this.office_prefix,
-		csrf_token: this.csrf_token
-	}).then(response => {
-		
-		if(response.data.status === 'success'){
-			showSwalMessage(response.data.message);
-			this.office_name = '';
-			this.office_prefix = '';
-		}else{
-			showSwalMessage(response.data.message);
-		}
-	}).catch(error => {
-		console.error('There was an error!', error);
-		if(error.response && error.response.data && error.response.data.message){
-			console.log(error.response.data.message);
-		} else {
-			console.log('An unexpected error occurred.');
-		}
-	});
-//reload the window
-window.location.reload();
-	
+async addOffice() {
+    try {
+        const response = await axios.post(this.add_office_url, {
+            name: this.office_name,
+            prefix: this.office_prefix,
+            csrf_token: this.csrf_token
+        });
+
+        if (response.data.status === 'success') {
+            const result = await showSwalMessage(response.data.message);
+
+            if (result.isConfirmed) {
+                window.location.reload();
+            }
+
+            this.office_name = '';
+            this.office_prefix = '';
+        } else {
+            await showSwalMessage(response.data.message);
+        }
+
+    } catch (error) {
+        console.error(error);
+        await showSwalMessage('An unexpected error occurred.');
+    }
 }
+
 
 {% endblock %}
 
