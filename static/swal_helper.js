@@ -33,7 +33,7 @@ document.head.appendChild(style);
 
 // Final combined SweetAlert helper
 function showSwalMessage(message, duration = null) {
-    Swal.fire({
+    return Swal.fire({
         title: "Message",
         text: message,
         icon: "info",
@@ -41,14 +41,10 @@ function showSwalMessage(message, duration = null) {
         allowOutsideClick: false,
         allowEscapeKey: false,
         customClass: {
-            popup: 'custom-big-swal',     // bigger box
-            title: 'big-text',            // bigger title font
-            htmlContainer: 'big-text',    // bigger message font
-            confirmButton: 'big-btn'      // bigger OK button
-        }
-    }).then(() => {
-        if (duration) {
-            setTimeout(() => Swal.close(), duration);
+            popup: 'custom-big-swal',
+            title: 'big-text',
+            htmlContainer: 'big-text',
+            confirmButton: 'big-btn'
         }
     });
 }
