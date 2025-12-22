@@ -363,7 +363,7 @@
                         active_tickets_task_by_office: {},
                         office_ids: [],
                         task_ids: [],
-                            
+                        rows: [],
                         {% block vue_data %}
                             
                         {% endblock %}
@@ -404,9 +404,14 @@
                         axios.post("{{ url_for('offices.all_offices_tickets') }}",{
                             o_id: {% if office_id and office_id is not none %}{{ office_id }}{% else %}null{% endif %}
                         }).then(response => {
-                             this.rows = response.data;
+                            if (Array.isArray(response.data)) {
+                                this.rows = response.data;
+                            } else {
+                                this.rows = [];
+                            }
                         }).catch(error => {
                             console.error("Error fetching data:", error);
+                            this.rows = [];
                         });      
                     },
 
