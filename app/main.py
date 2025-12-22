@@ -24,6 +24,7 @@ from app.views.administrate import administrate
 from app.views.core import core
 from app.views.customize import cust_app
 from app.views.manage import manage_app
+from app.views.manage2 import manage_app2
 from app.views.reports import reports
 from app.views.analytics_rules import analytics_rules
 from app.views.offices import offices
@@ -84,6 +85,7 @@ def create_app(config={}):
     app.register_blueprint(core)
     app.register_blueprint(cust_app)
     app.register_blueprint(manage_app)
+    app.register_blueprint(manage_app2)
     app.register_blueprint(setup_api(), url_prefix='/api/v1')
     app.register_blueprint(reports)
     app.register_blueprint(analytics_rules)
