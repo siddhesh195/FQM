@@ -229,7 +229,7 @@
             Delete All Offices and Tasks
         </button>
         {% elif current_user.role_id == 1 and office_id %}
-        <button class="btn btn-primary" @click="resetOneOffice(office_id)" >
+        <button class="btn btn-primary" @click="resetOneOffice({{ office_id }})" >
             Reset this Office
         </button>
     
