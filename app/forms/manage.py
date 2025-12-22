@@ -7,7 +7,7 @@ from app.constants import TICKET_STATUSES
 
 
 class OfficeForm(LocalizedForm):
-    name = StringField('Enter a unique office name : ',
+    name = StringField('Enter a unique office name(at least 3 letters): ',
                        validators=[InputRequired('Required not less than 3 nor more than 300 letters'),
                                    Length(3, 300)])
     prefix = SelectField('Select unique prefix for the office : ',

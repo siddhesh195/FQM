@@ -2,10 +2,10 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
    
-{% macro render_field(field) %}
+{% macro render_field(field,length=30) %}
   {% if field.type != "HiddenField" %}
     <dt class="ar1 mt-2 mb-1" title="{{ field.label }}">
-		{{ field.label | truncate(30, True, '...')}}
+		{{ field.label | truncate(length, True, '...')}}
 	</dt>
   {% endif %}
     <dd class="ar1">{{ field(**kwargs)|safe }}
