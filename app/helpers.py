@@ -438,7 +438,7 @@ def get_number_of_active_tickets_office_cached(*args, **kwargs):
         .count()
     )
 
-@cache_call(None)
+#@cache_call(None)
 def get_number_of_active_tickets_task_cached(*args, **kwargs):
     return (
         data.Serial.all_task_tickets(*args, **kwargs)
