@@ -41,6 +41,10 @@ def delete_an_office():
     print(db.session.execute("PRAGMA foreign_keys").scalar(),"")
 
     try:
+        #if any tasks are assigned only to this office, they should be deleted as well
+        for task in office.tasks:
+            if len(task.offices) == 1:
+                db.session.delete(task)
         db.session.delete(office)
         db.session.commit()
        

@@ -157,14 +157,76 @@ def test_delete_an_office_with_tasks_and_operators_no_error(c,monkeypatch):
     # it should work due to cascade delete in operators
     url = '/delete_an_office'
     response = c.post(url, json={'office_id': fetched_office.id})
-
-    
-
+    assert response.status_code == 200
+    data_response = response.get_json()
+    assert data_response['status'] == 'success'
+    assert data_response['message'] == 'Office deleted successfully'
+    # check if the office still exists using raw sql query
+    result = data.db.session.execute(f"SELECT * FROM offices WHERE id={fetched_office.id}").fetchone()  
+    assert result is None
     # check if the operator still exists using raw sql query
     result = data.db.session.execute(f"SELECT * FROM operators WHERE id={fetched_user.id} AND office_id={fetched_office.id}").fetchone()
     assert result is None
 
     #check if the task still exists using raw sql query
+    result = data.db.session.execute(f"SELECT * FROM tasks WHERE id={fetched_task.id}").fetchone()
+    assert result is None
+
+
+
+@pytest.mark.usefixtures("c")
+def test_delete_an_office_tasks_of_other_offices_not_deleted(c,monkeypatch):
+    ''' Tasks associated with other offices too should not be deleted when an office is deleted.
+        This test ensures that only tasks exclusively linked to the deleted office are removed.
+    '''
+
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices2.current_user', current_user)
+
+    #create two test offices
+    test_office1 = data.Office(name="Test Office 1")
+    test_office2 = data.Office(name="Test Office 2")
+    data.db.session.add(test_office1)
+    data.db.session.add(test_office2)
+    data.db.session.commit()
+    fetched_office1 = data.Office.query.filter_by(name="Test Office 1").first()
+    fetched_office2 = data.Office.query.filter_by(name="Test Office 2").first()
+    assert fetched_office1 is not None
+    assert fetched_office2 is not None
+
+    #create a new task assigned to both offices
+    test_task = data.Task(name="Shared Task")
+    data.db.session.add(test_task)
+    data.db.session.commit()
+
+    fetched_task = data.Task.query.filter_by(name="Shared Task").first()
+    assert fetched_task is not None
+
+    #attach the task to both offices
+    fetched_office1.tasks.append(fetched_task)
+    fetched_office2.tasks.append(fetched_task)
+    data.db.session.commit()
+    #assert the task is assigned to both offices
+    fetched_office1 = data.Office.query.filter_by(name="Test Office 1").first()
+    fetched_office2 = data.Office.query.filter_by(name="Test Office 2").first()
+    assert fetched_task in fetched_office1.tasks
+    assert fetched_task in fetched_office2.tasks
+
+    url= '/delete_an_office'
+    response = c.post(url, json={'office_id': fetched_office1.id})
+    assert response.status_code == 200
+    data_response = response.get_json()
+    assert data_response['status'] == 'success'
+    assert data_response['message'] == 'Office deleted successfully'
+
+    # raw sql query to check if office1 still exists
+    result = data.db.session.execute(f"SELECT * FROM offices WHERE id={fetched_office1.id}").fetchone()
+    assert result is None
+
+    # raw sql query to check if task still exists
     result = data.db.session.execute(f"SELECT * FROM tasks WHERE id={fetched_task.id}").fetchone()
     assert result is not None
 
