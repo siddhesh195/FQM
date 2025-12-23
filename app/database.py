@@ -88,7 +88,7 @@ class Office(db.Model, Mixin):
     prefix = db.Column(db.String(2))
     operators = db.relationship('Operators', backref='offices',cascade="all, delete-orphan")
     tasks = db.relationship('Task', secondary=mtasks, lazy='subquery',
-                            backref=db.backref('offices', lazy=True))
+                            backref=db.backref('offices', lazy=True, passive_deletes=True),passive_deletes=True)
 
     def __init__(self, name=None, prefix=None):
         self.name = name or self.get_generic_available_name()
@@ -263,8 +263,8 @@ class Serial(db.Model, TicketsMixin, Mixin):
     pulledBy = db.Column(db.Integer)
     on_hold = db.Column(db.Boolean, default=False)
     status = db.Column(db.String(10), default=TICKET_PROCESSED)
-    office_id = db.Column(db.Integer, db.ForeignKey('offices.id'))
-    task_id = db.Column(db.Integer, db.ForeignKey('tasks.id'))
+    office_id = db.Column(db.Integer, db.ForeignKey('offices.id',ondelete='CASCADE'))
+    task_id = db.Column(db.Integer, db.ForeignKey('tasks.id',ondelete='CASCADE'))
 
     ORDERS = {TICKET_ORDER_NEWEST_PROCESSED: [p, timestamp.desc()],
               TICKET_ORDER_NEWEST: [timestamp.desc()],
