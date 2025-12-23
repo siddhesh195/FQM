@@ -6,8 +6,7 @@ import app.database as data
 
 from app.constants import TICKET_ORDER_NEWEST_PROCESSED,TICKET_WAITING,TICKET_PROCESSED, TICKET_ATTENDED
 
-from app.helpers import is_operator,is_office_operator,is_common_task_operator,get_number_of_active_tickets_cached
-from app.helpers import get_number_of_active_tickets_office_cached, get_number_of_active_tickets_task_cached
+from app.helpers import is_operator,is_office_operator,is_common_task_operator
 from app.helpers import has_offices
 
 from app.forms.manage import ProcessedTicketForm2
@@ -157,15 +156,6 @@ def update_token_details():
     except:
         return jsonify({'status': 'error', 'message': 'An error occurred while updating the ticket'})
     
-
-
-@offices.route('/get_number_of_active_tickets', methods=['GET'])
-@login_required
-@reject_operator
-def get_all_active_tickets():
-    active_tickets = get_number_of_active_tickets_cached()
-    return jsonify({'active_tickets': active_tickets})
-
 
 @login_required
 @offices.route('/pull_next_ticket', methods=['POST'])
