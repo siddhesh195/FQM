@@ -32,13 +32,21 @@ def delete_an_office():
     if not office:
         return jsonify({'status': 'error', 'message': 'Office not found'}), 404
 
-
+    #if office has tickets cannot delete
+    all_office_tickets = data.Serial.all_office_tickets(office_id=office.id).all()
+    if all_office_tickets:
+        
+        return jsonify({'status': 'error', 'message': 'Cannot delete office with active tickets'}), 200
+    
+    print(db.session.execute("PRAGMA foreign_keys").scalar(),"")
 
     try:
         db.session.delete(office)
         db.session.commit()
+       
         return jsonify({'status': 'success', 'message': 'Office deleted successfully'})
     except Exception as e:
+        print(e)
         db.session.rollback()
         return jsonify({'status': 'error', 'message': str(e)}), 500
 

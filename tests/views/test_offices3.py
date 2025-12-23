@@ -2,10 +2,109 @@ import pytest
 import app.database as data
 
 
+@pytest.mark.usefixtures("c")
+def test_delete_nonexistent_office(c, monkeypatch):
+    ''' Test deleting a non-existent office.
+        The test ensures that the appropriate error message is returned.
+    '''
 
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices2.current_user', current_user)
+
+    # attempt to delete a non-existent office
+    url = '/delete_an_office'
+    response = c.post(url, json={'office_id': 99999})  # assuming this ID does not exist
+
+    assert response.status_code == 404
+    data_response = response.get_json()
+    assert data_response['status'] == 'error'
+    assert data_response['message'] == 'Office not found'
 
 @pytest.mark.usefixtures("c")
-def test_delete_an_office_with_operators_no_error(c,monkeypatch):
+def test_delete_office_unauthorized(c, monkeypatch):
+    ''' Test deleting an office with an unauthorized user.
+        The test ensures that the appropriate error message is returned.
+    '''
+
+    class user:
+        def __init__(self):
+            self.role_id = 2  # non-admin role
+    current_user = user()
+    monkeypatch.setattr('app.views.offices2.current_user', current_user)
+
+    # attempt to delete an office
+    url = '/delete_an_office'
+    response = c.post(url, json={'office_id': 1})  # office_id can be any value
+
+    assert response.status_code == 403
+    data_response = response.get_json()
+    assert data_response['status'] == 'error'
+    assert data_response['message'] == 'Unauthorized'
+
+@pytest.mark.usefixtures("c")
+def test_delete_office_no_id(c, monkeypatch):
+    ''' Test deleting an office without providing an office ID.
+        The test ensures that the appropriate error message is returned.
+    '''
+
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices2.current_user', current_user)
+
+    # attempt to delete an office without providing an ID
+    url = '/delete_an_office'
+    response = c.post(url, json={})  # no office_id provided
+
+    assert response.status_code == 400
+    data_response = response.get_json()
+    assert data_response['status'] == 'error'
+    assert data_response['message'] == 'Office ID is required'
+
+@pytest.mark.usefixtures("c")
+def test_delete_office_with_tickets_error(c, monkeypatch):
+    ''' Test deleting an office that has active tickets.
+        The test ensures that the appropriate error message is returned.
+    '''
+
+    class user:
+        def __init__(self):
+            self.role_id = 1
+    current_user = user()
+    monkeypatch.setattr('app.views.offices2.current_user', current_user)
+
+    # create a test office
+    test_office = data.Office(name="Test Office With Tickets")
+    data.db.session.add(test_office)
+    data.db.session.commit()
+    fetched_office = data.Office.query.filter_by(name="Test Office With Tickets").first()
+    assert fetched_office is not None
+
+    #create a task
+    test_task = data.Task(name="Test Task")
+    data.db.session.add(test_task)
+    data.db.session.commit()
+    fetched_task = data.Task.query.filter_by(name="Test Task").first()
+    assert fetched_task is not None
+
+    # create a ticket associated with the office
+    data.Serial.create_new_ticket(office=fetched_office,task=fetched_task,name_or_number="Test Ticket")
+
+    # attempt to delete the office via the endpoint
+    url = '/delete_an_office'
+    response = c.post(url, json={'office_id': fetched_office.id})
+
+    assert response.status_code == 200
+    data_response = response.get_json()
+    assert data_response['status'] == 'error'
+    assert data_response['message'] == 'Cannot delete office with active tickets'
+    
+@pytest.mark.usefixtures("c")
+def test_delete_an_office_with_tasks_and_operators_no_error(c,monkeypatch):
     ''' Test deleting an office that has operators assigned to it.
         The test ensures that the office is deleted without errors,
         and that the associated operators are also removed due to cascade delete.
@@ -24,6 +123,19 @@ def test_delete_an_office_with_operators_no_error(c,monkeypatch):
     fetched_office = data.Office.query.filter_by(name="Test Office").first()
     assert fetched_office is not None
 
+    #create a new task 
+    test_task = data.Task(name="Test Task")
+    data.db.session.add(test_task)
+    data.db.session.commit()
+    fetched_task = data.Task.query.filter_by(name="Test Task").first()
+    assert fetched_task is not None
+
+    #attach task to the office
+    fetched_office.tasks.append(fetched_task)
+    data.db.session.commit()
+    fetched_office = data.Office.query.filter_by(name="Test Office").first()
+    assert fetched_task in fetched_office.tasks
+
     #create a new user
 
     test_user = data.User(name="operator_user",password="password", role_id=3)  # role_id=3 for operator
@@ -39,8 +151,10 @@ def test_delete_an_office_with_operators_no_error(c,monkeypatch):
     fetched_operator = data.Operators.query.filter_by(id=fetched_user.id, office_id=fetched_office.id).first()
     assert fetched_operator is not None
 
-    # attempt to delete the office via the endpoint
-    # it should work now due to cascade delete
+
+
+    # delete the office via the endpoint
+    # it should work due to cascade delete in operators
     url = '/delete_an_office'
     response = c.post(url, json={'office_id': fetched_office.id})
 
@@ -49,3 +163,8 @@ def test_delete_an_office_with_operators_no_error(c,monkeypatch):
     # check if the operator still exists using raw sql query
     result = data.db.session.execute(f"SELECT * FROM operators WHERE id={fetched_user.id} AND office_id={fetched_office.id}").fetchone()
     assert result is None
+
+    #check if the task still exists using raw sql query
+    result = data.db.session.execute(f"SELECT * FROM tasks WHERE id={fetched_task.id}").fetchone()
+    assert result is not None
+
