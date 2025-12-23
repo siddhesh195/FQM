@@ -167,25 +167,6 @@ def get_all_active_tickets():
     return jsonify({'active_tickets': active_tickets})
 
 
-@offices.route('/get_number_of_active_office_tickets', methods=['GET', 'POST'])
-@login_required
-def get_all_active_office_tickets():
-    json_data = request.get_json()
-    o_id = json_data.get("o_id") if request.is_json else None
-    active_tickets = get_number_of_active_tickets_office_cached(o_id)
-    return jsonify({'active_tickets': active_tickets})
-
-
-@offices.route('/get_number_of_active_task_tickets', methods=['GET', 'POST'])
-@login_required
-def get_all_active_task_tickets():
-    json_data = request.get_json()
-    t_id = json_data.get("t_id")
-    office_id = json_data.get("office_id")
-    active_tickets = get_number_of_active_tickets_task_cached(task_id=t_id, office_id=office_id)
-    return jsonify({'active_tickets': active_tickets})
-
-
 @login_required
 @offices.route('/pull_next_ticket', methods=['POST'])
 def pull_next_ticket():
