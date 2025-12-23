@@ -426,11 +426,11 @@ def get_all_offices_cached():
 def get_settings_cached():
     return data.Settings.get()
 
-@cache_call(None)
+#@cache_call(None)
 def get_number_of_active_tickets_cached():
     return data.Serial.query.filter_by(p=False).count()
 
-@cache_call(None)
+#@cache_call(None)
 def get_number_of_active_tickets_office_cached(*args, **kwargs):
     return (
         data.Serial.all_office_tickets(*args, **kwargs)
