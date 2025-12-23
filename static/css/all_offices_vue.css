@@ -1,0 +1,196 @@
+body {
+            background: #f5f7fa;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .search-wrapper {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-wrapper input {
+            border-radius: 20px;
+            padding-left: 40px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .search-wrapper input:focus {
+            border-color: #5cb85c;
+            box-shadow: 0 0 8px rgba(92, 184, 92, 0.2);
+        }
+
+        .search-wrapper:before {
+            content: "\f002";
+            font-family: FontAwesome;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            z-index: 10;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .table thead th {
+            border: none !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            padding: 15px 12px;
+            vertical-align: middle;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .table tbody td {
+            padding: 12px;
+            vertical-align: middle;
+            border: none !important;
+            color: #555;
+        }
+
+        .table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .action-icons a {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 50%;
+            margin: 0 3px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .action-icons a:hover {
+            transform: scale(1.15);
+        }
+
+        .action-icons .fa-pencil {
+            background: #fff3cd;
+        }
+
+        .action-icons .fa-pencil:hover {
+            background: #ffc107;
+        }
+
+        .action-icons .fa-minus {
+            background: #d1ecf1;
+        }
+
+        .action-icons .fa-minus:hover {
+            background: #17a2b8;
+            color: white !important;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .pagination-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 15px 25px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .page-info {
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .pagination {
+            margin: 0;
+        }
+
+        .pagination > li > a,
+        .pagination > li > button {
+            border-radius: 6px !important;
+            margin: 0 3px;
+            border: 1px solid #ddd;
+            color: #667eea;
+            font-weight: 500;
+            padding: 8px 14px;
+            transition: all 0.3s;
+        }
+
+        .pagination > li > a:hover,
+        .pagination > li > button:hover {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .pagination > .active > a,
+        .pagination > .active > button {
+            background: #667eea !important;
+            border-color: #667eea !important;
+            color: white !important;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .pagination > .disabled > a,
+        .pagination > .disabled > button {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .table-responsive {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .pagination-wrapper {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-wrapper input {
+                width: 100% !important;
+            }
+        }
