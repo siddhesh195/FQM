@@ -388,7 +388,6 @@ def on_hold(ticket, redirect_to):
 # remove @cache_call('json') to reflect language changes immediately
 @core.route('/feed', defaults={'office_id': None})
 @core.route('/feed/<int:office_id>')
-@cache_call('json')
 def feed(office_id=None):
     ''' stream list of waiting tickets and current ticket. '''
     display_settings = data.Display_store.get()
