@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request
 from flask_login import login_required, current_user
-from app.helpers import reject_operator
 
 import app.database as data
 
@@ -16,6 +15,8 @@ from app.middleware import db
 
 from app.forms.manage import OfficeForm
 from app.utils import remove_string_noise
+from datetime import datetime
+from app.helpers import reject_operator
 
 
 offices = Blueprint('offices', __name__)
@@ -144,11 +145,27 @@ def update_token_details():
         return jsonify({'status': 'error', 'message': 'Ticket not found'})
     try:
         if form.validate_on_submit():
+            if ticket.status == status:
+                return jsonify({'status': 'error', 'message': 'Ticket is already in the desired status'})
+            
             if (status ==TICKET_PROCESSED or status == TICKET_ATTENDED) and not ticket.p:
                 return jsonify({'status': 'error', 'message': 'Ticket must be pulled before processing/attending'})
+            if status == TICKET_PROCESSED and ticket.status!=TICKET_ATTENDED:
+                return jsonify({'status': 'error', 'message': 'Ticket must be in process before processing'})
 
             if status==TICKET_WAITING:
                 ticket.p= False
+                ticket.timestamp2= None
+                ticket.timestamp3= None
+
+            if status==TICKET_PROCESSED:
+                ticket.timestamp3= datetime.utcnow()
+                
+            if status==TICKET_ATTENDED:
+                if not ticket.timestamp2:
+                    ticket.timestamp2= datetime.utcnow()
+                ticket.timestamp3= None
+
             ticket.status=status
             db.session.commit()
             return jsonify({'status': 'success', 'message': 'Ticket updated successfully'})

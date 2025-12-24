@@ -8,7 +8,7 @@ import app.views.core
 import app.printer
 import app.database
 import app.utils
-from .. import NAMES, TEST_REPEATS, fill_tickets, do_until_truthy
+from tests.conftest import NAMES, TEST_REPEATS, fill_tickets, do_until_truthy
 from app.middleware import db
 from app.utils import absolute_path
 from app.constants import TICKET_WAITING

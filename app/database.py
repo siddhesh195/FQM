@@ -86,7 +86,7 @@ class Office(db.Model, Mixin):
     name = db.Column(db.String(300), unique=True)
     timestamp = db.Column(db.DateTime(), index=True, default=datetime.utcnow)
     prefix = db.Column(db.String(2))
-    operators = db.relationship('Operators', backref='offices',cascade="all, delete-orphan")
+    operators = db.relationship('Operators', backref='offices',passive_deletes=True)
     tasks = db.relationship('Task', secondary=mtasks, lazy='subquery',
                             backref=db.backref('offices', lazy=True, passive_deletes=True),passive_deletes=True)
 
@@ -253,6 +253,8 @@ class Serial(db.Model, TicketsMixin, Mixin):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime(), index=True, default=datetime.utcnow)
+    timestamp2 = db.Column(db.DateTime(),nullable=True)
+    timestamp3 = db.Column(db.DateTime(),nullable=True)
     date = db.Column(db.Date(), default=datetime.utcnow().date)
     name = db.Column(db.String(300), nullable=True)
     n = db.Column(db.Boolean)

@@ -1,6 +1,6 @@
 import pytest
 
-from . import TEST_REPEATS
+from tests.conftest import TEST_REPEATS
 from app.database import Task, Settings, Serial, Office
 from app.settings import single_row
 import app.views.core
