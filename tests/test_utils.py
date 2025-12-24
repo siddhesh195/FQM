@@ -1,7 +1,7 @@
 import pytest
 import os
 
-from . import DB_NAME
+from tests.conftest import DB_NAME
 from app.middleware import db
 from app.database import (Aliases)
 from app.utils import (get_with_alias, execute, absolute_path)

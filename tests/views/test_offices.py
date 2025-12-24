@@ -387,10 +387,10 @@ def test_pull_next_ticket(c):
     assert json_response['ticket_name'] == ticket_names[0]
 
 
-@pytest.mark.usefixtures("app","c")
-def test_add_offices_form_validation_failed_no_csrf(app,c,monkeypatch):
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_offices_form_validation_failed_no_csrf(flask_app,c,monkeypatch):
 
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
     class user:
         def __init__(self):
             self.role_id = 1
@@ -412,15 +412,15 @@ def test_add_offices_form_validation_failed_no_csrf(app,c,monkeypatch):
     assert json_response['message'] == 'Form validation failed'
 
 
-@pytest.mark.usefixtures("app","c")
-def test_add_offices_form_validation_pass_and_failed_due_to_name_length(app,c,monkeypatch):
-    app.config["WTF_CSRF_ENABLED"] = True
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_offices_form_validation_pass_and_failed_due_to_name_length(flask_app,c,monkeypatch):
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     class user:
@@ -472,15 +472,15 @@ def test_add_offices_form_validation_pass_and_failed_due_to_name_length(app,c,mo
    
 
 
-@pytest.mark.usefixtures("app","c")
-def test_add_offices_form_validation_failed_due_to_wrong_prefix(app,c,monkeypatch):
-    app.config["WTF_CSRF_ENABLED"] = True
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_offices_form_validation_failed_due_to_wrong_prefix(flask_app,c,monkeypatch):
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     class user:
@@ -513,16 +513,16 @@ def test_add_offices_form_validation_failed_due_to_wrong_prefix(app,c,monkeypatc
     
 
 
-@pytest.mark.usefixtures("app","c")
-def test_add_offices_office_name_exists(app,c,monkeypatch):
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_offices_office_name_exists(flask_app,c,monkeypatch):
 
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     class user:
@@ -555,16 +555,16 @@ def test_add_offices_office_name_exists(app,c,monkeypatch):
    
 
 
-@pytest.mark.usefixtures("app","c")
-def test_add_offices_unauthorized_access(app,c,monkeypatch):
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_offices_unauthorized_access(flask_app,c,monkeypatch):
 
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     class user:
@@ -588,16 +588,16 @@ def test_add_offices_unauthorized_access(app,c,monkeypatch):
     assert json_response['status'] == 'error'
     assert json_response['message'] == 'Unauthorized access'
 
-@pytest.mark.usefixtures("app","c")
-def test_add_offices_success(app,c,monkeypatch):
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_offices_success(flask_app,c,monkeypatch):
 
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     class user:

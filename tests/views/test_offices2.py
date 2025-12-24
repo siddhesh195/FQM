@@ -1,7 +1,7 @@
 import pytest
 import app.database as data
 from app.helpers import has_offices
-from tests.__init__ import fill_tickets,fill_offices,fill_tasks
+from tests.conftest import fill_tickets,fill_offices,fill_tasks
 
 
 

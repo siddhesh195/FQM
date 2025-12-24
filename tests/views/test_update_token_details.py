@@ -32,13 +32,13 @@ def test_update_token_details_form_validation_failed(c):
 
 
 
-@pytest.mark.usefixtures("app","c")
-def test_update_token_details_no_ticket(app,c):
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_no_ticket(flask_app,c):
     
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Get correct CSRF token from session
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     url='/update_token_details'
@@ -59,16 +59,16 @@ def test_update_token_details_no_ticket(app,c):
 
 
 
-@pytest.mark.usefixtures("app","c")
-def test_update_token_details_invalid_status(app,c):
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_invalid_status(flask_app,c):
     
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     all_tickets = data.Serial.all_clean()
@@ -93,16 +93,16 @@ def test_update_token_details_invalid_status(app,c):
     assert json_response['message'] == 'Form validation failed'
 
 
-@pytest.mark.usefixtures("app","c")
-def test_update_token_details_ticket_not_pulled(app,c):
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_ticket_not_pulled(flask_app,c):
     
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     all_tickets = data.Serial.all_clean()
@@ -133,16 +133,16 @@ def test_update_token_details_ticket_not_pulled(app,c):
     assert json_response['message'] == 'Ticket must be pulled before processing/attending'
 
 
-@pytest.mark.usefixtures("app","c")
-def test_update_token_details_same_status(app,c):
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_same_status(flask_app,c):
     
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     all_tickets = data.Serial.all_clean()
@@ -170,19 +170,19 @@ def test_update_token_details_same_status(app,c):
     assert json_response['message'] == 'Ticket is already in the desired status'
 
 
-@pytest.mark.usefixtures("app","c")
-def test_update_token_details_invalid_transition(app,c):
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_invalid_transition(flask_app,c):
     """
     Processed without being attended
     """
     
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     all_tickets = data.Serial.all_clean()
@@ -215,17 +215,17 @@ def test_update_token_details_invalid_transition(app,c):
 
 
 
-@pytest.mark.usefixtures("app","c")
-def test_update_token_details_success(app,c):
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_success(flask_app,c):
     
     #Enable CSRF protection for this test
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     all_tickets = data.Serial.all_clean()
@@ -259,18 +259,18 @@ def test_update_token_details_success(app,c):
     updated_ticket = data.Serial.query.filter_by(name=ticket_name).first()
     assert updated_ticket.status == new_status
 
-@pytest.mark.usefixtures("app","c")
-def test_check_processing_time_from_timestamps(app,c):
+@pytest.mark.usefixtures("flask_app","c")
+def test_check_processing_time_from_timestamps(flask_app,c):
     """
     Test to verify that the processing time is correctly calculated from timestamps.
     """
-    app.config["WTF_CSRF_ENABLED"] = True
+    flask_app.config["WTF_CSRF_ENABLED"] = True
 
     #Initial GET to set up session
     c.get('/')
 
     #Get correct CSRF token from session:
-    with app.test_request_context():
+    with flask_app.test_request_context():
         token = generate_csrf()
 
     all_tickets = data.Serial.all_clean()
