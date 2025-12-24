@@ -1,6 +1,7 @@
 import pytest
 from app import helpers2
 from app.middleware import db
+import string
 
 class FakeSerial:
     def __init__(self,id,name,pulled_by, office,task,status):
@@ -147,7 +148,7 @@ def test_generate_token_for_task():
     from app.helpers2 import generate_token_for_task
     token = generate_token_for_task()
     assert len(token) == 8
-    assert token.isupper()
+    assert all(c in string.hexdigits.upper() for c in token)
 
 
 
