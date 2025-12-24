@@ -151,6 +151,13 @@ def test_delete_an_office_with_tasks_and_operators_no_error(c,monkeypatch):
     fetched_operator = data.Operators.query.filter_by(id=fetched_user.id, office_id=fetched_office.id).first()
     assert fetched_operator is not None
 
+    # check if the operator still exists using raw sql query
+    result = data.db.session.execute(f"SELECT * FROM operators WHERE id={fetched_user.id}").fetchone()
+    assert result is not None
+
+    #check if the task still exists using raw sql query
+    result = data.db.session.execute(f"SELECT * FROM tasks WHERE id={fetched_task.id}").fetchone()
+    assert result is not None
 
 
     # delete the office via the endpoint
@@ -165,7 +172,7 @@ def test_delete_an_office_with_tasks_and_operators_no_error(c,monkeypatch):
     result = data.db.session.execute(f"SELECT * FROM offices WHERE id={fetched_office.id}").fetchone()  
     assert result is None
     # check if the operator still exists using raw sql query
-    result = data.db.session.execute(f"SELECT * FROM operators WHERE id={fetched_user.id} AND office_id={fetched_office.id}").fetchone()
+    result = data.db.session.execute(f"SELECT * FROM operators WHERE id={fetched_user.id}").fetchone()
     assert result is None
 
     #check if the task still exists using raw sql query
@@ -202,18 +209,29 @@ def test_delete_an_office_tasks_of_other_offices_not_deleted(c,monkeypatch):
     data.db.session.add(test_task)
     data.db.session.commit()
 
-    fetched_task = data.Task.query.filter_by(name="Shared Task").first()
-    assert fetched_task is not None
-
-    #attach the task to both offices
-    fetched_office1.tasks.append(fetched_task)
-    fetched_office2.tasks.append(fetched_task)
+    #create task only for office to be deleted
+    test_task2 = data.Task(name="Exclusive Task")
+    data.db.session.add(test_task2)
     data.db.session.commit()
+    fetched_exclusive_task = data.Task.query.filter_by(name="Exclusive Task").first()
+    assert fetched_exclusive_task is not None
+
+    fetched_shared_task = data.Task.query.filter_by(name="Shared Task").first()
+    assert fetched_shared_task is not None
+
+    #attach the shared task to both offices
+    fetched_office1.tasks.append(fetched_shared_task)
+    fetched_office2.tasks.append(fetched_shared_task)
+    data.db.session.commit()
+    #attach the exclusive task to only office1
+    fetched_office1.tasks.append(fetched_exclusive_task)
+    data.db.session.commit()
+    
     #assert the task is assigned to both offices
     fetched_office1 = data.Office.query.filter_by(name="Test Office 1").first()
     fetched_office2 = data.Office.query.filter_by(name="Test Office 2").first()
-    assert fetched_task in fetched_office1.tasks
-    assert fetched_task in fetched_office2.tasks
+    assert fetched_shared_task in fetched_office1.tasks
+    assert fetched_shared_task in fetched_office2.tasks
 
     url= '/delete_an_office'
     response = c.post(url, json={'office_id': fetched_office1.id})
@@ -226,7 +244,11 @@ def test_delete_an_office_tasks_of_other_offices_not_deleted(c,monkeypatch):
     result = data.db.session.execute(f"SELECT * FROM offices WHERE id={fetched_office1.id}").fetchone()
     assert result is None
 
-    # raw sql query to check if task still exists
-    result = data.db.session.execute(f"SELECT * FROM tasks WHERE id={fetched_task.id}").fetchone()
+    # raw sql query to check if shared task still exists
+    result = data.db.session.execute(f"SELECT * FROM tasks WHERE id={fetched_shared_task.id}").fetchone()
     assert result is not None
+
+    # raw sql query to check if exclusive task is deleted
+    result = data.db.session.execute(f"SELECT * FROM tasks WHERE id={fetched_exclusive_task.id}").fetchone()
+    assert result is None
 
