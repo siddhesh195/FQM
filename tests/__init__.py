@@ -45,7 +45,7 @@ ENTRY_NUMBER = 4
 
 
 def setup_data():
-    db.create_all()
+
     recreate_defaults(DEFAULT_MODULES)
     fill_offices()
     fill_tasks()
@@ -211,6 +211,10 @@ def app():
     # context created here makes session & db available
     with app.app_context():
 
+        import app.database
+
+        
+        db.create_all()
         setup_data()
         shutil.copyfile(DB_PATH, dump_db)
 
