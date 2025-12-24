@@ -16,6 +16,7 @@ from app.middleware import db
 from app.forms.manage import OfficeForm
 from app.utils import remove_string_noise
 from datetime import datetime
+from app.helpers import reject_operator
 
 
 offices = Blueprint('offices', __name__)
