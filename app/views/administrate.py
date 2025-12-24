@@ -211,7 +211,9 @@ def user_u(user):
         form.role.data = user.role_id
 
         if user.role_id == 3:
-            form.offices.data = data.Operators.get(user.id).office_id
+            operator = data.Operators.query.filter_by(id=user.id).first()
+            if operator:
+                 form.offices.data = operator.office_id
 
     return render_template('user_add.html',
                            form=form, navbar='#snb3',
