@@ -5,4 +5,3 @@ pytest-repeat==0.8.0
 coverage==4.5.4
 flake8==3.7.9
 pandas
-openpyxl
