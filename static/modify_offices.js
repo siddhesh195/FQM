@@ -169,7 +169,7 @@ export default {
                                         <span class="mr-1 fa fa-pencil text-warning">
                                         </span>
                                     </a>
-                                    <a @click="DeleteOffice(office.id)" >
+                                    <a @click="DeleteOffice(office.id)" class="delete-office-link"> >
                                         <span class="mr-1 fa fa-trash text-danger">
                                         </span>
                                     </a>
