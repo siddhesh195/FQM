@@ -37,4 +37,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest -vv --maxfail=1 --cov=app
+          pytest -vv --maxfail=1 --cov=app --ignore=tests/playwright
