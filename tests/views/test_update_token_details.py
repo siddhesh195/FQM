@@ -7,7 +7,7 @@ from app.constants import TICKET_STATUSES
 
 
 @pytest.mark.usefixtures("c")
-def test_update_token_details_form_validation_failed(c):
+def test_form_validation_failed(c):
     """
     Test updating ticket details with missing CSRF token"""
 
@@ -134,7 +134,7 @@ def test_update_token_details_ticket_not_pulled(flask_app,c):
 
 
 @pytest.mark.usefixtures("flask_app","c")
-def test_update_token_details_same_status(flask_app,c):
+def test_update_token_details_same_status_waiting_not_pulled(flask_app,c):
     
     flask_app.config["WTF_CSRF_ENABLED"] = True
 
@@ -151,8 +151,83 @@ def test_update_token_details_same_status(flask_app,c):
     ticket_to_update = all_tickets[3]
     ticket_name = ticket_to_update.name
     current_status = ticket_to_update.status
+    print("current_status",current_status)
+    new_status = current_status  #Same status, waiting 
+
+    url='/update_token_details'
+    payload = {
+        'ticket_name': ticket_name,
+        'status': new_status,
+        'csrf_token': token
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+
+    json_response = resp.get_json()
+  
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Ticket is already in the desired status'
+
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_same_status_waiting_pulled(flask_app,c):
+    
+    flask_app.config["WTF_CSRF_ENABLED"] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    #Get correct CSRF token from session:
+    with flask_app.test_request_context():
+        token = generate_csrf()
+
+    all_tickets = data.Serial.all_clean()
+    
    
+    ticket_to_update = all_tickets[3]
+    ticket_name = ticket_to_update.name
+    current_status = ticket_to_update.status #Waiting
     new_status = current_status  #Same status
+
+    #Ensure the ticket is pulled
+    ticket_to_update.p = True
+    db.session.commit()
+
+    url='/update_token_details'
+    payload = {
+        'ticket_name': ticket_name,
+        'status': new_status,
+        'csrf_token': token
+    }
+
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+
+    json_response = resp.get_json()
+  
+    assert json_response['status'] == 'success'
+    assert json_response['message'] == 'Ticket updated successfully'
+
+@pytest.mark.usefixtures("flask_app","c")
+def test_update_token_details_same_status_processed(flask_app,c):
+    
+    flask_app.config["WTF_CSRF_ENABLED"] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    #Get correct CSRF token from session:
+    with flask_app.test_request_context():
+        token = generate_csrf()
+
+    all_tickets = data.Serial.all_clean()
+    
+   
+    ticket_to_update = all_tickets[1]
+    ticket_name = ticket_to_update.name
+    current_status = ticket_to_update.status #Processed
+    new_status = current_status  #Same status
+
 
     url='/update_token_details'
     payload = {
