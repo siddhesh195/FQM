@@ -3,7 +3,7 @@ import pickle
 from sys import platform
 from uuid import uuid4
 from flask import url_for, flash, render_template, redirect, session, jsonify, Blueprint, request
-from flask_login import current_user, login_required, login_user
+from flask_login import current_user, login_required, login_user, logout_user
 
 import app.database as data
 import app.settings as settings_handlers
@@ -109,7 +109,7 @@ class SharedAnnouncementDecorator:
 @core.route('/log/<n>', methods=['GET', 'POST'])
 def root(n=None):
     ''' welcome view and login. '''
-    
+
     form = LoginForm()
     has_default_password = data.User.has_default_password()
     wrong_credentials = n == 'a'
@@ -118,21 +118,34 @@ def root(n=None):
 
     def logged_in_all_good():
         destination = url_for('manage_app.manage')
-
+       
+        
         if is_operator() and not single_row:
-         
-            destination = url_for('offices.offices_home', o_id=data.Operators.get(current_user.id).office_id)
+            operator_office_id = None
+            operator = data.Operators.query.filter_by(id=current_user.id).first()
+            if operator:
+                operator_office_id = operator.office_id
+                
+       
+            if operator_office_id is None:
+                flash('Error: your operator account is not linked to any office. '
+                      'Please contact administrator.', 'danger')
+            
+                logout_user()
+                return redirect(url_for('core.root'))
+            
+            destination = url_for('offices.offices_home', o_id=operator_office_id)
         elif should_redirect:
-            destination = f'{session.get("next_url", "/")}'
             session['next_url'] = None
-
-        flash('Notice: logged-in and all good', 'info')
+       
+ 
         return redirect(destination)
 
     if form.validate_on_submit():
         if current_user.is_authenticated:
+         
             return logged_in_all_good()
-
+      
         user = data.User.query.filter_by(name=form.name.data).first()
 
         if not user or not user.verify_password(form.password.data):
@@ -142,7 +155,8 @@ def root(n=None):
         login_user(user, remember=bool(form.rm.data))
         update_last_seen_helper()
         return logged_in_all_good()
-
+   
+   
     return render_template('index.html', operators=data.Operators.query,
                            page_title='Free Queue Manager', form=form,
                            n=wrong_credentials, dpass=has_default_password)

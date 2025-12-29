@@ -11,7 +11,8 @@ manage_app2 = Blueprint('manage_app2', __name__)
 @manage_app2.route('/manage_home')
 @login_required
 def manage_home():
-    
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized'})
     
     return render_template ('manage_home.html',title="Management Home")
 
