@@ -145,7 +145,7 @@ def update_token_details():
         return jsonify({'status': 'error', 'message': 'Ticket not found'})
     try:
         if form.validate_on_submit():
-            if ticket.status == status:
+            if ticket.status == status and ticket.status==TICKET_WAITING and not ticket.p:
                 return jsonify({'status': 'error', 'message': 'Ticket is already in the desired status'})
             
             if (status ==TICKET_PROCESSED or status == TICKET_ATTENDED) and not ticket.p:
