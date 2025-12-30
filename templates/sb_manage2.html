@@ -21,14 +21,14 @@
 				    <span class="fa fa-ticket"></span>
 				    {{ translate('All tickets', 'en', [defLang]) }}
 				    {% if not settings.single_row %}
-				        <span class="badge pull-right">
+				        <span class="badge pull-right" id="all_tickets_count">
 					        [[ active_tickets_number ]]
 				        </span>
 				    {% endif %}
 			    </a>
 			</li>
 			<li >
-				<a @click="pullnextTicket()">
+				<a @click="pullnextTicket()" id="pull_any_office_ticket">
 						<span class="fa fa-{% if settings.single_row %}plus{% else %}minus{% endif %}"></span>
 						{{ translate('Generate a ticket' if settings.single_row else 'Pull a ticket', 'en', [defLang]) }}
 						

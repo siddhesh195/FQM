@@ -26,11 +26,11 @@
         </div>
         {% if current_user.role_id == 1 and not office_id %}
        
-        <button class="btn btn-primary" @click="resetAllOffices">
+        <button id="resetAllOfficesBtn" class="btn btn-primary" @click="resetAllOffices">
             Reset All Offices
         </button>
     
-        <button class="btn btn-danger" @click="deleteAllOfficesAndTasks">
+        <button id="deleteAllOfficesAndTasksBtn" class="btn btn-danger" @click="deleteAllOfficesAndTasks">
             Delete All Offices and Tasks
         </button>
         {% elif current_user.role_id == 1 and office_id %}
@@ -273,9 +273,8 @@
 {% block vue_computed %}
 
     totalPages() {
-        return this.rows.length === 0
-        ? 1
-        : Math.ceil(this.rows.length / this.perPage);
+    const count = this.filteredRows.length;
+    return count === 0 ? 1 : Math.ceil(count / this.perPage);
     },
 
     filteredRows() {

@@ -2,27 +2,34 @@ from playwright.sync_api import Page, expect
 import re
 
 def login(page: Page):
-    # Go to your Flask app
     page.goto("http://localhost:8001/")
 
-    # Assert text is present anywhere on the page
-    expect(page.locator("text=Digital Queue Management System")).to_be_visible()
-    page.click("text=Login")
-    
+    # Index page loaded
+    expect(page.locator("h1", has_text="Digital Queue Management System")).to_be_visible()
 
+    user_header = page.locator("h2.u")
+
+    # Case 1: already authenticated
+    if user_header.is_visible():
+        # Clicking Login should navigate (not open modal)
+        page.locator("a:has-text('Login')").click()
+        expect(page.locator("body")).to_contain_text("Management")
+        return
+
+    # Case 2: not authenticated → modal login
+    page.locator("a:has-text('Login')").click()
+
+    # Modal must appear
     expect(page.locator("#upd")).to_be_visible()
 
     page.fill("input[name='name']", "Admin")
     page.fill("input[name='password']", "admin")
 
-    # Submit the login form
-    page.click("#fm button[type='submit']")
+    page.locator("#fm button[type='submit']").click()
 
-
-
-    expect(page.locator("body")).to_contain_text(
-        "Management"
-    )
+    # Successful login proof
+   
+    expect(page.locator("body")).to_contain_text("Management")
 
 def create_office(page: Page, office_name: str):
     page.click("text=Add new office")
@@ -140,6 +147,10 @@ def open_touch_screen_for_office(page: Page, office_name: str, task_name: str):
     touch_page = p.value
     touch_page.wait_for_load_state()
 
+    return touch_page
+
+
+def create_new_token(touch_page,task_name: str, office_name: str):
     # Build full task name
     full_task_name = f"{task_name} for {office_name}"
 
@@ -158,8 +169,9 @@ def open_touch_screen_for_office(page: Page, office_name: str, task_name: str):
 
     token = match.group(1)
 
-    #close the page
-    touch_page.close()
+    #close swal alert
+    touch_page.locator(".swal2-confirm").click()
+    expect(swal).not_to_be_visible()
 
     return token
 
@@ -177,7 +189,7 @@ def check_token_in_pulled_table(display_page: Page, token: str):
     expect(token_cell).to_be_visible()
 
 
-def open_display_screen_for_office(page: Page, office_name: str,token: str=None, scroll: bool=False, pulled_table: bool=False):
+def open_display_screen_for_office(page: Page, office_name: str):
     # Open Screens dropdown
     page.locator('a.dropdown-toggle:has-text("Screens")').click()
 
@@ -194,16 +206,9 @@ def open_display_screen_for_office(page: Page, office_name: str,token: str=None,
 
     display_page = p.value
     display_page.wait_for_load_state()
-    if scroll:
-        check_token_in_scroll_content(display_page, token)
-    if pulled_table:
-        check_token_in_pulled_table(display_page, token)
 
-    #close the page
-    if scroll:
-        return display_page
-    else:
-        display_page.close()
+    return display_page
+
 
     
 def open_office_tickets(office_panel):
@@ -237,7 +242,18 @@ def expect_sweetalert_success(page: Page, token: str):
     # Ensure alert disappears
     expect(alert).to_be_hidden()
 
-def assert_token_present(page: Page, token: str):
+def pull_a_token_and_assert(page,row,status_badge, token: str):
+    # Click Pull
+    row.locator("a.pull_ticket").click()
+
+    # ✅ FIRST: handle SweetAlert
+    expect_sweetalert_success(page, token)
+
+    # ✅ THEN: assert UI state
+    expect(status_badge).to_contain_text("Is Pulled")
+
+
+def assert_token_present(page: Page,display_page: Page | None, token: str,pull:bool=False):
     # Ensure we're on the tickets page
     expect(page.get_by_placeholder("Search tickets...")).to_be_visible()
 
@@ -253,16 +269,17 @@ def assert_token_present(page: Page, token: str):
     status_badge = row.locator(".status-badge")
     expect(status_badge).to_contain_text("Not Pulled")
 
-    # Click Pull
-    row.locator("a.pull_ticket").click()
-
-    # ✅ FIRST: handle SweetAlert
-    expect_sweetalert_success(page, token)
-
-    # ✅ THEN: assert UI state
-    expect(status_badge).to_contain_text("Is Pulled")
     
 
+    if pull:
+        check_token_in_scroll_content(display_page, token)
+        #pull and assert in UI where ticket is pulled
+        pull_a_token_and_assert(page, row, status_badge, token)
+
+        #assert in pulled table in display page
+        check_token_in_pulled_table(display_page, token)
+        
+    
 def reset_current_office(page: Page,office_name: str):
     def handle_confirm(dialog):
         assert dialog.type == "confirm"

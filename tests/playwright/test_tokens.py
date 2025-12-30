@@ -1,12 +1,10 @@
-
-import time
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 from helpers import login, create_office, open_office, delete_office, open_office_tickets, open_touch_screen_for_office
 from helpers import add_task
-from helpers import assert_token_present, reset_current_office, open_display_screen_for_office
+from helpers import reset_current_office
 
-from helpers import check_token_in_pulled_table
+from helpers2 import create_multiple_tokens, assert_multiple_tokens, assert_all_tickets_count, pull_any_office_tickets
 
 raise_office_creation_exception=False
 raise_task_creation_exception=False
@@ -15,7 +13,7 @@ raise_office_open_exception=True
 raise_office_tickets_exception =True
 raise_office_delete_exception=True
 
-def test_office_add_delete(page: Page):
+def test_create_and_pull_lot_of_tokens(page: Page):
     
     login(page)
     office_name = "Playwright Office"
@@ -30,25 +28,21 @@ def test_office_add_delete(page: Page):
     except Exception as e:
         if raise_task_creation_exception:
             raise Exception(e)
-    token=None
+  
+    token_list=[]
+    number_of_tokens=50
     try:
-        token= open_touch_screen_for_office(page, office_name, task_name)
+        touch_page = open_touch_screen_for_office(page, office_name, task_name)
+        token_list = create_multiple_tokens(number_of_tokens,touch_page, office_name, task_name)
         
     except Exception as e:
         if raise_office_open_exception:
             raise Exception(e)
-    if not token:
-        raise Exception("Token not retrieved from touch screen")
+   
+    if not token_list or len(token_list)!=number_of_tokens:
+        raise Exception("Multiple tokens not created")
+    
     office_panel=None
-    display_page=None
-    try:
-        display_page = open_display_screen_for_office(page, office_name,token,scroll=True)
-        
-    except Exception as e:
-        if raise_display_screen_exception:
-            raise Exception(e)
-    if not display_page:
-        raise Exception("Display page not opened")
     
     try:
         office_panel = open_office(page, office_name)
@@ -65,18 +59,23 @@ def test_office_add_delete(page: Page):
             raise Exception(e)
         
     try:
-        assert_token_present(page, token)
+        assert_multiple_tokens(page, token_list)
     except Exception as e:
         if raise_office_tickets_exception:
             raise Exception(e)
         
     try:
-        check_token_in_pulled_table(display_page, token)
-        
+        assert_all_tickets_count(page,number_of_tokens)
     except Exception as e:
-        if raise_display_screen_exception:
+        if raise_office_tickets_exception:
             raise Exception(e)
-    
+        
+   
+    try:
+        pull_any_office_tickets(page,number_to_pull=number_of_tokens, tickets_count=number_of_tokens)
+    except Exception as e:
+        if raise_office_tickets_exception:
+            raise Exception(e)
     
     try:
         reset_current_office(page, office_name)
