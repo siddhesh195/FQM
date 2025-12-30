@@ -163,6 +163,49 @@ def open_touch_screen_for_office(page: Page, office_name: str, task_name: str):
 
     return token
 
+def check_token_in_scroll_content(display_page, token: str):
+    scroll_content = display_page.locator(".scroll-content")
+    expect(scroll_content).to_be_visible()
+    expect(scroll_content).to_contain_text(token)
+
+def check_token_in_pulled_table(display_page: Page, token: str):
+    table = display_page.locator("table.tickets-table")
+    expect(table).to_be_visible()
+
+    # Look for any cell containing the token
+    token_cell = table.locator("td", has_text=token)
+    expect(token_cell).to_be_visible()
+
+
+def open_display_screen_for_office(page: Page, office_name: str,token: str=None, scroll: bool=False, pulled_table: bool=False):
+    # Open Screens dropdown
+    page.locator('a.dropdown-toggle:has-text("Screens")').click()
+
+    display_link = page.locator(
+        f'//li[contains(@class,"dropdown-header") and contains(., "{office_name}")]'
+        '/following-sibling::li[2]//a[contains(., "Display screen")]'
+    )
+
+    expect(display_link).to_be_visible()
+
+    # Capture NEW TAB
+    with page.context.expect_page() as p:
+        display_link.click()
+
+    display_page = p.value
+    display_page.wait_for_load_state()
+    if scroll:
+        check_token_in_scroll_content(display_page, token)
+    if pulled_table:
+        check_token_in_pulled_table(display_page, token)
+
+    #close the page
+    if scroll:
+        return display_page
+    else:
+        display_page.close()
+
+    
 def open_office_tickets(office_panel):
     all_tickets_link = office_panel.get_by_role(
         "link",
@@ -171,6 +214,28 @@ def open_office_tickets(office_panel):
 
     expect(all_tickets_link).to_be_visible()
     all_tickets_link.click()
+
+def get_ticket_row(page: Page, token: str):
+    # row that contains the token in any <td>
+    row = page.locator("tbody tr", has=page.get_by_text(token))
+    expect(row).to_be_visible()
+    return row
+
+def expect_sweetalert_success(page: Page, token: str):
+    alert = page.locator(".swal2-popup")
+
+    expect(alert).to_be_visible()
+
+    # Assert message contains token
+    expect(alert).to_contain_text(f"Successfully pulled ticket: {token}")
+
+    # Click OK / Confirm
+    confirm_button = alert.locator(".swal2-confirm")
+    expect(confirm_button).to_be_visible()
+    confirm_button.click()
+
+    # Ensure alert disappears
+    expect(alert).to_be_hidden()
 
 def assert_token_present(page: Page, token: str):
     # Ensure we're on the tickets page
@@ -183,10 +248,19 @@ def assert_token_present(page: Page, token: str):
     # Vue debounce / reactivity safety
     page.wait_for_timeout(300)
 
-    # Assert token appears somewhere in table
-    token_cell = page.get_by_role("cell", name=token)
+    # Get the ticket row
+    row = get_ticket_row(page, token)
+    status_badge = row.locator(".status-badge")
+    expect(status_badge).to_contain_text("Not Pulled")
 
-    expect(token_cell).to_be_visible()
+    # Click Pull
+    row.locator("a.pull_ticket").click()
+
+    # ✅ FIRST: handle SweetAlert
+    expect_sweetalert_success(page, token)
+
+    # ✅ THEN: assert UI state
+    expect(status_badge).to_contain_text("Is Pulled")
     
 
 def reset_current_office(page: Page,office_name: str):
