@@ -155,6 +155,7 @@
                 if (response.data.status === 'success') {
                     showSwalMessage(response.data.message);
                     this.fetchData(); // Refresh data after reset
+                    this.currentPage = 1; // Reset to first page
                 } else {
                     showSwalMessage("Error: " + response.data.message);
                 }

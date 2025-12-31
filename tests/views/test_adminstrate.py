@@ -5,6 +5,8 @@ from random import choice
 from app.database import User, Office, Operators, AuthTokens
 from app.utils import get_module_columns, get_module_values
 
+from app.middleware import db
+
 
 @pytest.mark.usefixtures('c')
 def test_update_admin_password(c):
@@ -118,9 +120,23 @@ def test_update_operator(c):
 
 
 @pytest.mark.usefixtures('c')
-def test_delete_user(c):
+def test_delete_user_not_an_active_operator(c):
     user = User.query.filter(User.id != 1).first()
 
+    response = c.get(f'/user_d/{user.id}', follow_redirects=True)
+
+    assert response.status == '200 OK'
+    assert User.get(user.id) is None
+
+@pytest.mark.usefixtures('c')
+def test_delete_active_operator_user(c):
+    user = User.query.filter(User.id != 1).first()
+
+    # Make the user an active operator
+    operator = Operators(id=user.id, office_id=choice(Office.query.all()).id)
+    db.session.add(operator)
+    db.session.commit()
+    
     response = c.get(f'/user_d/{user.id}', follow_redirects=True)
 
     assert response.status == '200 OK'
