@@ -164,6 +164,7 @@ def root(n=None):
 
 @core.route('/serial/<int:t_id>', methods=['POST', 'GET'], defaults={'office_id': None})
 @core.route('/serial/<int:t_id>/<int:office_id>', methods=['GET', 'POST'])
+@login_required
 @reject_setting('single_row', True)
 @get_or_reject(t_id=data.Task)
 def serial(task, office_id=None):
@@ -402,6 +403,7 @@ def on_hold(ticket, redirect_to):
 # remove @cache_call('json') to reflect language changes immediately
 @core.route('/feed', defaults={'office_id': None})
 @core.route('/feed/<int:office_id>')
+@login_required
 def feed(office_id=None):
     ''' stream list of waiting tickets and current ticket. '''
     display_settings = data.Display_store.get()
@@ -462,11 +464,11 @@ def feed(office_id=None):
 @core.route('/repeat_announcement/<int:user_id>', defaults={'office_id': None})
 @core.route('/repeat_announcement/<int:user_id>/<int:office_id>')
 @SharedAnnouncementDecorator
+@login_required
 def repeat_announcement(user_id,office_id=None):
     ''' get repeat TTS announcement. '''
     meta_by_user_id=repeat_announcement.get_state_by_user_id(office_id, user_id)
    
-  
     return jsonify(
         status=repeat_announcement.get(office_id),
         meta_by_user_id=meta_by_user_id
@@ -528,6 +530,7 @@ def display(office_id=None):
 @core.route('/touch/<int:a>/<int:office_id>',defaults={'identifier':None})
 @core.route('/touch/<int:a>/<string:identifier>/', defaults={'office_id': None})
 @core.route('/touch/<int:a>/<string:identifier>/<int:office_id>')
+@login_required
 @cache_call()
 @reject_setting('single_row', True)
 def touch(a, identifier="", office_id=None):
