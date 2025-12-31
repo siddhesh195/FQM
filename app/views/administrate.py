@@ -232,8 +232,12 @@ def user_d(user):
         return reject_god(lambda: None)()
 
     if user.role_id == 3:
-        db.session.delete(data.Operators.get(user.id))
-        db.session.commit()
+        #first check if user is in operator table
+        operator = data.Operators.get(user.id)
+        #if operator found delete it from operator table
+        if operator:
+            db.session.delete(operator)
+            db.session.commit()
 
     db.session.delete(user)
     db.session.commit()
