@@ -59,6 +59,24 @@ export default {
             });
             
         },
+        DeleteTask(task_id){
+            if (!confirm("Are you sure you want to delete this task? This action cannot be undone.")){
+                return;
+            }
+
+            axios.post('/delete_a_task', {'task_id': task_id})
+            .then(response => {
+                if (response.data.status === "success"){
+                    alert(response.data.message);
+                } else {
+                    alert(response.data.message);
+                }
+                this.get_all_tasks();
+            })
+            .catch(error => {
+                console.error("There was an error deleting the task:", error);
+            });
+        },
 
         get_all_tasks(){
 
@@ -171,6 +189,12 @@ export default {
                                         <span class="mr-1 fa fa-pencil text-warning">
                                         </span>
                                     </a>
+                                    <a @click="DeleteTask(task.id)" class="delete-task-link">
+                                        <span class="mr-1 fa fa-trash text-danger">
+                                        </span>
+                                    </a>
+                                    
+
                                 </td>
                     
                             </tr>
