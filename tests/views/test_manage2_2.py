@@ -1,9 +1,65 @@
 import pytest
 from app.middleware import db
-from flask import url_for
 import app.database as database
 
 
+@pytest.mark.usefixtures('c')
+def test_modify_office_no_modifications_provided(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Office
+    new_office = database.Office(name='Office To Modify')
+    db.session.add(new_office)
+    db.session.commit()
+
+    response = c.post('/modify_office', json={'office_id': new_office.id})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'No modifications provided'
+
+
+@pytest.mark.usefixtures('c')
+def test_modify_office_remove_task_success(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Office
+    new_office = database.Office(name='Office To Modify')
+    db.session.add(new_office)
+    db.session.commit()
+
+    # add a new Task
+    new_task = database.Task(name='Task To Remove', hidden=False)
+    db.session.add(new_task)
+    db.session.commit()
+
+    #assert task is added
+    task = database.Task.query.get(new_task.id)
+    assert task.name == 'Task To Remove'
+
+    # Associate task with the office
+    new_office.tasks.append(new_task)
+    db.session.commit()
+
+    # Verify association
+    office = database.Office.query.get(new_office.id)
+    assert any(task.id == new_task.id for task in office.tasks)
+
+    response = c.post('/modify_office', json={'office_id': new_office.id, 'taskId': new_task.id})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert data['message'] == f'Office {new_office.name} updated successfully'
+
+    # Verify that the task is removed from the office
+    office = database.Office.query.get(new_office.id)
+    assert all(task.id != new_task.id for task in office.tasks)
 
 @pytest.mark.usefixtures('c')
 def test_delete_task_unauthorized(c,monkeypatch):

@@ -155,8 +155,16 @@ async function openEditTaskDialog() {
 }
 
 
-async function openEditOfficeDialog() {
- 
+async function openEditOfficeDialog(office_tasks) {
+   
+  const taskOptions = office_tasks
+    .map(
+      task =>
+        `<option value="${task.id}">
+          ${task.name}${task.hidden ? " (hidden)" : ""}
+        </option>`
+    )
+    .join("");
   
   const { value: formData } = await Swal.fire({
     title: 'Edit Office',
@@ -185,14 +193,16 @@ async function openEditOfficeDialog() {
    
       
       const officeName = document.getElementById('swal-office-name').value.trim();
+      const taskId = document.getElementById('swal-task-id').value;
 
-      if (!officeName) {
-        Swal.showValidationMessage('You must modify office name');
+      if (!officeName && !taskId) {
+        Swal.showValidationMessage('You must modify office name or select a task to remove');
         return false;
       }
 
       return {
-        officeName: officeName
+        officeName: officeName,
+        taskId: taskId
       };
     }
   });

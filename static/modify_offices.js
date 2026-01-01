@@ -47,8 +47,8 @@ export default {
                 console.error("There was an error deleting the office:", error);
             });
         },
-        async EditOffice(office_id){
-            const formData = await this.openeditofficefunc();
+        async EditOffice(office_id,office_tasks){
+            const formData = await this.openeditofficefunc(office_tasks);
             if (!formData) {
                 return;
             }
@@ -64,7 +64,7 @@ export default {
             axios.post(url, payload)
             .then(response => {
                 if (response.data.status === "success"){
-                    console.log(response.data.message);
+                    alert(response.data.message);
                 } else {
                     console.error("Failed to edit office:", response.data.message);
                 }
@@ -165,7 +165,7 @@ export default {
 
                                 
                                 <td class="action-icons">
-                                    <a @click="EditOffice(office.id)" >
+                                    <a @click="EditOffice(office.id,office.tasks)" >
                                         <span class="mr-1 fa fa-pencil text-warning">
                                         </span>
                                     </a>

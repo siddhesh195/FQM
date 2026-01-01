@@ -222,6 +222,44 @@ def test_get_all_offices_success(c, monkeypatch):
     assert 'offices' in data
     assert len(data['offices']) == len(existing_offices)
 
+@pytest.mark.usefixtures('c')
+def test_get_all_offices_some_with_tasks(c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # Ensure there is at least one office with tasks and one without
+    office_with_tasks = database.Office(name='Office With Tasks')
+    office_without_tasks = database.Office(name='Office Without Tasks')
+    db.session.add(office_with_tasks)
+    db.session.add(office_without_tasks)
+    db.session.commit()
+
+    task1 = database.Task(name='Task 1', hidden=False)
+    task2 = database.Task(name='Task 2', hidden=False)
+    db.session.add(task1)
+    db.session.add(task2)
+    db.session.commit()
+
+    # Associate tasks with the office
+    office_with_tasks.tasks.append(task1)
+    office_with_tasks.tasks.append(task2)
+    db.session.commit()
+
+    response = c.get('/get_all_offices')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert 'offices' in data
+
+    offices_dict = {office['name']: office for office in data['offices']}
+    assert 'Office With Tasks' in offices_dict
+    assert 'Office Without Tasks' in offices_dict
+
+    assert len(offices_dict['Office With Tasks']['tasks']) == 2
+    assert len(offices_dict['Office Without Tasks']['tasks']) == 0
+
 
 @pytest.mark.usefixtures('c')
 def test_modify_office_not_authorized(c,monkeypatch):
