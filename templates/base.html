@@ -369,6 +369,8 @@
                         active_tickets_task_by_office: {},
                         office_ids: [],
                         task_ids: [],
+                        pulling_ticket: false,
+                        pulling_next_ticket: false,
                         rows: [],
                         {% block vue_data %}
                             
@@ -389,6 +391,10 @@
                         });
                     },
                     pullnextTicket(o_id=null,ofc_id=null) {
+                        if (this.pulling_next_ticket) {
+                            return; // Prevent multiple simultaneous pulls
+                        }
+                        this.pulling_next_ticket = true;
                         axios.post("{{ url_for('offices.pull_next_ticket') }}", {
                             o_id: o_id,
                             ofc_id: ofc_id
@@ -403,6 +409,8 @@
                         })
                         .catch(error => {
                             console.error("Error pulling ticket:", error);
+                        }).finally(() => {
+                            this.pulling_next_ticket = false;
                         });
                     },
                     
@@ -422,7 +430,10 @@
                     },
 
                     PullTicket(ticketName,officeId,ticketId) {
-              
+                        if (this.pulling_ticket) {
+                            return; // Prevent multiple simultaneous pulls
+                        }
+                        this.pulling_ticket = true;
                         axios.post("{{ url_for('offices.pull_ticket') }}", {
                             ticket_name: ticketName,
                             office_id: officeId,
@@ -438,6 +449,8 @@
                         })
                         .catch(error => {
                             console.error("Error pulling ticket:", error);
+                        }).finally(() => {
+                            this.pulling_ticket = false;
                         });
                     },
                         

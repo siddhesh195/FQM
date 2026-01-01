@@ -31,6 +31,12 @@ export default {
     },
 
     methods: {
+        truncate(text, length = 30) {
+            if (!text) return ''
+            return text.length > length
+            ? text.substring(0, length) + '...'
+            : text
+        },
         async EditTask(task_id){
             const formData = await this.openedittaskfunc();
             if (!formData) {
@@ -58,6 +64,24 @@ export default {
                 console.error("There was an error editing the task:", error);
             });
             
+        },
+        DeleteTask(task_id){
+            if (!confirm("Are you sure you want to delete this task? This action cannot be undone.")){
+                return;
+            }
+
+            axios.post('/delete_a_task', {'task_id': task_id})
+            .then(response => {
+                if (response.data.status === "success"){
+                    alert(response.data.message);
+                } else {
+                    alert(response.data.message);
+                }
+                this.get_all_tasks();
+            })
+            .catch(error => {
+                console.error("There was an error deleting the task:", error);
+            });
         },
 
         get_all_tasks(){
@@ -155,7 +179,9 @@ export default {
                         
                         <tbody>
                             <tr v-for="task in paginatedRows" :key="task.id">
-                                <td>{{ task.name }}</td>
+                                <td :title="task.name">
+                                    {{ truncate(task.name, 25) }}
+                                </td>
                                 <td>{{ show_hidden_label(task.hidden) }}</td>
 
                                 <!-- Scrollable cell -->
@@ -171,6 +197,12 @@ export default {
                                         <span class="mr-1 fa fa-pencil text-warning">
                                         </span>
                                     </a>
+                                    <a @click="DeleteTask(task.id)" class="delete-task-link">
+                                        <span class="mr-1 fa fa-trash text-danger">
+                                        </span>
+                                    </a>
+
+
                                 </td>
                     
                             </tr>
