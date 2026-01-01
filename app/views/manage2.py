@@ -69,6 +69,26 @@ def modify_task():
 
     return jsonify({'status': 'success', 'message': f'Task {task.name} status updated to {status}'})
 
+@manage_app2.route('/delete_a_task', methods=['POST'])
+@login_required
+def delete_a_task():
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized'})
+    task_id = request.json.get('task_id',None)
+
+    if not task_id:
+        return jsonify({'status': 'error', 'message': 'Task ID not provided'})
+    
+    task = data.Task.query.get(task_id)
+    if not task:
+        return jsonify({'status': 'error', 'message': 'Task not found'})
+    
+    db.session.delete(task)
+    db.session.commit()
+
+    return jsonify({'status': 'success', 'message': f'Task {task.name} deleted successfully'})
+
+
 
 @manage_app2.route('/get_all_offices', methods=['GET'])
 @login_required

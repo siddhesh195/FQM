@@ -166,6 +166,16 @@ async function openEditOfficeDialog() {
         <label style="display: block; margin-bottom: 5px;">Office Name:</label>
         <input type="text" id="swal-office-name" class="swal2-input" placeholder="Change Office Name">
 
+        <label style="margin-top:10px;">Select Task To Remove:</label>
+        <select
+          id="swal-task-id"
+          class="swal2-select"
+          style="width:75%;"
+        >
+          <option value="">-- Select a task --</option>
+          ${taskOptions}
+        </select>
+
       </div>
     `,
     focusConfirm: false,
