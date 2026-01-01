@@ -31,6 +31,12 @@ export default {
     },
 
     methods: {
+        truncate(text, length = 30) {
+            if (!text) return ''
+            return text.length > length
+            ? text.substring(0, length) + '...'
+            : text
+        },
         async EditTask(task_id){
             const formData = await this.openedittaskfunc();
             if (!formData) {
@@ -173,7 +179,9 @@ export default {
                         
                         <tbody>
                             <tr v-for="task in paginatedRows" :key="task.id">
-                                <td>{{ task.name }}</td>
+                                <td :title="task.name">
+                                    {{ truncate(task.name, 25) }}
+                                </td>
                                 <td>{{ show_hidden_label(task.hidden) }}</td>
 
                                 <!-- Scrollable cell -->
