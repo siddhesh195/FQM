@@ -98,7 +98,14 @@ def get_all_offices():
         return jsonify({'status': 'error', 'message': 'Unauthorized'})
     offices = data.Office.query.all()
     
-    offices_list = [{'id': office.id, 'name': office.name} for office in offices]
+    #offices_list = [{'id': office.id, 'name': office.name} for office in offices]
+    offices_list = []
+    for office in offices:
+        office_tasks = []
+        for task in office.tasks:
+            office_tasks.append({'id': task.id, 'name': task.name, 'hidden': task.hidden})
+        offices_list.append({'id': office.id, 'name': office.name, 'tasks': office_tasks})
+            
     return jsonify({'status': 'success', 'offices': offices_list})
 
 @manage_app2.route('/modify_office', methods=['POST'])
@@ -107,12 +114,15 @@ def modify_office():
     if current_user.role_id != 1:
         return jsonify({'status': 'error', 'message': 'Unauthorized'})
     office_id = request.json.get('office_id',None)
+    task_id = request.json.get('taskId', None)
 
     if not office_id:
         return jsonify({'status': 'error', 'message': 'Office ID not provided'})
     json_body= request.get_json()
 
-    officeName= json_body.get('officeName',None)
+    new_officeName= json_body.get('officeName',None)
+    if not new_officeName and not task_id:
+        return jsonify({'status': 'error', 'message': 'No modifications provided'})
     
 
     office = data.Office.query.get(office_id)
@@ -120,9 +130,21 @@ def modify_office():
         return jsonify({'status': 'error', 'message': 'Office not found'})
     
 
-    if officeName is not None:
-        office.name = officeName
+    if new_officeName is not None:
+        
+        office.name = new_officeName
         db.session.commit()
+    
+    if task_id is not None:
+        
+        task= data.Task.query.get(task_id)
+            
+        if task:
+            office.tasks.remove(task)
+            db.session.commit()
+            
+
+    
    
 
     return jsonify({'status': 'success', 'message': f'Office {office.name} updated successfully'})
