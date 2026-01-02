@@ -34,3 +34,4 @@ gTTS==2.2.4
 openpyxl
 flask_socketio
 apscheduler
+pandas
