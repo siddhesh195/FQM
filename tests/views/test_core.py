@@ -241,7 +241,7 @@ def test_new_printed_ticket_lp(c, monkeypatch):
     monkeypatch.setattr(app.printer, 'uuid', mock_uuid)
     monkeypatch.setattr(app.printer, 'system', mock_system)
 
-    settings = Settings.get()
+    settings = Settings.query.first()
     printer_settings = Printer.get()
     touch_screen_settings = Touch_store.get()
     settings.lp_printing = True
@@ -403,7 +403,7 @@ def test_new_printed_ticket_lp_arabic(c, monkeypatch):
     monkeypatch.setattr(escpos.printer, 'Dummy', mock_pos)
     
 
-    settings = Settings.get()
+    settings = Settings.query.first()
     printer_settings = Printer.get()
     touch_screen_settings = Touch_store.get()
     settings.lp_printing = True
