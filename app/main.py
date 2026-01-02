@@ -29,6 +29,7 @@ from app.views.reports import reports
 from app.views.analytics_rules import analytics_rules
 from app.views.offices import offices
 from app.views.offices2 import offices2
+from app.views.tasks import tasks
 from app.utils import (absolute_path, log_error, create_default_records,create_default_background_tasks, get_bp_endpoints)
 from app.helpers import is_user_office_operator
 from app.database import Serial
@@ -103,6 +104,7 @@ def create_app(config={}):
     app.register_blueprint(analytics_rules)
     app.register_blueprint(offices)
     app.register_blueprint(offices2)
+    app.register_blueprint(tasks)
     app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
     return app
