@@ -28,7 +28,7 @@
 		    	| {{ translate("Task : the option that its title appears to the user on the Touch screen to choose from and dispatch a ticket for it", 'en', [defLang]) }} |
 			</p>
 			<hr class='mb-4'>
-			{{ render_field(form.name, class="form-control") }}
+			{{ render_field(form.name, class="form-control",**{'v-model': 'task_name', 'length': 60}) }}
 			{{ render_field(form.hidden, class="form-control") }}
 			{% if common %}
 			<p class="h4 text-center text-muted ar2 pt-2 pb-1">
@@ -40,7 +40,7 @@
 			{% endif %}
 			<p class="pt-6"></p>
 			<center>
-				<button class="btn btn-md btn-danger">{{ translate('Add task', 'en', [defLang]) }}</button>
+				<button  @click="addTask" type="button" class="btn btn-md btn-danger">{{ translate('Add task', 'en', [defLang]) }}</button>
     		</center>
     		<p class="pb-2"></p>
 	    </div>
@@ -49,4 +49,54 @@
 </div>
 
 {{ qrModal([['mym', translate('Management template', 'en', [defLang]), url_for('static', filename='images/manage_map.jpg')]], close=translate('Exit', 'en', [defLang])) }}
+{% endblock %}
+
+
+{% block vue_data %}
+task_name: '',
+csrf_token:  "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
+add_task_url: "{{ url_for('tasks.add_task', o_id=o_id) }}"
+
+
+{% endblock %}
+
+{% block vue_methods %}
+async addTask() {
+	try {
+		
+		console.log("csrf_token:", this.csrf_token);
+		const response = await axios.post(this.add_task_url, {
+			name: this.task_name,
+			csrf_token: this.csrf_token,
+		});
+		if (response.data.status === 'success') {
+			showSwalMessage(response.data.message).then(() => {
+				//reload the page to reflect changes
+				window.location.reload();
+			});
+		} else {
+			console.log("Error response:", response.data)
+			showSwalMessage(response.data.message);
+		}
+	} catch (error) {
+		console.error(error);
+		showSwalMessage("{{ translate('An error occurred while adding the task.', 'en', [defLang]) }}");
+	}
+}
+
+
+
+{% endblock %}
+
+
+
+{% block vue_mounted %}
+
+
+{% endblock %}
+
+{% block  vue_watch %}
+
+
+
 {% endblock %}
