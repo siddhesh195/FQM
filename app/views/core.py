@@ -587,7 +587,7 @@ def touch(a, identifier="", office_id=None):
 def settings(setting, togo=None):
     ''' toggle a setting. '''
     togo = togo or '/'
-    settings = data.Settings.get()
+    settings = data.Settings.query.first()
 
     if not settings:
         flash('Error: Failed to find settings in the database', 'danger')

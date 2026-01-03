@@ -15,12 +15,13 @@ def test_single_row_restrictions_enabled(c,monkeypatch):
     monkeypatch.setattr(app.views.core, 'current_user', current_user)
     task = Task.get()
     office = task.offices[0]
-
-    if not Settings.get().single_row:
+    settings = Settings.query.first()
+    if not settings.single_row:
         c.get('/settings/single_row', follow_redirects=True)
+        #query again after change
+        settings = Settings.query.first()
 
-    assert Settings.get().single_row is True
-
+    assert Settings.query.first().single_row is True
     message = f'flag setting single_row must be disabled'
     contains_message = lambda p: message in c\
         .get(p, follow_redirects=True)\
