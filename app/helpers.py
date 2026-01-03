@@ -90,6 +90,8 @@ def is_office_operator(office_id):
     -------
         True if a valid operator False if not
     '''
+    if not current_user.is_authenticated:
+        return False
     operator = data.Operators.get(current_user.id)
 
     return bool(operator and operator.office_id == office_id)
