@@ -1,7 +1,6 @@
 import pytest
 import app.database as data
 from app.middleware import db
-from app.constants import TICKET_STATUSES
 from flask_wtf.csrf import generate_csrf
 
 

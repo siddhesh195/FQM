@@ -19,39 +19,55 @@ import app.database as data
 from app.middleware import db
 from app.constants import (DEFAULT_PASSWORD, DEFAULT_USER, BACKGROUNDTASKS_DEFAULTS)
 
+import subprocess
+import shlex
 
-def execute(command, parser=None, encoding='utf-8'):
-    '''
-    Utility to execute a system command and get its output without
-    breaking any ongoing execution loops.
 
-    Parameter
-    ---------
-        command: str
-            system command to execute.
-        parser: str
-            factor to parse the output and clean it with.
-        encoding: str
-            encoding to read the command output with.
+def execute(command, parser=None, cwd=None):
+    """
+    Execute a command safely.
 
-    Returns
-    -------
-        System command output as a string or a list if parsed.
-    '''
-    temp_name = f'{uuid4()}'.replace('-', '') + '.tmp'
-    temp_file = absolute_path(temp_name)
-    output = ''
-    parsed = []
+    command:
+        - list[str] (preferred)
+        - str (will be safely tokenized)
+    parser:
+        - None
+        - delimiter (e.g. '\n')
+        - callable
+    """
 
-    os.system(f'{command} > "{temp_file}"')
-    with open(temp_file, 'r', encoding=encoding) as file:
-        output += file.read()
-    os.remove(temp_file)
+    # Convert string command to argv safely
+    if isinstance(command, str):
+        command = shlex.split(command)
 
-    if parser:
-        parsed += [o.strip() for o in output.split(parser) if o.strip()]
+    if not isinstance(command, (list, tuple)):
+        raise TypeError("command must be str or list/tuple")
 
-    return parsed if parser else output
+    result = subprocess.run(
+        command,
+        cwd=cwd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        shell=False,          # CRITICAL
+        check=False,          # we handle errors explicitly
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Command failed ({result.returncode}): {' '.join(command)}\n"
+            f"stderr:\n{result.stderr}"
+        )
+
+    output = result.stdout.rstrip("\n")
+
+    if parser is None:
+        return output
+
+    if callable(parser):
+        return parser(output)
+
+    return output.split(parser)
 
 
 def absolute_path(relative_path):

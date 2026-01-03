@@ -26,6 +26,8 @@ def test_get_with_alias(c, monkeypatch):
 
 
 def test_execute():
-    path = absolute_path('static')
+    path = absolute_path("static")
 
-    assert sorted(execute(f'ls {path}', parser='\n')) == sorted(os.listdir(path))
+    result = execute(["ls", path], parser="\n")
+
+    assert sorted(result) == sorted(os.listdir(path))
