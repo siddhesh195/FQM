@@ -1025,3 +1025,22 @@ class Settings(db.Model, Mixin):
         self.visual_effects = visual_effects
         self.lp_printing = lp_printing
         self.single_row = single_row
+        
+    @classmethod
+    def get(cls):
+        row = cls.query.first()
+        if row is None:
+            return None
+
+        # return a SIMPLE, NON-ORM object
+        return type(
+            "SettingsSnapshot",
+            (),
+            {
+                "notifications": row.notifications,
+                "strict_pulling": row.strict_pulling,
+                "visual_effects": row.visual_effects,
+                "lp_printing": row.lp_printing,
+                "single_row": row.single_row,
+            },
+        )()

@@ -1,0 +1,154 @@
+import pytest
+from app.middleware import db
+import app.database as data
+from flask_wtf.csrf import generate_csrf
+
+
+"""
+@pytest.fixture(autouse=True)
+def explode_on_settings_get(monkeypatch):
+    import app.database as data
+
+    if hasattr(data.Settings, "get"):
+        def boom(*args, **kwargs):
+            raise RuntimeError("Settings.get() CALLED")
+        monkeypatch.setattr(data.Settings, "get", boom)
+"""
+
+@pytest.mark.usefixtures("c")
+def test_add_task_unauthorized(c,monkeypatch):
+    class User:
+        def __init__(self):
+            self.role_id = 2  # non-admin role
+    current_user = User()
+    monkeypatch.setattr('app.views.tasks.current_user',current_user)
+
+    office = data.Office(name="Test Office")
+    db.session.add(office)
+    db.session.commit()
+
+    resp = c.post(f"/add_task/{office.id}", data={
+        'name': 'Test Task',
+        'hidden': False
+    })
+    assert resp.status_code == 403
+    data_json = resp.get_json()
+    assert data_json['status'] == 'error'
+    assert data_json['message'] == 'Unauthorized access'
+
+
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_task_form_validation_failure_missing_csrf(flask_app,c,monkeypatch):
+    class User:
+        def __init__(self):
+            self.role_id = 1  # admin role
+    current_user = User()
+    monkeypatch.setattr('app.views.tasks.current_user',current_user)
+
+    office = data.Office(name="Test Office")
+    db.session.add(office)
+    db.session.commit()
+
+    #enable CSRF protection in the app for this test
+    flask_app.config['WTF_CSRF_ENABLED'] = True
+
+
+    resp = c.post(f"/add_task/{office.id}", data={
+        'name': 'Task 1',
+        'hidden': False
+    })
+    assert resp.status_code == 200
+    data_json = resp.get_json()
+    assert data_json['status'] == 'error'
+    assert data_json['message'] == 'Form validation failed'
+
+#@pytest.mark.skip(reason="test after this fails")
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_task_duplicate_name_failure(flask_app,c,monkeypatch):
+    class User:
+        def __init__(self):
+            self.role_id = 1  # admin role
+    current_user = User()
+    monkeypatch.setattr('app.views.tasks.current_user',current_user)
+
+
+    #enable CSRF protection in the app for this test
+    flask_app.config['WTF_CSRF_ENABLED'] = True
+
+    #Initial GET to set up session
+    c.get('/')
+    with flask_app.test_request_context():
+        csrf_token = generate_csrf()
+
+    office = data.Office(name="Test Office")
+    db.session.add(office)
+    db.session.commit()
+    office_id = office.id
+
+    # Add initial task
+    task = data.Task('Task 1', False)
+    db.session.add(task)
+    db.session.commit()
+
+    
+    resp = c.post(f"/add_task/{office_id}", data={
+        'name': 'Task 1',
+        'hidden': False,
+        'csrf_token': csrf_token
+    })
+    assert resp.status_code == 200
+    data_json = resp.get_json()
+    assert data_json['status'] == 'error'
+    assert data_json['message'] == 'Task with this name already exists'
+
+
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_task_success(flask_app,c,monkeypatch):
+    
+    class User:
+        def __init__(self):
+            self.role_id = 1  # admin role
+    current_user = User()
+    monkeypatch.setattr('app.views.tasks.current_user',current_user)
+
+
+    #enable CSRF protection in the app for this test
+    flask_app.config['WTF_CSRF_ENABLED'] = True
+
+   
+    import app.database as data
+
+    #print("settings object:", data.Settings)
+    #print("detached:", inspect(data.Settings).detached)
+    #print("Settings detached:", inspect(data.Settings._cached).detached if data.Settings._cached else None)
+
+    #Initial GET to set up session
+    c.get('/')
+    with flask_app.test_request_context():
+        csrf_token = generate_csrf()
+
+    office = data.Office(name="Test Office")
+    db.session.add(office)
+    db.session.commit()
+    office_id = office.id
+
+    
+    resp = c.post(f"/add_task/{office.id}", data={
+        'name': 'Task 1',
+        'hidden': False,
+        'csrf_token': csrf_token
+    })
+    assert resp.status_code == 200
+    data_json = resp.get_json()
+    assert data_json['status'] == 'success'
+    assert data_json['message'] == 'Task added successfully'
+
+    # Verify that the task was added to the database
+    task_in_db = data.Task.query.filter_by(name='Task 1').first()
+    assert task_in_db is not None
+
+    #fetch office again
+    office = data.Office.query.get(office_id)
+    
+    #assert task in office 
+    assert task_in_db in office.tasks

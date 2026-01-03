@@ -141,7 +141,7 @@ def test_ticket_printed_lp(c, monkeypatch):
     monkeypatch.setattr(app.views.customize, 'os', MagicMock(name='linux'))
     monkeypatch.setattr(app.forms.customize, 'os', MagicMock(name='nt'))
 
-    settings = Settings.get()
+    settings = Settings.query.first()
     touch_screen_settings = Touch_store.get()
     touch_screen_settings.n = False
     settings.lp_printing = True
