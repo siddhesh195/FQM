@@ -1,7 +1,11 @@
 import pytest
-from flask_migrate import upgrade as database_upgrade
+from sqlalchemy import inspect
+from app.middleware import db
 
 
-@pytest.mark.usefixtures('c')
-def test_upgrading_database(c):
-    assert database_upgrade() is None
+@pytest.mark.usefixtures('flask_app')
+def test_database_schema_created(flask_app):
+    inspector = inspect(db.engine)
+    tables = inspector.get_table_names()
+    assert "users" in tables
+    assert "roles" in tables

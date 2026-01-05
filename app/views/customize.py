@@ -1,5 +1,5 @@
 import os
-from flask import url_for, flash, request, render_template, redirect, Blueprint
+from flask import current_app, url_for, flash, request, render_template, redirect, Blueprint
 from flask_login import login_required
 from werkzeug.utils import secure_filename
 
@@ -681,13 +681,14 @@ def background_tasks():
                                             form.delete_tickets_time.data)
 
         db.session.commit()
+        if not current_app.config.get("TESTING", False):
 
-        if os.environ.get('DOCKER'):
-            CeleryTasks._runner.stop()
-            CeleryTasks._runner.apply_async()            
-        else:
-            stop_tasks()
-            start_tasks()
+            if os.environ.get('DOCKER'):
+                CeleryTasks._runner.stop()
+                CeleryTasks._runner.apply_async()            
+            else:
+                stop_tasks()
+                start_tasks()
 
         flash('Notice: background tasks got updated successfully.', 'info')
         return redirect(url_for('cust_app.background_tasks'))

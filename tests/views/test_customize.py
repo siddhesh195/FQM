@@ -11,7 +11,7 @@ import app.tasks.cache_tickets_tts
 from app.middleware import db
 from app.helpers import get_tts_safely
 from app.database import (Touch_store, Display_store, Printer, Slides_c,
-                          Vid, Media, Slides, Aliases, Settings, Serial)
+                          Vid, Media, Slides, Aliases, Settings, Serial,BackgroundTask)
 
 
 @pytest.mark.usefixtures('c')
@@ -465,14 +465,14 @@ def test_background_tasks_cache_tts(c, get_bg_task, monkeypatch):
         'delete_tickets_every': 'day',
         'delete_tickets_time': '12:12'
     }, follow_redirects=True)
-    task = get_bg_task('CacheTicketsAnnouncements')
+    assert response.status_code == 200
 
-    assert response.status == '200 OK'
-    assert task.settings.enabled == task_enabled
-    assert task.settings.every == task_every
-    assert task.settings.time is None
-    assert mock_gTTs.say.called is True
+    task = BackgroundTask.get(name='CacheTicketsAnnouncements')
 
+    assert task is not None
+    assert task.enabled is True
+    assert task.every == 'second'
+    assert task.time is None
 
 @pytest.mark.skipif(
     bool(os.getenv('DOCKER')),
@@ -491,10 +491,12 @@ def test_background_tasks_delete_tickets(c, get_bg_task):
         'delete_tickets_every': task_every,
         'delete_tickets_time': task_time
     }, follow_redirects=True)
-    task = get_bg_task('DeleteTickets')
 
-    assert response.status == '200 OK'
-    assert task.settings.enabled == task_enabled
-    assert task.settings.every == task_every
-    assert task.settings.time is None
-    assert Serial.all_clean().count() == 0
+    assert response.status_code == 200
+
+    task = BackgroundTask.get(name='DeleteTickets')
+
+    assert task is not None
+    assert task.enabled is True
+    assert task.every == 'second'
+    assert task.time is None

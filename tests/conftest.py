@@ -18,6 +18,8 @@ from app.database import (User, Operators, Office, Task, Serial, Media, Touch_st
 from app.utils import absolute_path, is_iterable
 from app.tasks import stop_tasks
 from app.views.core import touch
+from app.utils import create_default_records
+import tempfile
 
 @pytest.fixture(autouse=True)
 def fixed_seed():
@@ -40,8 +42,10 @@ def get_bg_task():
     yield waitier
 
     stop_tasks()
-    while not get_bg_task.__dict__['TASK'].dead:
-        sleep(1)
+    task = get_bg_task.__dict__.get('TASK')
+    if task:
+        while not get_bg_task.__dict__['TASK'].dead:
+            sleep(1)
 
 
 
@@ -72,8 +76,6 @@ ENTRY_NUMBER = 4
 
 
 
-
-
 def setup_data():
 
     recreate_defaults(DEFAULT_MODULES)
@@ -82,7 +84,8 @@ def setup_data():
     fill_users()
     fill_tickets()
     fill_slides()
-    fill_tokens()    
+    fill_tokens()   
+    
 
 
 def recreate_defaults(models):
@@ -221,17 +224,15 @@ def before_exit():
 
 @pytest.fixture
 def flask_app():
-    dump_db = f'{DB_PATH}.backup'
-
-    if os.path.exists(DB_PATH):
-        os.remove(DB_PATH) 
+    
+    db_fd, db_path = tempfile.mkstemp(suffix=".sqlite")
 
     app_config = {
         'LOGIN_DISABLED': True,
         'WTF_CSRF_ENABLED': False,   # default for most tests
         'TESTING': True,
-        'DB_NAME': DB_NAME,
-        'SQLALCHEMY_DATABASE_URI': f'sqlite:///{DB_PATH}?check_same_thread=False'
+        'SQLALCHEMY_DATABASE_URI': f'sqlite:///{db_path}',
+        'DB_NAME': os.path.basename(db_path),
     }
 
     app, socketio = bundle_app(app_config)
@@ -241,15 +242,13 @@ def flask_app():
     # context created here makes session & db available
     with app.app_context():
 
-        from app import database 
-
-
         db.create_all()
+        create_default_records()
         setup_data()
-        shutil.copyfile(DB_PATH, dump_db)
-
+        
         yield app
-
+    os.close(db_fd)
+    os.remove(db_path)
 
 @pytest.fixture
 def c(flask_app):
