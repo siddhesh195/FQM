@@ -26,7 +26,7 @@ def test_welcome_customize(c):
 @pytest.mark.usefixtures('c')
 def test_ticket_registered(c):
     with c.application.app_context():
-        touch_screen_settings = Touch_store.get()
+        touch_screen_settings = Touch_store.query.first()
         touch_screen_settings.n = True
         db.session.commit()
 
@@ -55,7 +55,7 @@ def test_ticket_printed(c, monkeypatch):
         product)])
     monkeypatch.setattr(usb.core, 'find', mock_usb_find)
 
-    touch_screen_settings = Touch_store.get()
+    touch_screen_settings = Touch_store.query.first()
     touch_screen_settings.n = False
     db.session.commit()
 
@@ -99,7 +99,7 @@ def test_ticket_printed_windows(c, monkeypatch):
     monkeypatch.setattr(app.views.customize, 'os', mock_os)
     monkeypatch.setattr(app.forms.customize, 'os', mock_os)
 
-    touch_screen_settings = Touch_store.get()
+    touch_screen_settings = Touch_store.query.first()
     touch_screen_settings.n = False
     db.session.commit()
 
@@ -142,7 +142,7 @@ def test_ticket_printed_lp(c, monkeypatch):
     monkeypatch.setattr(app.forms.customize, 'os', MagicMock(name='nt'))
 
     settings = Settings.query.first()
-    touch_screen_settings = Touch_store.get()
+    touch_screen_settings = Touch_store.query.first()
     touch_screen_settings.n = False
     settings.lp_printing = True
     db.session.commit()
