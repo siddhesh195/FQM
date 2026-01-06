@@ -12,6 +12,7 @@
     <component :is="Components['TaskThresholdComponent']"
     :get_all_tasks_url="get_all_tasks_url"
     :update_task_threshold_url="update_task_threshold_url"
+    :show-toast="showToast_var"
     >
     </component>
    
@@ -28,7 +29,8 @@
         TaskThresholdComponent : "{{ url_for('static', filename='task_thresholds.js') }}"
     },
     get_all_tasks_url: "{{ url_for('analytics_rules.get_all_tasks') }}",
-    update_task_threshold_url: "{{ url_for('analytics_rules.update_task_threshold') }}"         
+    update_task_threshold_url: "{{ url_for('analytics_rules.update_task_threshold') }}",
+    showToast_var: null         
 
 {% endblock %}
 
@@ -45,6 +47,13 @@
         this.Components[component_name] = markRaw(module.default);   // Set component
     }
 
+
+{% endblock %}
+
+
+{% block vue_mounted %}
+ 
+    this.showToast_var = showToast; // Initialize the function reference
 
 {% endblock %}
 
