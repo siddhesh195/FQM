@@ -49,6 +49,27 @@ function showSwalMessage(message, duration = null) {
     });
 }
 
+async function showSwalConfirm(message, title = "Confirm Action") {
+    const result = await Swal.fire({
+        title: title,
+        text: message,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        customClass: {
+            popup: 'custom-big-swal',
+            title: 'big-text',
+            htmlContainer: 'big-text',
+            confirmButton: 'big-btn',
+            cancelButton: 'big-btn'
+        }
+    });
+    return result.isConfirmed;
+}
+
 function showToast(message, type = "success", duration = 5000, position = "center") {
     Swal.fire({
         toast: true,
