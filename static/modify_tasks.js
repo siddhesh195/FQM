@@ -65,17 +65,17 @@ export default {
             });
             
         },
-        DeleteTask(task_id){
-            if (!confirm("Are you sure you want to delete this task? This action cannot be undone.")){
+        async DeleteTask(task_id){
+            if (!await window.showSwalConfirm("Are you sure you want to delete this task? This action cannot be undone.")){
                 return;
             }
 
             axios.post('/delete_a_task', {'task_id': task_id})
             .then(response => {
                 if (response.data.status === "success"){
-                    alert(response.data.message);
+                    window.showSwalMessage(response.data.message);
                 } else {
-                    alert(response.data.message);
+                    window.showSwalMessage(response.data.message);
                 }
                 this.get_all_tasks();
             })
