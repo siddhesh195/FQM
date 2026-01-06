@@ -17,8 +17,9 @@ style.innerHTML = `
     .swal2-html-container.big-text {
         font-size: 3.5rem !important;
     }
-     /* Bigger OK button */
-    .swal2-confirm.big-btn {
+     /* Bigger confirm and cancel buttons */
+    .swal2-confirm.big-btn,
+    .swal2-cancel.big-btn {
     font-size: 2.3rem !important;
     padding: 1rem 2rem !important;
     border-radius: 0.5rem !important;
