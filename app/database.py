@@ -596,6 +596,15 @@ class BackgroundTask(db.Model, Mixin):
         self.every = every
         self.time = time
 
+    @classmethod
+    def get(cls, **kwargs):
+        obj = cls.query.filter_by(**kwargs).first()
+        if obj is None:
+            obj = cls(**kwargs)
+            db.session.add(obj)
+            db.session.commit()
+        return obj
+
 
 class Operators(db.Model, Mixin):
     __tablename__ = "operators"

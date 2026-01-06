@@ -12,9 +12,6 @@ from flask_colorpicker import colorpicker
 from flask_fontpicker import fontpicker
 from sqlalchemy.exc import OperationalError
 from app.helpers import (get_all_offices_cached,
-                         get_number_of_active_tickets_cached,
-                         get_number_of_active_tickets_office_cached,
-                         get_number_of_active_tickets_task_cached,
                          get_settings_cached)
 
 from app.middleware import db, login_manager, files, gTTs, migrate
@@ -33,7 +30,7 @@ from app.views.tasks import tasks
 from app.utils import (absolute_path, log_error, create_default_records,create_default_background_tasks, get_bp_endpoints)
 from app.helpers import is_user_office_operator
 from app.database import Serial
-from app.tasks import start_tasks
+from app.tasks import materialize_tasks, start_task_threads
 from app.api.setup import setup_api
 from app.events import setup_events
 from app.constants import (SUPPORTED_LANGUAGES, SUPPORTED_MEDIA_FILES, VERSION, MIGRATION_FOLDER,
@@ -41,6 +38,7 @@ from app.constants import (SUPPORTED_LANGUAGES, SUPPORTED_MEDIA_FILES, VERSION, 
 from flask_socketio import SocketIO
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
+import tempfile
 
 
 def create_app(config={}):
@@ -73,7 +71,28 @@ def create_app(config={}):
     configure_uploads(app, files)
     login_manager.init_app(app)
     db.init_app(app)
-    migrate.init_app(app, db=db)
+    if not app.config.get("TESTING", False):
+        migrate.init_app(app, db=db)
+    
+    if app.config.get("TESTING") and "DATABASE_URI" in os.environ:
+        raise RuntimeError("DATABASE_URI must not be set during tests")
+    
+    if app.config.get("TESTING", False):
+        uri = app.config["SQLALCHEMY_DATABASE_URI"]
+
+        if uri.startswith("sqlite:///") and not uri.endswith(":memory:"):
+            # Extract filesystem path
+            db_path = uri.replace("sqlite:///", "", 1)
+
+            temp_dir = tempfile.gettempdir()
+            db_path = os.path.abspath(db_path)
+
+            if not db_path.startswith(os.path.abspath(temp_dir)):
+                raise RuntimeError(
+                    "Tests must not use persistent SQLite databases "
+                    f"(got {db_path})"
+                )
+            
     datepicker(app, local=['static/css/jquery-ui.min.css', 'static/jquery-ui.min.js'])
     colorpicker(app, local=['static/css/spectrum.css', 'static/spectrum.min.js'])
     fontpicker(app, local=['static/jquery-ui.min.js', 'static/css/jquery-ui.min.css', 'static/webfont.min.js',
@@ -91,8 +110,6 @@ def create_app(config={}):
         cursor.close()
     
     
-   
-
     # Register blueprints
     app.register_blueprint(administrate)
     app.register_blueprint(core)
@@ -121,6 +138,9 @@ def create_db(app, testing=False):
             flag to disable migrations, mainly used during integration testing.
     '''
     with app.app_context():
+        if testing:
+            db.create_all()
+            return
         if not os.path.isfile(absolute_path(app.config.get('DB_NAME'))):
             db.create_all()
         else:
@@ -141,10 +161,14 @@ def bundle_app(config={}):
     socketio = SocketIO(app, async_mode='gevent')   # create and bind to app
 
     # NOTE: avoid creating or interacting with the database during migration
-    if not app.config.get('MIGRATION', False):
+    is_testing = app.config.get("TESTING", False)
+    is_migration = app.config.get("MIGRATION", False)
+
+    if not is_migration and not is_testing:
         create_db(app)
         setup_events(db)
-        start_tasks(app)
+        materialize_tasks(app)
+        start_task_threads()
 
     if os.name != 'nt':
         # !!! it did not work creates no back-end available error !!!

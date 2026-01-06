@@ -3,43 +3,52 @@ import os
 from app.utils import find
 from app.tasks.cache_tickets_tts import CacheTicketsAnnouncements
 from app.tasks.delete_tickets import DeleteTickets
+from flask import current_app
 
 
 THREADS = {}
 TASKS = [CacheTicketsAnnouncements, DeleteTickets]
 
 
+def materialize_tasks(app, tasks=TASKS):
+    app = app or current_app
+    
+
+    for task in tasks:
+        if task.__name__ in THREADS:
+            continue
+
+        task_obj = task(app)
+        if task_obj.settings.enabled:
+            THREADS[task.__name__] = task_obj
+
+    return THREADS
+
+
+def start_task_threads():
+    for task in THREADS.values():
+        if task.settings.enabled and not task.dead:
+            task.init()
+
+
+
 def start_tasks(app=None, tasks=TASKS):
-    ''' start all tasks in `TASKS`.
+    """
+    Compatibility wrapper.
+    Prefer materialize_tasks() + start_task_threads().
+    """
+    app = app or current_app
 
-    Parameters
-    ----------
-        app: Flask app
-
-    Returns
-    -------
-        List of running QThreads.
-    '''
-    if app:
-        start_tasks.__dict__['APP'] = app
-    else:
-        app = start_tasks.__dict__['APP']
-
-    if app.config.get('MIGRATION') or os.environ.get('DOCKER'):
-        # FIXME: Tasks are disabled when `GUNICORN` is running. We should implement
-        # a new tasks module with celery that works seemlessly alongside gunicorn.
+    # 🚨 DO NOT start threads in tests
+    if app.config.get("TESTING", False):
+        materialize_tasks(app, tasks)
         return THREADS
 
-    for task in tasks:            
-        if task.__name__ not in THREADS:
-            new_thread = task(app)
+    if app.config.get("MIGRATION") or os.environ.get("DOCKER"):
+        return THREADS
 
-            if new_thread.settings.enabled:
-                THREADS[task.__name__] = new_thread
-                THREADS[task.__name__].init()
-
-                if not new_thread.quiet:
-                    print(f'Starting task({task.__name__})...')
+    materialize_tasks(app, tasks)
+    start_task_threads()
 
     return THREADS
 

@@ -19,6 +19,8 @@ import app.database as data
 from app.middleware import db
 from app.constants import (DEFAULT_PASSWORD, DEFAULT_USER, BACKGROUNDTASKS_DEFAULTS)
 
+from app.database import BackgroundTask
+
 import subprocess
 import shlex
 
@@ -401,7 +403,7 @@ def create_default_records():
             db.session.add(table())
     db.session.commit()
     data.Roles.load_roles()
-
+    
     # NOTE: Add default user account if not existing
     if not data.User.query.first():
         db.session.add(data.User(name=DEFAULT_USER,
