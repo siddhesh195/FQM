@@ -8,6 +8,9 @@ export default {
         },
         update_task_threshold_url:{
             type: String
+        },
+        showToast: {
+            type: Function
         }
     },
 
@@ -34,11 +37,11 @@ export default {
                 task_name: task_name,
                 new_threshold: new_threshold
             }).then(response => {
-                alert("Threshold updated successfully!");
+                this.showToast("Threshold updated successfully!", "success");
                 this.get_all_tasks(); // Refresh the task list
             }).catch(error => {
                 console.error("Error updating threshold: ", error);
-                alert("Failed to update threshold.");
+                this.showToast("Failed to update threshold.", "error");
             });
           this.input_v_models[task_name] = '';
         }
