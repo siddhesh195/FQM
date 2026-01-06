@@ -24,7 +24,7 @@ def _make_serial(db_session, office, task, number, name, printed=False, status=N
 def test_reports_home(c):
     resp = c.get("/reports")   # adjust prefix
     assert resp.status_code == 200
-    assert b"Reports" in resp.data
+    assert b"Reports Dashboard" in resp.data
     assert b"Task Frequency Report" in resp.data
     assert b"Ticket Status Report" in resp.data
     assert b"Select a Report to View" in resp.data
