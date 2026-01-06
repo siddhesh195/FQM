@@ -7,6 +7,36 @@
 <script src="{{ url_for('static', filename='chartHelper.js') }}"></script>
 <script src="{{ url_for('static', filename='vendor/chart/chart.js') }}"></script>
 
+<style>
+.task-frequency-report {
+  margin-top: 20px;
+}
+
+.task-frequency-report .panel {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-frequency-report .panel-title {
+  font-weight: 600;
+}
+
+.task-frequency-report label {
+  font-weight: 600;
+}
+
+.task-frequency-report hr {
+  margin: 25px 0;
+}
+
+.task-frequency-report .btn {
+  min-width: 150px;
+}
+
+
+
+
+</style>
+
 {% endblock %}
 
 {% block page_content %}

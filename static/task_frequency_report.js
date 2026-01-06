@@ -93,37 +93,97 @@ export default {
     this.get_office_names();
   },
   template: `
-      <div class="row">
-        <div class="col-xs-12">
-          <h2 style="margin-top: 0;"> Task Frequency Report Date Selection </h2>
-          <h4>Select Date Range, fetch and then select office</h4>
-          
-        </div>
-        <div class="col-xs-12">
-        <label for="my-date">Pick a start date:</label>
-        <input type="date" name="my-date" v-model="selectedStartDate">
+    <div class="row task-frequency-report">
+      <div class="col-xs-12 col-md-10 col-md-offset-1">
 
-        <label for="my-date">Pick a end date:</label>
-        <input type="date"  name="my-date" v-model="selectedEndDate">
-        </div>
-        <div class="col-xs-12">
-        <br>
-        <button class="btn btn-default btn-sm "
-            @click="fetch_reports"
-            v-if="!loading">
-            Fetch Reports
-        </button>
-        </div>
-        <label>Select Office:</label>
-        <select v-model="selectedOffice">
-          <option disabled value="">Select office</option>
-          <option v-for="office in office_names" :key="office" :value="office">
-          {{ office }}
-          </option>
-        </select>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              Task Frequency Report
+            </h3>
+          </div>
 
-    
+          <div class="panel-body">
+
+          <p class="text-muted">
+            Select a date range, fetch reports, and then choose an office.
+          </p>
+
+          <!-- Date selection -->
+          <form class="form-horizontal">
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">
+                Start Date
+              </label>
+              <div class="col-sm-9">
+                <input
+                  type="date"
+                  class="form-control"
+                  v-model="selectedStartDate"
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">
+                End Date
+              </label>
+              <div class="col-sm-9">
+                <input
+                  type="date"
+                  class="form-control"
+                  v-model="selectedEndDate"
+                >
+              </div>
+            </div>
+
+            <!-- Fetch button -->
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  @click="fetch_reports"
+                >
+                  Fetch Reports
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+          <hr>
+
+          <!-- Office selection -->
+          <div class="form-group">
+            <label>
+              Select Office
+            </label>
+            <select
+              class="form-control"
+              v-model="selectedOffice"
+              :disabled="office_names.length === 0"
+            >
+              <option disabled value="">
+                Select office
+              </option>
+              <option
+                v-for="office in office_names"
+                :key="office"
+                :value="office"
+              >
+                {{ office }}
+              </option>
+            </select>
+          </div>
+
+        </div>
+
       </div>
+    </div>
+  </div>
+
     
   `
 };
