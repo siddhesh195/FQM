@@ -286,8 +286,8 @@ def reset_current_office(page: Page,office_name: str):
     reset_button.click()
 
     # Handle SweetAlert2 confirm dialog
-    swal_confirm = page.locator(".swal2-popup")
-    expect(swal_confirm).to_be_visible()
+    swal_confirm_popup = page.locator(".swal2-popup")
+    expect(swal_confirm_popup).to_be_visible()
     
     # Click "Yes" button to confirm
     swal_yes_button = page.locator(".swal2-confirm")
@@ -295,14 +295,14 @@ def reset_current_office(page: Page,office_name: str):
     swal_yes_button.click()
 
     # Handle SweetAlert2 success message
-    swal = page.locator(".swal2-popup")
-    expect(swal).to_be_visible()
+    swal_success_popup = page.locator(".swal2-popup")
+    expect(swal_success_popup).to_be_visible()
 
     # Optional but recommended assertion
-    expect(swal).to_contain_text(f"Office {office_name} has been reset")
+    expect(swal_success_popup).to_contain_text(f"Office {office_name} has been reset")
 
     # Close SweetAlert
     page.locator(".swal2-confirm").click()
-    expect(swal).not_to_be_visible()
+    expect(swal_success_popup).not_to_be_visible()
 
     

@@ -31,9 +31,7 @@ def _accept_swal_confirm(page: Page):
     """
     Handles SweetAlert2 confirm dialog by clicking the Yes button.
     """
-    swal_yes = page.locator(
-        '.swal2-confirm'
-    )
+    swal_yes = page.locator('.swal2-confirm')
     expect(swal_yes).to_be_visible(timeout=10_000)
     swal_yes.click()
 
