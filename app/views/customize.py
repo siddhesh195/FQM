@@ -48,12 +48,12 @@ def ticket():
     form = TicketForm(printers, settings.lp_printing)
 
     if form.validate_on_submit():
-        printer = data.Printer.get()  # NOTE: sessions's lost
+        printer = data.Printer.query.first()  # NOTE: get ORM instance for modification
 
         if form.kind.data == 1:  # Rigestered
             printer.value = form.value.data
             printer.active = False
-            touch_screen_settings = data.Touch_store.get()  # NOTE: sessions's lost
+            touch_screen_settings = data.Touch_store.query.first()  # NOTE: get ORM instance for modification
             touch_screen_settings.n = True
         else:  # Printed
             printer_id = form.printers.data
@@ -84,7 +84,7 @@ def ticket():
             printer.langu = form.langu.data
             printer.value = form.value.data
             printer.scale = form.scale.data
-            touch_screen_settings = data.Touch_store.get()  # NOTE: sessions's lost
+            touch_screen_settings = data.Touch_store.query.first()  # NOTE: get ORM instance for modification
             touch_screen_settings.n = False
 
         db.session.commit()
@@ -245,7 +245,7 @@ def slide_a():
 def slide_c():
     ''' updating a slide '''
     form = SlideSettingsForm()
-    sc = data.Slides_c.get()
+    sc = data.Slides_c.query.first()  # NOTE: get ORM instance for modification
 
     if form.validate_on_submit():
         sc.rotation = form.rotation.data
@@ -414,7 +414,7 @@ def displayscreen_c(stab):
         flash('Error: wrong entry, something went wrong', 'danger')
         return redirect(url_for('core.root'))
 
-    touch_s = data.Display_store.get()
+    touch_s = data.Display_store.query.first()  # NOTE: get ORM instance for modification
 
     if form.validate_on_submit():
         touch_s.tmp = form.display.data
@@ -542,7 +542,7 @@ def touchscreen_c(stab):
         flash('Error: wrong entry, something went wrong', 'danger')
         return redirect(url_for('core.root'))
 
-    touch_s = data.Touch_store.get()
+    touch_s = data.Touch_store.query.first()  # NOTE: get ORM instance for modification
 
     if form.validate_on_submit():
         touch_s.tmp = form.touch.data
@@ -630,7 +630,7 @@ def touchscreen_c(stab):
 def alias():
     ''' view for aliases customization '''
     form = AliasForm()
-    aliases = data.Aliases.get()
+    aliases = data.Aliases.query.first()  # NOTE: get ORM instance for modification
 
     if form.validate_on_submit():
         aliases.office = form.office.data

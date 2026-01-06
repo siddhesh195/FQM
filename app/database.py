@@ -730,6 +730,31 @@ class Printer(db.Model, Mixin):
         self.header = header
         self.sub = sub
 
+    @classmethod
+    def get(cls):
+        row = cls.query.first()
+        if row is None:
+            return None
+
+        # return a SIMPLE, NON-ORM object
+        return type(
+            "PrinterSnapshot",
+            (),
+            {
+                "vendor": row.vendor,
+                "product": row.product,
+                "in_ep": row.in_ep,
+                "out_ep": row.out_ep,
+                "active": row.active,
+                "langu": row.langu,
+                "value": row.value,
+                "scale": row.scale,
+                "name": row.name,
+                "header": row.header,
+                "sub": row.sub,
+            },
+        )()
+
 
 # 00 Configuration Tabels 00 #
 # -- Touch custimization table
@@ -795,6 +820,41 @@ class Touch_store(db.Model, Mixin):
         self.p = p
         self.n = n
         self.tmp = tmp
+
+    @classmethod
+    def get(cls):
+        row = cls.query.first()
+        if row is None:
+            return None
+
+        # return a SIMPLE, NON-ORM object
+        return type(
+            "Touch_storeSnapshot",
+            (),
+            {
+                "title": row.title,
+                "message": row.message,
+                "hsize": row.hsize,
+                "hcolor": row.hcolor,
+                "hbg": row.hbg,
+                "tsize": row.tsize,
+                "tcolor": row.tcolor,
+                "msize": row.msize,
+                "mcolor": row.mcolor,
+                "mbg": row.mbg,
+                "audio": row.audio,
+                "hfont": row.hfont,
+                "mfont": row.mfont,
+                "tfont": row.tfont,
+                "mduration": row.mduration,
+                "bgcolor": row.bgcolor,
+                "p": row.p,
+                "n": row.n,
+                "tmp": row.tmp,
+                "akey": row.akey,
+                "ikey": row.ikey,
+            },
+        )()
 
 
 # -- Touch customization table
@@ -892,6 +952,53 @@ class Display_store(db.Model, Mixin):
         self.hide_ticket_index = hide_ticket_index
         self.show_office_name = show_office_name
 
+    @classmethod
+    def get(cls):
+        row = cls.query.first()
+        if row is None:
+            return None
+
+        # return a SIMPLE, NON-ORM object
+        return type(
+            "Display_storeSnapshot",
+            (),
+            {
+                "title": row.title,
+                "hsize": row.hsize,
+                "hcolor": row.hcolor,
+                "h2size": row.h2size,
+                "h2color": row.h2color,
+                "h2font": row.h2font,
+                "hbg": row.hbg,
+                "tsize": row.tsize,
+                "tcolor": row.tcolor,
+                "ssize": row.ssize,
+                "scolor": row.scolor,
+                "audio": row.audio,
+                "hfont": row.hfont,
+                "tfont": row.tfont,
+                "sfont": row.sfont,
+                "mduration": row.mduration,
+                "rrate": row.rrate,
+                "announce": row.announce,
+                "anr": row.anr,
+                "anrt": row.anrt,
+                "effect": row.effect,
+                "repeats": row.repeats,
+                "bgcolor": row.bgcolor,
+                "tmp": row.tmp,
+                "prefix": row.prefix,
+                "always_show_ticket_number": row.always_show_ticket_number,
+                "wait_for_announcement": row.wait_for_announcement,
+                "hide_ticket_index": row.hide_ticket_index,
+                "show_office_name": row.show_office_name,
+                "r_announcement": row.r_announcement,
+                "akey": row.akey,
+                "ikey": row.ikey,
+                "vkey": row.vkey,
+            },
+        )()
+
 
 # -- Slides storage table
 
@@ -933,6 +1040,24 @@ class Slides_c(db.Model, Mixin):
         self.effect = effect
         self.status = status
         self.navigation = navigation
+
+    @classmethod
+    def get(cls):
+        row = cls.query.first()
+        if row is None:
+            return None
+
+        # return a SIMPLE, NON-ORM object
+        return type(
+            "Slides_cSnapshot",
+            (),
+            {
+                "rotation": row.rotation,
+                "navigation": row.navigation,
+                "effect": row.effect,
+                "status": row.status,
+            },
+        )()
 
 
 class Media(db.Model, Mixin):
@@ -1015,6 +1140,25 @@ class Aliases(db.Model, Mixin):
         self.ticket = ticket
         self.name = name
         self.number = number
+
+    @classmethod
+    def get(cls):
+        row = cls.query.first()
+        if row is None:
+            return None
+
+        # return a SIMPLE, NON-ORM object
+        return type(
+            "AliasesSnapshot",
+            (),
+            {
+                "office": row.office,
+                "task": row.task,
+                "ticket": row.ticket,
+                "name": row.name,
+                "number": row.number,
+            },
+        )()
 
 
 class Settings(db.Model, Mixin):
