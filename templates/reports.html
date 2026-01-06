@@ -11,16 +11,26 @@
 {% block page_content %}
 <div id="app" class="container" style="margin-top: 20px;" v-cloak>
    
+    <h1 class="page-header">Reports</h1>
     
-    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('TicketStatusComponent')">
-        <div v-if="!Components['TicketStatusComponent']">Open Ticket Status Report</div>
-        <div v-if="Components['TicketStatusComponent']">Close Ticket Status Report</div>
-    </button>
+    <div class="well">
+        <h4>Select a Report to View</h4>
+        <p class="text-muted">Click on the buttons below to open or close different report views.</p>
+        
+        <button class="btn btn-primary btn-sm pull-right mr-2" style="margin-left: 10px;" @click= "loadComponent('TicketStatusComponent')">
+            <span class="fa fa-bar-chart" aria-hidden="true"></span>
+            <span v-if="!Components['TicketStatusComponent']">Open Ticket Status Report</span>
+            <span v-if="Components['TicketStatusComponent']">Close Ticket Status Report</span>
+        </button>
 
-    <button class="btn btn-default btn-sm pull-right" @click= "loadComponent('TaskFrequencyComponent')">
-        <div v-if="!Components['TaskFrequencyComponent']">Open Task Frequency Report</div>
-        <div v-if="Components['TaskFrequencyComponent']">Close Task Frequency Report</div>
-    </button>
+        <button class="btn btn-info btn-sm pull-right" @click= "loadComponent('TaskFrequencyComponent')">
+            <span class="fa fa-line-chart" aria-hidden="true"></span>
+            <span v-if="!Components['TaskFrequencyComponent']">Open Task Frequency Report</span>
+            <span v-if="Components['TaskFrequencyComponent']">Close Task Frequency Report</span>
+        </button>
+        
+        <div class="clearfix"></div>
+    </div>
 
     <!-- Component appears here -->
     <component :is="Components['TicketStatusComponent']"
