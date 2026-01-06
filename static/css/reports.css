@@ -12,6 +12,7 @@
     overflow: hidden;
 }
 
+/* Decorative circle element in header for visual interest */
 .reports-header:before {
     content: '';
     position: absolute;
@@ -127,7 +128,7 @@
     flex-wrap: wrap;
 }
 
-/* Component Container Styling */
+/* Component Container Styling - for future component wrappers */
 .report-component-container {
     background: white;
     border-radius: 12px;
@@ -137,6 +138,7 @@
     animation: fadeInUp 0.5s ease;
 }
 
+/* Fade-in animation for component loading */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -148,7 +150,7 @@
     }
 }
 
-/* Info Icon Styling */
+/* Info Icon Styling - for tooltips and help text */
 .info-icon {
     display: inline-block;
     width: 18px;
@@ -187,7 +189,7 @@
     }
 }
 
-/* Loading Animation */
+/* Loading Animation - for async operations */
 .loading-spinner {
     display: inline-block;
     width: 16px;
@@ -199,6 +201,7 @@
     margin-left: 8px;
 }
 
+/* Spin animation for loading spinner */
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
