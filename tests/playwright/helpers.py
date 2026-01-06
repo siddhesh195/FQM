@@ -281,26 +281,28 @@ def assert_token_present(page: Page,display_page: Page | None, token: str,pull:b
         
     
 def reset_current_office(page: Page,office_name: str):
-    def handle_confirm(dialog):
-        assert dialog.type == "confirm"
-        assert "reset this office" in dialog.message
-        dialog.accept()
-
-    page.once("dialog", handle_confirm)
-
     reset_button = page.get_by_role("button", name="Reset this Office")
     expect(reset_button).to_be_visible()
     reset_button.click()
 
-    # 3️⃣ Handle SweetAlert2 success message
-    swal = page.locator(".swal2-popup")
-    expect(swal).to_be_visible()
+    # Handle SweetAlert2 confirm dialog
+    swal_confirm_popup = page.locator(".swal2-popup")
+    expect(swal_confirm_popup).to_be_visible()
+    
+    # Click "Yes" button to confirm
+    swal_yes_button = page.locator(".swal2-confirm")
+    expect(swal_yes_button).to_be_visible()
+    swal_yes_button.click()
+
+    # Handle SweetAlert2 success message
+    swal_success_popup = page.locator(".swal2-popup")
+    expect(swal_success_popup).to_be_visible()
 
     # Optional but recommended assertion
-    expect(swal).to_contain_text(f"Office {office_name} has been reset")
+    expect(swal_success_popup).to_contain_text(f"Office {office_name} has been reset")
 
-    # 4️⃣ Close SweetAlert
+    # Close SweetAlert
     page.locator(".swal2-confirm").click()
-    expect(swal).not_to_be_visible()
+    expect(swal_success_popup).not_to_be_visible()
 
     

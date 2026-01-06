@@ -29,17 +29,17 @@ export default {
     },
 
     methods: {
-        DeleteOffice(office_id){
-            if (!confirm("Are you sure you want to delete this office? This action cannot be undone.")){
+        async DeleteOffice(office_id){
+            if (!await window.showSwalConfirm("Are you sure you want to delete this office? This action cannot be undone.")){
                 return;
             }
             axios.post('/delete_an_office', {'office_id': office_id})
             .then(response => {
                 if (response.data.status === "success"){
                 
-                    alert(response.data.message);
+                    window.showSwalMessage(response.data.message);
                 } else {
-                    alert(response.data.message);
+                    window.showSwalMessage(response.data.message);
                 }
                 this.get_all_offices();
             })
@@ -64,7 +64,7 @@ export default {
             axios.post(url, payload)
             .then(response => {
                 if (response.data.status === "success"){
-                    alert(response.data.message);
+                    window.showSwalMessage(response.data.message);
                 } else {
                     console.error("Failed to edit office:", response.data.message);
                 }

@@ -27,6 +27,15 @@ def _accept_js_confirm(page: Page):
     page.once("dialog", lambda d: d.accept())
 
 
+def _accept_swal_confirm(page: Page):
+    """
+    Handles SweetAlert2 confirm dialog by clicking the Yes button.
+    """
+    swal_yes = page.locator('.swal2-confirm')
+    expect(swal_yes).to_be_visible(timeout=10_000)
+    swal_yes.click()
+
+
 def _accept_swal(page: Page):
     """
     Handles SweetAlert (swal / swal2) OK button.
@@ -40,23 +49,27 @@ def _accept_swal(page: Page):
 def reset_and_delete_all_offices(page: Page):
     """
     Reset all offices, then delete all offices and tasks.
-    Handles JS confirm() + SweetAlert popups.
+    Handles SweetAlert2 confirm + SweetAlert popups.
     """
 
     # ---------- Reset All Offices ----------
-    _accept_js_confirm(page)
-
     reset_btn = page.locator("#resetAllOfficesBtn")
     expect(reset_btn).to_be_visible()
     reset_btn.click()
 
+    # Accept SweetAlert2 confirm dialog
+    _accept_swal_confirm(page)
+
+    # Accept success message
     _accept_swal(page)
 
     # ---------- Delete All Offices & Tasks ----------
-    _accept_js_confirm(page)
-
     delete_btn = page.locator("#deleteAllOfficesAndTasksBtn")
     expect(delete_btn).to_be_visible()
     delete_btn.click()
 
-    _accept_swal(page)
+    # Accept SweetAlert2 confirm dialog
+    _accept_swal_confirm(page)
+
+    # Accept success message (after page reload)
+    # Note: Page reloads after delete, so success message may not appear

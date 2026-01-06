@@ -17,8 +17,9 @@ style.innerHTML = `
     .swal2-html-container.big-text {
         font-size: 3.5rem !important;
     }
-     /* Bigger OK button */
-    .swal2-confirm.big-btn {
+     /* Bigger confirm and cancel buttons */
+    .swal2-confirm.big-btn,
+    .swal2-cancel.big-btn {
     font-size: 2.3rem !important;
     padding: 1rem 2rem !important;
     border-radius: 0.5rem !important;
@@ -47,6 +48,27 @@ function showSwalMessage(message, duration = null) {
             confirmButton: 'big-btn'
         }
     });
+}
+
+async function showSwalConfirm(message, title = "Confirm Action") {
+    const result = await Swal.fire({
+        title: title,
+        text: message,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        customClass: {
+            popup: 'custom-big-swal',
+            title: 'big-text',
+            htmlContainer: 'big-text',
+            confirmButton: 'big-btn',
+            cancelButton: 'big-btn'
+        }
+    });
+    return result.isConfirmed;
 }
 
 function showToast(message, type = "success", duration = 5000, position = "center") {

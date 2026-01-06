@@ -145,9 +145,9 @@
 
 
 {% block vue_methods%}
-    resetAllOffices(){
+    async resetAllOffices(){
         // Confirm action
-        if (!confirm("Are you sure you want to reset all offices? This action cannot be undone.")) {
+        if (!await showSwalConfirm("Are you sure you want to reset all offices? This action cannot be undone.")) {
             return;
         }
         axios.post("{{ url_for('offices.reset_all_offices') }}")
@@ -165,9 +165,9 @@
                 console.error(error);
             });
     },
-    deleteAllOfficesAndTasks(){
+    async deleteAllOfficesAndTasks(){
     // Confirm action
-    if (!confirm("Are you sure you want to delete all offices and tasks? This action cannot be undone.")) {
+    if (!await showSwalConfirm("Are you sure you want to delete all offices and tasks? This action cannot be undone.")) {
         return;
     }
     axios.post("{{ url_for('offices.delete_all_offices_and_tasks') }}")
@@ -186,9 +186,9 @@
             console.error(error);
         });
     },
-    resetOneOffice(office_id){
+    async resetOneOffice(office_id){
         // Confirm action
-        if (!confirm("Are you sure you want to reset this office? This action cannot be undone.")) {
+        if (!await showSwalConfirm("Are you sure you want to reset this office? This action cannot be undone.")) {
            return;
         }
         axios.post("{{ url_for('offices.reset_single_office') }}",{
