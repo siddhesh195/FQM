@@ -194,12 +194,16 @@ def pull_next_ticket():
     json_data = request.get_json()
     o_id = json_data.get("o_id")
     ofc_id = json_data.get("ofc_id")
+    if not ofc_id:
+        return jsonify({'status': 'error', 'message': 'Office ID is required'})
 
     settings = data.Settings.get()
     strict_pulling = settings.strict_pulling
     single_row = settings.single_row
     task = data.Task.get(0 if single_row else o_id)
     office = data.Office.get(0 if single_row else ofc_id)
+    if not office:
+        return jsonify({'status': 'error', 'message': 'Office not found'})
     global_pull = not bool(o_id and ofc_id)
 
     if global_pull:
