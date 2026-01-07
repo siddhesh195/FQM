@@ -108,7 +108,8 @@ def pull_ticket():
     strict_pulling = data.Settings.get().strict_pulling
     office = data.Office.get(office_id)
 
-
+    if not office:
+        return jsonify({'status': 'error', 'message': 'Office not found'})
 
     ticket= data.Serial.query.filter_by(id=ticket_id).first()
     if not ticket or ticket.on_hold:
@@ -122,7 +123,7 @@ def pull_ticket():
                               is_common_task_operator(ticket.task_id)):
         return jsonify({'status': 'error', 'message': 'Unauthorized to pull this ticket'})
     try:
-        if ticket.pull((office or ticket.office).id):
+        if ticket.pull((office).id):
             return jsonify({'status': 'success', 'message': f'Ticket {ticket_name} pulled successfully'})
         else:
             return jsonify({'status': 'error', 'message': 'Ticket could not be pulled. It may already be pulled'})

@@ -237,6 +237,30 @@ def test_pull_ticket_success(c):
     assert json_response['status'] == 'success'
     assert json_response['message'] == f'Ticket {ticket_name} pulled successfully'
 
+@pytest.mark.usefixtures("c")
+def test_pull_ticket_office_not_found(c):
+
+    all_tickets = data.Serial.all_clean()
+
+    
+    ticket_to_pull = all_tickets[0]
+    ticket_name = ticket_to_pull.name
+    ticket_id = ticket_to_pull.id
+    office_id = 9999 #non existent office id
+
+    url='/pull_ticket'
+    payload = {
+        'ticket_id': ticket_id,
+        'office_id': office_id,
+        'ticket_name': ticket_name
+    }
+    resp = c.post(url,json=payload)
+
+
+    json_response = resp.get_json()
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Office not found'
+
 
 
 @pytest.mark.usefixtures("c")
