@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, jsonify, redirect, url_for, render_template
+from flask import Blueprint, flash, jsonify, redirect, url_for, render_template, request
 from flask_login import login_required
 from app.forms.manage import TaskForm
 from flask_login import current_user
@@ -7,6 +7,7 @@ from app.helpers import get_or_reject, is_operator, is_office_operator, reject_s
 import app.database as data
 from app.middleware import db
 from app.utils import ids
+from app.helpers2 import to_bool
 
 tasks = Blueprint('tasks', __name__)
 
@@ -32,7 +33,6 @@ def add_task_home(office):
         flash('Error: operators are not allowed to access the page ', 'danger')
         return redirect(url_for('core.root'))
 
-    print(office.id,'office_id')
     return render_template('task_add.html', form=form,
                            offices=data.Office.query,
                            serial=data.Serial.all_clean(),
@@ -56,10 +56,14 @@ def add_task(office):
     form = TaskForm()
 
     if form.validate_on_submit():
-        if data.Task.query.filter_by(name=form.name.data).first() is not None:
-            return jsonify({'status': 'error', 'message': 'Task with this name already exists'})
-
-        task = data.Task(form.name.data, form.hidden.data)
+        task_name = form.name.data.strip()
+        existing_task = data.Task.query.filter_by(name=task_name).first()
+        if existing_task:
+            existing_task_office_ids = ids(existing_task.offices)
+            if office.id in existing_task_office_ids:
+                return jsonify({'status': 'error', 'message': 'Task with this name already exists in this office'})
+        
+        task = data.Task(task_name, form.hidden.data)
         db.session.add(task)
         db.session.commit()
 
@@ -82,3 +86,43 @@ def add_task(office):
         return jsonify({'status': 'success', 'message': 'Task added successfully'})
     else:
         return jsonify({'status': 'error', 'message': 'Form validation failed'})
+    
+@tasks.route('/modify_task', methods=['POST'])
+@login_required
+def modify_task():
+    if current_user.role_id != 1:
+        return jsonify({'status': 'error', 'message': 'Unauthorized'})
+    task_id = request.json.get('task_id',None)
+
+    if not task_id:
+        return jsonify({'status': 'error', 'message': 'Task ID not provided'})
+    json_body= request.get_json()
+
+    taskName= json_body.get('taskName',None)
+    if taskName is not None:
+        taskName= taskName.strip()
+    status= json_body.get('status',None)
+
+    
+    task = data.Task.query.get(task_id)
+    if not task:
+        return jsonify({'status': 'error', 'message': 'Task not found'})
+    
+    if status is not None:
+        status = to_bool(status)
+        task.hidden = status
+        db.session.commit()
+    
+    if taskName is not None:
+        #check for duplicate task name in the same offices
+        existing_task = data.Task.query.filter_by(name=taskName).first()
+        if existing_task and existing_task.id != task.id:
+            existing_task_office_ids = ids(existing_task.offices)
+            for office in task.offices:
+                if office.id in existing_task_office_ids:
+                    return jsonify({'status': 'error', 'message': 'Task with this name already exists in this office'})
+        task.name = taskName
+        db.session.commit()
+   
+
+    return jsonify({'status': 'success', 'message': f'Task {task.name} status updated to {status}'})

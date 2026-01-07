@@ -37,37 +37,7 @@ def get_all_tasks():
     tasks_list = [{'id': task.id, 'name': task.name, 'hidden': task.hidden, 'offices': task_office_names.get(task.id, [])} for task in tasks]
     return jsonify({'status': 'success', 'tasks': tasks_list})
 
-@manage_app2.route('/modify_task', methods=['POST'])
-@login_required
-def modify_task():
-    if current_user.role_id != 1:
-        return jsonify({'status': 'error', 'message': 'Unauthorized'})
-    task_id = request.json.get('task_id',None)
 
-    if not task_id:
-        return jsonify({'status': 'error', 'message': 'Task ID not provided'})
-    json_body= request.get_json()
-
-    taskName= json_body.get('taskName',None)
-    status= json_body.get('status',None)
-
-    
-
-    task = data.Task.query.get(task_id)
-    if not task:
-        return jsonify({'status': 'error', 'message': 'Task not found'})
-    
-    if status is not None:
-        status = to_bool(status)
-        task.hidden = status
-        db.session.commit()
-    
-    if taskName is not None:
-        task.name = taskName
-        db.session.commit()
-   
-
-    return jsonify({'status': 'success', 'message': f'Task {task.name} status updated to {status}'})
 
 @manage_app2.route('/delete_a_task', methods=['POST'])
 @login_required

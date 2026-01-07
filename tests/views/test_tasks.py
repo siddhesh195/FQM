@@ -4,16 +4,6 @@ import app.database as data
 from flask_wtf.csrf import generate_csrf
 
 
-"""
-@pytest.fixture(autouse=True)
-def explode_on_settings_get(monkeypatch):
-    import app.database as data
-
-    if hasattr(data.Settings, "get"):
-        def boom(*args, **kwargs):
-            raise RuntimeError("Settings.get() CALLED")
-        monkeypatch.setattr(data.Settings, "get", boom)
-"""
 
 @pytest.mark.usefixtures("c")
 def test_add_task_unauthorized(c,monkeypatch):
@@ -62,7 +52,7 @@ def test_add_task_form_validation_failure_missing_csrf(flask_app,c,monkeypatch):
     assert data_json['status'] == 'error'
     assert data_json['message'] == 'Form validation failed'
 
-#@pytest.mark.skip(reason="test after this fails")
+
 @pytest.mark.usefixtures("flask_app","c")
 def test_add_task_duplicate_name_failure(flask_app,c,monkeypatch):
     class User:
@@ -90,6 +80,10 @@ def test_add_task_duplicate_name_failure(flask_app,c,monkeypatch):
     db.session.add(task)
     db.session.commit()
 
+    #attach task to office
+    office.tasks.append(task)
+    db.session.commit()
+
     
     resp = c.post(f"/add_task/{office_id}", data={
         'name': 'Task 1',
@@ -99,11 +93,108 @@ def test_add_task_duplicate_name_failure(flask_app,c,monkeypatch):
     assert resp.status_code == 200
     data_json = resp.get_json()
     assert data_json['status'] == 'error'
-    assert data_json['message'] == 'Task with this name already exists'
+    assert data_json['message'] == 'Task with this name already exists in this office'
 
 
 @pytest.mark.usefixtures("flask_app","c")
-def test_add_task_success(flask_app,c,monkeypatch):
+def test_add_task_whitespace_strip(flask_app,c,monkeypatch):
+    """
+    """
+    class User:
+        def __init__(self):
+            self.role_id = 1  # admin role
+    current_user = User()
+    monkeypatch.setattr('app.views.tasks.current_user',current_user)
+
+
+    #enable CSRF protection in the app for this test
+    flask_app.config['WTF_CSRF_ENABLED'] = True
+
+    #Initial GET to set up session
+    c.get('/')
+    with flask_app.test_request_context():
+        csrf_token = generate_csrf()
+
+    office = data.Office(name="Test Office")
+    db.session.add(office)
+    db.session.commit()
+    office_id = office.id
+
+    # enter a task directly in database
+    task = data.Task('Task 1', False)
+    db.session.add(task)
+    db.session.commit()
+
+    #attach task to office
+    office.tasks.append(task)
+    db.session.commit()
+    
+    # now try to add a task with trailing whitespace
+    #it should be stripped and detected as duplicate
+    
+    resp = c.post(f"/add_task/{office_id}", data={
+        'name': 'Task 1 ',   #whitespace only
+        'hidden': False,
+        'csrf_token': csrf_token
+    })
+    assert resp.status_code == 200
+    data_json = resp.get_json()
+    assert data_json['status'] == 'error'
+    assert data_json['message'] == 'Task with this name already exists in this office'
+
+
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_task_success_different_offices_same_task(flask_app,c,monkeypatch):
+    """
+    task already exists in another office but not in this one
+    so it should be added successfully
+    """
+    class User:
+        def __init__(self):
+            self.role_id = 1  # admin role
+    current_user = User()
+    monkeypatch.setattr('app.views.tasks.current_user',current_user)
+
+    #enable CSRF protection in the app for this test
+    flask_app.config['WTF_CSRF_ENABLED'] = True
+
+    #Initial GET to set up session
+    c.get('/')
+
+    with flask_app.test_request_context():
+        csrf_token = generate_csrf()
+    office1 = data.Office(name="Office 1")
+    office2 = data.Office(name="Office 2")
+
+    db.session.add(office1)
+    db.session.add(office2)
+    db.session.commit()
+
+    # enter a task directly in database and attach to office1
+    task = data.Task('Task 1', False)
+    db.session.add(task)
+    db.session.commit()
+    office1.tasks.append(task)
+    db.session.commit()
+
+    # now try to add the same task to office2
+    resp = c.post(f"/add_task/{office2.id}", data={
+        'name': 'Task 1',
+        'hidden': False,
+        'csrf_token': csrf_token
+    })
+    assert resp.status_code == 200 
+    data_json = resp.get_json()
+    assert data_json['status'] == 'success'
+    assert data_json['message'] == 'Task added successfully'
+
+
+
+@pytest.mark.usefixtures("flask_app","c")
+def test_add_task_success_new_task_in_entire_database(flask_app,c,monkeypatch):
+    """
+    first task in database
+    """
     
     class User:
         def __init__(self):
@@ -118,9 +209,6 @@ def test_add_task_success(flask_app,c,monkeypatch):
    
     import app.database as data
 
-    #print("settings object:", data.Settings)
-    #print("detached:", inspect(data.Settings).detached)
-    #print("Settings detached:", inspect(data.Settings._cached).detached if data.Settings._cached else None)
 
     #Initial GET to set up session
     c.get('/')
