@@ -75,6 +75,30 @@ def test_delete_task_unauthorized(c,monkeypatch):
     assert data['message'] == 'Unauthorized'
 
 @pytest.mark.usefixtures('c')
+def test_delete_task_with_active_tickets_failure(c,monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # First, create a task
+    new_task = database.Task(name='Task with Active Tickets', hidden=False)
+    db.session.add(new_task)
+    db.session.commit()
+    task_id = new_task.id
+
+    # Now, create an active ticket associated with this task
+    new_ticket = database.Serial(task_id=task_id, status='active')
+    db.session.add(new_ticket)
+    db.session.commit()
+
+    response = c.post('/delete_a_task', json={'task_id': task_id})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'error'
+    assert data['message'] == 'Cannot delete task with active tickets'
+
+@pytest.mark.usefixtures('c')
 def test_delete_task_id_not_provided(c,monkeypatch):
     class user:
         role_id = 1  # Admin

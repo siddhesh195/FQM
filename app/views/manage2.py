@@ -50,6 +50,11 @@ def delete_a_task():
         return jsonify({'status': 'error', 'message': 'Task ID not provided'})
     
     task = data.Task.query.get(task_id)
+    #check if task has active tickets. if yes, do not allow deletion
+    active_tickets = data.Serial.query.filter_by(task_id=task_id).all()
+    if active_tickets:
+        return jsonify({'status': 'error', 'message': 'Cannot delete task with active tickets'})
+
     if not task:
         return jsonify({'status': 'error', 'message': 'Task not found'})
     
