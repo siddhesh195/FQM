@@ -277,7 +277,7 @@ def test_reset_single_office_invalid_office_id(c, monkeypatch):
 
 
 @pytest.mark.usefixtures("c")
-def test_reset_single_office_success(c, monkeypatch):
+def test_reset_single_office_success_admin(c, monkeypatch):
     """
     Test resetting a single office.
     """
