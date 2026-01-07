@@ -84,9 +84,11 @@ def test_add_task_duplicate_name_failure(flask_app,c,monkeypatch):
     office.tasks.append(task)
     db.session.commit()
 
+    new_name = ' Task 1 '  # Duplicate name with whitespace difference to test stripping too
+
     
     resp = c.post(f"/add_task/{office_id}", data={
-        'name': 'Task 1',
+        'name': new_name,
         'hidden': False,
         'csrf_token': csrf_token
     })
@@ -96,51 +98,6 @@ def test_add_task_duplicate_name_failure(flask_app,c,monkeypatch):
     assert data_json['message'] == 'Task with this name already exists in this office'
 
 
-@pytest.mark.usefixtures("flask_app","c")
-def test_add_task_whitespace_strip(flask_app,c,monkeypatch):
-    """
-    """
-    class User:
-        def __init__(self):
-            self.role_id = 1  # admin role
-    current_user = User()
-    monkeypatch.setattr('app.views.tasks.current_user',current_user)
-
-
-    #enable CSRF protection in the app for this test
-    flask_app.config['WTF_CSRF_ENABLED'] = True
-
-    #Initial GET to set up session
-    c.get('/')
-    with flask_app.test_request_context():
-        csrf_token = generate_csrf()
-
-    office = data.Office(name="Test Office")
-    db.session.add(office)
-    db.session.commit()
-    office_id = office.id
-
-    # enter a task directly in database
-    task = data.Task('Task 1', False)
-    db.session.add(task)
-    db.session.commit()
-
-    #attach task to office
-    office.tasks.append(task)
-    db.session.commit()
-    
-    # now try to add a task with trailing whitespace
-    #it should be stripped and detected as duplicate
-    
-    resp = c.post(f"/add_task/{office_id}", data={
-        'name': 'Task 1 ',   #whitespace only
-        'hidden': False,
-        'csrf_token': csrf_token
-    })
-    assert resp.status_code == 200
-    data_json = resp.get_json()
-    assert data_json['status'] == 'error'
-    assert data_json['message'] == 'Task with this name already exists in this office'
 
 
 @pytest.mark.usefixtures("flask_app","c")

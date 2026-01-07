@@ -85,6 +85,7 @@ def add_task(office):
 
         return jsonify({'status': 'success', 'message': 'Task added successfully'})
     else:
+ 
         return jsonify({'status': 'error', 'message': 'Form validation failed'})
     
 @tasks.route('/modify_task', methods=['POST'])
