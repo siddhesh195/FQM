@@ -55,12 +55,16 @@
 task_name: '',
 task_hidden: false,
 csrf_token:  "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
-add_task_url: "{{ url_for('tasks.add_task',o_id=o_id) }}"
+o_id: {% if o_id is defined and o_id %}{{ o_id }}{% else %}null{% endif %},
+add_task_url: "{% if o_id is defined and o_id %}{{ url_for('tasks.add_task', o_id=o_id) }}{% else %}{{ url_for('tasks.add_common_task') }}{% endif %}",
+
 
 
 {% endblock %}
 
 {% block vue_methods %}
+
+
 async addTask() {
 	console.log(this.add_task_url);
 	try {
