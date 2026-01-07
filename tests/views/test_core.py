@@ -27,6 +27,11 @@ def test_welcome_root_and_login(c):
 
 @pytest.mark.usefixtures('c')
 def test_new_registered_ticket(c,monkeypatch):
+    """
+    Cannot create a new ticket without attaching it to office.
+    So we create a new office and attach task to it.
+    And then pass office id along with task id to create ticket.
+    """
     class user:
         def __init__(self):
             self.role_id=1
@@ -39,16 +44,24 @@ def test_new_registered_ticket(c,monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    #create a new office to attach ticket to
+    office = Office(name='Test Office for Ticket', prefix='T')
+    db.session.add(office)
+    db.session.commit()
+    office.tasks.append(task)
+    db.session.commit()
+    office_id = office.id
 
     name = 'TESTING REGISTERED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
 
 

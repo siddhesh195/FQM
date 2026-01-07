@@ -170,6 +170,7 @@ def root(n=None):
 def serial(task, office_id=None):
     ''' generate a new ticket and print it. '''
     if not office_id:
+    
         flash('Error: office id is required to generate a new ticket', 'danger')
         return redirect(url_for('core.root'))
     windows = os.name == 'nt'
