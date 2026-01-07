@@ -15,7 +15,16 @@ from app.constants import TICKET_WAITING
 from app.database import (Task, Office, Serial, Settings, Touch_store, Display_store,
                           Printer, Aliases)
 
-
+def create_office_and_attach_task(task: Task)-> int:
+    #create a new office to attach ticket to
+    office = Office(name='Test Office for Ticket', prefix='T')
+    db.session.add(office)
+    db.session.commit()
+    office.tasks.append(task)
+    db.session.commit()
+    office_id = office.id
+    return office_id
+    
 @pytest.mark.usefixtures('c')
 def test_welcome_root_and_login(c):
     response = c.post('/log/a', follow_redirects=True)
@@ -45,13 +54,7 @@ def test_new_registered_ticket(c,monkeypatch):
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
     last_ticket_number = last_ticket.number
-    #create a new office to attach ticket to
-    office = Office(name='Test Office for Ticket', prefix='T')
-    db.session.add(office)
-    db.session.commit()
-    office.tasks.append(task)
-    db.session.commit()
-    office_id = office.id
+    office_id = create_office_and_attach_task(task)
 
     name = 'TESTING REGISTERED TICKET'
     response = c.post(f'/serial/{task.id}/{office_id}', data={
@@ -79,16 +82,18 @@ def test_new_noisy_registered_ticket(c,monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
 
     name = '0002020000'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name[3:]
 
 
@@ -115,16 +120,22 @@ def test_new_printed_ticket(c, monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
+
+
+    
 
     name = 'TESTING PRINTED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
     assert mock_printer().image.call_count == 1
     assert mock_printer().cut.call_count == 1
@@ -158,9 +169,12 @@ def test_new_printed_ticket_with_aliases(c, monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
+
 
     name = 'TESTING PRINTED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
@@ -171,7 +185,7 @@ def test_new_printed_ticket_with_aliases(c, monkeypatch):
     cur_ticket = tickets.first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
     assert mock_printer().text.call_count == 12
     assert mock_printer().set.call_count == 7
@@ -218,16 +232,19 @@ def test_new_printed_ticket_windows(c, monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
+
 
     name = 'TESTING PRINTED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
     mock_system.assert_called_once_with(
         f'print /D:\\\localhost\\"{printer_name}" "{printer_full_path}"') # noqa
@@ -264,16 +281,19 @@ def test_new_printed_ticket_lp(c, monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
+
 
     name = 'TESTING PRINTED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
     mock_system.assert_called_once_with(
         f'lp -d "{printer_name}" -o raw "{printer_full_path}"')
@@ -311,16 +331,19 @@ def test_new_printed_ticket_arabic(c, monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
+
 
     name = 'TESTING PRINTED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
     assert mock_printer().text.call_count == 1
     mock_printer().cut.assert_called_once()
@@ -369,16 +392,19 @@ def test_new_printed_ticket_windows_arabic(c, monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
+
 
     name = 'TESTING PRINTED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
     assert mock_system.call_count == 1
     assert (
@@ -427,16 +453,19 @@ def test_new_printed_ticket_lp_arabic(c, monkeypatch):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_number = last_ticket.number
+    office_id = create_office_and_attach_task(task)
+
 
     name = 'TESTING PRINTED TICKET'
-    response = c.post(f'/serial/{task.id}', data={
+    response = c.post(f'/serial/{task.id}/{office_id}', data={
         'name': name
     }, follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
     assert response.status == '200 OK'
-    assert last_ticket.number != new_ticket.number
+    assert last_ticket_number != new_ticket.number
     assert new_ticket.name == name
     mock_system.assert_called_once_with(
         f'lp -d "{printer_name}" -o raw "{printer_full_path}"')
@@ -450,8 +479,11 @@ def test_new_printed_ticket_fail(c):
     task = choice(Task.query.all())
     last_ticket = Serial.query.filter_by(task_id=task.id)\
                               .order_by(Serial.number.desc()).first()
+    last_ticket_id = last_ticket.id
+    office_id = create_office_and_attach_task(task)
 
-    response = c.post(f'/serial/{task.id}', follow_redirects=True)
+
+    response = c.post(f'/serial/{task.id}/{office_id}', follow_redirects=True)
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()
 
@@ -459,7 +491,7 @@ def test_new_printed_ticket_fail(c):
         errors_log_content = errors_log.read()
 
     assert response.status == '200 OK'
-    assert new_ticket.id == last_ticket.id
+    assert new_ticket.id == last_ticket_id
     assert bool(errors_log_content)
 
 
@@ -512,29 +544,61 @@ def test_reset_all(c):
 
 @pytest.mark.usefixtures('c')
 @pytest.mark.parametrize('_', range(TEST_REPEATS))
-def test_generate_new_tickets(_, c,monkeypatch):
+def test_generate_new_tickets(_, c, monkeypatch):
+    """
+    Verify that an authorized user can generate a new ticket
+    for a given task and office, and that the ticket number
+    increments globally and sequentially.
+    """
+
+    # ---- mock authorized user ----
     class user:
         def __init__(self):
-            self.role_id=1
+            self.role_id = 1
+
     current_user = user()
     monkeypatch.setattr(app.views.core, 'current_user', current_user)
+
+    # ---- enable touch screen mode ----
     touch_screen_settings = Touch_store.query.first()
     touch_screen_settings.n = True
     db.session.commit()
-    tickets_before = Serial.query.order_by(Serial.number.desc()).all()
-    last_ticket = Serial.query.order_by(Serial.number.desc()).first()
-    random_task = choice(Task.query.all())
 
+    # ---- choose task and attach an office ----
+    task = choice(Task.query.all())
+    office_id = create_office_and_attach_task(task)
+
+    # ---- capture GLOBAL last ticket number ----
+    last_ticket = (
+        Serial.query
+        .order_by(Serial.number.desc())
+        .first()
+    )
+    last_ticket_number = last_ticket.number if last_ticket else 0
+
+    # ---- generate new ticket ----
     name = choice(NAMES)
-    response = c.post(f'/serial/{random_task.id}', data={
-        'name': name
-    }, follow_redirects=True)
 
+    response = c.post(
+        f'/serial/{task.id}/{office_id}',
+        data={'name': name},
+        follow_redirects=True
+    )
+
+    # ---- fetch newly created ticket ----
+    new_ticket = (
+        Serial.query
+        .order_by(Serial.number.desc())
+        .first()
+    )
+
+    # ---- assertions ----
     assert response.status == '200 OK'
-    assert Serial.query.count() > len(tickets_before)
-    assert Serial.query.order_by(Serial.number.desc())\
-                       .first()\
-                       .number == (last_ticket.number + 1)
+    assert new_ticket is not None
+    assert new_ticket.number == last_ticket_number + 1
+    assert new_ticket.name == name
+    assert new_ticket.office_id == office_id
+    assert new_ticket.task_id == task.id
 
 
 @pytest.mark.parametrize('_', range(TEST_REPEATS))
