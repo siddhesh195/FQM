@@ -6,7 +6,6 @@ import app.database as data
 from app.constants import TICKET_ORDER_NEWEST_PROCESSED,TICKET_WAITING,TICKET_PROCESSED, TICKET_ATTENDED
 
 from app.helpers import is_operator,is_office_operator,is_common_task_operator,get_number_of_active_tickets_cached
-from app.helpers import get_number_of_active_tickets_office_cached, get_number_of_active_tickets_task_cached
 from app.helpers import has_offices
 
 from app.forms.manage import ProcessedTicketForm2
@@ -184,24 +183,6 @@ def get_all_active_tickets():
     return jsonify({'active_tickets': active_tickets})
 
 
-@offices.route('/get_number_of_active_office_tickets', methods=['GET', 'POST'])
-@login_required
-def get_all_active_office_tickets():
-    json_data = request.get_json()
-    o_id = json_data.get("o_id") if request.is_json else None
-    active_tickets = get_number_of_active_tickets_office_cached(o_id)
-    return jsonify({'active_tickets': active_tickets})
-
-
-@offices.route('/get_number_of_active_task_tickets', methods=['GET', 'POST'])
-@login_required
-def get_all_active_task_tickets():
-    json_data = request.get_json()
-    t_id = json_data.get("t_id")
-    office_id = json_data.get("office_id")
-    active_tickets = get_number_of_active_tickets_task_cached(task_id=t_id, office_id=office_id)
-    return jsonify({'active_tickets': active_tickets})
-
 
 @login_required
 @offices.route('/pull_next_ticket', methods=['POST'])
@@ -347,10 +328,9 @@ def reset_single_office():
     office_id = json_data.get("office_id", None)
     if not office_id:
         return jsonify({'status': 'error', 'message': 'Office ID is required'}), 400
-
+    
     if current_user.role_id != 1 and not is_office_operator(office_id):
         return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
-    
     
     
     office = data.Office.get(office_id)
