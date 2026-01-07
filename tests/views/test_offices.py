@@ -237,6 +237,30 @@ def test_pull_ticket_success(c):
     assert json_response['status'] == 'success'
     assert json_response['message'] == f'Ticket {ticket_name} pulled successfully'
 
+@pytest.mark.usefixtures("c")
+def test_pull_ticket_office_not_found(c):
+
+    all_tickets = data.Serial.all_clean()
+
+    
+    ticket_to_pull = all_tickets[0]
+    ticket_name = ticket_to_pull.name
+    ticket_id = ticket_to_pull.id
+    office_id = 9999 #non existent office id
+
+    url='/pull_ticket'
+    payload = {
+        'ticket_id': ticket_id,
+        'office_id': office_id,
+        'ticket_name': ticket_name
+    }
+    resp = c.post(url,json=payload)
+
+
+    json_response = resp.get_json()
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Office not found'
+
 
 
 @pytest.mark.usefixtures("c")
@@ -334,9 +358,72 @@ def test_get_all_active_tickets(c):
 
     assert json_response_after_pull['active_tickets'] == current_active_tickets_count - 1
 
+@pytest.mark.usefixtures("c")
+def test_pull_next_ticket_no_office_id(c):
+    url='/pull_next_ticket'
+
+    payload = {
+        'o_id': 1,
+        'ofc_id': None
+    }
+    resp = c.post(url,json=payload)
+   
+    json_response = resp.get_json()
+ 
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Office ID is required'
+
+@pytest.mark.usefixtures("c")
+def test_pull_next_ticket_office_not_found(c):
+    url='/pull_next_ticket'
+
+    payload = {
+        'o_id': 1,
+        'ofc_id': 9999
+    }
+    resp = c.post(url,json=payload)
+   
+    json_response = resp.get_json()
+ 
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'Office not found'
+
+@pytest.mark.usefixtures("c")
+def test_pull_next_ticket_no_tickets_available(c):
+    #create new office
+    new_office = data.Office(name="Test Office No Tickets")
+    db.session.add(new_office)
+    db.session.commit()
+    office_id = new_office.id
+
+    #create new task
+    office= data.Office.get(office_id)
+    new_task = data.Task(name="Test Task No Tickets")
+    db.session.add(new_task)
+    db.session.commit()
+
+    #attach task to office
+    task = data.Task.query.filter_by(name="Test Task No Tickets").first()
+    office.tasks.append(task)
+    db.session.commit()
+    task_id = task.id
+    
+    url='/pull_next_ticket'
+
+    payload = {
+        'o_id': task_id,
+        'ofc_id': office_id
+    }
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+ 
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'No tickets available to pull'
+
     
 @pytest.mark.usefixtures("c")
-def test_pull_next_ticket(c):
+def test_pull_next_ticket_success(c):
     #create new office
     new_office = data.Office(name="Test Office for Ticket Pull")
     db.session.add(new_office)
