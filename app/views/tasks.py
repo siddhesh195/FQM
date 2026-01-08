@@ -98,81 +98,55 @@ def add_task(office):
 def add_common_task():
     ''' Add a common task (JSON API) '''
 
-    # Authorization (admins only, same intent as old route)
+    
     if current_user.role_id != 1:
         return jsonify({
             'status': 'error',
             'message': 'Unauthorized access'
         }), 403
-
-    form = TaskForm(common=True)
-
-    if not form.validate_on_submit():
-        return jsonify({
-            'status': 'error',
-            'message': 'Form validation failed'
-        }), 400
-
-    task_name = form.name.data.strip()
-
-    # Task name must be globally unique
-    existing_task = data.Task.query.filter_by(name=task_name).first()
-    if existing_task:
-        return jsonify({
-            'status': 'error',
-            'message': 'Task name is already in use'
-        }), 409
-
-    # Validate that at least one office is selected
-    offices = data.Office.query.all()
-    selected_offices = [
-        office for office in offices
-        if form.get(f'check{office.id}') and form[f'check{office.id}'].data
-    ]
-
-    if not selected_offices:
-        return jsonify({
-            'status': 'error',
-            'message': 'At least one office must be selected'
-        }), 400
-
-    # Create task
-    task = data.Task(task_name, form.hidden.data)
-    db.session.add(task)
-    db.session.commit()
-
-    # Associate offices
-    for office in selected_offices:
-        if office not in task.offices:
-            task.offices.append(office)
-
-    db.session.commit()
-
-    # Create initial serial (number=100) for each associated office
-    for office in task.offices:
-        initial_ticket = data.Serial.query.filter_by(
-            office_id=office.id,
-            task_id=task.id,
-            number=100
-        ).first()
-
-        if not initial_ticket:
-            db.session.add(data.Serial(
-                office_id=office.id,
-                task_id=task.id,
-                p=True
-            ))
-
-    db.session.commit()
-
-    return jsonify({
-        'status': 'success',
-        'message': 'Common task added successfully',
-        'task_id': task.id,
-        'offices': [office.id for office in task.offices]
-    }), 201
-
     
+    form = TaskForm(common=True)
+    if form.validate_on_submit():
+
+        task_name = form.name.data.strip()
+
+        # Task name must be globally unique
+        existing_task = data.Task.query.filter_by(name=task_name).first()
+        if existing_task:
+            return jsonify({
+                'status': 'error','message': 'Task name is already in use'})
+        # Validate that at least one office is selected
+        all_offices = data.Office.query.all()
+        offices_validation = [form[f'check{o.id}'].data for o in all_offices]
+        if len(offices_validation) > 0 and not any(offices_validation):
+            return jsonify({'status': 'error','message': 'At least one office must be selected'})   
+        # Create task
+        hidden_status= bool(form.hidden.data)
+        
+        task = data.Task(task_name, hidden_status)
+        db.session.add(task)
+        db.session.commit()
+
+        for office in all_offices:
+            if form[f'check{office.id}'].data:
+                task.offices.append(office)
+        for office in task.offices:
+            initial_ticket = data.Serial.query\
+                                 .filter_by(office_id=office.id, number=100)\
+                                 .first()
+            if not initial_ticket:
+                db.session.add(data.Serial(office_id=office.id,
+                                           task_id=task.id,
+                                           p=True))
+        db.session.commit()
+
+        return jsonify({'status': 'success', 'message': 'Common task added successfully'})
+    else:
+ 
+         return jsonify({'status': 'error', 'message': 'Form validation failed'})
+
+
+
 @tasks.route('/modify_task', methods=['POST'])
 @login_required
 def modify_task():

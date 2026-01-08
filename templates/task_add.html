@@ -35,7 +35,7 @@
 				| {{ translate("Select the offices to add the common task to :", 'en', [defLang]) }} |
 			</p>
 			{% for ofc in offices.all() %}
-			{{ render_field(form['check' + str(ofc.id)], class="form-control") }}
+			{{ render_field(form['check' + str(ofc.id)],class="form-control",**{'v-model': 'office_checks[' ~ ofc.id ~ ']'}) }}
 			{% endfor %}
 			{% endif %}
 			<p class="pt-6"></p>
@@ -54,6 +54,7 @@
 {% block vue_data %}
 task_name: '',
 task_hidden: false,
+office_checks: {},
 csrf_token:  "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
 o_id: {% if o_id is defined and o_id %}{{ o_id }}{% else %}null{% endif %},
 add_task_url: "{% if o_id is defined and o_id %}{{ url_for('tasks.add_task', o_id=o_id) }}{% else %}{{ url_for('tasks.add_common_task') }}{% endif %}",
@@ -68,11 +69,21 @@ add_task_url: "{% if o_id is defined and o_id %}{{ url_for('tasks.add_task', o_i
 async addTask() {
 	console.log(this.add_task_url);
 	try {
-		const response = await axios.post(this.add_task_url, {
-            name: this.task_name,
+		const payload = {
+			name: this.task_name,
 			hidden: this.task_hidden,
-            csrf_token: this.csrf_token
-        });
+			csrf_token: this.csrf_token
+		};
+		if (this.office_checks) {
+		    for (const [id, val] of Object.entries(this.office_checks)) {
+                if (val) {
+                    payload[`check${id}`] = true;
+                }else{
+					payload[`check${id}`] = false;
+				}
+				}
+            }
+			const response = await axios.post(this.add_task_url, payload);
 		if (response.data.status === 'success') {
             const result = await showSwalMessage(response.data.message);
 
@@ -85,6 +96,8 @@ async addTask() {
         } else {
             await showSwalMessage(response.data.message);
         }
+		
+		
 	} catch (error) {
 		console.error('Error:', error);
 		alert('An error occurred while adding the task.');
@@ -98,12 +111,23 @@ async addTask() {
 
 {% block vue_mounted %}
 
-
+console.log('Vue instance mounted for adding task.');
 {% endblock %}
 
 {% block  vue_watch %}
 
-
+office_checks: {
+    handler(newVal) {
+        console.log('Office checks updated:', newVal);
+    },
+    deep: true
+},
+task_hidden(newVal) {
+	console.log('Task hidden status changed:', newVal);
+},
+task_name(newVal) {
+	console.log('Task name changed:', newVal);
+},
 
 {% endblock %}
 
