@@ -246,14 +246,17 @@ def add_office():
     if current_user.role_id != 1:
         return jsonify({'status': 'error', 'message': 'Unauthorized access'})
     form = OfficeForm()
-    office_name = remove_string_noise(form.name.data or '',
-                                      lambda s: s.startswith('0'),
-                                      lambda s: s[1:]) or None
+    
     
     if request.method == 'POST':
 
         if form.validate_on_submit():
-            if data.Office.query.filter_by(name=form.name.data).first():
+            office_name = remove_string_noise(form.name.data or '',
+                                      lambda s: s.startswith('0'),
+                                      lambda s: s[1:]) or None
+            office_name = office_name.strip() 
+            
+            if data.Office.query.filter_by(name=office_name).first():
                 return jsonify({'status': 'error', 'message': 'Office name already exists'})
             
             
