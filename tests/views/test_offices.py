@@ -536,11 +536,13 @@ def test_add_offices_office_name_exists(flask_app,c,monkeypatch):
     db.session.commit()
 
     url='/add_office'
+
+    new_name = " Existing Office " #name with whitespaces to test strip
     
     #Test adding a new office with existing name but different prefix
     # same prefix will cause form validation error
     payload = {
-        'name': 'Existing Office',
+        'name': new_name,
         'prefix': 'A',
         'csrf_token': token
     }
