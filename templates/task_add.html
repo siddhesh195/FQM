@@ -28,19 +28,19 @@
 		    	| {{ translate("Task : the option that its title appears to the user on the Touch screen to choose from and dispatch a ticket for it", 'en', [defLang]) }} |
 			</p>
 			<hr class='mb-4'>
-			{{ render_field(form.name, class="form-control") }}
-			{{ render_field(form.hidden, class="form-control") }}
+			{{ render_field(form.name, class="form-control", **{'v-model': 'task_name', 'length': 60}) }}
+			{{ render_field(form.hidden, class="form-control", **{'v-model': 'task_hidden'}) }}
 			{% if common %}
 			<p class="h4 text-center text-muted ar2 pt-2 pb-1">
 				| {{ translate("Select the offices to add the common task to :", 'en', [defLang]) }} |
 			</p>
 			{% for ofc in offices.all() %}
-			{{ render_field(form['check' + str(ofc.id)], class="form-control") }}
+			{{ render_field(form['check' + str(ofc.id)],class="form-control",**{'v-model': 'office_checks[' ~ ofc.id ~ ']'}) }}
 			{% endfor %}
 			{% endif %}
 			<p class="pt-6"></p>
 			<center>
-				<button class="btn btn-md btn-danger">{{ translate('Add task', 'en', [defLang]) }}</button>
+				<button @click="addTask" type="button" class="btn btn-md btn-danger">{{ translate('Add task', 'en', [defLang]) }}</button>
     		</center>
     		<p class="pb-2"></p>
 	    </div>
@@ -50,3 +50,84 @@
 
 {{ qrModal([['mym', translate('Management template', 'en', [defLang]), url_for('static', filename='images/manage_map.jpg')]], close=translate('Exit', 'en', [defLang])) }}
 {% endblock %}
+
+{% block vue_data %}
+task_name: '',
+task_hidden: false,
+office_checks: {},
+csrf_token:  "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
+o_id: {% if o_id is defined and o_id %}{{ o_id }}{% else %}null{% endif %},
+add_task_url: "{% if o_id is defined and o_id %}{{ url_for('tasks.add_task', o_id=o_id) }}{% else %}{{ url_for('tasks.add_common_task') }}{% endif %}",
+
+
+
+{% endblock %}
+
+{% block vue_methods %}
+
+
+async addTask() {
+	console.log(this.add_task_url);
+	try {
+		const payload = {
+			name: this.task_name,
+			hidden: this.task_hidden,
+			csrf_token: this.csrf_token
+		};
+		if (this.office_checks) {
+		    for (const [id, val] of Object.entries(this.office_checks)) {
+                if (val) {
+                    payload[`check${id}`] = true;
+                }else{
+					payload[`check${id}`] = false;
+				}
+				}
+            }
+			const response = await axios.post(this.add_task_url, payload);
+		if (response.data.status === 'success') {
+            const result = await showSwalMessage(response.data.message);
+
+            if (result.isConfirmed) {
+                window.location.reload();
+            }
+
+            this.office_name = '';
+            this.office_prefix = '';
+        } else {
+            await showSwalMessage(response.data.message);
+        }
+		
+		
+	} catch (error) {
+		console.error('Error:', error);
+		alert('An error occurred while adding the task.');
+	}
+}
+
+
+{% endblock %}
+
+
+
+{% block vue_mounted %}
+
+console.log('Vue instance mounted for adding task.');
+{% endblock %}
+
+{% block  vue_watch %}
+
+office_checks: {
+    handler(newVal) {
+        console.log('Office checks updated:', newVal);
+    },
+    deep: true
+},
+task_hidden(newVal) {
+	console.log('Task hidden status changed:', newVal);
+},
+task_name(newVal) {
+	console.log('Task name changed:', newVal);
+},
+
+{% endblock %}
+

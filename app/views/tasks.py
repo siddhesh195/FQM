@@ -3,7 +3,7 @@ from flask_login import login_required
 from app.forms.manage import TaskForm
 from flask_login import current_user
 
-from app.helpers import get_or_reject, is_operator, is_office_operator, reject_setting
+from app.helpers import get_or_reject, is_operator, is_office_operator, reject_operator, reject_setting, reject_no_offices
 import app.database as data
 from app.middleware import db
 from app.utils import ids
@@ -48,7 +48,7 @@ def add_task_home(office):
 @login_required
 @get_or_reject(o_id=data.Office)
 def add_task(office):
-    ''' to add a task '''
+    ''' to add a task in office'''
     if current_user.role_id!=1:
         return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
 
@@ -57,9 +57,11 @@ def add_task(office):
 
     if form.validate_on_submit():
         task_name = form.name.data.strip()
-        existing_task = data.Task.query.filter_by(name=task_name).first()
-        if existing_task:
-            existing_task_office_ids = ids(existing_task.offices)
+        existing_tasks = data.Task.query.filter_by(name=task_name).all()
+        if existing_tasks:
+            existing_task_office_ids=[]
+            for existing_task in existing_tasks:
+                existing_task_office_ids.extend(ids(existing_task.offices))
             if office.id in existing_task_office_ids:
                 return jsonify({'status': 'error', 'message': 'Task with this name already exists in this office'})
         
@@ -85,8 +87,66 @@ def add_task(office):
 
         return jsonify({'status': 'success', 'message': 'Task added successfully'})
     else:
+ 
         return jsonify({'status': 'error', 'message': 'Form validation failed'})
+
+
+@tasks.route('/add_common_task', methods=['POST'])
+@login_required
+@reject_operator
+@reject_no_offices
+def add_common_task():
+    ''' Add a common task (JSON API) '''
+
     
+    if current_user.role_id != 1:
+        return jsonify({
+            'status': 'error',
+            'message': 'Unauthorized access'
+        }), 403
+    
+    form = TaskForm(common=True)
+    if form.validate_on_submit():
+
+        task_name = form.name.data.strip()
+
+        # Task name must be globally unique
+        existing_task = data.Task.query.filter_by(name=task_name).first()
+        if existing_task:
+            return jsonify({
+                'status': 'error','message': 'Task name is already in use'})
+        # Validate that at least one office is selected
+        all_offices = data.Office.query.all()
+        offices_validation = [form[f'check{o.id}'].data for o in all_offices]
+        if len(offices_validation) > 0 and not any(offices_validation):
+            return jsonify({'status': 'error','message': 'At least one office must be selected'})   
+        # Create task
+        hidden_status= bool(form.hidden.data)
+        
+        task = data.Task(task_name, hidden_status)
+        db.session.add(task)
+        db.session.commit()
+
+        for office in all_offices:
+            if form[f'check{office.id}'].data:
+                task.offices.append(office)
+        for office in task.offices:
+            initial_ticket = data.Serial.query\
+                                 .filter_by(office_id=office.id, number=100)\
+                                 .first()
+            if not initial_ticket:
+                db.session.add(data.Serial(office_id=office.id,
+                                           task_id=task.id,
+                                           p=True))
+        db.session.commit()
+
+        return jsonify({'status': 'success', 'message': 'Common task added successfully'})
+    else:
+ 
+         return jsonify({'status': 'error', 'message': 'Form validation failed'})
+
+
+
 @tasks.route('/modify_task', methods=['POST'])
 @login_required
 def modify_task():
