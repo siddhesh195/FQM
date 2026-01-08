@@ -70,18 +70,31 @@ def test_add_task_duplicate_name_failure(flask_app,c,monkeypatch):
     with flask_app.test_request_context():
         csrf_token = generate_csrf()
 
+    unrelated_office = data.Office(name="Unrelated test Office")
+    db.session.add(unrelated_office)
+    db.session.commit()
+    unrelated_office_id = unrelated_office.id
+
     office = data.Office(name="Test Office")
     db.session.add(office)
     db.session.commit()
     office_id = office.id
 
+    task_name = 'Task 1'
+
+    # unrelated office's task 
+    unrelated_office_task = data.Task(task_name, False)
+    db.session.add(unrelated_office_task)
+    db.session.commit()
+
     # Add initial task
-    task = data.Task('Task 1', False)
+    task = data.Task(task_name, False)
     db.session.add(task)
     db.session.commit()
 
-    #attach task to office
+    #attach both tasks to their respective offices
     office.tasks.append(task)
+    unrelated_office.tasks.append(unrelated_office_task)
     db.session.commit()
 
     new_name = ' Task 1 '  # Duplicate name with whitespace difference to test stripping too
