@@ -59,6 +59,9 @@ export default {
                     payload[key]=formData[key];
                 }
             }
+            if (!confirm("Are you sure you want to edit this office?")){
+                return;
+            }
             payload['office_id']=office_id;
             const url='/modify_office';
             axios.post(url, payload)
