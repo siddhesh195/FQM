@@ -492,7 +492,7 @@ def test_add_offices_form_validation_failed_no_csrf(flask_app,c,monkeypatch):
     }
 
     resp = c.post(url,json=payload)
-    assert resp.status_code == 200
+    assert resp.status_code == 400
     json_response = resp.get_json()
     assert json_response['status'] == 'error'
     assert json_response['message'] == 'Form validation failed'
