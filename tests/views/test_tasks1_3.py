@@ -121,6 +121,9 @@ def test_add_common_task_no_office_selected(flask_app,c,monkeypatch):
 
 @pytest.mark.usefixtures("flask_app",'c')
 def test_add_common_task_form_validation_failed(flask_app,c,monkeypatch):
+    """
+    form validation failed due to missing name
+    """
     class user:
         role_id = 1  # Admin
     current_user = user()
