@@ -3,6 +3,7 @@ from app.middleware import db
 import app.database as database
 
 
+
 @pytest.mark.usefixtures('c')
 def test_modify_office_no_modifications_provided(c, monkeypatch):
     class user:
@@ -59,6 +60,45 @@ def test_modify_office_remove_task_success(c, monkeypatch):
 
     # Verify that the task is removed from the office
     office = database.Office.query.get(new_office.id)
+    assert all(task.id != new_task.id for task in office.tasks)
+
+
+@pytest.mark.usefixtures('flask_app','c')
+def test_office_edit_both_edit_name_and_remove_task(flask_app,c, monkeypatch):
+    class user:
+        role_id = 1  # Admin
+    current_user = user()
+    monkeypatch.setattr('app.views.manage2.current_user', current_user)
+
+    # add a new Office
+    new_office = database.Office(name='Office To Modify Both')
+    db.session.add(new_office)
+    db.session.commit()
+
+    # add a new Task
+    new_task = database.Task(name='Task To Remove Both', hidden=False)
+    db.session.add(new_task)
+    db.session.commit()
+
+    # Associate task with the office
+    new_office.tasks.append(new_task)
+    db.session.commit()
+
+    response = c.post('/modify_office', json={
+        'office_id': new_office.id,
+        'officeName': 'Modified Office Name',
+        'taskId': new_task.id
+    })
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['status'] == 'success'
+    assert data['message'] == f'Office Modified Office Name updated successfully'
+
+    # Verify that the office name is updated
+    office = database.Office.query.get(new_office.id)
+    assert office.name == 'Modified Office Name'
+
+    # Verify that the task is removed from the office
     assert all(task.id != new_task.id for task in office.tasks)
 
 @pytest.mark.usefixtures('c')
@@ -180,3 +220,4 @@ def test_delete_task_with_office_success(c,monkeypatch):
     # Verify the task is actually deleted
     deleted_task = database.Task.query.get(task_id)
     assert deleted_task is None
+
