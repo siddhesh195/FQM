@@ -44,16 +44,21 @@ def add_task_home(office):
                            page_title='Add new task',o_id=office.id)
 
 
-@tasks.route('/add_task/<int:o_id>', methods=['POST', 'GET'])
+@tasks.route('/add_task/<int:office_id>', methods=['POST', 'GET'])
 @login_required
-@get_or_reject(o_id=data.Office)
-def add_task(office):
+def add_task(office_id):
     ''' to add a task in office'''
     if current_user.role_id!=1:
         return jsonify({'status': 'error', 'message': 'Unauthorized access'}), 403
 
 
     form = TaskForm()
+
+    office = data.Office.query.get(office_id)
+
+    if not office:
+        return jsonify({'status': 'error', 'message': 'Office ID not found'}), 404
+
 
     if form.validate_on_submit():
         task_name = form.name.data.strip()
