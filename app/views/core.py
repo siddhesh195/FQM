@@ -170,7 +170,6 @@ def root(n=None):
 def serial(task, office_id=None):
     ''' generate a new ticket and print it. '''
     if not office_id:
-    
         flash('Error: office id is required to generate a new ticket', 'danger')
         return redirect(url_for('core.root'))
     windows = os.name == 'nt'
@@ -212,7 +211,6 @@ def serial(task, office_id=None):
             identifier = generate_token_for_task()  # helper below
         except Exception as e:
             log_error(e)
-           
             return redirect(url_for('core.touch', a=2, office_id=office_id))
 
     new_ticket, exception = data.Serial.create_new_ticket(task,
@@ -232,7 +230,8 @@ def serial(task, office_id=None):
         log_error(exception)
         return redirect(url_for('core.root'))
     
-    return redirect(url_for('core.touch', a=1,identifier=identifier, office_id=office_id))
+    return jsonify(message='Common task added successfully',status='success',identifier=identifier)
+    
 
 
 @core.route('/serial_r/<int:o_id>')
@@ -535,7 +534,6 @@ def display(office_id=None):
 @core.route('/touch/<int:a>/<string:identifier>/', defaults={'office_id': None})
 @core.route('/touch/<int:a>/<string:identifier>/<int:office_id>')
 @login_required
-@cache_call()
 @reject_setting('single_row', True)
 def touch(a, identifier="", office_id=None):
     ''' touch screen view. '''
@@ -575,9 +573,11 @@ def touch(a, identifier="", office_id=None):
         touch_screen_stings.message= "Error: could not generate the token"
     elif a==1:
         touch_screen_stings.message= "Your token is" + " " + str(identifier)
-    
+    tasks_id_dict= {}
+    for task in tasks:
+        tasks_id_dict[task.id]=task.name
 
-    return render_template('touch.html', ts=touch_screen_stings, tasks=tasks.all(),
+    return render_template('touch.html', ts=touch_screen_stings, tasks=tasks.all(),tasks_id_dict=tasks_id_dict,
                            tnumber=numeric_ticket_form, page_title='Touch Screen',
                            alias=aliases_settings, form=form, d=a == 1 or a==2,
                            a=touch_screen_stings.tmp, office_id=office_id)
