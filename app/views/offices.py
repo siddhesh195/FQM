@@ -265,7 +265,8 @@ def add_office():
        
             return jsonify({'status': 'success', 'message': 'Office added successfully'})
         else:
-            return jsonify({'status': 'error', 'message': 'Form validation failed'})
+            
+            return jsonify({'status': 'error', 'message': 'Form validation failed'}), 400
 
     return render_template('office_add.html',
                            form=form,
