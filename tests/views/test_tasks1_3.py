@@ -145,8 +145,10 @@ def test_add_common_task_duplicate_name(flask_app,c,monkeypatch):
     current_user = user()
     monkeypatch.setattr('app.views.tasks.current_user', current_user)
 
+    task_name='Existing Task'
+
     # Create an existing task
-    existing_task = database.Task(name='Existing Task', hidden=False)
+    existing_task = database.Task(name=task_name, hidden=False)
     db.session.add(existing_task)
     db.session.commit()
 
@@ -158,8 +160,10 @@ def test_add_common_task_duplicate_name(flask_app,c,monkeypatch):
 
     token = get_csrf_token(c, flask_app)
 
+    new_task_name =  " " +task_name + " " # Same name as existing task with extra spaces to test stripping
+
     response = c.post('/add_common_task', data={
-        'name': 'Existing Task',
+        'name': new_task_name,
         f'check{office_id}': True,
         'csrf_token': token
     })
@@ -167,4 +171,5 @@ def test_add_common_task_duplicate_name(flask_app,c,monkeypatch):
     data = response.get_json()
     assert data['status'] == 'error'
     assert data['message'] == 'Task name is already in use'
+
 

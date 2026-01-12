@@ -67,7 +67,7 @@ add_task_url: "{% if o_id is defined and o_id %}{{ url_for('tasks.add_task', o_i
 
 
 async addTask() {
-	console.log(this.add_task_url);
+	
 	try {
 		const payload = {
 			name: this.task_name,
@@ -118,15 +118,15 @@ console.log('Vue instance mounted for adding task.');
 
 office_checks: {
     handler(newVal) {
-        console.log('Office checks updated:', newVal);
+        
     },
     deep: true
 },
 task_hidden(newVal) {
-	console.log('Task hidden status changed:', newVal);
+	
 },
 task_name(newVal) {
-	console.log('Task name changed:', newVal);
+	
 },
 
 {% endblock %}

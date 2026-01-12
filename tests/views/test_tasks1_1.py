@@ -210,3 +210,42 @@ def test_add_task_success_new_task_in_entire_database(flask_app,c,monkeypatch):
     
     #assert task in office 
     assert task_in_db in office.tasks
+
+@pytest.mark.usefixtures('c')
+def test_add_task_failure_without_office_id(c,monkeypatch):
+    """
+    Test to verify that adding a task without office id fails.
+    """
+    class User:
+        def __init__(self):
+            self.role_id=1
+    current_user=User()
+    monkeypatch.setattr('app.views.manage.current_user', current_user)
+    
+    response = c.post(f'/add_task/',
+           data={'name': 'Some Task'},
+              follow_redirects=False)
+   
+    assert response.status == '302 FOUND'  # should redirect due to missing office id
+
+@pytest.mark.usefixtures('c')
+def test_add_task_failure_invalid_office_id(c,monkeypatch):
+    """
+    Test to verify that adding a task with invalid office id fails.
+    """
+    class User:
+        def __init__(self):
+            self.role_id=1
+    current_user=User()
+    monkeypatch.setattr('app.views.tasks.current_user', current_user)
+    
+    invalid_office_id = 9999  # assuming this ID does not exist
+
+    response = c.post(f'/add_task/{invalid_office_id}',
+           data={'name': 'Some Task'},
+              follow_redirects=False)
+   
+    assert response.status_code == 404  # Not Found due to invalid office id
+    data_json = response.get_json()
+    assert data_json['status'] == 'error'
+    assert data_json['message'] == 'Office ID not found'
