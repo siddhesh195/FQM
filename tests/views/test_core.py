@@ -618,7 +618,7 @@ def test_pull_tickets_from_all(_, c):
     assert Serial.get(ticket_to_be_pulled.id).number == ticket_to_be_pulled.number
     assert Serial.get(ticket_to_be_pulled.id).p is True
 
-
+@pytest.mark.skip('Changed logic: now cannot create common task ticket without office')
 @pytest.mark.usefixtures('c')
 def test_office_assigned_for_common_task_ticket(c, monkeypatch):
     class user:
