@@ -69,7 +69,8 @@ export default {
                 if (response.data.status === "success"){
                     window.showSwalMessage(response.data.message);
                 } else {
-                    console.error("Failed to edit office:", response.data.message);
+                    window.showSwalMessage(response.data.message);
+                   
                 }
                 this.get_all_offices();
             })

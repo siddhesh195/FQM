@@ -2,8 +2,7 @@ from flask import Blueprint, jsonify, render_template, request
 from flask_login import login_required, current_user
 import app.database as data
 from app.middleware import db
-from app.helpers2 import to_bool
-
+from app.helpers import get_number_of_active_tickets_office_cached
 
 manage_app2 = Blueprint('manage_app2', __name__)
 
@@ -103,6 +102,14 @@ def modify_office():
     office = data.Office.query.get(office_id)
     if not office:
         return jsonify({'status': 'error', 'message': 'Office not found'})
+    
+    active_tickets_count = get_number_of_active_tickets_office_cached(office.id)
+
+    if active_tickets_count > 0 and task_id is not None:
+        return jsonify({'status': 'error', 'message': 'Cannot remove tasks from office with active tickets'})
+    
+    if active_tickets_count > 0 and new_officeName is not None:
+        return jsonify({'status': 'error', 'message': 'Cannot rename office with active tickets'})
     
 
     if new_officeName is not None:
