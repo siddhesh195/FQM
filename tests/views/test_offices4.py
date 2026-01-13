@@ -27,7 +27,7 @@ def test_add_office_empty_name_failure(c, monkeypatch):
     assert 'Form validation failed' in response.json['message']
 
 @pytest.mark.usefixtures('c')
-def test_existing_prefix_office_creation_fail(c,monkeypatch):
+def test_existing_prefix_office_creation_success(c,monkeypatch):
 
     class User:
         def __init__(self):
@@ -53,7 +53,7 @@ def test_existing_prefix_office_creation_fail(c,monkeypatch):
     assert 'message' in response_json
     assert response_json['message'] == 'Office added successfully'
 
-    #now add another office with same prefix
+    #now add another office with same prefix, it should work because all prefixes are allowed
     name2 = 'Test Office 2'
     payload2 = {
         'name': name2,
@@ -61,9 +61,9 @@ def test_existing_prefix_office_creation_fail(c,monkeypatch):
     }
 
     response2 = c.post('/add_office',json=payload2)
-    assert response2.status_code == 400
-    assert response2.json['status'] == 'error'
-    assert response2.json['message'] == 'Form validation failed'
+    assert response2.status_code == 200
+    assert response2.json['status'] == 'success'
+    assert response2.json['message'] == 'Office added successfully'
     
     
   

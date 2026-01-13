@@ -16,7 +16,9 @@ class OfficeForm(LocalizedForm):
 
     def __init__(self, current_prefix=None, *args, **kwargs):
         super(OfficeForm, self).__init__(*args, **kwargs)
-        prefixes = Office.get_all_available_prefixes()
+        #prefixes = Office.get_all_available_prefixes()
+        #Allow All Alphabets as prefixes
+        prefixes = [chr(i) for i in range(65, 91)]  # A-Z
         self.prefix.choices = [(p, p) for p in
                                prefixes + (
                                current_prefix and [current_prefix] or [])]
