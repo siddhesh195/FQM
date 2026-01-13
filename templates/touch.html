@@ -185,6 +185,7 @@ reloadIf('/touch/0')
     </div>
   {% if tasks != 0 %}
       <div class="col-xs-6">
+  <div id="vue_tasks_app">
   {% for t in tasks %}
         <div class="col-md-12 hidden-xs hidden-sm">
   	      <button class="btn btn-lg mt-1 mb-2 {{ ts.tcolor }}" @click="submit_task({{t.id}})"  style="font-size: {{ ts.tsize }}; font-family: '{{ ts.tfont }}';">
@@ -197,6 +198,7 @@ reloadIf('/touch/0')
   	      </button>
         </div>
   {% endfor %}
+  </div>
       </div>
   </div>
   {% else %}
@@ -209,73 +211,63 @@ reloadIf('/touch/0')
 {% endif %} <!--  End of condition for displaying form  -->
 {% endblock %}
 
+{% block scripts %}
 
-{% block vue_data %}
+{{ super() }}
 
-tasks_id_dict: {{ tasks_id_dict|tojson }},
-task_submit_url_generic: "{{ url_for('core.serial', t_id=0, office_id=office_id,auto=1) }}",
-urls_by_task_id: {},
-office_id: "{{ office_id }}"
+    <script type="module">
 
-{% endblock %}
+    import { createApp, markRaw } from "{{ url_for('static', filename='vendor/vue/vue.esm-browser.prod.js') }}";
 
-{% block vue_methods %}
+    const app =createApp({
+      delimiters: ['[[', ']]'],
 
-replace_urls(){
-  //generic url is like /serial/0?auto=1
-  // we need to replace 0 with actual task id
-  console.log(this.office_id,'office id in vue method');
-  for (const [task_id, task_name] of Object.entries(this.tasks_id_dict)) {
-    var new_url = this.task_submit_url_generic.replace('/serial/0','/serial/'+task_id)
-   
-    this.urls_by_task_id[task_id]= new_url;
-  } 
-},
+      data() {
+        return {
+          tasks_id_dict: {{ tasks_id_dict|tojson }},
+          task_submit_url_generic: "{{ url_for('core.serial', t_id=0, office_id=office_id,auto=1) }}",
+          urls_by_task_id: {},
+          office_id: "{{ office_id }}"
+        };
+      },
+      methods: {
+        replace_urls(){
+            //generic url is like /serial/0?auto=1
+            // we need to replace 0 with actual task id
+            
+            for (const [task_id, task_name] of Object.entries(this.tasks_id_dict)) {
+                var new_url = this.task_submit_url_generic.replace('/serial/0','/serial/'+task_id)
+                this.urls_by_task_id[task_id]= new_url;
+            } 
+        },
+        async submit_task(task_id){
+            const submit_url= this.urls_by_task_id[task_id];
+  
+          try {
+              const response = await axios.get(submit_url);
+              if (response.status === 200) {
+                  const swal_message = "token number is " + response.data.identifier;
+                  showSwalMessage(swal_message);
+                  // You can add more logic here based on the response
+              } else {
+                showSwalMessage(response.data.message);
+              }
+          } catch (error) {
+              console.error('Error submitting task:', error);
+          }
+        }
+      },
+      mounted() {
+        this.replace_urls();
+      },
+      beforeUnmount() {
+                
+      }
 
-
-async submit_task(task_id){
-  const submit_url= this.urls_by_task_id[task_id];
-  console.log('Submitting task with id:', task_id, 'to URL:', submit_url);
-  try {
-    const response = await axios.get(submit_url);
-    if (response.status === 200) {
-      console.log('Response data:', response.data);
-     
-      const swal_message = "token number is " + response.data.identifier;
-      showSwalMessage(swal_message);
-      // You can add more logic here based on the response
-    } else {
-      showSwalMessage(response.data.message);
-      
-    }
-  } catch (error) {
-    console.error('Error submitting task:', error);
-  }
+    });
     
-}
+    app.mount('#vue_tasks_app');
 
-{% endblock %}
-
-{% block vue_created %}
-
-{% endblock %}
-
-{% block vue_computed %}
-
-{% endblock %}
-
-{% block vue_watch %}
-
-{% endblock %}
-
-{% block vue_mounted %}
-
-console.log(this.task_submit_url_generic)
-this.replace_urls();
-console.log(this.urls_by_task_id); 
-
-{% endblock %}
-
-{% block vue_before_unmount %}
+    </script>
 
 {% endblock %}
