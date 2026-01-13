@@ -465,7 +465,7 @@ def test_pull_next_ticket_success(c):
     url='/pull_next_ticket'
 
     payload = {
-        'o_id': task_id,
+        'task_id': task_id,
         'ofc_id': office_id
     }
     resp = c.post(url,json=payload)
