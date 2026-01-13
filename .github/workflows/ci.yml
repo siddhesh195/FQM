@@ -65,11 +65,18 @@ jobs:
           elif [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
           pip install pytest-playwright gevent
-
+      
+      - name: Cache Playwright browsers
+          uses: actions/cache@v4
+          with:
+            path: ~/.cache/ms-playwright
+            key: playwright-${{ runner.os }}-${{ hashFiles('**/requirements*.txt') }}
+            restore-keys: |
+              playwright-${{ runner.os }}-
 
       - name: Install Playwright browsers
         run: |
-          playwright install --with-deps
+          playwright install --with-deps chromium
 
       # REQUIRED if Playwright hits a real app
       - name: Start application
