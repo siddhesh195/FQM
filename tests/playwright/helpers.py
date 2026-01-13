@@ -71,20 +71,25 @@ def delete_office(page: Page, office_name: str):
     search_input = page.get_by_placeholder("Search offices...")
     
     search_input.type(office_name)
-    def handle_dialog(dialog):
-        assert dialog.type == "confirm"
-        assert "delete this office" in dialog.message
-        dialog.accept()
-
-    page.once("dialog", handle_dialog)
+    
    
     page.locator(".delete-office-link").click()
-    def handle_alert(dialog):
-        assert dialog.type == "alert"
-        assert "office deleted successfully" in dialog.message.lower()
-        dialog.accept()
+    
+    #handle sweetalert2 confirm
+    swal_confirm = page.locator(".swal2-popup")
+    expect(swal_confirm).to_be_visible()
+    swal_yes = swal_confirm.locator(".swal2-confirm")
+    expect(swal_yes).to_be_visible()
+    swal_yes.click()
 
-    page.once("dialog", handle_alert)
+    # confirm office deleted swal
+    swal_success = page.locator(".swal2-popup")
+    expect(swal_success).to_be_visible()
+    
+    expect(swal_success).to_contain_text("Office deleted successfully")
+    #close swal
+    swal_success.locator(".swal2-confirm").click()
+
 
 
 def open_office(page: Page, office_name: str):
