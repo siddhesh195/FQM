@@ -7,7 +7,7 @@ on:
 
 jobs:
   tests:
-    if: "!contains(github.event.head_commit.message, '[playwright-only]')"
+    if: !contains(github.event.head_commit.message, '[playwright-only]')
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -41,7 +41,7 @@ jobs:
           pytest -vv --maxfail=1 --cov=app --ignore=tests/playwright
 
   playwright:
-    if: "contains(github.event.head_commit.message, '[playwright-only]')"
+    if: contains(github.event.head_commit.message, '[playwright-only]')
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
