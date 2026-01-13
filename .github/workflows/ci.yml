@@ -74,18 +74,21 @@ jobs:
       # REQUIRED if Playwright hits a real app
       - name: Start application
         run: |
-          python3 run.py --cli --ip 127.0.0.1 --port 8001
+          nohup python3 run.py --cli --ip 127.0.0.1 --port 8001 > app.log 2>&1 &
+          echo $! > app.pid
           
       - name: Wait for app to be ready
         run: |
           for i in {1..20}; do
-          if curl -sf http://127.0.0.1:8001; then
-            echo "App is up"
-            exit 0
-          fi
+            if curl -sf http://127.0.0.1:8001; then
+               echo "App is up"
+               exit 0
+            fi
             sleep 1
-          done
-          echo "App failed to start on port 8001"
+            done
+          echo "App failed to start"
+          echo "=== app.log ==="
+          cat app.log || true
           exit 1
 
       - name: Run Playwright tests
