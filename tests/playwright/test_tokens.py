@@ -4,7 +4,7 @@ from helpers import login, create_office, open_office, delete_office, open_offic
 from helpers import add_task
 from helpers import reset_current_office
 
-from helpers2 import create_multiple_tokens, assert_multiple_tokens, assert_all_tickets_count, pull_any_office_tickets
+from helpers2 import create_multiple_tokens, assert_multiple_tokens, assert_all_tickets_count, pull_office_specific_tickets
 
 raise_office_creation_exception=False
 raise_task_creation_exception=False
@@ -72,7 +72,7 @@ def test_create_and_pull_lot_of_tokens(page: Page):
         
    
     try:
-        pull_any_office_tickets(page,number_to_pull=number_of_tokens, tickets_count=number_of_tokens)
+        pull_office_specific_tickets(page,number_to_pull=number_of_tokens, tickets_count=number_of_tokens, office_name=office_name)
     except Exception as e:
         if raise_office_tickets_exception:
             raise Exception(e)

@@ -469,19 +469,20 @@ class Serial(db.Model, TicketsMixin, Mixin):
         task = Task.get(0 if single_row else task_id)
         office = Office.get(0 if single_row else office_id)
         global_pull = not bool(task_id and office_id)
+        office_pull = bool(office_id and not task_id)
 
-        next_tickets = Serial.query.filter(Serial.number != 100,
+        next_ticket_global = Serial.query.filter(Serial.number != 100,
                                            Serial.p != True,
                                            Serial.on_hold == False)
         next_ticket = None
 
         if not global_pull:
-            next_ticket = next_tickets.filter(Serial.task_id == task.id)
+            next_ticket = next_ticket_global.filter(Serial.task_id == task.id)
 
-            if strict_pulling:
+            if strict_pulling or office_pull:
                 next_ticket = next_ticket.filter(Serial.office_id == office.id)
 
-        next_ticket = (next_tickets if global_pull else next_ticket)\
+        next_ticket = (next_ticket_global if global_pull else next_ticket)\
             .order_by(Serial.timestamp)\
             .first()
 

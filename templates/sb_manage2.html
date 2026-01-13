@@ -27,16 +27,7 @@
 				    {% endif %}
 			    </a>
 			</li>
-			<li >
-				<a @click="pullnextTicket()" id="pull_any_office_ticket">
-						<span class="fa fa-{% if settings.single_row %}plus{% else %}minus{% endif %}"></span>
-						{{ translate('Generate a ticket' if settings.single_row else 'Pull a ticket', 'en', [defLang]) }}
-						
-						<span class="badge pull-right">
-							[[ active_tickets_number ]]
-						</span>
-				</a>
-			</li>
+			
 			{% if not settings.single_row %}
 			<li id="da3">
 			    <a href="{{ url_for('offices.add_office') }}">
@@ -109,6 +100,18 @@
 						{{ translate('All tickets', 'en', [defLang]) }}
 					    </a>
 					</li>
+
+					<li >
+				        <a @click="pullnextTicket(task_id=null, ofc_id={{ office.id }})" id="pull_any_office_specific_ticket">
+						    <span class="fa fa-{% if settings.single_row %}plus{% else %}minus{% endif %}"></span>
+						    {{ translate('Generate a ticket' if settings.single_row else 'Pull a ticket', 'en', [defLang]) }}
+						
+						    <span class="badge pull-right" id="all_office_specific_tickets_count">
+					            [[active_tickets_office[{{office.id}}] ]]
+				            </span>
+				        </a>
+			        </li>
+					
 					<li id="tr{{ office.id }}" >
 						<a onclick="announce('{{ current_user.id }}','{{ office.id }}')">
 						<span class="glyphicon glyphicon-refresh"></span>
@@ -148,7 +151,7 @@
 					</li>
 					<!-- Pull is shifted to here -->
 					<li>
-						<a @click="pullnextTicket( {{ task.id }}, {{ office.id }} )">
+						<a @click="pullnextTicket( task_id={{ task.id }}, ofc_id={{ office.id }} )">
 								<span class="fa fa-minus"></span>
 								{{ translate('Pull a ticket', 'en', [defLang]) }}
 								<span class="badge pull-right">

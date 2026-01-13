@@ -390,6 +390,9 @@ def test_pull_next_ticket_office_not_found(c):
 
 @pytest.mark.usefixtures("c")
 def test_pull_next_ticket_no_tickets_available(c):
+    """
+    No tickets available for that task in a specific office
+    """
     #create new office
     new_office = data.Office(name="Test Office No Tickets")
     db.session.add(new_office)
@@ -411,15 +414,16 @@ def test_pull_next_ticket_no_tickets_available(c):
     url='/pull_next_ticket'
 
     payload = {
-        'o_id': task_id,
+        'task_id': task_id,
         'ofc_id': office_id
     }
     resp = c.post(url,json=payload)
     assert resp.status_code == 200
     json_response = resp.get_json()
- 
+   
     assert json_response['status'] == 'error'
     assert json_response['message'] == 'No tickets available to pull'
+    
 
     
 @pytest.mark.usefixtures("c")
@@ -461,7 +465,7 @@ def test_pull_next_ticket_success(c):
     url='/pull_next_ticket'
 
     payload = {
-        'o_id': task_id,
+        'task_id': task_id,
         'ofc_id': office_id
     }
     resp = c.post(url,json=payload)
