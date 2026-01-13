@@ -275,6 +275,11 @@ class Serial(db.Model, TicketsMixin, Mixin):
 
     def __init__(self, number=100, office_id=1, task_id=1, name=None,
                  n=False, p=False, pulledBy=0, status=TICKET_WAITING):
+        """
+        Initialize a new Serial (ticket) instance.
+        Not intended to be called directly; use Serial.create_new_ticket() instead.
+        
+        """
         self.number = number
         self.office_id = office_id
         self.task_id = task_id
