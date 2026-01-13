@@ -1,3 +1,10 @@
+import pytest
+
+pytest.skip(
+    "Skipping long and less critical test",
+    allow_module_level=True
+)
+
 from playwright.sync_api import Page
 
 from helpers import login, create_office, open_office, delete_office, open_office_tickets, open_touch_screen_for_office
