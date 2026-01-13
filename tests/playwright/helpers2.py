@@ -1,5 +1,5 @@
 from playwright.sync_api import Page, expect
-from helpers import create_new_token, assert_token_present, open_display_screen_for_office
+from helpers import create_new_token, assert_token_present, open_display_screen_for_office, open_office
 
 
 def create_multiple_tokens(number,page, office_name, task_name):
@@ -28,6 +28,10 @@ def assert_all_tickets_count(page:Page, expected_count:int):
     all_tickets_count_locator = page.locator("#all_tickets_count")
     expect(all_tickets_count_locator).to_have_text(str(expected_count))
 
+def assert_all_office_specific_tickets_count(page:Page, expected_count:int):
+    all_tickets_count_locator = page.locator("#all_office_specific_tickets_count")
+    expect(all_tickets_count_locator).to_have_text(str(expected_count))
+
 def pull_any_office_tickets(page:Page, number_to_pull:int,tickets_count:int):
 
     expected_count_after_pull = tickets_count
@@ -44,6 +48,28 @@ def pull_any_office_tickets(page:Page, number_to_pull:int,tickets_count:int):
         #wait for swal to disappear
         expect(swal_confirm_button).not_to_be_visible()
         assert_all_tickets_count(page, expected_count_after_pull)
+
+    return
+
+def pull_office_specific_tickets(page:Page, number_to_pull:int,tickets_count:int, office_name: str):
+
+    office_panel = open_office(page, office_name)
+    
+
+    expected_count_after_pull = tickets_count
+    for _ in range(number_to_pull):
+        expected_count_after_pull = expected_count_after_pull -1
+        pull_any_office_ticket_link = office_panel.locator("#pull_any_office_specific_ticket")
+        expect(pull_any_office_ticket_link).to_be_visible()
+        pull_any_office_ticket_link.click()
+
+        #confirm swal popup
+        swal_confirm_button = page.locator(".swal2-confirm")
+        expect(swal_confirm_button).to_be_visible()
+        swal_confirm_button.click()
+        #wait for swal to disappear
+        expect(swal_confirm_button).not_to_be_visible()
+        assert_all_office_specific_tickets_count(office_panel, expected_count_after_pull)
 
     return
 

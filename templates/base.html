@@ -377,13 +377,13 @@
                             console.error("Error fetching office and task IDs:", error);
                         });
                     },
-                    pullnextTicket(o_id=null,ofc_id=null) {
+                    pullnextTicket(task_id=null,ofc_id=null) {
                         if (this.pulling_next_ticket) {
                             return; // Prevent multiple simultaneous pulls
                         }
                         this.pulling_next_ticket = true;
                         axios.post("{{ url_for('offices.pull_next_ticket') }}", {
-                            o_id: o_id,
+                            task_id: task_id,
                             ofc_id: ofc_id
                         })
                         .then(response => {

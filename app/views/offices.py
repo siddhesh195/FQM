@@ -193,7 +193,7 @@ def pull_next_ticket():
         return jsonify({'status': 'error', 'message': 'Unauthorized to pull this ticket'})
 
     json_data = request.get_json()
-    o_id = json_data.get("o_id")
+    task_id = json_data.get("task_id")
     ofc_id = json_data.get("ofc_id")
     if not ofc_id:
         return jsonify({'status': 'error', 'message': 'Office ID is required'})
@@ -201,23 +201,21 @@ def pull_next_ticket():
     settings = data.Settings.get()
     strict_pulling = settings.strict_pulling
     single_row = settings.single_row
-    task = data.Task.get(0 if single_row else o_id)
+    task = data.Task.get(0 if single_row else task_id)
     office = data.Office.get(0 if single_row else ofc_id)
     if not office:
         return jsonify({'status': 'error', 'message': 'Office not found'})
-    global_pull = not bool(o_id and ofc_id)
+    global_pull = not bool(task_id and ofc_id)
 
     if global_pull:
         if not single_row and is_operator():
             return operators_not_allowed()
-    else:
-        if not task:
-            return jsonify({'status': 'error', 'message': 'Task not found'})
+    
     if is_operator() and not (is_office_operator(ofc_id)
                                   if strict_pulling else
                                   is_common_task_operator(task.id)):
             return operators_not_allowed()
-    next_ticket = data.Serial.get_next_ticket(task_id=o_id,
+    next_ticket = data.Serial.get_next_ticket(task_id=task_id,
                                               office_id=ofc_id)
     if not next_ticket:
         return jsonify({'status': 'error', 'message': 'No tickets available to pull'})

@@ -129,6 +129,13 @@ def add_task(page: Page, task_name: str, office_name: str):
 
     page.get_by_role("button", name="Add task").click()
 
+    # Assert Swal is visible
+    swal = page.locator(".swal2-popup")
+    expect(swal).to_be_visible()
+    
+    #close the swal
+    page.locator(".swal2-confirm").click()
+
 def open_touch_screen_for_office(page: Page, office_name: str, task_name: str):
     # Open Screens dropdown
     page.locator('a.dropdown-toggle:has-text("Screens")').click()
@@ -155,7 +162,7 @@ def create_new_token(touch_page,task_name: str, office_name: str):
     full_task_name = f"{task_name} for {office_name}"
 
     # Click task ON THE NEW PAGE
-    task_link = touch_page.get_by_role("link", name=full_task_name)
+    task_link = touch_page.get_by_role("button", name=full_task_name)
     expect(task_link).to_be_visible()
     task_link.click()
 
