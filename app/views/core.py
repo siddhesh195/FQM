@@ -166,16 +166,18 @@ def root(n=None):
 @core.route('/serial/<int:t_id>/<int:office_id>', methods=['GET', 'POST'])
 @login_required
 @reject_setting('single_row', True)
-@get_or_reject(t_id=data.Task)
-def serial(task, office_id=None):
+def serial(t_id, office_id=None):
     ''' generate a new ticket and print it. '''
     if not office_id:
-        flash('Error: office id is required to generate a new ticket', 'danger')
-        return redirect(url_for('core.root'))
+        return jsonify({'status': 'error', 'message': 'office id is required to generate a new ticket'}), 400
     windows = os.name == 'nt'
     form = TouchSubmitForm()
-    task = data.Task.get(task.id)
+    task = data.Task.get(t_id)
+    if not task:
+        return jsonify({'status': 'error', 'message': 'Task ID not found'}), 404
     office = data.Office.get(office_id)
+    if not office:
+        return jsonify({'status': 'error', 'message': 'Office ID not found'}), 404
     touch_screen_stings = data.Touch_store.get()
     ticket_settings = data.Printer.get()
     printed = not touch_screen_stings.n

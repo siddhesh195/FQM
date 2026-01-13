@@ -110,7 +110,7 @@ def test_new_registered_ticket_fail(c,monkeypatch):
     response = c.post(f'/serial/{task.id}', data={
         'name': name
     }, follow_redirects=True)
-    assert response.status == '200 OK'
+    assert response.status == '400 BAD REQUEST'
     assert b"office id is required to generate a new ticket" in response.data
     new_ticket = Serial.query.filter_by(task_id=task.id)\
                              .order_by(Serial.number.desc()).first()

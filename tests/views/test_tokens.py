@@ -142,6 +142,105 @@ def test_tokens_task_With_same_name(c, monkeypatch):
                                               office_id=office2.id)
     assert next_ticket_office2 is None
 
+@pytest.mark.usefixtures('c', 'monkeypatch')
+def test_token_with_invalid_office(c, monkeypatch):
+    """
+    
+    Test to verify that requesting a token with an invalid office ID fails gracefully.
+
+    """
+    # Create an office and a task first
+    class User:
+        def __init__(self):
+            self.role_id = 1  # Admin role
+
+    user = User()
+
+    monkeypatch.setattr('app.views.offices.current_user', user)
+    monkeypatch.setattr('app.views.tasks.current_user', user)
+
+    office = add_and_assert_office('Office Z', 'Z', c)
+
+    
+    task = add_and_assert_task('Task for Invalid Office Test', office.id, c)
+
+    # Now, try to get a token for the task but with an invalid office ID
+    invalid_office_id = 99999  # Assuming this ID does not exist
+    token_url_invalid_office = f'/serial/{task.id}/{invalid_office_id}'
+    token_url_invalid_office += '?auto=1'
+    
+    response = c.get(token_url_invalid_office)
+    
+    assert response.status_code == 404
+    assert response.json['status'] == 'error'
+    assert 'Office ID not found' in response.json['message']
+
+@pytest.mark.usefixtures('c', 'monkeypatch')
+def test_token_with_invalid_task(c, monkeypatch):
+    """
+    
+    Test to verify that requesting a token with an invalid task ID fails gracefully.
+
+    """
+    # Create an office first
+    class User:
+        def __init__(self):
+            self.role_id = 1  # Admin role
+
+    user = User()
+
+    monkeypatch.setattr('app.views.offices.current_user', user)
+    monkeypatch.setattr('app.views.tasks.current_user', user)
+    
+    office = add_and_assert_office('Office Z', 'Z', c)
+
+    
+
+    # Now, try to get a token with an invalid task ID
+    invalid_task_id = 99999  # Assuming this ID does not exist
+    token_url_invalid_task = f'/serial/{invalid_task_id}/{office.id}'
+    token_url_invalid_task += '?auto=1'
+    
+    response = c.get(token_url_invalid_task)
+    
+    assert response.status_code == 404
+    assert response.json['status'] == 'error'
+    assert 'Task ID not found' in response.json['message']
+
+@pytest.mark.usefixtures('c', 'monkeypatch')
+def test_token_without_office_id(c, monkeypatch):
+    """
+    
+    Test to verify that requesting a token without providing an office ID fails gracefully.
+
+    """
+    # Create an office and a task first
+    class User:
+        def __init__(self):
+            self.role_id = 1  # Admin role
+
+    user = User()
+
+    monkeypatch.setattr('app.views.offices.current_user', user)
+    monkeypatch.setattr('app.views.tasks.current_user', user)
+
+    office = add_and_assert_office('Office Z', 'Z', c)
+
+    
+    task = add_and_assert_task('Task for No Office ID Test', office.id, c)
+
+    # Now, try to get a token for the task but without an office ID
+    token_url_no_office = f'/serial/{task.id}'
+    token_url_no_office += '?auto=1'
+    
+    response = c.get(token_url_no_office)
+    
+    assert response.status_code == 400  
+    assert response.json['status'] == 'error'
+    assert 'office id is required to generate a new ticket' in response.json['message']
+
+
+    
     
 
 
