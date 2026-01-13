@@ -7,6 +7,7 @@ on:
 
 jobs:
   tests:
+    if: "!contains(github.event.head_commit.message, '[playwright-only]')"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -40,6 +41,7 @@ jobs:
           pytest -vv --maxfail=1 --cov=app --ignore=tests/playwright
 
   playwright:
+    if: "contains(github.event.head_commit.message, '[playwright-only]')"
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -62,7 +64,8 @@ jobs:
           elif [ -f requirements/test-legacy.txt ]; then pip install -r requirements/test-legacy.txt; \
           elif [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-          pip install playwright pytest gevent
+          pip install pytest-playwright gevent
+
 
       - name: Install Playwright browsers
         run: |
