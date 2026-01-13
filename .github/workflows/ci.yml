@@ -74,8 +74,19 @@ jobs:
       # REQUIRED if Playwright hits a real app
       - name: Start application
         run: |
-          gunicorn app:app --bind 127.0.0.1:8001 &
-          sleep 5
+          python3 run.py --cli --ip 127.0.0.1 --port 8001
+          
+      - name: Wait for app to be ready
+        run: |
+          for i in {1..20}; do
+          if curl -sf http://127.0.0.1:8001; then
+            echo "App is up"
+            exit 0
+          fi
+            sleep 1
+          done
+          echo "App failed to start on port 8001"
+          exit 1
 
       - name: Run Playwright tests
         env:
