@@ -27,7 +27,7 @@ def login(page: Page):
     expect(page.locator("#upd")).to_be_visible()
 
     page.fill("input[name='name']", "Admin")
-    page.fill("input[name='password']", "password")
+    page.fill("input[name='password']", "admin")
 
     page.locator("#fm button[type='submit']").click()
 
