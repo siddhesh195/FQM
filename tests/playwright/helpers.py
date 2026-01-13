@@ -1,8 +1,12 @@
 from playwright.sync_api import Page, expect
 import re
 
+import os
+
+BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:8001")
+
 def login(page: Page):
-    page.goto("http://localhost:8001/")
+    page.goto(BASE_URL)
 
     # Index page loaded
     expect(page.locator("h1", has_text="Digital Queue Management System")).to_be_visible()
