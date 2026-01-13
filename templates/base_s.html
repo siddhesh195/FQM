@@ -41,65 +41,16 @@
             <style>html{display:none;}</style>
             <meta http-equiv="refresh" content="0.0;url=/nojs/0">
         </noscript>
-        <div id="app" >
-            <div class="container-fluid">
-                <div class="col-xs-12">
-                    {% block page_content %} {% endblock %}
-                </div>
+     
+        <div class="container-fluid">
+            <div class="col-xs-12">
+                {% block page_content %} {% endblock %}
             </div>
         </div>
+       
 
     <script src="{{ url_for('static', filename='vendor/axios/axios.min.js') }}"></script>
 
-    <script type="module">
-
-    import { createApp, markRaw } from "{{ url_for('static', filename='vendor/vue/vue.esm-browser.prod.js') }}";
-
-    const app =createApp({
-            delimiters: ['[[', ']]'],
-
-            data() {
-                return {
-                       
-                    {% block vue_data %}
-                            
-                    {% endblock %}
-                };
-            },
-            methods: {
-                {% block vue_methods %}
-                            
-                {% endblock %}
-            },
-            created() {
-                {% block vue_created %}
-                            
-                {% endblock %}
-            },
-            computed : {
-                {% block vue_computed %}
-                            
-                {% endblock %}
-            },
-            watch: {
-                {% block vue_watch %}
-                            
-                {% endblock %}
-            },
-            mounted() {
-                {% block vue_mounted %}
-                            
-                {% endblock %}
-            },
-            beforeUnmount() {
-                {% block vue_before_unmount %}
-                            
-                {% endblock %}
-            }
-
-        });
-    app.mount('#app');
-
-    </script>
+    {% block scripts %} {% endblock %}
     </body>
 </html>
