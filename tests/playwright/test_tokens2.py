@@ -1,7 +1,7 @@
 from playwright.sync_api import Page
 
 from helpers import login, create_office, open_office, delete_office, open_office_tickets, open_touch_screen_for_office
-from helpers import add_task
+from helpers import add_task, close_all_swal
 from helpers import reset_current_office
 from tests.playwright.helpers2 import assert_multiple_tokens, create_multiple_tokens
 
@@ -28,9 +28,11 @@ def test_create_and_pull_lot_of_tokens(page: Page):
             raise Exception(e)
 
     token_list=[]
+    
     number_of_tokens=3
     try:
         touch_page = open_touch_screen_for_office(page, office_name, task_name)
+        close_all_swal(page)
         token_list = create_multiple_tokens(number_of_tokens,touch_page, office_name, task_name)
         
     except Exception as e:

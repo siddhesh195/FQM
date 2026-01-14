@@ -5,6 +5,22 @@ import os
 
 BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:8001")
 
+def wait_for_ui_ready(page):
+    # Wait until all SweetAlert2 overlays are gone
+    page.wait_for_function("""
+        () => !document.querySelector('.swal2-container')
+    """)
+
+def close_all_swal(page):
+    # Click confirm buttons until no Swal remains
+    while page.locator(".swal2-container").count() > 0:
+        confirm = page.locator(".swal2-confirm")
+        if confirm.count() > 0:
+            confirm.first.click(force=True)
+        else:
+            # Fallback: press Escape
+            page.keyboard.press("Escape")
+
 def login(page: Page):
     page.goto(BASE_URL)
 
@@ -36,11 +52,22 @@ def login(page: Page):
     expect(page.locator("body")).to_contain_text("Management")
 
 def create_office(page: Page, office_name: str):
-    page.click("text=Add new office")
-    office_name = "Playwright Office"
-    page.fill("input[name='name']", office_name)
+    
+    page.get_by_role("link", name="Add new office").click()
+
+    office_input = page.locator("input[name='name']")
+    office_input.wait_for(state="attached")
+
+    expect(office_input).to_be_visible()
+    expect(office_input).to_be_enabled()
+
+    office_input.click()
+    office_input.fill("")
+    office_input.type(office_name)
 
     prefix_select = page.locator("select[name='prefix']")
+    #expect it to be enabled
+    expect(prefix_select).to_be_enabled()
 
     # Get all available option values
     options = prefix_select.locator("option")
@@ -51,23 +78,26 @@ def create_office(page: Page, office_name: str):
     # Pick the first valid prefix
     prefix_value = options.nth(0).get_attribute("value")
 
-    prefix_select.select_option(prefix_value)
 
-    page.get_by_role("button", name="Add office").click()
+    prefix_select.select_option(prefix_value)
+    click_button = page.get_by_role("button", name="Add office")
+    #wait for button to be enabled
+    expect(click_button).to_be_enabled()
+    click_button.click()
 
     # Assert Swal is visible
     swal = page.locator(".swal2-popup")
     expect(swal).to_be_visible()
 
     # Assert message text
-    try:
-        expect(swal).to_contain_text("Office added successfully")
+    
+    expect(swal).to_contain_text("Office added successfully")
 
-    finally:
-        # Click OK
-        page.locator(".swal2-confirm").click()
-        # Assert Swal closed
-        expect(swal).not_to_be_visible()
+    
+    # Click OK
+    page.locator(".swal2-confirm").click()
+    
+    page.wait_for_selector(".swal2-container", state="detached")
 
 def delete_office(page: Page, office_name: str):
     page.click("text=Manage Home")
@@ -134,9 +164,16 @@ def add_task(page: Page, task_name: str, office_name: str):
 
     task_name = f"Playwright Task for {office_name}"
 
-    page.fill("input[name='name']", task_name)
+    input_field = page.locator("input[name='name']")
+    expect(input_field).to_be_visible()
+    input_field.fill("")  # clear first
+    input_field.type(task_name)
 
-    page.get_by_role("button", name="Add task").click()
+    add_task_button = page.get_by_role("button", name="Add task")
+    expect(add_task_button).to_be_enabled()
+    add_task_button.click()
+
+    
 
     # Assert Swal is visible
     swal = page.locator(".swal2-popup")
@@ -146,6 +183,9 @@ def add_task(page: Page, task_name: str, office_name: str):
     page.locator(".swal2-confirm").click()
 
 def open_touch_screen_for_office(page: Page, office_name: str, task_name: str):
+
+    wait_for_ui_ready(page)
+
     # Open Screens dropdown
     page.locator('a.dropdown-toggle:has-text("Screens")').click()
 
