@@ -8,9 +8,9 @@ on:
 jobs:
   tests:
     if: |
-      github.event_name == 'pull_request' ||
       github.event.head_commit.message == null ||
       !contains(github.event.head_commit.message, '[playwright-only]')
+      
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -45,7 +45,6 @@ jobs:
 
   playwright:
     if: |
-      github.event_name == 'push' &&
       github.event.head_commit.message != null &&
       contains(github.event.head_commit.message, '[playwright-only]')
     runs-on: ubuntu-latest
