@@ -54,7 +54,7 @@ def test_tokens_common_office(c, monkeypatch):
     assert response1.status_code == 200
 
     assert response1.json['status'] == 'success'
-    assert response1.json['message'] == 'Common task added successfully'
+    assert response1.json['message'] == 'Ticket generated successfully'
     assert 'identifier' in response1.json
     token_identifier1 = response1.json['identifier']
     assert len(token_identifier1)==8  # Assuming identifier is an 8 character string
@@ -121,6 +121,7 @@ def test_tokens_task_With_same_name(c, monkeypatch):
     response1 = c.get(token_url_office1)
     assert response1.status_code == 200
     assert response1.json['status'] == 'success'
+    assert response1.json['message'] == 'Ticket generated successfully'
     assert 'identifier' in response1.json
     token_identifier1 = response1.json['identifier']
     assert len(token_identifier1) == 8  # Assuming identifier is an 8 character

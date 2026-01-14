@@ -232,7 +232,7 @@ def serial(t_id, office_id=None):
         log_error(exception)
         return redirect(url_for('core.root'))
     
-    return jsonify(message='Common task added successfully',status='success',identifier=identifier)
+    return jsonify(message='Ticket generated successfully',status='success',identifier=identifier)
     
 
 
