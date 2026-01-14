@@ -28,6 +28,7 @@ def test_create_and_pull_lot_of_tokens(page: Page):
             raise Exception(e)
 
     token_list=[]
+    
     number_of_tokens=3
     try:
         touch_page = open_touch_screen_for_office(page, office_name, task_name)
