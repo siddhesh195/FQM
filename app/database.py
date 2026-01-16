@@ -468,23 +468,26 @@ class Serial(db.Model, TicketsMixin, Mixin):
         single_row = Settings.get().single_row
         task = Task.get(0 if single_row else task_id)
         office = Office.get(0 if single_row else office_id)
-        global_pull = not bool(task_id and office_id)
+        global_pull = bool(not task_id and not office_id)
         office_pull = bool(office_id and not task_id)
 
         next_ticket_global = Serial.query.filter(Serial.number != 100,
                                            Serial.p != True,
                                            Serial.on_hold == False)
         next_ticket = None
+        if office_pull:
+            next_ticket = next_ticket_global.filter(Serial.office_id == office.id)
 
-        if not global_pull:
-            next_ticket = next_ticket_global.filter(Serial.task_id == task.id)
+        elif global_pull:
+            #UI has deprecated global pulling , but keeping the code if needed in future
+            next_ticket = next_ticket_global
+            
+        else:
+            next_ticket = next_ticket_global.filter(Serial.task_id == task.id,
+                                                 Serial.office_id == office.id)
 
-            if strict_pulling or office_pull:
-                next_ticket = next_ticket.filter(Serial.office_id == office.id)
-
-        next_ticket = (next_ticket_global if global_pull else next_ticket)\
-            .order_by(Serial.timestamp)\
-            .first()
+       
+        next_ticket  = next_ticket.order_by(Serial.timestamp).first()
 
         if single_row:
             current_ticket = office.tickets\
