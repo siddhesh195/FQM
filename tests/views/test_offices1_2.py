@@ -271,3 +271,19 @@ def test_pull_next_ticket_success_only_office_id(c):
     assert json_response['message'] == f'Ticket {ticket_names[1]} pulled successfully'
     assert json_response['ticket_name'] == ticket_names[1]
 
+    # try to pull third time, should get no tickets available
+    #despite tickets in other office
+    resp = c.post(url,json=payload)
+    assert resp.status_code == 200
+    json_response = resp.get_json()
+    assert json_response['status'] == 'error'
+    assert json_response['message'] == 'No tickets available to pull'
+
+    #assert that tickets in other office are still there and unpulled
+    remaining_tickets_office2 = data.Serial.query.filter_by(office_id=office2.id, task_id=task.id).all()
+    for t in remaining_tickets_office2:
+        assert t.p == False
+    #now assert that tickets in office1 are all pulled
+    pulled_tickets_office1 = data.Serial.query.filter_by(office_id=office1.id, task_id=task.id).all()
+    for t in pulled_tickets_office1:
+        assert t.p == True
