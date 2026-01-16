@@ -66,6 +66,7 @@ office_checks: {},
 csrf_token:  "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
 o_id: {% if o_id is defined and o_id %}{{ o_id }}{% else %}null{% endif %},
 add_task_url: "{% if o_id is defined and o_id %}{{ url_for('tasks.add_task', office_id=o_id) }}{% else %}{{ url_for('tasks.add_common_task') }}{% endif %}",
+common_task: {% if common is defined and common %}true{% else %}false{% endif %}
 
 
 
@@ -82,15 +83,23 @@ async addTask() {
 			hidden: this.task_hidden,
 			csrf_token: this.csrf_token
 		};
+		
+		var at_least_one_office_selected= false;
 		if (this.office_checks) {
 		    for (const [id, val] of Object.entries(this.office_checks)) {
                 if (val) {
                     payload[`check${id}`] = true;
+					at_least_one_office_selected= true;
                 }else{
 					payload[`check${id}`] = false;
 				}
-				}
-            }
+			}
+        }
+		if( this.common_task && !at_least_one_office_selected ){
+			
+			await showSwalMessage('Please select at least one office for the common task.');
+			return;
+		}
 			const response = await axios.post(this.add_task_url, payload);
 		if (response.data.status === 'success') {
             const result = await showSwalMessage(response.data.message);

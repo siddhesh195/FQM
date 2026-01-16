@@ -421,7 +421,7 @@ def feed(office_id=None):
     current_ticket_office_name = getattr(office, 'display_text', empty_text) or empty_text 
     try:
         current_ticket_pulled_by_name = current_ticket and current_ticket.puller_name or empty_text
-        print(current_ticket_pulled_by_name)
+        
     except Exception as e:
         current_ticket_pulled_by_name = empty_text
         print(e)

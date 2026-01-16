@@ -34,16 +34,20 @@ def offices_home(o_id=None):
     
     if not o_id and current_user.role_id!=1:
         return jsonify({'status': 'error', 'message': 'Office ID is required for Non Admins'}), 400
-
+    office_name=None
     if o_id and current_user.role_id!=1:
-        office= data.Office.get(o_id)
+        office = data.Office.get(o_id)
         if not office:
             return jsonify({'status': 'error', 'message': 'Office not found'}), 404
+        
         
         operator = data.Operators.query.filter_by(id=current_user.id).first()
         if operator.office_id != o_id:
             return jsonify({'status': 'error', 'message': 'Unauthorized access to this office'}), 403
-    
+    if o_id:
+        office = data.Office.get(o_id)
+        office_name= office.name if office else None
+
     user_name = current_user.name
     offices=data.Office.query
     operators=data.Operators.query
@@ -53,9 +57,10 @@ def offices_home(o_id=None):
         {"value": value, "label": label}
         for value, label in form.status.choices
     ]
+
     
     
-    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id, user_name=user_name)
+    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id,office_name=office_name, user_name=user_name)
 
 @offices.route('/all_offices_tickets', methods=['GET', 'POST'])
 @login_required

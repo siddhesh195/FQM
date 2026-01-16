@@ -5,6 +5,20 @@
  {{ super() }}
    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all_offices_vue.css') }}">
+    <style>
+        .office-title {
+            text-align: center;
+            font-size: 20px;        /* increase size */
+            font-weight: 600;
+            margin: 10px 0 15px 0;
+        }
+
+        .office-title span {
+            font-weight: 700;       /* make office name bold */
+        }
+    
+    </style>
+
    
 {% endblock %}
 {%- from "sb_manage2.html" import sb_manage with context %}
@@ -24,6 +38,16 @@
                 style="width: 250px;"
                >
         </div>
+        {% if office_name %}
+            <div class="office-title">
+                Office: <span>{{ office_name }}</span>
+            </div>
+        {% else %}
+            <div class="office-title">
+                All Offices
+            </div>
+        {% endif %}
+        <br>
         {% if current_user.role_id == 1 and not office_id %}
        
         <button id="resetAllOfficesBtn" class="btn btn-primary" @click="resetAllOffices">
@@ -38,6 +62,8 @@
             Reset this Office
         </button>
     
+        
+       
  
 
         {% endif %}
