@@ -48,8 +48,15 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th v-for="col in columns" :key="col.label">
+                        <th v-for="col in columns" :key="col.label"
+                            @click="col.label === 'Time' ? toggleSort('timestamp') : null"
+                            :style="col.label === 'Time' ? 'cursor:pointer; user-select:none;' : ''">
+
                             [[ col.label ]]
+                            <span v-if="col.label === 'Time'">
+                            <span v-if="sortDir === 'asc'">▲</span>
+                            <span v-else>▼</span>
+                            </span>
                         </th>
                     </tr>
                 </thead>
@@ -122,6 +129,9 @@
 
 
 {% block vue_data %}
+    sortKey: "timestamp",
+    sortDir: "desc", // "asc" or "desc",
+
     searchQuery: '',
     // pagination
     currentPage: 1,
@@ -277,6 +287,27 @@
         else{
             return 'Unknown';
         }
+    },
+    toggleSort(key) {
+        if (this.sortKey === key) {
+            this.sortDir = (this.sortDir === "asc") ? "desc" : "asc";
+        } else {
+            this.sortKey = key;
+            this.sortDir = "desc";
+        }
+        this.currentPage = 1;
+    },
+
+    parseTimestamp(ts) {
+        // safest: support ISO strings directly (recommended)
+        // ex: "2026-01-16T10:30:00" or "2026-01-16 10:30:00"
+        if (!ts) return 0;
+
+        // normalize "YYYY-MM-DD HH:MM:SS" -> "YYYY-MM-DDTHH:MM:SS"
+        const normalized = ts.includes("T") ? ts : ts.replace(" ", "T");
+
+        const d = new Date(normalized);
+        return isNaN(d.getTime()) ? 0 : d.getTime();
     }
 
 {% endblock %}
@@ -285,7 +316,7 @@
 {% block vue_computed %}
 
     totalPages() {
-    const count = this.filteredRows.length;
+    const count = this.sortedRows.length;
     return count === 0 ? 1 : Math.ceil(count / this.perPage);
     },
 
@@ -315,7 +346,21 @@
     paginatedRows() {
         const start = (this.currentPage - 1) * this.perPage;
         const end   = start + this.perPage;
-        return this.filteredRows.slice(start, end);
+        return this.sortedRows.slice(start, end);
+    },
+    sortedRows() {
+        const arr = [...this.filteredRows];
+
+        if (this.sortKey === "timestamp") {
+            arr.sort((a, b) => {
+                const ta = this.parseTimestamp(a.timestamp);
+                const tb = this.parseTimestamp(b.timestamp);
+
+                return this.sortDir === "asc" ? (ta - tb) : (tb - ta);
+            });
+        }
+
+        return arr;
     }
 
 {% endblock %}
@@ -324,7 +369,10 @@
     searchQuery() {
         
         this.currentPage = 1; // Reset to first page on new search
-    }
+    },
+    sortKey() {
+        this.currentPage = 1; // Reset to first page on sort change
+    },
 
 {% endblock %}
 

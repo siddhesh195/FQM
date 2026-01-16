@@ -100,7 +100,6 @@ def make_task_frequency_reports():
         return jsonify({"error": "some error occurred"})
 
    
-    try:
-       return jsonify(fetched_tickets)
-    except:
-        return jsonify({"error": "some error occurred while sending data"})
+  
+    return jsonify(fetched_tickets)
+  
