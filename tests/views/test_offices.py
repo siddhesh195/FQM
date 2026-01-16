@@ -10,7 +10,7 @@ def test_offices_home_admin_login(c,monkeypatch):
     class user:
         def __init__(self):
             self.role_id = 1  #Admin role
-            name="Admin"
+            self.name="Admin"
     current_user = user()
     monkeypatch.setattr('app.views.offices.current_user', current_user)
     url='/all_offices_vue'
