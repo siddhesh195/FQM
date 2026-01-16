@@ -146,12 +146,12 @@ def fetch_tickets_by_date_range(start_date, end_date):
 
     tickets_by_office_names={}
     end_date = end_date 
-    end_date = end_date + timedelta(days=1)
+    end_date = end_date
 
     for office_id in all_office_ids:
         office_name = office_id_to_name[office_id]
         all_office_tickets= Serial.all_office_tickets(office_id=office_id)
-        filtered_ticket_objects_list = all_office_tickets.filter(Serial.timestamp >= start_date, Serial.timestamp <= end_date).all()
+        filtered_ticket_objects_list = all_office_tickets.filter(Serial.timestamp >= start_date, Serial.timestamp < end_date).all()
         #make filter tickets list from query object
         
         task_frequency_dict = {}
