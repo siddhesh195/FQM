@@ -44,6 +44,7 @@ def offices_home(o_id=None):
         if operator.office_id != o_id:
             return jsonify({'status': 'error', 'message': 'Unauthorized access to this office'}), 403
     
+    user_name = current_user.name
     offices=data.Office.query
     operators=data.Operators.query
     tasks=data.Task
@@ -54,7 +55,7 @@ def offices_home(o_id=None):
     ]
     
     
-    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id)
+    return render_template('all_offices_vue.html', page_title='Offices', offices=offices, operators=operators, tasks=tasks, form=form, status_choices=status_choices,office_id=o_id, user_name=user_name)
 
 @offices.route('/all_offices_tickets', methods=['GET', 'POST'])
 @login_required

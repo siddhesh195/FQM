@@ -64,7 +64,7 @@
                         <td :title="row.pulled_by">[[ truncate_text(row.pulled_by, 20) ]]</td>
                         <td>[[ row.timestamp ]]</td>
                         <td class="action-icons" >
-                            <a @click="EditTicket(row.name)" >
+                            <a @click="EditTicket(row.name,row.pulled_by)" >
                                 <span class="mr-1 fa fa-pencil text-warning">
                                 </span>
                             </a>
@@ -140,6 +140,9 @@
     openProcessTicketDialog_var: null,
     status_choices: {{ status_choices|tojson }},
     csrf_token: "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}",
+    current_user_name : "{{ user_name }}",
+    current_user_role_id : {{ current_user.role_id }},
+
     
 {% endblock %}
 
@@ -245,7 +248,15 @@
     },
    
 
-    async EditTicket(ticketName) {
+    async EditTicket(ticketName,pulled_by) {
+        if(pulled_by == 'N/A'){
+            await showSwalMessage("This ticket is not pulled yet. You cannot edit it.");
+            return;
+        }
+        if(pulled_by && pulled_by !== this.current_user_name && this.current_user_role_id !== 1){
+            await showSwalMessage("This ticket is pulled by "+pulled_by+". You cannot edit it since your user role is not Admin.");
+            return;
+        }
         // Open modal logic here
         const response = await this.submitTicketForm(ticketName);
     },
@@ -323,6 +334,7 @@
     this.fetchData_interval = setInterval(this.fetchData, 2000)
     
     this.openProcessTicketDialog_var = openProcessTicketDialog;
+    console.log(this.current_user_name);
 
 {% endblock %}
 
