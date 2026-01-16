@@ -15,7 +15,7 @@ style.innerHTML = `
 
     /* Make message text bigger */
     .swal2-html-container.big-text {
-        font-size: 3.5rem !important;
+        font-size: 2.4rem !important;
     }
      /* Bigger confirm and cancel buttons */
     .swal2-confirm.big-btn,
@@ -92,12 +92,21 @@ async function openProcessTicketDialog(select_choices) {
     .join("");
   const { value: formData } = await Swal.fire({
     title: 'Process Ticket',
+    width: 450,
+      customClass: {
+    popup: "custom-big-swal",
+    title: "big-text",
+    htmlContainer: "big-text",
+    confirmButton: "big-btn",
+    cancelButton: "big-btn",
+  },
     html: `
       <div style="text-align: left;">
        
         
         <label style="display: block; margin-bottom: 5px; margin-top: 15px;">Select ticket current status:</label>
-        <select id="swal-status" class="swal2-input">
+        <select id="swal-status" class="swal2-input"
+        style="height: 50px; font-size: 18px; padding: 10px;">
           ${optionsHtml}
         </select>
         
