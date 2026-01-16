@@ -290,10 +290,10 @@ def test_fetch_tickets_by_date_range(monkeypatch):
         replace_timestamps([ticket], year=timestamp_info['year'], month=timestamp_info['month'], day=timestamp_info['day'], time_hour=timestamp_info['hour'], time_minute=timestamp_info['minute'], time_second=timestamp_info['second'])
 
     start_date1 = dt.datetime(2022, 1, 1, 0, 0, 0)
-    end_date1 = dt.datetime(2022, 6, 30, 23, 59, 59)
+    end_date1   = dt.datetime(2022, 6, 30, 0, 0, 0)
 
     start_date2 = dt.datetime(2022, 7, 1, 0, 0, 0)
-    end_date2 = dt.datetime(2022, 12, 31, 23, 59, 59)
+    end_date2   = dt.datetime(2022, 12, 31, 0, 0, 0)
 
     get_all_office_tickets = fetch_tickets_by_date_range(start_date1, end_date1)['Office1']
 
