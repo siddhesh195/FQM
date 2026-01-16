@@ -25,6 +25,7 @@ def test_offices_home_non_admin_login_failure(c,monkeypatch):
     class user:
         def __init__(self):
             self.role_id = 2  #non admin role_id
+            self.name="User"
    
     current_user = user()
     monkeypatch.setattr('app.views.offices.current_user', current_user)
@@ -40,6 +41,7 @@ def test_offices_home_operator_access(c,monkeypatch):
         def __init__(self,id):
             self.role_id = 3  #Operator role_id
             self.id =id
+            self.name = "Operator User"
     
     #create a new User
     
@@ -93,6 +95,7 @@ def test_offices_home_operator_failure(c,monkeypatch):
         def __init__(self,id):
             self.role_id = 3  #Operator role_id
             self.id =id
+            self.name = "Operator User"
     
     #create a new User
     
@@ -146,6 +149,7 @@ def test_offices_home_non_existent_office(c,monkeypatch):
         def __init__(self,id):
             self.role_id = 3  #Operator role_id
             self.id =id
+            self.name = "Operator User"
     
     #create a new User
     
