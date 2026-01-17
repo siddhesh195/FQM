@@ -46,7 +46,8 @@ jobs:
   playwright:
     if: |
       github.event.head_commit.message != null &&
-      contains(github.event.head_commit.message, '[playwright-only]')
+      (contains(github.event.head_commit.message, '[playwright-only]') ||
+       contains(github.event.head_commit.message, '[playwright]'))
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
