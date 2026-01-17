@@ -1,7 +1,7 @@
 import os
 from functools import reduce
 from urllib.parse import quote
-from flask import Flask, request, Markup, session, redirect, url_for, flash, render_template, jsonify, current_app
+from flask import Flask, request, Markup, session, redirect, url_for, flash, render_template, jsonify
 from flask_migrate import upgrade as database_upgrade
 from flask_moment import Moment
 from flask_uploads import configure_uploads
@@ -18,6 +18,7 @@ from app.middleware import db, login_manager, files, gTTs, migrate
 from app.mock_translator import gtranslator
 from app.printer import get_printers_usb
 from app.views.administrate import administrate
+from app.views.administrate2 import administrate2
 from app.views.core import core
 from app.views.customize import cust_app
 from app.views.manage import manage_app
@@ -112,6 +113,7 @@ def create_app(config={}):
     
     # Register blueprints
     app.register_blueprint(administrate)
+    app.register_blueprint(administrate2)
     app.register_blueprint(core)
     app.register_blueprint(cust_app)
     app.register_blueprint(manage_app)

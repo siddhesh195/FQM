@@ -8,10 +8,10 @@ from app.constants import USER_ROLES
 
 
 class UserForm(LocalizedForm):
-    name = StringField('Enter a unique user name : ',
+    name = StringField('Enter a unique user name(at least 5 letters) : ',
                        validators=[InputRequired('Required not less than 5 nor more than 200 letters'),
                                    Length(5, 200)])
-    password = PasswordField('Enter password : ',
+    password = PasswordField('Enter password (at least 5 letters): ',
                              validators=[InputRequired('Password must be at least of 5 and at most 15 letters'),
                                          Length(5, 15)])
     role = SelectField('Select a role for the user : ',
@@ -24,6 +24,31 @@ class UserForm(LocalizedForm):
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
+        self.offices.choices = [(o.id, f'{self.translate("Office : ")}{o.prefix}{o.name}')
+                                for o in Office.query.all()]
+
+        has_offices = bool(Office.get())
+        for _id, role in USER_ROLES.items():
+            if _id != 3 or has_offices:
+                self.role.choices = (self.role.choices or []) + [(_id, role)]
+
+class UserForm2(LocalizedForm):
+    name = StringField('Enter a unique user name (at least 5 letters) : ',
+                       validators=[Optional(),
+                                   Length(5, 200)])
+    password = PasswordField('Enter password (at least 5 letters): ',
+                             validators=[Optional(),
+                                         Length(5, 15)])
+    role = SelectField('Select a role for the user : ',
+                       coerce=int,
+                       validators=[Optional()])
+    offices = SelectField('Select office to assing the operator to : ',
+                          coerce=int,
+                          validators=[Optional()])
+    submit = SubmitField('Add')
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm2, self).__init__(*args, **kwargs)
         self.offices.choices = [(o.id, f'{self.translate("Office : ")}{o.prefix}{o.name}')
                                 for o in Office.query.all()]
 

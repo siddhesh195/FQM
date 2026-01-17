@@ -6,7 +6,7 @@ from datetime import datetime
 import app.database as data
 from app.middleware import db, login_manager
 from app.utils import absolute_path, get_module_columns, get_module_values
-from app.forms.adminstrate import AdminForm, UserForm, CSVForm, AuthTokensForm
+from app.forms.adminstrate import AdminForm, UserForm, CSVForm, AuthTokensForm, UserForm2
 from app.forms.constents import EXPORT_DELIMETERS, EXPORT_TABLES
 from app.helpers import (reject_not_god, reject_not_admin, reject_god, is_operator, is_office_operator,
                          get_or_reject)
@@ -176,6 +176,7 @@ def user_u(user):
         return reject_god(lambda: None)()
 
     form = UserForm()
+    form2 = UserForm2()
 
     if form.validate_on_submit():
         user = data.User.get(user.id)  # NOTE: session lost
@@ -216,7 +217,7 @@ def user_u(user):
                  form.offices.data = operator.office_id
 
     return render_template('user_add.html',
-                           form=form, navbar='#snb3',
+                           form=form,form2=form2, navbar='#snb3',
                            page_title='Update user : ' + user.name,
                            u=user, update=True,
                            offices_count=data.Office.query.count())

@@ -40,15 +40,25 @@ $(document).ready(function () {
 	    	</div>
 	  		<div class="panel-body">
       			<p class="pt-3"></p>
+				{% if not update %}
 				{{ form.csrf_token }}
 				{{ render_field(form.name, class="form-control") }}
 				{{ render_field(form.password, class="form-control") }}
+				{% else %}
+				{{ form2.csrf_token }}
+				{{ render_field(form2.name, class="form-control",length=60,**{'v-model':'name','autocomplete':'off'}) }}
+				{{ render_field(form2.password, class="form-control",length=60,**{'v-model':'password','autocomplete':'new-password'}) }}
+				{% endif %}
 				{% if offices_count == 0 %}
 				<p class="h4 ar2 mt-2 mb-2 text-center text-warning">
 					| Monitor: {{ translate('the role is not enabled, it will be enabled once you add a new office', 'en', [defLang]) }}. |
 				</p>
 				{% endif %}
+				{% if not update %}
 				{{ render_field(form.role, class="form-control") }}
+				{% else %}
+				{{ render_field(form2.role, class="form-control",**{'v-model':'role'}) }}
+				{% endif %}
 		  		<p class="h3 ar2 mt-2 mb-2 text-center text-muted admin hide">
 		      		|  Admin : {{ translate('has the permissions to access and monitor everything', 'en', [defLang]) }} |
 		  		</p>
@@ -59,12 +69,16 @@ $(document).ready(function () {
 		    		| Operator : {{ translate('has limited permissions only to access and monitor the office assigned to', 'en', [defLang]) }} |
 		  		</p>
 		  		<div class='offices hide'>
+				    {% if not update %}
 					{{ render_field(form.offices, class="form-control") }}
+					{% else %}
+					{{ render_field(form2.offices, class="form-control",**{'v-model':'offices'}) }}
+					{% endif %}
 				</div>
 				<p class="pb-5"></p>
 		  		<center>
 					{% if update %}
-					<button class='btn btn-md btn-danger'>{{ translate('Update user', 'en', [defLang]) }}</button>
+					<button @click.prevent='updateUser' class='btn btn-md btn-danger'>{{ translate('Update user', 'en', [defLang]) }}</button>
 					{% else %}
 					<button id="add_user_button" class='btn btn-md btn-danger'>{{ translate('Add user', 'en', [defLang]) }}</button>
 					{% endif %}
@@ -74,4 +88,59 @@ $(document).ready(function () {
 		</div>
     </form>
 </div>
+{% endblock %}
+
+{% block vue_data %}
+
+password: '',
+name: '',
+role: '',
+offices: '',
+csrf_token:  "{% if form and form.csrf_token is defined %}{{ form.csrf_token._value() }}{% endif %}"
+{% endblock %}
+
+{% block vue_methods %}
+
+async updateUser() {
+	const payload = {
+		name: this.name,
+		password: this.password,
+		role: this.role,
+		offices: this.offices,
+		csrf_token: this.csrf_token
+	};
+	try {
+		const response = await axios.post("{{ url_for('administrate2.update_user', user_id=u.id) }}", payload);
+		if (response.data.status === 'success') {
+			
+			await showSwalMessage(response.data.message);
+			
+			// go one page back
+			window.location.href = "{{ url_for('administrate.users') }}";
+
+		} else {
+		
+			showSwalMessage(response.data.message);
+		}
+	} catch (error) {
+		// if error is 400 then show the message from server
+		if (error.response && error.response.status === 400) {
+			showSwalMessage(error.response.data.message);
+			return;
+		}
+		showSwalMessage("An error occurred while updating the user.");
+	}
+}
+
+
+{% endblock %}
+
+{% block vue_watch %}
+
+
+
+{% endblock %}
+
+{% block vue_mounted %}
+
 {% endblock %}
